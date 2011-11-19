@@ -1,5 +1,5 @@
 FactoryGirl.define do
   factory :menu do
-    name "horizontal"
+    sequence(:name) { |n| "#{n} Menu" }
   end
 end
