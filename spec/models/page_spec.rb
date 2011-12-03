@@ -29,19 +29,13 @@ describe Page do
     page.permalink.should eq("a-r34lly-str4ng3-permalnk-wth-ymb0ls-tht-c4nt-b3")
   end
   
-  context "One page cannot be twice in the same menu" do
-    before do 
-      page = create(:page)
-      @menu = create(:menu)
-      @menu.pages << page
-      @menu.pages << page
-    end
-         
-    it "should be one" do
-      @menu.pages.size.should eq(1)
-    end
+  it "should raise an error if a page pushed in the same menu twice" do
+    page = create(:page)
+    menu = create(:menu)
+    menu.pages << page
+    lambda { menu.pages << page }.should raise_error
   end
-  
+
   it "should create sitemap of all of the active pages" do
     pending   
   end

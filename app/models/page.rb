@@ -18,11 +18,12 @@ class Page < ActiveRecord::Base
 
   
   def prettify_permalink
+    # parameterize function is nice but not as good as below
     self.permalink = truncate(self.permalink.strip.gsub(/[\~]|[\`]|[\!]|[\@]|[\#]|[\$]|[\%]|[\^]|[\&]|[\*]|[\(]|[\)]|[\+]|[\=]|[\{]|[\[]|[\}]|[\]]|[\|]|[\\]|[\:]|[\;]|[\"]|[\']|[\<]|[\,]|[\>]|[\.]|[\?]|[\/]/,"").gsub(/\s+/,"-").downcase, length: 50, separator: "-", omission: "")
   end
   
   def self.sitemap
-    
+    pending "Must create some controllers etc and then"
   end
     
 end
