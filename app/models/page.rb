@@ -25,5 +25,4 @@ class Page < ActiveRecord::Base
   def self.sitemap
     pending "Must create some controllers etc and then"
   end
-    
 end
