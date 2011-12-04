@@ -1,7 +1,13 @@
 Gscms::Application.routes.draw do
-  devise_for :users
+  devise_for :users do
+      get "/admin" => "devise/sessions#new"
+  end
 
-  resources :menus, :pages
+  scope "/admin" do
+    resources :menus, :pages #, :except => [:show]
+  end
+  
+  #resources :menus, :pages, :only => [:show]
   
   root :to => "pages#index" #This will change
   

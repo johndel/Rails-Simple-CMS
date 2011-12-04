@@ -13,5 +13,10 @@ capybara-*.html
 /spec/tmp/*
 **.orig
 config/*.yml
+*.tmproj
+*.sw?
+*.cache
+*.log
+*.pid
 rerun.txt
 pickle-email-*.html
