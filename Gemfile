@@ -32,3 +32,8 @@ group :test, :development do
   gem "pry-remote"
   gem "pry-rails"
 end
+
+group :development do
+  gem 'letter_opener'
+end
+

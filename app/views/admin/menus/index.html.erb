@@ -1,0 +1,24 @@
+<h1>Listing menus</h1>
+
+<table>
+  <tr>
+  	<th>Name</th>
+  	<th>Created</th>
+  	<th>Updated</th>
+    <th colspan="2">Actions</th>
+  </tr>
+
+<% @menus.each do |menu| %>
+  <tr>
+  	<td><%= menu.name %></td>
+  	<td><%= menu.created_at %></td>
+  	<td><%= menu.updated_at %></td>
+    <td><%= link_to 'Edit', edit_admin_menu_path(menu) %></td>
+    <td><%= link_to 'Destroy', [:admin, menu], confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New menu', new_admin_menu_path %>

@@ -1,0 +1,1292 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<title>Ruby on Rails Guides: Active Record Validations and Callbacks</title>
+
+<link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
+<link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+<link rel="stylesheet" type="text/css" href="stylesheets/syntaxhighlighter/shCore.css" />
+<link rel="stylesheet" type="text/css" href="stylesheets/syntaxhighlighter/shThemeRailsGuides.css" />
+
+<link rel="stylesheet" type="text/css" href="stylesheets/fixes.css" />
+</head>
+<body class="guide">
+  <div id="topNav">
+    <div class="wrapper">
+      <strong>More at <a href="http://rubyonrails.org/">rubyonrails.org:</a> </strong>
+      <a href="http://rubyonrails.org/">Overview</a> |
+      <a href="http://rubyonrails.org/download">Download</a> |
+      <a href="http://rubyonrails.org/deploy">Deploy</a> |
+      <a href="https://github.com/rails/rails">Code</a> |
+      <a href="http://rubyonrails.org/screencasts">Screencasts</a> |
+      <a href="http://rubyonrails.org/documentation">Documentation</a> |
+      <a href="http://rubyonrails.org/ecosystem">Ecosystem</a> |
+      <a href="http://rubyonrails.org/community">Community</a> |
+      <a href="http://weblog.rubyonrails.org/">Blog</a>
+    </div>
+  </div>
+  <div id="header">
+    <div class="wrapper clearfix">
+      <h1><a href="index.html" title="Return to home page">Guides.rubyonrails.org</a></h1>
+      <p class="hide"><a href="#mainCol">Skip navigation</a>.</p>
+      <ul class="nav">
+        <li><a href="index.html">Home</a></li>
+        <li class="index"><a href="index.html" onclick="guideMenu(); return false;" id="guidesMenu">Guides Index</a>
+          <div id="guides" class="clearfix" style="display: none;">
+            <hr />
+            <dl class="L">
+              <dt>Start Here</dt>
+              <dd><a href="getting_started.html">Getting Started with Rails</a></dd>
+              <dt>Models</dt>
+              <dd><a href="migrations.html">Rails Database Migrations</a></dd>
+              <dd><a href="active_record_validations_callbacks.html">Active Record Validations and Callbacks</a></dd>
+              <dd><a href="association_basics.html">Active Record Associations</a></dd>
+              <dd><a href="active_record_querying.html">Active Record Query Interface</a></dd>
+              <dt>Views</dt>
+              <dd><a href="layouts_and_rendering.html">Layouts and Rendering in Rails</a></dd>
+              <dd><a href="form_helpers.html">Action View Form Helpers</a></dd>
+              <dt>Controllers</dt>
+              <dd><a href="action_controller_overview.html">Action Controller Overview</a></dd>
+              <dd><a href="routing.html">Rails Routing from the Outside In</a></dd>
+            </dl>
+            <dl class="R">
+              <dt>Digging Deeper</dt>
+              <dd><a href="active_support_core_extensions.html">Active Support Core Extensions</a></dd>
+              <dd><a href="i18n.html">Rails Internationalization API</a></dd>
+              <dd><a href="action_mailer_basics.html">Action Mailer Basics</a></dd>
+              <dd><a href="testing.html">Testing Rails Applications</a></dd>
+              <dd><a href="security.html">Securing Rails Applications</a></dd>
+              <dd><a href="debugging_rails_applications.html">Debugging Rails Applications</a></dd>
+              <dd><a href="performance_testing.html">Performance Testing Rails Applications</a></dd>
+              <dd><a href="configuring.html">Configuring Rails Applications</a></dd>
+              <dd><a href="command_line.html">Rails Command Line Tools and Rake Tasks</a></dd>
+              <dd><a href="caching_with_rails.html">Caching with Rails</a></dd>
+              <dd><a href="asset_pipeline.html">Asset Pipeline</a></dd>
+
+              <dt>Extending Rails</dt>
+              <dd><a href="plugins.html">The Basics of Creating Rails Plugins</a></dd>
+              <dd><a href="rails_on_rack.html">Rails on Rack</a></dd>
+              <dd><a href="generators.html">Creating and Customizing Rails Generators</a></dd>
+
+              <dt>Contributing to Ruby on Rails</dt>
+              <dd><a href="contributing_to_ruby_on_rails.html">Contributing to Ruby on Rails</a></dd>
+              <dd><a href="api_documentation_guidelines.html">API Documentation Guidelines</a></dd>
+              <dd><a href="ruby_on_rails_guides_guidelines.html">Ruby on Rails Guides Guidelines</a></dd>
+
+              <dt>Release Notes</dt>
+              <dd><a href="3_1_release_notes.html">Ruby on Rails 3.1 Release Notes</a></dd>
+              <dd><a href="3_0_release_notes.html">Ruby on Rails 3.0 Release Notes</a></dd>
+              <dd><a href="2_3_release_notes.html">Ruby on Rails 2.3 Release Notes</a></dd>
+              <dd><a href="2_2_release_notes.html">Ruby on Rails 2.2 Release Notes</a></dd>
+            </dl>
+          </div>
+        </li>
+        <li><a href="contributing_to_ruby_on_rails.html">Contribute</a></li>
+        <li><a href="credits.html">Credits</a></li>
+      </ul>
+    </div>
+  </div>
+  <hr class="hide" />
+
+  <div id="feature">
+    <div class="wrapper">
+      <h2>Active Record Validations and Callbacks</h2>
+<p>This guide teaches you how to hook into the life cycle of your Active Record objects. You will learn how to validate the state of objects before they go into the database, and how to perform custom operations at certain points in the object life cycle.</p>
+<p>After reading this guide and trying out the presented concepts, we hope that you&#8217;ll be able to:</p>
+<ul>
+	<li>Understand the life cycle of Active Record objects</li>
+	<li>Use the built-in Active Record validation helpers</li>
+	<li>Create your own custom validation methods</li>
+	<li>Work with the error messages generated by the validation process</li>
+	<li>Create callback methods that respond to events in the object life cycle</li>
+	<li>Create special classes that encapsulate common behavior for your callbacks</li>
+	<li>Create Observers that respond to life cycle events outside of the original class</li>
+</ul>
+
+            <div id="subCol">
+        <h3 class="chapter"><img src="images/chapters_icon.gif" alt="" />Chapters</h3>
+        <ol class="chapters">
+<li><a href="#the-object-life-cycle">The Object Life Cycle</a></li><li><a href="#validations-overview">Validations Overview</a><ul><li><a href="#why-use-validations">Why Use Validations?</a></li> <li><a href="#when-does-validation-happen">When Does Validation Happen?</a></li> <li><a href="#skipping-validations">Skipping Validations</a></li> <li><a href="#valid-and-invalid"><tt>valid?</tt> and <tt>invalid?</tt></a></li> <li><a href="#validations_overview-errors"><tt>errors[]</tt></a></li></ul></li><li><a href="#validation-helpers">Validation Helpers</a><ul><li><a href="#acceptance"><tt>acceptance</tt></a></li> <li><a href="#validates_associated"><tt>validates_associated</tt></a></li> <li><a href="#confirmation"><tt>confirmation</tt></a></li> <li><a href="#exclusion"><tt>exclusion</tt></a></li> <li><a href="#format"><tt>format</tt></a></li> <li><a href="#inclusion"><tt>inclusion</tt></a></li> <li><a href="#length"><tt>length</tt></a></li> <li><a href="#numericality"><tt>numericality</tt></a></li> <li><a href="#presence"><tt>presence</tt></a></li> <li><a href="#uniqueness"><tt>uniqueness</tt></a></li> <li><a href="#validates_with"><tt>validates_with</tt></a></li> <li><a href="#validates_each"><tt>validates_each</tt></a></li></ul></li><li><a href="#common-validation-options">Common Validation Options</a><ul><li><a href="#allow_nil"><tt>:allow_nil</tt></a></li> <li><a href="#allow_blank"><tt>:allow_blank</tt></a></li> <li><a href="#message"><tt>:message</tt></a></li> <li><a href="#on"><tt>:on</tt></a></li></ul></li><li><a href="#conditional-validation">Conditional Validation</a><ul><li><a href="#using-a-symbol-with-if-and-unless">Using a Symbol with <tt>:if</tt> and <tt>:unless</tt></a></li> <li><a href="#using-a-string-with-if-and-unless">Using a String with <tt>:if</tt> and <tt>:unless</tt></a></li> <li><a href="#using-a-proc-with-if-and-unless">Using a Proc with <tt>:if</tt> and <tt>:unless</tt></a></li> <li><a href="#grouping-conditional-validations">Grouping conditional validations</a></li></ul></li><li><a href="#performing-custom-validations">Performing Custom Validations</a><ul><li><a href="#custom-validators">Custom Validators</a></li> <li><a href="#custom-methods">Custom Methods</a></li></ul></li><li><a href="#working-with-validation-errors">Working with Validation Errors</a><ul><li><a href="#working_with_validation_errors-errors"><tt>errors</tt></a></li> <li><a href="#working_with_validation_errors-errors-2"><tt>errors[]</tt></a></li> <li><a href="#errors-add"><tt>errors.add</tt></a></li> <li><a href="#errors-base"><tt>errors[:base]</tt></a></li> <li><a href="#errors-clear"><tt>errors.clear</tt></a></li> <li><a href="#errors-size"><tt>errors.size</tt></a></li></ul></li><li><a href="#displaying-validation-errors-in-the-view">Displaying Validation Errors in the View</a><ul><li><a href="#installing-as-a-plugin">Installing as a plugin</a></li> <li><a href="#installing-as-a-gem">Installing as a Gem</a></li> <li><a href="#error_messages-and-error_messages_for"><tt>error_messages</tt> and <tt>error_messages_for</tt></a></li> <li><a href="#customizing-error-messages-css">Customizing the Error Messages <span class="caps">CSS</span></a></li> <li><a href="#customizing-the-error-messages-html">Customizing the Error Messages <span class="caps">HTML</span></a></li></ul></li><li><a href="#callbacks-overview">Callbacks Overview</a><ul><li><a href="#callback-registration">Callback Registration</a></li></ul></li><li><a href="#available-callbacks">Available Callbacks</a><ul><li><a href="#creating-an-object">Creating an Object</a></li> <li><a href="#updating-an-object">Updating an Object</a></li> <li><a href="#destroying-an-object">Destroying an Object</a></li> <li><a href="#after_initialize-and-after_find"><tt>after_initialize</tt> and <tt>after_find</tt></a></li></ul></li><li><a href="#running-callbacks">Running Callbacks</a></li><li><a href="#skipping-callbacks">Skipping Callbacks</a></li><li><a href="#halting-execution">Halting Execution</a></li><li><a href="#relational-callbacks">Relational Callbacks</a></li><li><a href="#conditional-callbacks">Conditional Callbacks</a><ul><li><a href="#using-if-and-unless-with-a-symbol">Using <tt>:if</tt> and <tt>:unless</tt> with a <tt>Symbol</tt></a></li> <li><a href="#using-if-and-unless-with-a-string">Using <tt>:if</tt> and <tt>:unless</tt> with a String</a></li> <li><a href="#using-if-and-unless-with-a-proc">Using <tt>:if</tt> and <tt>:unless</tt> with a <tt>Proc</tt></a></li> <li><a href="#multiple-conditions-for-callbacks">Multiple Conditions for Callbacks</a></li></ul></li><li><a href="#callback-classes">Callback Classes</a></li><li><a href="#observers">Observers</a><ul><li><a href="#creating-observers">Creating Observers</a></li> <li><a href="#registering-observers">Registering Observers</a></li> <li><a href="#sharing-observers">Sharing Observers</a></li></ul></li><li><a href="#transaction-callbacks">Transaction Callbacks</a></li></ol></div>
+    </div>
+  </div>
+
+  <div id="container">
+    <div class="wrapper">
+      <div id="mainCol">
+        <h3 id="the-object-life-cycle">1 The Object Life Cycle</h3>
+<p>During the normal operation of a Rails application, objects may be created, updated, and destroyed. Active Record provides hooks into this <em>object life cycle</em> so that you can control your application and its data.</p>
+<p>Validations allow you to ensure that only valid data is stored in your database. Callbacks and observers allow you to trigger logic before or after an alteration of an object&#8217;s state.</p>
+<h3 id="validations-overview">2 Validations Overview</h3>
+<p>Before you dive into the detail of validations in Rails, you should understand a bit about how validations fit into the big picture.</p>
+<h4 id="why-use-validations">2.1 Why Use Validations?</h4>
+<p>Validations are used to ensure that only valid data is saved into your database. For example, it may be important to your application to ensure that every user provides a valid email address and mailing address.</p>
+<p>There are several ways to validate data before it is saved into your database, including native database constraints, client-side validations, controller-level validations, and model-level validations:</p>
+<ul>
+	<li>Database constraints and/or stored procedures make the validation mechanisms database-dependent and can make testing and maintenance more difficult. However, if your database is used by other applications, it may be a good idea to use some constraints at the database level. Additionally, database-level validations can safely handle some things (such as uniqueness in heavily-used tables) that can be difficult to implement otherwise.</li>
+	<li>Client-side validations can be useful, but are generally unreliable if used alone. If they are implemented using JavaScript, they may be bypassed if JavaScript is turned off in the user&#8217;s browser. However, if combined with other techniques, client-side validation can be a convenient way to provide users with immediate feedback as they use your site.</li>
+	<li>Controller-level validations can be tempting to use, but often become unwieldy and difficult to test and maintain. Whenever possible, it&#8217;s a good idea to <a href="http://weblog.jamisbuck.org/2006/10/18/skinny-controller-fat-model">keep your controllers skinny</a>, as it will make your application a pleasure to work with in the long run.</li>
+	<li>Model-level validations are the best way to ensure that only valid data is saved into your database. They are database agnostic, cannot be bypassed by end users, and are convenient to test and maintain. Rails makes them easy to use, provides built-in helpers for common needs, and allows you to create your own validation methods as well.</li>
+</ul>
+<h4 id="when-does-validation-happen">2.2 When Does Validation Happen?</h4>
+<p>There are two kinds of Active Record objects: those that correspond to a row inside your database and those that do not. When you create a fresh object, for example using the <tt>new</tt> method, that object does not belong to the database yet. Once you call <tt>save</tt> upon that object it will be saved into the appropriate database table. Active Record uses the <tt>new_record?</tt> instance method to determine whether an object is already in the database or not. Consider the following simple Active Record class:</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class Person &lt; ActiveRecord::Base
+end
+</pre>
+</div>
+<p>We can see how it works by looking at some <tt>rails console</tt> output:</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+&gt;&gt; p = Person.new(:name =&gt; &quot;John Doe&quot;)
+=&gt; #&lt;Person id: nil, name: &quot;John Doe&quot;, created_at: nil, :updated_at: nil&gt;
+&gt;&gt; p.new_record?
+=&gt; true
+&gt;&gt; p.save
+=&gt; true
+&gt;&gt; p.new_record?
+=&gt; false
+</pre>
+</div>
+<p>Creating and saving a new record will send an <span class="caps">SQL</span> <tt>INSERT</tt> operation to the database. Updating an existing record will send an <span class="caps">SQL</span> <tt>UPDATE</tt> operation instead. Validations are typically run before these commands are sent to the database. If any validations fail, the object will be marked as invalid and Active Record will not perform the <tt>INSERT</tt> or <tt>UPDATE</tt> operation. This helps to avoid storing an invalid object in the database. You can choose to have specific validations run when an object is created, saved, or updated.</p>
+<div class="warning"><p>There are many ways to change the state of an object in the database. Some methods will trigger validations, but some will not. This means that it&#8217;s possible to save an object in the database in an invalid state if you aren&#8217;t careful.</p></div>
+<p>The following methods trigger validations, and will save the object to the database only if the object is valid:</p>
+<ul>
+	<li><tt>create</tt></li>
+	<li><tt>create!</tt></li>
+	<li><tt>save</tt></li>
+	<li><tt>save!</tt></li>
+	<li><tt>update</tt></li>
+	<li><tt>update_attributes</tt></li>
+	<li><tt>update_attributes!</tt></li>
+</ul>
+<p>The bang versions (e.g. <tt>save!</tt>) raise an exception if the record is invalid. The non-bang versions don&#8217;t: <tt>save</tt> and <tt>update_attributes</tt> return <tt>false</tt>, <tt>create</tt> and <tt>update</tt> just return the objects.</p>
+<h4 id="skipping-validations">2.3 Skipping Validations</h4>
+<p>The following methods skip validations, and will save the object to the database regardless of its validity. They should be used with caution.</p>
+<ul>
+	<li><tt>decrement!</tt></li>
+	<li><tt>decrement_counter</tt></li>
+	<li><tt>increment!</tt></li>
+	<li><tt>increment_counter</tt></li>
+	<li><tt>toggle!</tt></li>
+	<li><tt>touch</tt></li>
+	<li><tt>update_all</tt></li>
+	<li><tt>update_attribute</tt></li>
+	<li><tt>update_column</tt></li>
+	<li><tt>update_counters</tt></li>
+</ul>
+<p>Note that <tt>save</tt> also has the ability to skip validations if passed <tt>:validate => false</tt> as argument. This technique should be used with caution.</p>
+<ul>
+	<li><tt>save(:validate => false)</tt></li>
+</ul>
+<h4 id="valid-and-invalid">2.4 <tt>valid?</tt> and <tt>invalid?</tt></h4>
+<p>To verify whether or not an object is valid, Rails uses the <tt>valid?</tt> method. You can also use this method on your own. <tt>valid?</tt> triggers your validations and returns true if no errors were found in the object, and false otherwise.</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class Person &lt; ActiveRecord::Base
+  validates :name, :presence =&gt; true
+end
+
+Person.create(:name =&gt; &quot;John Doe&quot;).valid? # =&gt; true
+Person.create(:name =&gt; nil).valid? # =&gt; false
+</pre>
+</div>
+<p>After Active Record has performed validations, any errors found can be accessed through the <tt>errors</tt> instance method, which returns a collection of errors. By definition, an object is valid if this collection is empty after running validations.</p>
+<p>Note that an object instantiated with <tt>new</tt> will not report errors even if it&#8217;s technically invalid, because validations are not run when using <tt>new</tt>.</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class Person &lt; ActiveRecord::Base
+  validates :name, :presence =&gt; true
+end
+
+&gt;&gt; p = Person.new
+=&gt; #&lt;Person id: nil, name: nil&gt;
+&gt;&gt; p.errors
+=&gt; {}
+
+&gt;&gt; p.valid?
+=&gt; false
+&gt;&gt; p.errors
+=&gt; {:name=&gt;[&quot;can't be blank&quot;]}
+
+&gt;&gt; p = Person.create
+=&gt; #&lt;Person id: nil, name: nil&gt;
+&gt;&gt; p.errors
+=&gt; {:name=&gt;[&quot;can't be blank&quot;]}
+
+&gt;&gt; p.save
+=&gt; false
+
+&gt;&gt; p.save!
+=&gt; ActiveRecord::RecordInvalid: Validation failed: Name can't be blank
+
+&gt;&gt; Person.create!
+=&gt; ActiveRecord::RecordInvalid: Validation failed: Name can't be blank
+</pre>
+</div>
+<p><tt>invalid?</tt> is simply the inverse of <tt>valid?</tt>. <tt>invalid?</tt> triggers your validations, returning true if any errors were found in the object, and false otherwise.</p>
+<h4 id="validations_overview-errors">2.5 <tt>errors[]</tt></h4>
+<p>To verify whether or not a particular attribute of an object is valid, you can use <tt>errors[:attribute]</tt>. It returns an array of all the errors for <tt>:attribute</tt>. If there are no errors on the specified attribute, an empty array is returned.</p>
+<p>This method is only useful <em>after</em> validations have been run, because it only inspects the errors collection and does not trigger validations itself. It&#8217;s different from the <tt>ActiveRecord::Base#invalid?</tt> method explained above because it doesn&#8217;t verify the validity of the object as a whole. It only checks to see whether there are errors found on an individual attribute of the object.</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class Person &lt; ActiveRecord::Base
+  validates :name, :presence =&gt; true
+end
+
+&gt;&gt; Person.new.errors[:name].any? # =&gt; false
+&gt;&gt; Person.create.errors[:name].any? # =&gt; true
+</pre>
+</div>
+<p>We&#8217;ll cover validation errors in greater depth in the <a href="#working-with-validation-errors">Working with Validation Errors</a> section. For now, let&#8217;s turn to the built-in validation helpers that Rails provides by default.</p>
+<h3 id="validation-helpers">3 Validation Helpers</h3>
+<p>Active Record offers many pre-defined validation helpers that you can use directly inside your class definitions. These helpers provide common validation rules. Every time a validation fails, an error message is added to the object&#8217;s <tt>errors</tt> collection, and this message is associated with the attribute being validated.</p>
+<p>Each helper accepts an arbitrary number of attribute names, so with a single line of code you can add the same kind of validation to several attributes.</p>
+<p>All of them accept the <tt>:on</tt> and <tt>:message</tt> options, which define when the validation should be run and what message should be added to the <tt>errors</tt> collection if it fails, respectively. The <tt>:on</tt> option takes one of the values <tt>:save</tt> (the default), <tt>:create</tt>  or <tt>:update</tt>. There is a default error message for each one of the validation helpers. These messages are used when the <tt>:message</tt> option isn&#8217;t specified. Let&#8217;s take a look at each one of the available helpers.</p>
+<h4 id="acceptance">3.1 <tt>acceptance</tt></h4>
+<p>Validates that a checkbox on the user interface was checked when a form was submitted. This is typically used when the user needs to agree to your application&#8217;s terms of service, confirm reading some text, or any similar concept. This validation is very specific to web applications and this &#8216;acceptance&#8217; does not need to be recorded anywhere in your database (if you don&#8217;t have a field for it, the helper will just create a virtual attribute).</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class Person &lt; ActiveRecord::Base
+  validates :terms_of_service, :acceptance =&gt; true
+end
+</pre>
+</div>
+<p>The default error message for this helper is &#8220;<em>must be accepted</em>&#8221;.</p>
+<p>It can receive an <tt>:accept</tt> option, which determines the value that will be considered acceptance. It defaults to &#8220;1&#8221; and can be easily changed.</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class Person &lt; ActiveRecord::Base
+  validates :terms_of_service, :acceptance =&gt; { :accept =&gt; 'yes' }
+end
+</pre>
+</div>
+<h4 id="validates_associated">3.2 <tt>validates_associated</tt></h4>
+<p>You should use this helper when your model has associations with other models and they also need to be validated. When you try to save your object, <tt>valid?</tt> will be called upon each one of the associated objects.</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class Library &lt; ActiveRecord::Base
+  has_many :books
+  validates_associated :books
+end
+</pre>
+</div>
+<p>This validation will work with all of the association types.</p>
+<div class="warning"><p>Don&#8217;t use <tt>validates_associated</tt> on both ends of your associations. They would call each other in an infinite loop.</p></div>
+<p>The default error message for <tt>validates_associated</tt> is &#8220;<em>is invalid</em>&#8221;. Note that each associated object will contain its own <tt>errors</tt> collection; errors do not bubble up to the calling model.</p>
+<h4 id="confirmation">3.3 <tt>confirmation</tt></h4>
+<p>You should use this helper when you have two text fields that should receive exactly the same content. For example, you may want to confirm an email address or a password. This validation creates a virtual attribute whose name is the name of the field that has to be confirmed with &#8220;_confirmation&#8221; appended.</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class Person &lt; ActiveRecord::Base
+  validates :email, :confirmation =&gt; true
+end
+</pre>
+</div>
+<p>In your view template you could use something like</p>
+<div class="code_container">
+<pre class="brush: ruby; html-script: true; gutter: false; toolbar: false">
+&lt;%= text_field :person, :email %&gt;
+&lt;%= text_field :person, :email_confirmation %&gt;
+</pre>
+</div>
+<p>This check is performed only if <tt>email_confirmation</tt> is not <tt>nil</tt>. To require confirmation, make sure to add a presence check for the confirmation attribute (we&#8217;ll take a look at <tt>presence</tt> later on this guide):</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class Person &lt; ActiveRecord::Base
+  validates :email, :confirmation =&gt; true
+  validates :email_confirmation, :presence =&gt; true
+end
+</pre>
+</div>
+<p>The default error message for this helper is &#8220;<em>doesn&#8217;t match confirmation</em>&#8221;.</p>
+<h4 id="exclusion">3.4 <tt>exclusion</tt></h4>
+<p>This helper validates that the attributes&#8217; values are not included in a given set. In fact, this set can be any enumerable object.</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class Account &lt; ActiveRecord::Base
+  validates :subdomain, :exclusion =&gt; { :in =&gt; %w(www us ca jp),
+    :message =&gt; &quot;Subdomain %{value} is reserved.&quot; }
+end
+</pre>
+</div>
+<p>The <tt>exclusion</tt> helper has an option <tt>:in</tt> that receives the set of values that will not be accepted for the validated attributes. The <tt>:in</tt> option has an alias called <tt>:within</tt> that you can use for the same purpose, if you&#8217;d like to. This example uses the <tt>:message</tt> option to show how you can include the attribute&#8217;s value.</p>
+<p>The default error message is &#8220;<em>is reserved</em>&#8221;.</p>
+<h4 id="format">3.5 <tt>format</tt></h4>
+<p>This helper validates the attributes&#8217; values by testing whether they match a given regular expression, which is specified using the <tt>:with</tt> option.</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class Product &lt; ActiveRecord::Base
+  validates :legacy_code, :format =&gt; { :with =&gt; /\A[a-zA-Z]+\z/,
+    :message =&gt; &quot;Only letters allowed&quot; }
+end
+</pre>
+</div>
+<p>The default error message is &#8220;<em>is invalid</em>&#8221;.</p>
+<h4 id="inclusion">3.6 <tt>inclusion</tt></h4>
+<p>This helper validates that the attributes&#8217; values are included in a given set. In fact, this set can be any enumerable object.</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class Coffee &lt; ActiveRecord::Base
+  validates :size, :inclusion =&gt; { :in =&gt; %w(small medium large),
+    :message =&gt; &quot;%{value} is not a valid size&quot; }
+end
+</pre>
+</div>
+<p>The <tt>inclusion</tt> helper has an option <tt>:in</tt> that receives the set of values that will be accepted. The <tt>:in</tt> option has an alias called <tt>:within</tt> that you can use for the same purpose, if you&#8217;d like to. The previous example uses the <tt>:message</tt> option to show how you can include the attribute&#8217;s value.</p>
+<p>The default error message for this helper is &#8220;<em>is not included in the list</em>&#8221;.</p>
+<h4 id="length">3.7 <tt>length</tt></h4>
+<p>This helper validates the length of the attributes&#8217; values. It provides a variety of options, so you can specify length constraints in different ways:</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class Person &lt; ActiveRecord::Base
+  validates :name, :length =&gt; { :minimum =&gt; 2 }
+  validates :bio, :length =&gt; { :maximum =&gt; 500 }
+  validates :password, :length =&gt; { :in =&gt; 6..20 }
+  validates :registration_number, :length =&gt; { :is =&gt; 6 }
+end
+</pre>
+</div>
+<p>The possible length constraint options are:</p>
+<ul>
+	<li><tt>:minimum</tt> &#8211; The attribute cannot have less than the specified length.</li>
+	<li><tt>:maximum</tt> &#8211; The attribute cannot have more than the specified length.</li>
+	<li><tt>:in</tt> (or <tt>:within</tt>) &#8211; The attribute length must be included in a given interval. The value for this option must be a range.</li>
+	<li><tt>:is</tt> &#8211; The attribute length must be equal to the given value.</li>
+</ul>
+<p>The default error messages depend on the type of length validation being performed. You can personalize these messages using the <tt>:wrong_length</tt>, <tt>:too_long</tt>, and <tt>:too_short</tt> options and <tt>%{count}</tt> as a placeholder for the number corresponding to the length constraint being used. You can still use the <tt>:message</tt> option to specify an error message.</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class Person &lt; ActiveRecord::Base
+  validates :bio, :length =&gt; { :maximum =&gt; 1000,
+    :too_long =&gt; &quot;%{count} characters is the maximum allowed&quot; }
+end
+</pre>
+</div>
+<p>This helper counts characters by default, but you can split the value in a different way using the <tt>:tokenizer</tt> option:</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class Essay &lt; ActiveRecord::Base
+  validates :content, :length =&gt; {
+    :minimum   =&gt; 300,
+    :maximum   =&gt; 400,
+    :tokenizer =&gt; lambda { |str| str.scan(/\w+/) },
+    :too_short =&gt; &quot;must have at least %{count} words&quot;,
+    :too_long  =&gt; &quot;must have at most %{count} words&quot;
+  }
+end
+</pre>
+</div>
+<p>Note that the default error messages are plural (e.g., &#8220;is too short (minimum is %{count} characters)&#8221;). For this reason, when <tt>:minimum</tt> is 1 you should provide a personalized message or use <tt>validates_presence_of</tt> instead. When <tt>:in</tt> or <tt>:within</tt> have a lower limit of 1, you should either provide a personalized message or call <tt>presence</tt> prior to <tt>length</tt>.</p>
+<p>The <tt>size</tt> helper is an alias for <tt>length</tt>.</p>
+<h4 id="numericality">3.8 <tt>numericality</tt></h4>
+<p>This helper validates that your attributes have only numeric values. By default, it will match an optional sign followed by an integral or floating point number. To specify that only integral numbers are allowed set <tt>:only_integer</tt> to true.</p>
+<p>If you set <tt>:only_integer</tt> to <tt>true</tt>, then it will use the</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+/\A[+-]?\d+\Z/
+</pre>
+</div>
+<p>regular expression to validate the attribute&#8217;s value. Otherwise, it will try to convert the value to a number using <tt>Float</tt>.</p>
+<div class="warning"><p>Note that the regular expression above allows a trailing newline character.</p></div>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class Player &lt; ActiveRecord::Base
+  validates :points, :numericality =&gt; true
+  validates :games_played, :numericality =&gt; { :only_integer =&gt; true }
+end
+</pre>
+</div>
+<p>Besides <tt>:only_integer</tt>, this helper also accepts the following options to add constraints to acceptable values:</p>
+<ul>
+	<li><tt>:greater_than</tt> &#8211; Specifies the value must be greater than the supplied value. The default error message for this option is &#8220;<em>must be greater than %{count}</em>&#8221;.</li>
+	<li><tt>:greater_than_or_equal_to</tt> &#8211; Specifies the value must be greater than or equal to the supplied value. The default error message for this option is &#8220;<em>must be greater than or equal to %{count}</em>&#8221;.</li>
+	<li><tt>:equal_to</tt> &#8211; Specifies the value must be equal to the supplied value. The default error message for this option is &#8220;<em>must be equal to %{count}</em>&#8221;.</li>
+	<li><tt>:less_than</tt> &#8211; Specifies the value must be less than the supplied value. The default error message for this option is &#8220;<em>must be less than %{count}</em>&#8221;.</li>
+	<li><tt>:less_than_or_equal_to</tt> &#8211; Specifies the value must be less than or equal the supplied value. The default error message for this option is &#8220;<em>must be less than or equal to %{count}</em>&#8221;.</li>
+	<li><tt>:odd</tt> &#8211; Specifies the value must be an odd number if set to true. The default error message for this option is &#8220;<em>must be odd</em>&#8221;.</li>
+	<li><tt>:even</tt> &#8211; Specifies the value must be an even number if set to true. The default error message for this option is &#8220;<em>must be even</em>&#8221;.</li>
+</ul>
+<p>The default error message is &#8220;<em>is not a number</em>&#8221;.</p>
+<h4 id="presence">3.9 <tt>presence</tt></h4>
+<p>This helper validates that the specified attributes are not empty. It uses the <tt>blank?</tt> method to check if the value is either <tt>nil</tt> or a blank string, that is, a string that is either empty or consists of whitespace.</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class Person &lt; ActiveRecord::Base
+  validates :name, :login, :email, :presence =&gt; true
+end
+</pre>
+</div>
+<p>If you want to be sure that an association is present, you&#8217;ll need to test whether the foreign key used to map the association is present, and not the associated object itself.</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class LineItem &lt; ActiveRecord::Base
+  belongs_to :order
+  validates :order_id, :presence =&gt; true
+end
+</pre>
+</div>
+<p>Since <tt>false.blank?</tt> is true, if you want to validate the presence of a boolean field you should use <tt>validates :field_name, :inclusion =&gt; { :in =&gt; [true, false] }</tt>.</p>
+<p>The default error message is &#8220;<em>can&#8217;t be empty</em>&#8221;.</p>
+<h4 id="uniqueness">3.10 <tt>uniqueness</tt></h4>
+<p>This helper validates that the attribute&#8217;s value is unique right before the object gets saved. It does not create a uniqueness constraint in the database, so it may happen that two different database connections create two records with the same value for a column that you intend to be unique. To avoid that, you must create a unique index in your database.</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class Account &lt; ActiveRecord::Base
+  validates :email, :uniqueness =&gt; true
+end
+</pre>
+</div>
+<p>The validation happens by performing an <span class="caps">SQL</span> query into the model&#8217;s table, searching for an existing record with the same value in that attribute.</p>
+<p>There is a <tt>:scope</tt> option that you can use to specify other attributes that are used to limit the uniqueness check:</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class Holiday &lt; ActiveRecord::Base
+  validates :name, :uniqueness =&gt; { :scope =&gt; :year,
+    :message =&gt; &quot;should happen once per year&quot; }
+end
+</pre>
+</div>
+<p>There is also a <tt>:case_sensitive</tt> option that you can use to define whether the uniqueness constraint will be case sensitive or not. This option defaults to true.</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class Person &lt; ActiveRecord::Base
+  validates :name, :uniqueness =&gt; { :case_sensitive =&gt; false }
+end
+</pre>
+</div>
+<div class="warning"><p>Note that some databases are configured to perform case-insensitive searches anyway.</p></div>
+<p>The default error message is &#8220;<em>has already been taken</em>&#8221;.</p>
+<h4 id="validates_with">3.11 <tt>validates_with</tt></h4>
+<p>This helper passes the record to a separate class for validation.</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class Person &lt; ActiveRecord::Base
+  validates_with GoodnessValidator
+end
+
+class GoodnessValidator &lt; ActiveModel::Validator
+  def validate(record)
+    if record.first_name == &quot;Evil&quot;
+      record.errors[:base] &lt;&lt; &quot;This person is evil&quot;
+    end
+  end
+end
+</pre>
+</div>
+<div class="note"><p>Errors added to <tt>record.errors[:base]</tt> relate to the state of the record as a whole, and not to a specific attribute.</p></div>
+<p>The <tt>validates_with</tt> helper takes a class, or a list of classes to use for validation. There is no default error message for <tt>validates_with</tt>. You must manually add errors to the record&#8217;s errors collection in the validator class.</p>
+<p>To implement the validate method, you must have a <tt>record</tt> parameter defined, which is the record to be validated.</p>
+<p>Like all other validations, <tt>validates_with</tt> takes the <tt>:if</tt>, <tt>:unless</tt> and <tt>:on</tt> options. If you pass any other options, it will send those options to the validator class as <tt>options</tt>:</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class Person &lt; ActiveRecord::Base
+  validates_with GoodnessValidator, :fields =&gt; [:first_name, :last_name]
+end
+
+class GoodnessValidator &lt; ActiveModel::Validator
+  def validate(record)
+    if options[:fields].any?{|field| record.send(field) == &quot;Evil&quot; }
+      record.errors[:base] &lt;&lt; &quot;This person is evil&quot;
+    end
+  end
+end
+</pre>
+</div>
+<h4 id="validates_each">3.12 <tt>validates_each</tt></h4>
+<p>This helper validates attributes against a block. It doesn&#8217;t have a predefined validation function. You should create one using a block, and every attribute passed to <tt>validates_each</tt> will be tested against it. In the following example, we don&#8217;t want names and surnames to begin with lower case.</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class Person &lt; ActiveRecord::Base
+  validates_each :name, :surname do |record, attr, value|
+    record.errors.add(attr, 'must start with upper case') if value =~ /\A[a-z]/
+  end
+end
+</pre>
+</div>
+<p>The block receives the record, the attribute&#8217;s name and the attribute&#8217;s value. You can do anything you like to check for valid data within the block. If your validation fails, you should add an error message to the model, therefore making it invalid.</p>
+<h3 id="common-validation-options">4 Common Validation Options</h3>
+<p>These are common validation options:</p>
+<h4 id="allow_nil">4.1 <tt>:allow_nil</tt></h4>
+<p>The <tt>:allow_nil</tt> option skips the validation when the value being validated is <tt>nil</tt>.</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class Coffee &lt; ActiveRecord::Base
+  validates :size, :inclusion =&gt; { :in =&gt; %w(small medium large),
+    :message =&gt; &quot;%{value} is not a valid size&quot; }, :allow_nil =&gt; true
+end
+</pre>
+</div>
+<div class="info"><p><tt>:allow_nil</tt> is ignored by the presence validator.</p></div>
+<h4 id="allow_blank">4.2 <tt>:allow_blank</tt></h4>
+<p>The <tt>:allow_blank</tt> option is similar to the <tt>:allow_nil</tt> option. This option will let validation pass if the attribute&#8217;s value is <tt>blank?</tt>, like <tt>nil</tt> or an empty string for example.</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class Topic &lt; ActiveRecord::Base
+  validates :title, :length =&gt; { :is =&gt; 5 }, :allow_blank =&gt; true
+end
+
+Topic.create(&quot;title&quot; =&gt; &quot;&quot;).valid?  # =&gt; true
+Topic.create(&quot;title&quot; =&gt; nil).valid? # =&gt; true
+</pre>
+</div>
+<div class="info"><p><tt>:allow_blank</tt> is ignored by the presence validator.</p></div>
+<h4 id="message">4.3 <tt>:message</tt></h4>
+<p>As you&#8217;ve already seen, the <tt>:message</tt> option lets you specify the message that will be added to the <tt>errors</tt> collection when validation fails. When this option is not used, Active Record will use the respective default error message for each validation helper.</p>
+<h4 id="on">4.4 <tt>:on</tt></h4>
+<p>The <tt>:on</tt> option lets you specify when the validation should happen. The default behavior for all the built-in validation helpers is to be run on save (both when you&#8217;re creating a new record and when you&#8217;re updating it). If you want to change it, you can use <tt>:on => :create</tt> to run the validation only when a new record is created or <tt>:on => :update</tt> to run the validation only when a record is updated.</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class Person &lt; ActiveRecord::Base
+  # it will be possible to update email with a duplicated value
+  validates :email, :uniqueness =&gt; true, :on =&gt; :create
+
+  # it will be possible to create the record with a non-numerical age
+  validates :age, :numericality =&gt; true, :on =&gt; :update
+
+  # the default (validates on both create and update)
+  validates :name, :presence =&gt; true, :on =&gt; :save
+end
+</pre>
+</div>
+<h3 id="conditional-validation">5 Conditional Validation</h3>
+<p>Sometimes it will make sense to validate an object just when a given predicate is satisfied. You can do that by using the <tt>:if</tt> and <tt>:unless</tt> options, which can take a symbol, a string or a <tt>Proc</tt>. You may use the <tt>:if</tt> option when you want to specify when the validation <strong>should</strong> happen. If you want to specify when the validation <strong>should not</strong> happen, then you may use the <tt>:unless</tt> option.</p>
+<h4 id="using-a-symbol-with-if-and-unless">5.1 Using a Symbol with <tt>:if</tt> and <tt>:unless</tt></h4>
+<p>You can associate the <tt>:if</tt> and <tt>:unless</tt> options with a symbol corresponding to the name of a method that will get called right before validation happens. This is the most commonly used option.</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class Order &lt; ActiveRecord::Base
+  validates :card_number, :presence =&gt; true, :if =&gt; :paid_with_card?
+
+  def paid_with_card?
+    payment_type == &quot;card&quot;
+  end
+end
+</pre>
+</div>
+<h4 id="using-a-string-with-if-and-unless">5.2 Using a String with <tt>:if</tt> and <tt>:unless</tt></h4>
+<p>You can also use a string that will be evaluated using <tt>eval</tt> and needs to contain valid Ruby code. You should use this option only when the string represents a really short condition.</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class Person &lt; ActiveRecord::Base
+  validates :surname, :presence =&gt; true, :if =&gt; &quot;name.nil?&quot;
+end
+</pre>
+</div>
+<h4 id="using-a-proc-with-if-and-unless">5.3 Using a Proc with <tt>:if</tt> and <tt>:unless</tt></h4>
+<p>Finally, it&#8217;s possible to associate <tt>:if</tt> and <tt>:unless</tt> with a <tt>Proc</tt> object which will be called. Using a <tt>Proc</tt> object gives you the ability to write an inline condition instead of a separate method. This option is best suited for one-liners.</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class Account &lt; ActiveRecord::Base
+  validates :password, :confirmation =&gt; true,
+    :unless =&gt; Proc.new { |a| a.password.blank? }
+end
+</pre>
+</div>
+<h4 id="grouping-conditional-validations">5.4 Grouping conditional validations</h4>
+<p>Sometimes it is useful to have multiple validations use one condition, it can be easily achieved using <tt>with_options</tt>.</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class User &lt; ActiveRecord::Base
+  with_options :if =&gt; :is_admin? do |admin|
+    admin.validates :password, :length =&gt; { :minimum =&gt; 10 }
+    admin.validates :email, :presence =&gt; true
+  end
+end
+</pre>
+</div>
+<p>All validations inside of <tt>with_options</tt> block will have automatically passed the condition <tt>:if => :is_admin?</tt></p>
+<h3 id="performing-custom-validations">6 Performing Custom Validations</h3>
+<p>When the built-in validation helpers are not enough for your needs, you can write your own validators or validation methods as you prefer.</p>
+<h4 id="custom-validators">6.1 Custom Validators</h4>
+<p>Custom validators are classes that extend <tt>ActiveModel::Validator</tt>. These classes must implement a <tt>validate</tt> method which takes a record as an argument and performs the validation on it. The custom validator is called using the <tt>validates_with</tt> method.</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class MyValidator &lt; ActiveModel::Validator
+  def validate(record)
+    unless record.name.starts_with? 'X'
+      record.errors[:name] &lt;&lt; 'Need a name starting with X please!'
+    end
+  end
+end
+
+class Person
+  include ActiveModel::Validations
+  validates_with MyValidator
+end
+</pre>
+</div>
+<p>The easiest way to add custom validators for validating individual attributes is with the convenient <tt>ActiveModel::EachValidator</tt>. In this case, the custom validator class must implement a <tt>validate_each</tt> method which takes three arguments: record, attribute and value which correspond to the instance, the attribute to be validated and the value of the attribute in the passed instance.</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class EmailValidator &lt; ActiveModel::EachValidator
+  def validate_each(record, attribute, value)
+    unless value =~ /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
+      record.errors[attribute] &lt;&lt; (options[:message] || &quot;is not an email&quot;)
+    end
+  end
+end
+
+class Person &lt; ActiveRecord::Base
+  validates :email, :presence =&gt; true, :email =&gt; true
+end
+</pre>
+</div>
+<p>As shown in the example, you can also combine standard validations with your own custom validators.</p>
+<h4 id="custom-methods">6.2 Custom Methods</h4>
+<p>You can also create methods that verify the state of your models and add messages to the <tt>errors</tt> collection when they are invalid. You must then register these methods by using one or more of the <tt>validate</tt>, <tt>validate_on_create</tt> or <tt>validate_on_update</tt> class methods, passing in the symbols for the validation methods&#8217; names.</p>
+<p>You can pass more than one symbol for each class method and the respective validations will be run in the same order as they were registered.</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class Invoice &lt; ActiveRecord::Base
+  validate :expiration_date_cannot_be_in_the_past,
+    :discount_cannot_be_greater_than_total_value
+
+  def expiration_date_cannot_be_in_the_past
+    if !expiration_date.blank? and expiration_date &lt; Date.today
+      errors.add(:expiration_date, &quot;can't be in the past&quot;)
+    end
+  end
+
+  def discount_cannot_be_greater_than_total_value
+    if discount &gt; total_value
+      errors.add(:discount, &quot;can't be greater than total value&quot;)
+    end
+  end
+end
+</pre>
+</div>
+<p>You can even create your own validation helpers and reuse them in several different models. For example, an application that manages surveys may find it useful to express that a certain field corresponds to a set of choices:</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+ActiveRecord::Base.class_eval do
+  def self.validates_as_choice(attr_name, n, options={})
+    validates attr_name, :inclusion =&gt; { {:in =&gt; 1..n}.merge(options) }
+  end
+end
+</pre>
+</div>
+<p>Simply reopen <tt>ActiveRecord::Base</tt> and define a class method like that. You&#8217;d typically put this code somewhere in <tt>config/initializers</tt>. You can use this helper like this:</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class Movie &lt; ActiveRecord::Base
+  validates_as_choice :rating, 5
+end
+</pre>
+</div>
+<h3 id="working-with-validation-errors">7 Working with Validation Errors</h3>
+<p>In addition to the <tt>valid?</tt> and <tt>invalid?</tt> methods covered earlier, Rails provides a number of methods for working with the <tt>errors</tt> collection and inquiring about the validity of objects.</p>
+<p>The following is a list of the most commonly used methods. Please refer to the <tt>ActiveRecord::Errors</tt> documentation for a list of all the available methods.</p>
+<h4 id="working_with_validation_errors-errors">7.1 <tt>errors</tt></h4>
+<p>Returns an instance of the class <tt>ActiveModel::Errors</tt> (which behaves like an ordered hash) containing all errors. Each key is the attribute name and the value is an array of strings with all errors.</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class Person &lt; ActiveRecord::Base
+  validates :name, :presence =&gt; true, :length =&gt; { :minimum =&gt; 3 }
+end
+
+person = Person.new
+person.valid? # =&gt; false
+person.errors
+ # =&gt; {:name =&gt; [&quot;can't be blank&quot;, &quot;is too short (minimum is 3 characters)&quot;]}
+
+person = Person.new(:name =&gt; &quot;John Doe&quot;)
+person.valid? # =&gt; true
+person.errors # =&gt; []
+</pre>
+</div>
+<h4 id="working_with_validation_errors-errors-2">7.2 <tt>errors[]</tt></h4>
+<p><tt>errors[]</tt> is used when you want to check the error messages for a specific attribute. It returns an array of strings with all error messages for the given attribute, each string with one error message. If there are no errors related to the attribute, it returns an empty array.</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class Person &lt; ActiveRecord::Base
+  validates :name, :presence =&gt; true, :length =&gt; { :minimum =&gt; 3 }
+end
+
+person = Person.new(:name =&gt; &quot;John Doe&quot;)
+person.valid? # =&gt; true
+person.errors[:name] # =&gt; []
+
+person = Person.new(:name =&gt; &quot;JD&quot;)
+person.valid? # =&gt; false
+person.errors[:name] # =&gt; [&quot;is too short (minimum is 3 characters)&quot;]
+
+person = Person.new
+person.valid? # =&gt; false
+person.errors[:name]
+ # =&gt; [&quot;can't be blank&quot;, &quot;is too short (minimum is 3 characters)&quot;]
+</pre>
+</div>
+<h4 id="errors-add">7.3 <tt>errors.add</tt></h4>
+<p>The <tt>add</tt> method lets you manually add messages that are related to particular attributes. You can use the <tt>errors.full_messages</tt> or <tt>errors.to_a</tt> methods to view the messages in the form they might be displayed to a user. Those particular messages get the attribute name prepended (and capitalized). <tt>add</tt> receives the name of the attribute you want to add the message to, and the message itself.</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class Person &lt; ActiveRecord::Base
+  def a_method_used_for_validation_purposes
+    errors.add(:name, &quot;cannot contain the characters !@#%*()_-+=&quot;)
+  end
+end
+
+person = Person.create(:name =&gt; &quot;!@#&quot;)
+
+person.errors[:name]
+ # =&gt; [&quot;cannot contain the characters !@#%*()_-+=&quot;]
+
+person.errors.full_messages
+ # =&gt; [&quot;Name cannot contain the characters !@#%*()_-+=&quot;]
+</pre>
+</div>
+<p>Another way to do this is using <tt>[]=</tt> setter</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class Person &lt; ActiveRecord::Base
+    def a_method_used_for_validation_purposes
+      errors[:name] = &quot;cannot contain the characters !@#%*()_-+=&quot;
+    end
+  end
+
+  person = Person.create(:name =&gt; &quot;!@#&quot;)
+
+  person.errors[:name]
+   # =&gt; [&quot;cannot contain the characters !@#%*()_-+=&quot;]
+
+  person.errors.to_a
+   # =&gt; [&quot;Name cannot contain the characters !@#%*()_-+=&quot;]
+</pre>
+</div>
+<h4 id="errors-base">7.4 <tt>errors[:base]</tt></h4>
+<p>You can add error messages that are related to the object&#8217;s state as a whole, instead of being related to a specific attribute. You can use this method when you want to say that the object is invalid, no matter the values of its attributes. Since <tt>errors[:base]</tt> is an array, you can simply add a string to it and it will be used as an error message.</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class Person &lt; ActiveRecord::Base
+  def a_method_used_for_validation_purposes
+    errors[:base] &lt;&lt; &quot;This person is invalid because ...&quot;
+  end
+end
+</pre>
+</div>
+<h4 id="errors-clear">7.5 <tt>errors.clear</tt></h4>
+<p>The <tt>clear</tt> method is used when you intentionally want to clear all the messages in the <tt>errors</tt> collection. Of course, calling <tt>errors.clear</tt> upon an invalid object won&#8217;t actually make it valid: the <tt>errors</tt> collection will now be empty, but the next time you call <tt>valid?</tt> or any method that tries to save this object to the database, the validations will run again. If any of the validations fail, the <tt>errors</tt> collection will be filled again.</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class Person &lt; ActiveRecord::Base
+  validates :name, :presence =&gt; true, :length =&gt; { :minimum =&gt; 3 }
+end
+
+person = Person.new
+person.valid? # =&gt; false
+person.errors[:name]
+ # =&gt; [&quot;can't be blank&quot;, &quot;is too short (minimum is 3 characters)&quot;]
+
+person.errors.clear
+person.errors.empty? # =&gt; true
+
+p.save # =&gt; false
+
+p.errors[:name]
+ # =&gt; [&quot;can't be blank&quot;, &quot;is too short (minimum is 3 characters)&quot;]
+</pre>
+</div>
+<h4 id="errors-size">7.6 <tt>errors.size</tt></h4>
+<p>The <tt>size</tt> method returns the total number of error messages for the object.</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class Person &lt; ActiveRecord::Base
+  validates :name, :presence =&gt; true, :length =&gt; { :minimum =&gt; 3 }
+end
+
+person = Person.new
+person.valid? # =&gt; false
+person.errors.size # =&gt; 2
+
+person = Person.new(:name =&gt; &quot;Andrea&quot;, :email =&gt; &quot;andrea@example.com&quot;)
+person.valid? # =&gt; true
+person.errors.size # =&gt; 0
+</pre>
+</div>
+<h3 id="displaying-validation-errors-in-the-view">8 Displaying Validation Errors in the View</h3>
+<p>Rails maintains an official plugin, DynamicForm, that provides helpers to display the error messages of your models in your view templates. You can install it as a plugin or as a Gem.</p>
+<h4 id="installing-as-a-plugin">8.1 Installing as a plugin</h4>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ rails plugin install git://github.com/joelmoss/dynamic_form.git
+</pre>
+</div>
+<h4 id="installing-as-a-gem">8.2 Installing as a Gem</h4>
+<p>Add this line in your Gemfile:</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+gem &quot;dynamic_form&quot;
+</pre>
+</div>
+<p>Now you will have access to the two helper methods <tt>error_messages</tt> and <tt>error_messages_for</tt> in your view templates.</p>
+<h4 id="error_messages-and-error_messages_for">8.3 <tt>error_messages</tt> and <tt>error_messages_for</tt></h4>
+<p>When creating a form with the <tt>form_for</tt> helper, you can use the <tt>error_messages</tt> method on the form builder to render all failed validation messages for the current model instance.</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class Product &lt; ActiveRecord::Base
+  validates :description, :value, :presence =&gt; true
+  validates :value, :numericality =&gt; true, :allow_nil =&gt; true
+end
+</pre>
+</div>
+<div class="code_container">
+<pre class="brush: ruby; html-script: true; gutter: false; toolbar: false">
+&lt;%= form_for(@product) do |f| %&gt;
+  &lt;%= f.error_messages %&gt;
+  &lt;p&gt;
+    &lt;%= f.label :description %&gt;&lt;br /&gt;
+    &lt;%= f.text_field :description %&gt;
+  &lt;/p&gt;
+  &lt;p&gt;
+    &lt;%= f.label :value %&gt;&lt;br /&gt;
+    &lt;%= f.text_field :value %&gt;
+  &lt;/p&gt;
+  &lt;p&gt;
+    &lt;%= f.submit &quot;Create&quot; %&gt;
+  &lt;/p&gt;
+&lt;% end %&gt;
+</pre>
+</div>
+<p>If you submit the form with empty fields, the result will be similar to the one shown below:</p>
+<p><img src="images/error_messages.png" title="Error messages" alt="Error messages" /></p>
+<div class="note"><p>The appearance of the generated <span class="caps">HTML</span> will be different from the one shown, unless you have used scaffolding. See <a href="#customizing-error-messages-css">Customizing the Error Messages <span class="caps">CSS</span></a>.</p></div>
+<p>You can also use the <tt>error_messages_for</tt> helper to display the error messages of a model assigned to a view template. It is very similar to the previous example and will achieve exactly the same result.</p>
+<div class="code_container">
+<pre class="brush: ruby; html-script: true; gutter: false; toolbar: false">
+&lt;%= error_messages_for :product %&gt;
+</pre>
+</div>
+<p>The displayed text for each error message will always be formed by the capitalized name of the attribute that holds the error, followed by the error message itself.</p>
+<p>Both the <tt>form.error_messages</tt> and the <tt>error_messages_for</tt> helpers accept options that let you customize the <tt>div</tt> element that holds the messages, change the header text, change the message below the header, and specify the tag used for the header element. For example,</p>
+<div class="code_container">
+<pre class="brush: ruby; html-script: true; gutter: false; toolbar: false">
+&lt;%= f.error_messages :header_message =&gt; &quot;Invalid product!&quot;,
+  :message =&gt; &quot;You'll need to fix the following fields:&quot;,
+  :header_tag =&gt; :h3 %&gt;
+</pre>
+</div>
+<p>results in:</p>
+<p><img src="images/customized_error_messages.png" title="Customized error messages" alt="Customized error messages" /></p>
+<p>If you pass <tt>nil</tt> in any of these options, the corresponding section of the <tt>div</tt> will be discarded.</p>
+<h4 id="customizing-error-messages-css">8.4 Customizing the Error Messages <span class="caps">CSS</span></h4>
+<p>The selectors used to customize the style of error messages are:</p>
+<ul>
+	<li><tt>.field_with_errors</tt> &#8211; Style for the form fields and labels with errors.</li>
+	<li><tt>#error_explanation</tt> &#8211; Style for the <tt>div</tt> element with the error messages.</li>
+	<li><tt>#error_explanation h2</tt> &#8211; Style for the header of the <tt>div</tt> element.</li>
+	<li><tt>#error_explanation p</tt> &#8211; Style for the paragraph holding the message that appears right below the header of the <tt>div</tt> element.</li>
+	<li><tt>#error_explanation ul li</tt> &#8211; Style for the list items with individual error messages.</li>
+</ul>
+<p>If scaffolding was used, file <tt>app/assets/stylesheets/scaffolds.css.scss</tt> will have been generated automatically. This file defines the red-based styles you saw in the examples above.</p>
+<p>The name of the class and the id can be changed with the <tt>:class</tt> and <tt>:id</tt> options, accepted by both helpers.</p>
+<h4 id="customizing-the-error-messages-html">8.5 Customizing the Error Messages <span class="caps">HTML</span></h4>
+<p>By default, form fields with errors are displayed enclosed by a <tt>div</tt> element with the <tt>field_with_errors</tt> <span class="caps">CSS</span> class. However, it&#8217;s possible to override that.</p>
+<p>The way form fields with errors are treated is defined by <tt>ActionView::Base.field_error_proc</tt>. This is a <tt>Proc</tt> that receives two parameters:</p>
+<ul>
+	<li>A string with the <span class="caps">HTML</span> tag</li>
+	<li>An instance of <tt>ActionView::Helpers::InstanceTag</tt>.</li>
+</ul>
+<p>Below is a simple example where we change the Rails behavior to always display the error messages in front of each of the form fields in error. The error messages will be enclosed by a <tt>span</tt> element with a <tt>validation-error</tt> <span class="caps">CSS</span> class. There will be no <tt>div</tt> element enclosing the <tt>input</tt> element, so we get rid of that red border around the text field. You can use the <tt>validation-error</tt> <span class="caps">CSS</span> class to style it anyway you want.</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+ActionView::Base.field_error_proc = Proc.new do |html_tag, instance|
+  if instance.error_message.kind_of?(Array)
+    %(#{html_tag}&lt;span class=&quot;validation-error&quot;&gt;&amp;nbsp;
+      #{instance.error_message.join(',')}&lt;/span&gt;).html_safe
+  else
+    %(#{html_tag}&lt;span class=&quot;validation-error&quot;&gt;&amp;nbsp;
+      #{instance.error_message}&lt;/span&gt;).html_safe
+  end
+end
+</pre>
+</div>
+<p>The result looks like the following:</p>
+<p><img src="images/validation_error_messages.png" title="Validation error messages" alt="Validation error messages" /></p>
+<h3 id="callbacks-overview">9 Callbacks Overview</h3>
+<p>Callbacks are methods that get called at certain moments of an object&#8217;s life cycle. With callbacks it is possible to write code that will run whenever an Active Record object is created, saved, updated, deleted, validated, or loaded from the database.</p>
+<h4 id="callback-registration">9.1 Callback Registration</h4>
+<p>In order to use the available callbacks, you need to register them. You can implement the callbacks as ordinary methods and use a macro-style class method to register them as callbacks:</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class User &lt; ActiveRecord::Base
+  validates :login, :email, :presence =&gt; true
+
+  before_validation :ensure_login_has_a_value
+
+  protected
+  def ensure_login_has_a_value
+    if login.nil?
+      self.login = email unless email.blank?
+    end
+  end
+end
+</pre>
+</div>
+<p>The macro-style class methods can also receive a block. Consider using this style if the code inside your block is so short that it fits in a single line:</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class User &lt; ActiveRecord::Base
+  validates :login, :email, :presence =&gt; true
+
+  before_create do |user|
+    user.name = user.login.capitalize if user.name.blank?
+  end
+end
+</pre>
+</div>
+<p>It is considered good practice to declare callback methods as protected or private. If left public, they can be called from outside of the model and violate the principle of object encapsulation.</p>
+<h3 id="available-callbacks">10 Available Callbacks</h3>
+<p>Here is a list with all the available Active Record callbacks, listed in the same order in which they will get called during the respective operations:</p>
+<h4 id="creating-an-object">10.1 Creating an Object</h4>
+<ul>
+	<li><tt>before_validation</tt></li>
+	<li><tt>after_validation</tt></li>
+	<li><tt>before_save</tt></li>
+	<li><tt>before_create</tt></li>
+	<li><tt>around_create</tt></li>
+	<li><tt>after_create</tt></li>
+	<li><tt>after_save</tt></li>
+</ul>
+<h4 id="updating-an-object">10.2 Updating an Object</h4>
+<ul>
+	<li><tt>before_validation</tt></li>
+	<li><tt>after_validation</tt></li>
+	<li><tt>before_save</tt></li>
+	<li><tt>before_update</tt></li>
+	<li><tt>around_update</tt></li>
+	<li><tt>after_update</tt></li>
+	<li><tt>after_save</tt></li>
+</ul>
+<h4 id="destroying-an-object">10.3 Destroying an Object</h4>
+<ul>
+	<li><tt>before_destroy</tt></li>
+	<li><tt>after_destroy</tt></li>
+	<li><tt>around_destroy</tt></li>
+</ul>
+<div class="warning"><p><tt>after_save</tt> runs both on create and update, but always <em>after</em> the more specific callbacks <tt>after_create</tt> and <tt>after_update</tt>, no matter the order in which the macro calls were executed.</p></div>
+<h4 id="after_initialize-and-after_find">10.4 <tt>after_initialize</tt> and <tt>after_find</tt></h4>
+<p>The <tt>after_initialize</tt> callback will be called whenever an Active Record object is instantiated, either by directly using <tt>new</tt> or when a record is loaded from the database. It can be useful to avoid the need to directly override your Active Record <tt>initialize</tt> method.</p>
+<p>The <tt>after_find</tt> callback will be called whenever Active Record loads a record from the database. <tt>after_find</tt> is called before <tt>after_initialize</tt> if both are defined.</p>
+<p>The <tt>after_initialize</tt> and <tt>after_find</tt> callbacks are a bit different from the others. They have no <tt>before_*</tt> counterparts, and they are registered simply by defining them as regular methods with predefined names. If you try to register <tt>after_initialize</tt> or <tt>after_find</tt> using macro-style class methods, they will just be ignored. This behavior is due to performance reasons, since <tt>after_initialize</tt> and <tt>after_find</tt> will both be called for each record found in the database, which would otherwise significantly slow down the queries.</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class User &lt; ActiveRecord::Base
+  def after_initialize
+    puts &quot;You have initialized an object!&quot;
+  end
+
+  def after_find
+    puts &quot;You have found an object!&quot;
+  end
+end
+
+&gt;&gt; User.new
+You have initialized an object!
+=&gt; #&lt;User id: nil&gt;
+
+&gt;&gt; User.first
+You have found an object!
+You have initialized an object!
+=&gt; #&lt;User id: 1&gt;
+</pre>
+</div>
+<h3 id="running-callbacks">11 Running Callbacks</h3>
+<p>The following methods trigger callbacks:</p>
+<ul>
+	<li><tt>create</tt></li>
+	<li><tt>create!</tt></li>
+	<li><tt>decrement!</tt></li>
+	<li><tt>destroy</tt></li>
+	<li><tt>destroy_all</tt></li>
+	<li><tt>increment!</tt></li>
+	<li><tt>save</tt></li>
+	<li><tt>save!</tt></li>
+	<li><tt>save(false)</tt></li>
+	<li><tt>toggle!</tt></li>
+	<li><tt>update</tt></li>
+	<li><tt>update_attribute</tt></li>
+	<li><tt>update_attributes</tt></li>
+	<li><tt>update_attributes!</tt></li>
+	<li><tt>valid?</tt></li>
+</ul>
+<p>Additionally, the <tt>after_find</tt> callback is triggered by the following finder methods:</p>
+<ul>
+	<li><tt>all</tt></li>
+	<li><tt>first</tt></li>
+	<li><tt>find</tt></li>
+	<li><tt>find_all_by_<em>attribute</em></tt></li>
+	<li><tt>find_by_<em>attribute</em></tt></li>
+	<li><tt>find_by_<em>attribute</em>!</tt></li>
+	<li><tt>last</tt></li>
+</ul>
+<p>The <tt>after_initialize</tt> callback is triggered every time a new object of the class is initialized.</p>
+<h3 id="skipping-callbacks">12 Skipping Callbacks</h3>
+<p>Just as with validations, it is also possible to skip callbacks. These methods should be used with caution, however, because important business rules and application logic may be kept in callbacks. Bypassing them without understanding the potential implications may lead to invalid data.</p>
+<ul>
+	<li><tt>decrement</tt></li>
+	<li><tt>decrement_counter</tt></li>
+	<li><tt>delete</tt></li>
+	<li><tt>delete_all</tt></li>
+	<li><tt>find_by_sql</tt></li>
+	<li><tt>increment</tt></li>
+	<li><tt>increment_counter</tt></li>
+	<li><tt>toggle</tt></li>
+	<li><tt>touch</tt></li>
+	<li><tt>update_column</tt></li>
+	<li><tt>update_all</tt></li>
+	<li><tt>update_counters</tt></li>
+</ul>
+<h3 id="halting-execution">13 Halting Execution</h3>
+<p>As you start registering new callbacks for your models, they will be queued for execution. This queue will include all your model&#8217;s validations, the registered callbacks, and the database operation to be executed.</p>
+<p>The whole callback chain is wrapped in a transaction. If any <em>before</em> callback method returns exactly <tt>false</tt> or raises an exception, the execution chain gets halted and a <span class="caps">ROLLBACK</span> is issued; <em>after</em> callbacks can only accomplish that by raising an exception.</p>
+<div class="warning"><p>Raising an arbitrary exception may break code that expects <tt>save</tt> and its friends not to fail like that. The <tt>ActiveRecord::Rollback</tt> exception is thought precisely to tell Active Record a rollback is going on. That one is internally captured but not reraised.</p></div>
+<h3 id="relational-callbacks">14 Relational Callbacks</h3>
+<p>Callbacks work through model relationships, and can even be defined by them. Suppose an example where a user has many posts. A user&#8217;s posts should be destroyed if the user is destroyed. Let&#8217;s add an <tt>after_destroy</tt> callback to the <tt>User</tt> model by way of its relationship to the <tt>Post</tt> model:</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class User &lt; ActiveRecord::Base
+  has_many :posts, :dependent =&gt; :destroy
+end
+
+class Post &lt; ActiveRecord::Base
+  after_destroy :log_destroy_action
+
+  def log_destroy_action
+    puts 'Post destroyed'
+  end
+end
+
+&gt;&gt; user = User.first
+=&gt; #&lt;User id: 1&gt;
+&gt;&gt; user.posts.create!
+=&gt; #&lt;Post id: 1, user_id: 1&gt;
+&gt;&gt; user.destroy
+Post destroyed
+=&gt; #&lt;User id: 1&gt;
+</pre>
+</div>
+<h3 id="conditional-callbacks">15 Conditional Callbacks</h3>
+<p>As with validations, we can also make the calling of a callback method conditional on the satisfaction of a given predicate. We can do this using the <tt>:if</tt> and <tt>:unless</tt> options, which can take a symbol, a string or a <tt>Proc</tt>. You may use the <tt>:if</tt> option when you want to specify under which conditions the callback <strong>should</strong> be called. If you want to specify the conditions under which the callback <strong>should not</strong> be called, then you may use the <tt>:unless</tt> option.</p>
+<h4 id="using-if-and-unless-with-a-symbol">15.1 Using <tt>:if</tt> and <tt>:unless</tt> with a <tt>Symbol</tt></h4>
+<p>You can associate the <tt>:if</tt> and <tt>:unless</tt> options with a symbol corresponding to the name of a predicate method that will get called right before the callback. When using the <tt>:if</tt> option, the callback won&#8217;t be executed if the predicate method returns false; when using the <tt>:unless</tt> option, the callback won&#8217;t be executed if the predicate method returns true. This is the most common option. Using this form of registration it is also possible to register several different predicates that should be called to check if the callback should be executed.</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class Order &lt; ActiveRecord::Base
+  before_save :normalize_card_number, :if =&gt; :paid_with_card?
+end
+</pre>
+</div>
+<h4 id="using-if-and-unless-with-a-string">15.2 Using <tt>:if</tt> and <tt>:unless</tt> with a String</h4>
+<p>You can also use a string that will be evaluated using <tt>eval</tt> and hence needs to contain valid Ruby code. You should use this option only when the string represents a really short condition:</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class Order &lt; ActiveRecord::Base
+  before_save :normalize_card_number, :if =&gt; &quot;paid_with_card?&quot;
+end
+</pre>
+</div>
+<h4 id="using-if-and-unless-with-a-proc">15.3 Using <tt>:if</tt> and <tt>:unless</tt> with a <tt>Proc</tt></h4>
+<p>Finally, it is possible to associate <tt>:if</tt> and <tt>:unless</tt> with a <tt>Proc</tt> object. This option is best suited when writing short validation methods, usually one-liners:</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class Order &lt; ActiveRecord::Base
+  before_save :normalize_card_number,
+    :if =&gt; Proc.new { |order| order.paid_with_card? }
+end
+</pre>
+</div>
+<h4 id="multiple-conditions-for-callbacks">15.4 Multiple Conditions for Callbacks</h4>
+<p>When writing conditional callbacks, it is possible to mix both <tt>:if</tt> and <tt>:unless</tt> in the same callback declaration:</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class Comment &lt; ActiveRecord::Base
+  after_create :send_email_to_author, :if =&gt; :author_wants_emails?,
+    :unless =&gt; Proc.new { |comment| comment.post.ignore_comments? }
+end
+</pre>
+</div>
+<h3 id="callback-classes">16 Callback Classes</h3>
+<p>Sometimes the callback methods that you&#8217;ll write will be useful enough to be reused by other models. Active Record makes it possible to create classes that encapsulate the callback methods, so it becomes very easy to reuse them.</p>
+<p>Here&#8217;s an example where we create a class with an <tt>after_destroy</tt> callback for a <tt>PictureFile</tt> model:</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class PictureFileCallbacks
+  def after_destroy(picture_file)
+    if File.exists?(picture_file.filepath)
+      File.delete(picture_file.filepath)
+    end
+  end
+end
+</pre>
+</div>
+<p>When declared inside a class, as above, the callback methods will receive the model object as a parameter. We can now use the callback class in the model:</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class PictureFile &lt; ActiveRecord::Base
+  after_destroy PictureFileCallbacks.new
+end
+</pre>
+</div>
+<p>Note that we needed to instantiate a new <tt>PictureFileCallbacks</tt> object, since we declared our callback as an instance method. This is particularly useful if the callbacks make use of the state of the instantiated object. Often, however, it will make more sense to declare the callbacks as class methods:</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class PictureFileCallbacks
+  def self.after_destroy(picture_file)
+    if File.exists?(picture_file.filepath)
+      File.delete(picture_file.filepath)
+    end
+  end
+end
+</pre>
+</div>
+<p>If the callback method is declared this way, it won&#8217;t be necessary to instantiate a <tt>PictureFileCallbacks</tt> object.</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class PictureFile &lt; ActiveRecord::Base
+  after_destroy PictureFileCallbacks
+end
+</pre>
+</div>
+<p>You can declare as many callbacks as you want inside your callback classes.</p>
+<h3 id="observers">17 Observers</h3>
+<p>Observers are similar to callbacks, but with important differences. Whereas callbacks can pollute a model with code that isn&#8217;t directly related to its purpose, observers allow you to add the same functionality without changing the code of the model. For example, it could be argued that a <tt>User</tt> model should not include code to send registration confirmation emails. Whenever you use callbacks with code that isn&#8217;t directly related to your model, you may want to consider creating an observer instead.</p>
+<h4 id="creating-observers">17.1 Creating Observers</h4>
+<p>For example, imagine a <tt>User</tt> model where we want to send an email every time a new user is created. Because sending emails is not directly related to our model&#8217;s purpose, we should create an observer to contain the code implementing this functionality.</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ rails generate observer User
+</pre>
+</div>
+<p>generates <tt>app/models/user_observer.rb</tt> containing the observer class <tt>UserObserver</tt>:</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class UserObserver &lt; ActiveRecord::Observer
+end
+</pre>
+</div>
+<p>You may now add methods to be called at the desired occasions:</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class UserObserver &lt; ActiveRecord::Observer
+  def after_create(model)
+    # code to send confirmation email...
+  end
+end
+</pre>
+</div>
+<p>As with callback classes, the observer&#8217;s methods receive the observed model as a parameter.</p>
+<h4 id="registering-observers">17.2 Registering Observers</h4>
+<p>Observers are conventionally placed inside of your <tt>app/models</tt> directory and registered in your application&#8217;s <tt>config/application.rb</tt> file. For example, the <tt>UserObserver</tt> above would be saved as <tt>app/models/user_observer.rb</tt> and registered in <tt>config/application.rb</tt> this way:</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+# Activate observers that should always be running.
+config.active_record.observers = :user_observer
+</pre>
+</div>
+<p>As usual, settings in <tt>config/environments</tt> take precedence over those in <tt>config/application.rb</tt>. So, if you prefer that an observer doesn&#8217;t run in all environments, you can simply register it in a specific environment instead.</p>
+<h4 id="sharing-observers">17.3 Sharing Observers</h4>
+<p>By default, Rails will simply strip &#8220;Observer&#8221; from an observer&#8217;s name to find the model it should observe. However, observers can also be used to add behavior to more than one model, and thus it is possible to explicitly specify the models that our observer should observe:</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class MailerObserver &lt; ActiveRecord::Observer
+  observe :registration, :user
+
+  def after_create(model)
+    # code to send confirmation email...
+  end
+end
+</pre>
+</div>
+<p>In this example, the <tt>after_create</tt> method will be called whenever a <tt>Registration</tt> or <tt>User</tt> is created. Note that this new <tt>MailerObserver</tt> would also need to be registered in <tt>config/application.rb</tt> in order to take effect:</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+# Activate observers that should always be running.
+config.active_record.observers = :mailer_observer
+</pre>
+</div>
+<h3 id="transaction-callbacks">18 Transaction Callbacks</h3>
+<p>There are two additional callbacks that are triggered by the completion of a database transaction: <tt>after_commit</tt> and <tt>after_rollback</tt>. These callbacks are very similar to the <tt>after_save</tt> callback except that they don&#8217;t execute until after database changes have either been committed or rolled back. They are most useful when your active record models need to interact with external systems which are not part of the database transaction.</p>
+<p>Consider, for example, the previous example where the <tt>PictureFile</tt> model needs to delete a file after the corresponding record is destroyed. If anything raises an exception after the <tt>after_destroy</tt> callback is called and the transaction rolls back, the file will have been deleted and the model will be left in an inconsistent state. For example, suppose that <tt>picture_file_2</tt> in the code below is not valid and the <tt>save!</tt> method raises an error.</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+PictureFile.transaction do
+  picture_file_1.destroy
+  picture_file_2.save!
+end
+</pre>
+</div>
+<p>By using the <tt>after_commit</tt> callback we can account for this case.</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class PictureFile &lt; ActiveRecord::Base
+  attr_accessor :delete_file
+
+  after_destroy do |picture_file|
+    picture_file.delete_file = picture_file.filepath
+  end
+
+  after_commit do |picture_file|
+    if picture_file.delete_file &amp;&amp; File.exist?(picture_file.delete_file)
+      File.delete(picture_file.delete_file)
+      picture_file.delete_file = nil
+    end
+  end
+end
+</pre>
+</div>
+<p>The <tt>after_commit</tt> and <tt>after_rollback</tt> callbacks are guaranteed to be called for all models created, updated, or destroyed within a transaction block. If any exceptions are raised within one of these callbacks, they will be ignored so that they don&#8217;t interfere with the other callbacks. As such, if your callback code could raise an exception, you&#8217;ll need to rescue it and handle it appropriately within the callback.</p>
+
+        <h3>Feedback</h3>
+        <p>
+          You're encouraged to help improve the quality of this guide.
+        </p>
+        <p>
+          If you see any typos or factual errors you are confident to
+          patch, please clone <a href="https://github.com/lifo/docrails">docrails</a>
+          and push the change yourself. That branch of Rails has public write access.
+          Commits are still reviewed, but that happens after you've submitted your
+          contribution. <a href="https://github.com/lifo/docrails">docrails</a> is
+          cross-merged with master periodically.
+        </p>
+        <p>
+          You may also find incomplete content, or stuff that is not up to date.
+          Please do add any missing documentation for master. Check the
+          <a href="ruby_on_rails_guides_guidelines.html">Ruby on Rails Guides Guidelines</a>
+          for style and conventions.
+        </p>
+        <p>
+          If for whatever reason you spot something to fix but cannot patch it yourself, please
+          <a href="https://github.com/rails/rails/issues">open an issue</a>.
+        </p>
+        <p>And last but not least, any kind of discussion regarding Ruby on Rails
+          documentation is very welcome in the <a href="http://groups.google.com/group/rubyonrails-docs">rubyonrails-docs mailing list</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <hr class="hide" />
+  <div id="footer">
+    <div class="wrapper">
+      <p>This work is licensed under a <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-Share Alike 3.0</a> License</p>
+      <p>"Rails", "Ruby on Rails", and the Rails logo are trademarks of David Heinemeier Hansson. All rights reserved.</p>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="javascripts/guides.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shCore.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushRuby.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushXml.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushSql.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushPlain.js"></script>
+  <script type="text/javascript">
+    SyntaxHighlighter.all()
+  </script>
+</body>
+</html>

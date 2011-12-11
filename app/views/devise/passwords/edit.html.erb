@@ -1,14 +1,16 @@
-<h2>Change your password</h2>
+<h2><%=t "change_password" %></h2>
 
-<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f| %>
-  <%= devise_error_messages! %>
-  <%= f.hidden_field :reset_password_token %>
+<section class="gateway_confirm_form">
+	<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f| %>
+	  <%= devise_error_messages! %>
+	  <%= f.hidden_field :reset_password_token %>
+	
+	  <div id="change_password"><%= f.label :password, "New password:", :class => "sign_in_label_big" %> <%= f.password_field :password, :class => "sign_in_input", :autocomplete => "off" %></div>
+	  <div id="change_password_confirm"><%= f.label :password_confirmation, "Confirm new password:", :class => "sign_in_label_big" %>  <%= f.password_field :password_confirmation, :class => "sign_in_input", :autocomplete => "off" %></div>
+	
+	  <div id="submit_change_button"><%= f.submit "" %></div>
+	<% end %>
+</section>
 
-  <div><%= f.label :password, "New password" %><br />
-  <%= f.password_field :password %></div>
 
-  <div><%= f.label :password_confirmation, "Confirm new password" %><br />
-  <%= f.password_field :password_confirmation %></div>
-
-  <div><%= f.submit "Change my password" %></div>
-<% end %>
+<% content_for :title do %><%=t "change_password" %><% end %>

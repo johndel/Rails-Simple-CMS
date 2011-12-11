@@ -14,10 +14,12 @@ describe Menu do
     should have_many(:pages)
   end
   
-  it "should raise an error if a menu pushed in the same page twice" do
+  it "should not add the same menu twice" do #"should raise an error if a menu pushed in the same page twice" do
       menu = create(:menu)
       page = create(:page)
       page.menus << menu
-      lambda { page.menus << menu }.should raise_error
+      #lambda { page.menus << menu }.should raise_error
+      page.menus << menu
+      page.menus.size.should be 1
   end
 end

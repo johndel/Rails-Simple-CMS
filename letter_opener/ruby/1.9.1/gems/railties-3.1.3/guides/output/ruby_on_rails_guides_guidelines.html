@@ -1,0 +1,218 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<title>Ruby on Rails Guides: Ruby on Rails Guides Guidelines</title>
+
+<link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
+<link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+<link rel="stylesheet" type="text/css" href="stylesheets/syntaxhighlighter/shCore.css" />
+<link rel="stylesheet" type="text/css" href="stylesheets/syntaxhighlighter/shThemeRailsGuides.css" />
+
+<link rel="stylesheet" type="text/css" href="stylesheets/fixes.css" />
+</head>
+<body class="guide">
+  <div id="topNav">
+    <div class="wrapper">
+      <strong>More at <a href="http://rubyonrails.org/">rubyonrails.org:</a> </strong>
+      <a href="http://rubyonrails.org/">Overview</a> |
+      <a href="http://rubyonrails.org/download">Download</a> |
+      <a href="http://rubyonrails.org/deploy">Deploy</a> |
+      <a href="https://github.com/rails/rails">Code</a> |
+      <a href="http://rubyonrails.org/screencasts">Screencasts</a> |
+      <a href="http://rubyonrails.org/documentation">Documentation</a> |
+      <a href="http://rubyonrails.org/ecosystem">Ecosystem</a> |
+      <a href="http://rubyonrails.org/community">Community</a> |
+      <a href="http://weblog.rubyonrails.org/">Blog</a>
+    </div>
+  </div>
+  <div id="header">
+    <div class="wrapper clearfix">
+      <h1><a href="index.html" title="Return to home page">Guides.rubyonrails.org</a></h1>
+      <p class="hide"><a href="#mainCol">Skip navigation</a>.</p>
+      <ul class="nav">
+        <li><a href="index.html">Home</a></li>
+        <li class="index"><a href="index.html" onclick="guideMenu(); return false;" id="guidesMenu">Guides Index</a>
+          <div id="guides" class="clearfix" style="display: none;">
+            <hr />
+            <dl class="L">
+              <dt>Start Here</dt>
+              <dd><a href="getting_started.html">Getting Started with Rails</a></dd>
+              <dt>Models</dt>
+              <dd><a href="migrations.html">Rails Database Migrations</a></dd>
+              <dd><a href="active_record_validations_callbacks.html">Active Record Validations and Callbacks</a></dd>
+              <dd><a href="association_basics.html">Active Record Associations</a></dd>
+              <dd><a href="active_record_querying.html">Active Record Query Interface</a></dd>
+              <dt>Views</dt>
+              <dd><a href="layouts_and_rendering.html">Layouts and Rendering in Rails</a></dd>
+              <dd><a href="form_helpers.html">Action View Form Helpers</a></dd>
+              <dt>Controllers</dt>
+              <dd><a href="action_controller_overview.html">Action Controller Overview</a></dd>
+              <dd><a href="routing.html">Rails Routing from the Outside In</a></dd>
+            </dl>
+            <dl class="R">
+              <dt>Digging Deeper</dt>
+              <dd><a href="active_support_core_extensions.html">Active Support Core Extensions</a></dd>
+              <dd><a href="i18n.html">Rails Internationalization API</a></dd>
+              <dd><a href="action_mailer_basics.html">Action Mailer Basics</a></dd>
+              <dd><a href="testing.html">Testing Rails Applications</a></dd>
+              <dd><a href="security.html">Securing Rails Applications</a></dd>
+              <dd><a href="debugging_rails_applications.html">Debugging Rails Applications</a></dd>
+              <dd><a href="performance_testing.html">Performance Testing Rails Applications</a></dd>
+              <dd><a href="configuring.html">Configuring Rails Applications</a></dd>
+              <dd><a href="command_line.html">Rails Command Line Tools and Rake Tasks</a></dd>
+              <dd><a href="caching_with_rails.html">Caching with Rails</a></dd>
+              <dd><a href="asset_pipeline.html">Asset Pipeline</a></dd>
+
+              <dt>Extending Rails</dt>
+              <dd><a href="plugins.html">The Basics of Creating Rails Plugins</a></dd>
+              <dd><a href="rails_on_rack.html">Rails on Rack</a></dd>
+              <dd><a href="generators.html">Creating and Customizing Rails Generators</a></dd>
+
+              <dt>Contributing to Ruby on Rails</dt>
+              <dd><a href="contributing_to_ruby_on_rails.html">Contributing to Ruby on Rails</a></dd>
+              <dd><a href="api_documentation_guidelines.html">API Documentation Guidelines</a></dd>
+              <dd><a href="ruby_on_rails_guides_guidelines.html">Ruby on Rails Guides Guidelines</a></dd>
+
+              <dt>Release Notes</dt>
+              <dd><a href="3_1_release_notes.html">Ruby on Rails 3.1 Release Notes</a></dd>
+              <dd><a href="3_0_release_notes.html">Ruby on Rails 3.0 Release Notes</a></dd>
+              <dd><a href="2_3_release_notes.html">Ruby on Rails 2.3 Release Notes</a></dd>
+              <dd><a href="2_2_release_notes.html">Ruby on Rails 2.2 Release Notes</a></dd>
+            </dl>
+          </div>
+        </li>
+        <li><a href="contributing_to_ruby_on_rails.html">Contribute</a></li>
+        <li><a href="credits.html">Credits</a></li>
+      </ul>
+    </div>
+  </div>
+  <hr class="hide" />
+
+  <div id="feature">
+    <div class="wrapper">
+      <h2>Ruby on Rails Guides Guidelines</h2>
+<p>This guide documents guidelines for writing guides. This guide follows itself in a gracile loop.</p>
+
+            <div id="subCol">
+        <h3 class="chapter"><img src="images/chapters_icon.gif" alt="" />Chapters</h3>
+        <ol class="chapters">
+<li><a href="#textile">Textile</a></li><li><a href="#prologue">Prologue</a></li><li><a href="#titles">Titles</a></li><li><a href="#api-documentation-guidelines"><span class="caps">API</span> Documentation Guidelines</a></li><li><a href="#html-generation"><span class="caps">HTML</span> Generation</a></li><li><a href="#html-validation"><span class="caps">HTML</span> Validation</a></li></ol></div>
+    </div>
+  </div>
+
+  <div id="container">
+    <div class="wrapper">
+      <div id="mainCol">
+        <h3 id="textile">1 Textile</h3>
+<p>Guides are written in <a href="http://www.textism.com/tools/textile/">Textile</a>. There&#8217;s comprehensive documentation <a href="http://redcloth.org/hobix.com/textile/">here</a> and a cheatsheet for markup <a href="http://redcloth.org/hobix.com/textile/quick.html">here</a>.</p>
+<h3 id="prologue">2 Prologue</h3>
+<p>Each guide should start with motivational text at the top (that&#8217;s the little introduction in the blue area.) The prologue should tell the reader what the guide is about, and what they will learn. See for example the <a href="routing.html">Routing Guide</a>.</p>
+<h3 id="titles">3 Titles</h3>
+<p>The title of every guide uses <tt>h2</tt>, guide sections use <tt>h3</tt>, subsections <tt>h4</tt>, etc.</p>
+<p>Capitalize all words except for internal articles, prepositions, conjunctions, and forms of the verb to be:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+h5. Middleware Stack is an Array
+h5. When are Objects Saved?
+</pre>
+</div>
+<p>Use the same typography as in regular text:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+h6. The &lt;tt&gt;:content_type&lt;/tt&gt; Option
+</pre>
+</div>
+<h3 id="api-documentation-guidelines">4 <span class="caps">API</span> Documentation Guidelines</h3>
+<p>The guides and the <span class="caps">API</span> should be coherent where appropriate. Please have a look at these particular sections of the <a href="api_documentation_guidelines.html"><span class="caps">API</span> Documentation Guidelines</a>:</p>
+<ul>
+	<li><a href="api_documentation_guidelines.html#wording">Wording</a></li>
+	<li><a href="api_documentation_guidelines.html#example-code">Example Code</a></li>
+	<li><a href="api_documentation_guidelines.html#filenames">Filenames</a></li>
+	<li><a href="api_documentation_guidelines.html#fonts">Fonts</a></li>
+</ul>
+<p>Those guidelines apply also to guides.</p>
+<h3 id="html-generation">5 <span class="caps">HTML</span> Generation</h3>
+<p>To generate all the guides, just <tt>cd</tt> into the <tt>railties</tt> directory and execute:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+bundle exec rake generate_guides
+</pre>
+</div>
+<p>(You may need to run <tt>bundle install</tt> first to install the required gems.)</p>
+<p>To process <tt>my_guide.textile</tt> and nothing else use the <tt>ONLY</tt> environment variable:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+bundle exec rake generate_guides ONLY=my_guide
+</pre>
+</div>
+<p>By default, guides that have not been modified are not processed, so <tt>ONLY</tt> is rarely needed in practice.</p>
+<p>To force process of all the guides, pass <tt>ALL=1</tt>.</p>
+<p>It is also recommended that you work with <tt>WARNINGS=1</tt>. This detects duplicate IDs and warns about broken internal links.</p>
+<p>If you want to generate guides in languages other than English, you can keep them in a separate directory under <tt>source</tt> (eg. <tt>source/es</tt>) and use the <tt>GUIDES_LANGUAGE</tt> environment variable:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+bundle exec rake generate_guides GUIDES_LANGUAGE=es
+</pre>
+</div>
+<h3 id="html-validation">6 <span class="caps">HTML</span> Validation</h3>
+<p>Please validate the generated <span class="caps">HTML</span> with:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+bundle exec rake validate_guides
+</pre>
+</div>
+<p>Particularly, titles get an ID generated from their content and this often leads to duplicates. Please set <tt>WARNINGS=1</tt> when generating guides to detect them. The warning messages suggest a way to fix them.</p>
+
+        <h3>Feedback</h3>
+        <p>
+          You're encouraged to help improve the quality of this guide.
+        </p>
+        <p>
+          If you see any typos or factual errors you are confident to
+          patch, please clone <a href="https://github.com/lifo/docrails">docrails</a>
+          and push the change yourself. That branch of Rails has public write access.
+          Commits are still reviewed, but that happens after you've submitted your
+          contribution. <a href="https://github.com/lifo/docrails">docrails</a> is
+          cross-merged with master periodically.
+        </p>
+        <p>
+          You may also find incomplete content, or stuff that is not up to date.
+          Please do add any missing documentation for master. Check the
+          <a href="ruby_on_rails_guides_guidelines.html">Ruby on Rails Guides Guidelines</a>
+          for style and conventions.
+        </p>
+        <p>
+          If for whatever reason you spot something to fix but cannot patch it yourself, please
+          <a href="https://github.com/rails/rails/issues">open an issue</a>.
+        </p>
+        <p>And last but not least, any kind of discussion regarding Ruby on Rails
+          documentation is very welcome in the <a href="http://groups.google.com/group/rubyonrails-docs">rubyonrails-docs mailing list</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <hr class="hide" />
+  <div id="footer">
+    <div class="wrapper">
+      <p>This work is licensed under a <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-Share Alike 3.0</a> License</p>
+      <p>"Rails", "Ruby on Rails", and the Rails logo are trademarks of David Heinemeier Hansson. All rights reserved.</p>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="javascripts/guides.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shCore.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushRuby.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushXml.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushSql.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushPlain.js"></script>
+  <script type="text/javascript">
+    SyntaxHighlighter.all()
+  </script>
+</body>
+</html>

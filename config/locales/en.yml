@@ -1,1 +1,8 @@
 en:
+  sign_in: "Sign in"
+  sign_up: "Sign up"
+  password_confirmation: "Resend confirmation instructions"
+  change_password: "Change your password"
+  forgot_password: "Forgot your password?"
+  edit_resource_name: "Edit %{name}"
+  

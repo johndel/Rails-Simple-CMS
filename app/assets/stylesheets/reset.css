@@ -243,6 +243,10 @@ table { border-collapse: collapse; border-spacing: 0; }
 }
 
 
+/* Chrome fixes */
+	*:focus {outline: none;}
+
+
 /* =============================================================================
    Print styles.
    Inlined to avoid required HTTP connection: www.phpied.com/delay-loading-your-print-css/

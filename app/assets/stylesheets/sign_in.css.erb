@@ -1,0 +1,262 @@
+/*
+ *= require reset
+ *= require_self
+ */
+body {
+	background: #373737;
+	color: #fff; }
+	
+section {
+	display: block; }
+	
+.gateway_form {
+	height: 100px;
+	position: relative;
+	padding-left: 130px; }
+ 
+#main {
+ 	height: 400px;
+	left: 50%;
+	margin: -200px 0 0 -375px;
+	position: absolute;
+	padding: 0 auto;
+	top: 50%;
+	width: 750px; }
+ 
+	#main h2 {
+		margin: 30px auto;
+		color: #fff;
+		font: 40px Arial;
+		text-align: center;
+		text-shadow: 0px 1px 0px #999, 0px 2px 0px #888, 0px 3px 0px #777, 0px 4px 0px #666, 0px 5px 0px #555, 0px 6px 0px #444, 0px 7px 0px #333, 0px 8px 7px #001135; }
+ 
+	#main a {
+		color: #6296b4;
+		text-decoration: none; }
+ 
+	#main .sign_in_label {
+		color: #ccc;
+		display: block;
+		float: left;
+		font-size: 18px;
+		height: 50px;
+		line-height: 50px;
+		margin-right: 10px;
+		text-align: right;
+		text-shadow: 0px 1px 5px #000;
+		width: 100px; }
+		
+	#main .sign_in_label_big {
+		color: #ccc;
+		display: block;
+		float: left;
+		font-size: 18px;
+		height: 50px;
+		line-height: 50px;
+		margin-right: 10px;
+		text-align: right;
+		text-shadow: 0px 1px 5px #000;
+		width: 220px; }
+
+/* Sign in */ 
+	#main .sign_in_input {
+		background: none;
+		border: 0;
+		color: #fff;
+		float: left;
+		font-size: 18px;
+		height: 50px;
+		padding-left: 10px;
+		width: 260px; }
+ 
+	#main #email {
+		background: #373737 url("<%= asset_path('/assets/sign_in/input.png') %>") 110px -2px no-repeat;
+		overflow: auto; }
+ 
+	#main #password {
+		background: #373737 url("<%= asset_path('/assets/sign_in/input.png') %>") 110px -56px no-repeat;
+		overflow: auto; }
+ 
+#submit_button input {
+	background: url("<%= asset_path('/assets/sign_in/button.png') %>") 0 -107px no-repeat;
+	border: 0;
+	height: 54px;
+	margin: -78px 0 0 390px;
+	position: absolute;
+	width: 60px; }
+ 
+	#submit_button input:hover { background-position: 0 -54px; }
+ 	#submit_button input:active { background-position: 0 -1px; }
+ 
+#main footer {
+	clear: both;
+	display: block;
+	overflow: auto;
+	position: relative;
+	top: 5px;
+	width: 420px; }
+ 
+ 	#main footer label {
+ 		color: #ccc;
+		display: block;
+		float: left;
+		font-size: 18px;
+		height: 50px;
+		line-height: 50px;
+		margin-right: 0px;
+		text-align: right;
+		text-shadow: 0px 1px 5px #000;
+		width: 100px;
+ 	}
+ 
+	#main footer #remember_me {
+		float: right;
+		overflow: auto; }
+ 
+		#main footer #remember_me label {
+			font-size: 14px;
+			height: 16px;
+			line-height: 16px;
+			margin: 0;
+			text-align: left;
+			width: 107px; }
+ 
+	#main footer #user_remember_me {
+		display: block;
+		float: left;
+		margin-left: 5px;
+		position: absolute; 
+		margin-left: -20px;
+		top: 0px; }
+ 
+	#main footer a {
+		float: left;
+		margin-left: 117px; }
+ 
+		#main footer a:hover { text-decoration: underline; }
+ 
+#main .alert {
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	background: #FFDBDC url("<%= asset_path('/assets/sign_in/error_icon.png') %>") 10px 10px no-repeat;
+	border-radius: 6px;
+	border: 1px solid #A30107;
+	color: #660000;
+	font: 14px sans-serif;
+	line-height: 18px;
+	margin: 10px auto;
+	margin-left: 110px;
+	padding: 10px 0 10px 32px; 
+	width: 275px; }
+
+#main .notice {
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	background: #FFFBCC url("/assets/sign_in/notice_icon.png") 10px 10px no-repeat;
+	border-radius: 6px;
+	border: 1px solid #FFED2D;
+	color: #423C00;
+	font: 14px sans-serif;
+	line-height: 18px;
+	margin: 10px auto;
+	margin-left: 110px;
+	padding: 10px 0 10px 32px; 
+	width: 275px; }
+	
+/* Forgot Password */
+
+#pass_forgot_label { display: block; }
+
+#main #forgot_email_label {
+	color: #ccc;
+	display: block;
+	float: left;
+	font-size: 18px;
+	height: 50px;
+	line-height: 50px;
+	text-align: right;
+	text-shadow: 0px 1px 5px #000;
+	margin: 0 12px 0 4px;
+	width: 92px; }
+
+#main #reg_input {
+	background: url("<%= asset_path('/assets/sign_in/input2.png') %>") 0 4px no-repeat;
+	float: left;
+	overflow: auto;
+	width: 288px; }
+ 
+	#main #user_new .reg_input input { width: 270px; }
+ 
+#main #user_new #forgot_button {
+	background: url("<%= asset_path('/assets/sign_in/button.png') %>") 0 -107px no-repeat;
+	border: 0;
+	float: left;
+	margin-left: 7px;
+	height: 54px;
+	width: 54px; }
+ 
+	#main #user_new #forgot_button:hover { background-position: 0 -54px; }
+ 	#main #user_new #forgot_button:active { background-position: 0 -1px; }
+
+#error_explanation h2 {
+	display: none;
+}
+#error_explanation ul {
+	list-style: none outside;
+}
+#error_explanation li {
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	background: #FFDBDC url("<%= asset_path('/assets/sign_in/error_icon.png') %>") 10px 10px no-repeat;
+	border-radius: 6px;
+	border: 1px solid #A30107;
+	color: #660000;
+	font: 14px sans-serif;
+	line-height: 18px;
+	margin: 10px auto;
+	margin-left: 67px;
+	padding: 10px 0 10px 32px; 
+	width: 257px;
+ }
+}
+
+/* Edit Password (with token) */
+section {
+
+}
+
+.gateway_confirm_form  {
+	height: 100px;
+	position: relative;
+	padding-left: 70px; }
+	
+.gateway_confirm_form #error_explanation li {
+	margin-left: 45px;
+	width: 424px;
+}
+
+#main #change_password {
+	background: #373737 url("<%= asset_path('/assets/sign_in/input.png') %>") 230px -2px no-repeat;
+	overflow: auto; }
+ 
+#main #change_password_confirm {
+	background: #373737 url("<%= asset_path('/assets/sign_in/input.png') %>") 230px -56px no-repeat;
+	overflow: auto; }
+	
+	#submit_change_button input {
+		background: url("<%= asset_path('/assets/sign_in/button.png') %>") 0 -107px no-repeat;
+		border: 0;
+		height: 54px;
+		margin: -78px 0 0 510px;
+		position: absolute;
+		width: 60px; }
+ 
+	#submit_change_button input:hover { background-position: 0 -54px; }
+ 	#submit_change_button input:active { background-position: 0 -1px; }
+
+
+
+
+
+
+

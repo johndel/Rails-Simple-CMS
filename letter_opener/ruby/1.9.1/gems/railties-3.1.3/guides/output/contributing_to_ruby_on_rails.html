@@ -1,0 +1,465 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<title>Ruby on Rails Guides: Contributing to Ruby on Rails</title>
+
+<link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
+<link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+<link rel="stylesheet" type="text/css" href="stylesheets/syntaxhighlighter/shCore.css" />
+<link rel="stylesheet" type="text/css" href="stylesheets/syntaxhighlighter/shThemeRailsGuides.css" />
+
+<link rel="stylesheet" type="text/css" href="stylesheets/fixes.css" />
+</head>
+<body class="guide">
+  <div id="topNav">
+    <div class="wrapper">
+      <strong>More at <a href="http://rubyonrails.org/">rubyonrails.org:</a> </strong>
+      <a href="http://rubyonrails.org/">Overview</a> |
+      <a href="http://rubyonrails.org/download">Download</a> |
+      <a href="http://rubyonrails.org/deploy">Deploy</a> |
+      <a href="https://github.com/rails/rails">Code</a> |
+      <a href="http://rubyonrails.org/screencasts">Screencasts</a> |
+      <a href="http://rubyonrails.org/documentation">Documentation</a> |
+      <a href="http://rubyonrails.org/ecosystem">Ecosystem</a> |
+      <a href="http://rubyonrails.org/community">Community</a> |
+      <a href="http://weblog.rubyonrails.org/">Blog</a>
+    </div>
+  </div>
+  <div id="header">
+    <div class="wrapper clearfix">
+      <h1><a href="index.html" title="Return to home page">Guides.rubyonrails.org</a></h1>
+      <p class="hide"><a href="#mainCol">Skip navigation</a>.</p>
+      <ul class="nav">
+        <li><a href="index.html">Home</a></li>
+        <li class="index"><a href="index.html" onclick="guideMenu(); return false;" id="guidesMenu">Guides Index</a>
+          <div id="guides" class="clearfix" style="display: none;">
+            <hr />
+            <dl class="L">
+              <dt>Start Here</dt>
+              <dd><a href="getting_started.html">Getting Started with Rails</a></dd>
+              <dt>Models</dt>
+              <dd><a href="migrations.html">Rails Database Migrations</a></dd>
+              <dd><a href="active_record_validations_callbacks.html">Active Record Validations and Callbacks</a></dd>
+              <dd><a href="association_basics.html">Active Record Associations</a></dd>
+              <dd><a href="active_record_querying.html">Active Record Query Interface</a></dd>
+              <dt>Views</dt>
+              <dd><a href="layouts_and_rendering.html">Layouts and Rendering in Rails</a></dd>
+              <dd><a href="form_helpers.html">Action View Form Helpers</a></dd>
+              <dt>Controllers</dt>
+              <dd><a href="action_controller_overview.html">Action Controller Overview</a></dd>
+              <dd><a href="routing.html">Rails Routing from the Outside In</a></dd>
+            </dl>
+            <dl class="R">
+              <dt>Digging Deeper</dt>
+              <dd><a href="active_support_core_extensions.html">Active Support Core Extensions</a></dd>
+              <dd><a href="i18n.html">Rails Internationalization API</a></dd>
+              <dd><a href="action_mailer_basics.html">Action Mailer Basics</a></dd>
+              <dd><a href="testing.html">Testing Rails Applications</a></dd>
+              <dd><a href="security.html">Securing Rails Applications</a></dd>
+              <dd><a href="debugging_rails_applications.html">Debugging Rails Applications</a></dd>
+              <dd><a href="performance_testing.html">Performance Testing Rails Applications</a></dd>
+              <dd><a href="configuring.html">Configuring Rails Applications</a></dd>
+              <dd><a href="command_line.html">Rails Command Line Tools and Rake Tasks</a></dd>
+              <dd><a href="caching_with_rails.html">Caching with Rails</a></dd>
+              <dd><a href="asset_pipeline.html">Asset Pipeline</a></dd>
+
+              <dt>Extending Rails</dt>
+              <dd><a href="plugins.html">The Basics of Creating Rails Plugins</a></dd>
+              <dd><a href="rails_on_rack.html">Rails on Rack</a></dd>
+              <dd><a href="generators.html">Creating and Customizing Rails Generators</a></dd>
+
+              <dt>Contributing to Ruby on Rails</dt>
+              <dd><a href="contributing_to_ruby_on_rails.html">Contributing to Ruby on Rails</a></dd>
+              <dd><a href="api_documentation_guidelines.html">API Documentation Guidelines</a></dd>
+              <dd><a href="ruby_on_rails_guides_guidelines.html">Ruby on Rails Guides Guidelines</a></dd>
+
+              <dt>Release Notes</dt>
+              <dd><a href="3_1_release_notes.html">Ruby on Rails 3.1 Release Notes</a></dd>
+              <dd><a href="3_0_release_notes.html">Ruby on Rails 3.0 Release Notes</a></dd>
+              <dd><a href="2_3_release_notes.html">Ruby on Rails 2.3 Release Notes</a></dd>
+              <dd><a href="2_2_release_notes.html">Ruby on Rails 2.2 Release Notes</a></dd>
+            </dl>
+          </div>
+        </li>
+        <li><a href="contributing_to_ruby_on_rails.html">Contribute</a></li>
+        <li><a href="credits.html">Credits</a></li>
+      </ul>
+    </div>
+  </div>
+  <hr class="hide" />
+
+  <div id="feature">
+    <div class="wrapper">
+      <h2>Contributing to Ruby on Rails</h2>
+<p>This guide covers ways in which <em>you</em> can become a part of the ongoing development of Ruby on Rails. After reading it, you should be familiar with:</p>
+<ul>
+	<li>Using GitHub to report issues</li>
+	<li>Cloning master and running the test suite</li>
+	<li>Helping to resolve existing issues</li>
+	<li>Contributing to the Ruby on Rails documentation</li>
+	<li>Contributing to the Ruby on Rails code</li>
+</ul>
+<p>Ruby on Rails is not &#8220;someone else&#8217;s framework.&#8221; Over the years, hundreds of people have contributed to Ruby on Rails ranging from a single character to massive architectural changes or significant documentation. All with the goal of making Ruby on Rails better for everyone. Even if you don&#8217;t feel up to writing code or documentation yet, there are a variety of other ways that you can contribute, from reporting issues to testing patches.</p>
+
+            <div id="subCol">
+        <h3 class="chapter"><img src="images/chapters_icon.gif" alt="" />Chapters</h3>
+        <ol class="chapters">
+<li><a href="#reporting-an-issue">Reporting an Issue</a><ul><li><a href="#creating-a-bug-report">Creating a Bug Report</a></li> <li><a href="#special-treatment-for-security-issues">Special Treatment for Security Issues</a></li> <li><a href="#what-about-feature-requests">What About Feature Requests?</a></li></ul></li><li><a href="#running-the-test-suite">Running the Test Suite</a><ul><li><a href="#install-git">Install git</a></li> <li><a href="#clone-the-ruby-on-rails-repository">Clone the Ruby on Rails Repository</a></li> <li><a href="#set-up-and-run-the-tests">Set up and Run the Tests</a></li> <li><a href="#warnings">Warnings</a></li> <li><a href="#testing-active-record">Testing Active Record</a></li> <li><a href="#older-versions-of-ruby-on-rails">Older versions of Ruby on Rails</a></li></ul></li><li><a href="#helping-to-resolve-existing-issues">Helping to Resolve Existing Issues</a><ul><li><a href="#verifying-bug-reports">Verifying Bug Reports</a></li> <li><a href="#testing-patches">Testing Patches</a></li></ul></li><li><a href="#contributing-to-the-rails-documentation">Contributing to the Rails Documentation</a></li><li><a href="#contributing-to-the-rails-code">Contributing to the Rails Code</a><ul><li><a href="#clone-the-rails-repository">Clone the Rails Repository</a></li> <li><a href="#write-your-code">Write Your Code</a></li> <li><a href="#follow-the-coding-conventions">Follow the Coding Conventions</a></li> <li><a href="#sanity-check">Sanity Check</a></li> <li><a href="#commit-your-changes">Commit Your Changes</a></li> <li><a href="#update-master">Update master</a></li> <li><a href="#fork">Fork</a></li> <li><a href="#issue-a-pull-request">Issue a Pull Request</a></li> <li><a href="#get-some-feedback">Get Some Feedback</a></li> <li><a href="#iterate-as-necessary">Iterate as Necessary</a></li></ul></li><li><a href="#rails-contributors">Rails Contributors</a></li></ol></div>
+    </div>
+  </div>
+
+  <div id="container">
+    <div class="wrapper">
+      <div id="mainCol">
+        <h3 id="reporting-an-issue">1 Reporting an Issue</h3>
+<p>Ruby on Rails uses <a href="https://github.com/rails/rails/issues">GitHub Issue Tracking</a> to track issues (primarily bugs and contributions of new code). If you&#8217;ve found a bug in Ruby on Rails, this is the place to start. You&#8217;ll need to create a (free) GitHub account in order to either submit an issue, comment on them or create pull requests.</p>
+<div class="note"><p>Bugs in the most recent released version of Ruby on Rails are likely to get the most attention. Also, the Rails core team is always interested in feedback from those who can take the time to test <em>edge Rails</em> (the code for the version of Rails that is currently under development). Later in this guide you&#8217;ll find out how to get edge Rails for testing.</p></div>
+<h4 id="creating-a-bug-report">1.1 Creating a Bug Report</h4>
+<p>If you&#8217;ve found a problem in Ruby on Rails which is not a security risk do a search in GitHub Issues in case it was already reported. If you find no issue addressing it you can <a href="https://github.com/rails/rails/issues/new">add a new one</a>. (See the next section for reporting security issues.)</p>
+<p>At the minimum, your issue report needs a title and descriptive text. But that&#8217;s only a minimum. You should include as much relevant information as possible. You need to at least post the code sample that has the issue. Even better is to include a unit test that shows how the expected behavior is not occurring. Your goal should be to make it easy for yourself &#8211; and others &#8211; to replicate the bug and figure out a fix.</p>
+<p>Then don&#8217;t get your hopes up. Unless you have a &#8220;Code Red, Mission Critical, The World is Coming to an End&#8221; kind of bug, you&#8217;re creating this issue report in the hope that others with the same problem will be able to collaborate with you on solving it. Do not expect that the issue report will automatically see any activity or that others will jump to fix it. Creating an issue like this is mostly to help yourself start on the path of fixing the problem and for others to confirm it with a &#8220;I&#8217;m having this problem too&#8221; comment.</p>
+<h4 id="special-treatment-for-security-issues">1.2 Special Treatment for Security Issues</h4>
+<div class="warning"><p>Please do not report security vulnerabilities with public GitHub issue reports. The <a href="http://rubyonrails.org/security">Rails security policy page</a> details the procedure to follow for security issues.</p></div>
+<h4 id="what-about-feature-requests">1.3 What About Feature Requests?</h4>
+<p>Please don&#8217;t put &#8220;feature request&#8221; items into GitHub Issues. If there&#8217;s a new feature that you want to see added to Ruby on Rails, you&#8217;ll need to write the code yourself &#8211; or convince someone else to partner with you to write the code. Later in this guide you&#8217;ll find detailed instructions for proposing a patch to Ruby on Rails. If you enter a wishlist item in GitHub Issues with no code, you can expect it to be marked &#8220;invalid&#8221; as soon as it&#8217;s reviewed.</p>
+<h3 id="running-the-test-suite">2 Running the Test Suite</h3>
+<p>To move on from submitting bugs to helping resolve existing issues or contributing your own code to Ruby on Rails, you <em>must</em> be able to run its test suite. In this section of the guide you&#8217;ll learn how to set up the tests on your own computer.</p>
+<h4 id="install-git">2.1 Install git</h4>
+<p>Ruby on Rails uses git for source code control. The <a href="http://git-scm.com/">git homepage</a> has installation instructions. There are a variety of resources on the net that will help you get familiar with git:</p>
+<ul>
+	<li><a href="http://www.kernel.org/pub/software/scm/git/docs/everyday.html">Everyday Git</a> will teach you just enough about git to get by.</li>
+	<li>The <a href="https://peepcode.com/products/git">PeepCode screencast</a> on git ($9) is easier to follow.</li>
+	<li><a href="http://help.github.com">GitHub</a> offers links to a variety of git resources.</li>
+	<li><a href="http://progit.org/book/">Pro Git</a> is an entire book about git with a Creative Commons license.</li>
+</ul>
+<h4 id="clone-the-ruby-on-rails-repository">2.2 Clone the Ruby on Rails Repository</h4>
+<p>Navigate to the folder where you want the Ruby on Rails source code (it will create its own <tt>rails</tt> subdirectory) and run:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ git clone git://github.com/rails/rails.git
+$ cd rails
+</pre>
+</div>
+<h4 id="set-up-and-run-the-tests">2.3 Set up and Run the Tests</h4>
+<p>The test suite must pass with any submitted code. No matter whether you are writing a new patch, or evaluating someone else&#8217;s, you need to be able to run the tests.</p>
+<p>Install first libxml2 and libxslt together with their development files for Nokogiri. In Ubuntu that&#8217;s</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ sudo apt-get install libxml2 libxml2-dev libxslt1-dev
+</pre>
+</div>
+<p>Also, SQLite3 and its development files for the <tt>sqlite3-ruby</tt> gem, in Ubuntu you&#8217;re done with</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ sudo apt-get install sqlite3 libsqlite3-dev
+</pre>
+</div>
+<p>Get a recent version of <a href="http://gembundler.com/">Bundler</a>:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ gem install bundler
+</pre>
+</div>
+<p>and run:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ bundle install --without db
+</pre>
+</div>
+<p>This command will install all dependencies except the MySQL and PostgreSQL Ruby drivers. We will come back at these soon. With dependencies installed, you can run the test suite with:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ rake test
+</pre>
+</div>
+<p>You can also run tests for a specific framework, like Action Pack, by going into its directory and executing the same command:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ cd actionpack
+$ rake test
+</pre>
+</div>
+<p>If you want to run tests from the specific directory use the <tt>TEST_DIR</tt> environment variable. For example, this will run tests inside <tt>railties/test/generators</tt> directory only:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ cd railties
+$ TEST_DIR=generators rake test
+</pre>
+</div>
+<h4 id="warnings">2.4 Warnings</h4>
+<p>The test suite runs with warnings enabled. Ideally Ruby on Rails should issue no warning, but there may be a few, and also some from third-party libraries. Please ignore (or fix!) them if any, and submit patches that do not issue new warnings.</p>
+<p>As of this writing they are specially noisy with Ruby 1.9. If you are sure about what you are doing and would like to have a more clear output, there&#8217;s a way to override the flag:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ RUBYOPT=-W0 rake test
+</pre>
+</div>
+<h4 id="testing-active-record">2.5 Testing Active Record</h4>
+<p>The test suite of Active Record attempts to run four times, once for SQLite3, once for each of the two MySQL gems (<tt>mysql</tt> and <tt>mysql2</tt>), and once for PostgreSQL. We are going to see now how to setup the environment for them.</p>
+<div class="warning"><p>If you&#8217;re working with Active Record code, you <em>must</em> ensure that the tests pass for at least MySQL, PostgreSQL, and SQLite3. Subtle differences between the various adapters have been behind the rejection of many patches that looked OK when tested only against MySQL.</p></div>
+<h5 id="set-up-database-configuration">2.5.1 Set up Database Configuration</h5>
+<p>The Active Record test suite requires a custom config file: <tt>activerecord/test/config.yml</tt>. An example is provided in <tt>activerecord/test/config.example.yml</tt> which can be copied and used as needed for your environment.</p>
+<h5 id="sqlite3">2.5.2 SQLite3</h5>
+<p>The gem <tt>sqlite3-ruby</tt> does not belong to the &#8220;db&#8221; group indeed, if you followed the instructions above you&#8217;re ready. This is how you run the Active Record test suite only for SQLite3:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ cd activerecord
+$ rake test_sqlite3
+</pre>
+</div>
+<h5 id="mysql-and-postgresql">2.5.3 MySQL and PostgreSQL</h5>
+<p>To be able to run the suite for MySQL and PostgreSQL we need their gems. Install first the servers, their client libraries, and their development files. In Ubuntu just run</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ sudo apt-get install mysql-server libmysqlclient15-dev
+$ sudo apt-get install postgresql postgresql-client postgresql-contrib libpq-dev
+</pre>
+</div>
+<p>After that run:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ rm .bundle/config
+$ bundle install
+</pre>
+</div>
+<p>We need first to delete <tt>.bundle/config</tt> because Bundler remembers in that file that we didn&#8217;t want to install the &#8220;db&#8221; group (alternatively you can edit the file).</p>
+<p>In order to be able to run the test suite against MySQL you need to create a user named <tt>rails</tt> with privileges on the test databases:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+mysql&gt; GRANT ALL PRIVILEGES ON activerecord_unittest.*
+       to 'rails'@'localhost';
+mysql&gt; GRANT ALL PRIVILEGES ON activerecord_unittest2.*
+       to 'rails'@'localhost';
+</pre>
+</div>
+<p>and create the test databases:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ cd activerecord
+$ rake mysql:build_databases
+</pre>
+</div>
+<p>PostgreSQL&#8217;s authentication works differently. A simple way to setup the development environment for example is to run with your development account</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ sudo -u postgres createuser --superuser $USER
+</pre>
+</div>
+<p>and after that create the test databases with</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ cd activerecord
+$ rake postgresql:build_databases
+</pre>
+</div>
+<div class="note"><p>Using the rake task to create the test databases ensures they have the correct character set and collation.</p></div>
+<p>If you’re using another database, check the files under <tt>activerecord/test/connections</tt> for default connection information. You can edit these files if you <em>must</em> on your machine to provide different credentials, but obviously you should not push any such changes back to Rails.</p>
+<p>You can now run tests as you did for <tt>sqlite3</tt>, the tasks are</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+test_mysql
+test_mysql2
+test_postgresql
+</pre>
+</div>
+<p>respectively. As we mentioned before</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ rake test
+</pre>
+</div>
+<p>will now run the four of them in turn.</p>
+<p>You can also invoke <tt>test_jdbcmysql</tt>, <tt>test_jdbcsqlite3</tt> or <tt>test_jdbcpostgresql</tt>. Check out the file <tt>activerecord/RUNNING_UNIT_TESTS</tt> for information on running more targeted database tests, or the file <tt>ci/ci_build.rb</tt> to see the test suite that the continuous integration server runs.</p>
+<h4 id="older-versions-of-ruby-on-rails">2.6 Older versions of Ruby on Rails</h4>
+<p>If you want to add a fix to older versions of Ruby on Rails, you&#8217;ll need to set up and switch to your own local tracking branch. Here is an example to switch to the 3-0-stable branch:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ git branch --track 3-0-stable origin/3-0-stable
+$ git checkout 3-0-stable
+</pre>
+</div>
+<div class="info"><p>You may want to <a href="http://qugstart.com/blog/git-and-svn/add-colored-git-branch-name-to-your-shell-prompt/">put your git branch name in your shell prompt</a> to make it easier to remember which version of the code you&#8217;re working with.</p></div>
+<h3 id="helping-to-resolve-existing-issues">3 Helping to Resolve Existing Issues</h3>
+<p>As a next step beyond reporting issues, you can help the core team resolve existing issues. If you check the <a href="https://github.com/rails/rails/issues?sort=created&amp;direction=desc&amp;state=open&amp;page=1">Everyone&#8217;s Issues</a> list in GitHub Issues, you&#8217;ll find lots of issues already requiring attention. What can you do for these? Quite a bit, actually:</p>
+<h4 id="verifying-bug-reports">3.1 Verifying Bug Reports</h4>
+<p>For starters, it helps to just verify bug reports. Can you reproduce the reported issue on your own computer? If so, you can add a comment to the issue saying that you&#8217;re seeing the same thing.</p>
+<p>If something is very vague, can you help squish it down into something specific? Maybe you can provide additional information to help reproduce a bug, or eliminate needless steps that aren&#8217;t required to help demonstrate the problem.</p>
+<p>If you find a bug report without a test, it&#8217;s very useful to contribute a failing test. This is also a great way to get started exploring the source code: looking at the existing test files will teach you how to write more tests. New tests are best contributed in the form of a patch, as explained later on in the &#8220;Contributing to the Rails Code&#8221; section.</p>
+<p>Anything you can do to make bug reports more succinct or easier to reproduce is a help to folks trying to write code to fix those bugs &#8211; whether you end up writing the code yourself or not.</p>
+<h4 id="testing-patches">3.2 Testing Patches</h4>
+<p>You can also help out by examining pull requests that have been submitted to Ruby on Rails via GitHub. To apply someone&#8217;s changes you need to first create a dedicated branch:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ git checkout -b testing_branch
+</pre>
+</div>
+<p>Then you can use their remote branch to update your codebase. For example, let&#8217;s say the GitHub user JohnSmith has forked and pushed to the topic branch located at https://github.com/JohnSmith/rails.</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ git remote add JohnSmith git://github.com/JohnSmith/rails.git
+$ git pull JohnSmith topic
+</pre>
+</div>
+<p>After applying their branch, test it out! Here are some things to think about:</p>
+<ul>
+	<li>Does the change actually work?</li>
+	<li>Are you happy with the tests? Can you follow what they&#8217;re testing? Are there any tests missing?</li>
+	<li>Does it have proper documentation coverage? Should documentation elsewhere be updated?</li>
+	<li>Do you like the implementation? Can you think of a nicer or faster way to implement a part of their change?</li>
+</ul>
+<p>Once you&#8217;re happy that the pull request contains a good change, comment on the GitHub issue indicating your approval. Your comment should indicate that you like the change and what you like about it. Something like:</p>
+<blockquote>
+<p>I like the way you&#8217;ve restructured that code in generate_finder_sql, much nicer. The tests look good too.</p>
+</blockquote>
+<p>If your comment simply says &#8220;+1&#8221;, then odds are that other reviewers aren&#8217;t going to take it too seriously. Show that you took the time to review the pull request.</p>
+<h3 id="contributing-to-the-rails-documentation">4 Contributing to the Rails Documentation</h3>
+<p>Ruby on Rails has two main sets of documentation: The guides help you to learn Ruby on Rails, and the <span class="caps">API</span> is a reference.</p>
+<p>You can help improve the Rails guides by making them more coherent, adding missing information, correcting factual errors, fixing typos, bringing it up to date with the latest edge Rails. To get involved in the translation of Rails guides, please see <a href="https://wiki.github.com/lifo/docrails/translating-rails-guides">Translating Rails Guides</a>.</p>
+<p>If you&#8217;re confident about your changes, you can push them yourself directly via <a href="https://github.com/lifo/docrails">docrails</a>. docrails is a branch with an <strong>open commit policy</strong> and public write access. Commits to docrails are still reviewed, but that happens after they are pushed. docrails is merged with master regularly, so you are effectively editing the Ruby on Rails documentation.</p>
+<p>If you are unsure of the documentation changes, you can create an issue in the <a href="https://github.com/rails/rails/issues">Rails</a> issues tracker on GitHub.</p>
+<p>When working with documentation, please take into account the <a href="api_documentation_guidelines.html"><span class="caps">API</span> Documentation Guidelines</a> and the <a href="ruby_on_rails_guides_guidelines.html">Ruby on Rails Guides Guidelines</a>.</p>
+<div class="note"><p>As explained earlier, ordinary code patches should have proper documentation coverage. docrails is only used for isolated documentation improvements.</p></div>
+<div class="warning"><p>docrails has a very strict policy: no code can be touched whatsoever, no matter how trivial or small the change. Only RDoc and guides can be edited via docrails. Also, CHANGELOGs should never be edited in docrails.</p></div>
+<h3 id="contributing-to-the-rails-code">5 Contributing to the Rails Code</h3>
+<h4 id="clone-the-rails-repository">5.1 Clone the Rails Repository</h4>
+<p>The first thing you need to do to be able to contribute code is to clone the repository:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ git clone git://github.com/rails/rails.git
+</pre>
+</div>
+<p>and create a dedicated branch:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ cd rails
+$ git checkout -b my_new_branch
+</pre>
+</div>
+<p>It doesn’t really matter what name you use, because this branch will only exist on your local computer and your personal repository on Github. It won&#8217;t be part of the Rails git repository.</p>
+<h4 id="write-your-code">5.2 Write Your Code</h4>
+<p>Now get busy and add or edit code. You’re on your branch now, so you can write whatever you want (you can check to make sure you’re on the right branch with <tt>git branch -a</tt>). But if you’re planning to submit your change back for inclusion in Rails, keep a few things in mind:</p>
+<ul>
+	<li>Get the code right</li>
+	<li>Use Rails idioms and helpers</li>
+	<li>Include tests that fail without your code, and pass with it</li>
+	<li>Update the documentation, the surrounding one, examples elsewhere, guides, whatever is affected by your contribution</li>
+</ul>
+<h4 id="follow-the-coding-conventions">5.3 Follow the Coding Conventions</h4>
+<p>Rails follows a simple set of coding style conventions.</p>
+<ul>
+	<li>Two spaces, no tabs.</li>
+	<li>No trailing whitespace. Blank lines should not have any space.</li>
+	<li>Indent after private/protected.</li>
+	<li>Prefer <tt>&amp;&amp;</tt>/<tt>||</tt> over <tt>and</tt>/<tt>or</tt>.</li>
+	<li>Prefer class &lt;&lt; self block over self.method for class methods.</li>
+	<li><tt>MyClass.my_method(my_arg)</tt> not <tt>my_method( my_arg )</tt> or <tt>my_method my_arg</tt>.</li>
+	<li>a = b and not a=b.</li>
+	<li>Follow the conventions you see used in the source already.</li>
+</ul>
+<p>These are some guidelines and please use your best judgment in using them.</p>
+<h4 id="sanity-check">5.4 Sanity Check</h4>
+<p>You should not be the only person who looks at the code before you submit it. You know at least one other Rails developer, right? Show them what you’re doing and ask for feedback. Doing this in private before you push a patch out publicly is the “smoke test” for a patch: if you can’t convince one other developer of the beauty of your code, you’re unlikely to convince the core team either.</p>
+<p>You might also want to check out the <a href="http://wiki.railsbridge.org/projects/railsbridge/wiki/BugMash">RailsBridge BugMash</a> as a way to get involved in a group effort to improve Rails. This can help you get started and help check your code when you&#8217;re writing your first patches.</p>
+<h4 id="commit-your-changes">5.5 Commit Your Changes</h4>
+<p>When you&#8217;re happy with the code on your computer, you need to commit the changes to git:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ git commit -a -m &quot;Here is a commit message on what I changed in this commit&quot;
+</pre>
+</div>
+<h4 id="update-master">5.6 Update master</h4>
+<p>It’s pretty likely that other changes to master have happened while you were working. Go get them:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ git checkout master
+$ git pull
+</pre>
+</div>
+<p>Now reapply your patch on top of the latest changes:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ git checkout my_new_branch
+$ git rebase master
+</pre>
+</div>
+<p>No conflicts? Tests still pass? Change still seems reasonable to you? Then move on.</p>
+<h4 id="fork">5.7 Fork</h4>
+<p>Navigate to the Rails <a href="https://github.com/rails/rails">GitHub repository</a> and press &#8220;Fork&#8221; in the upper right hand corner.</p>
+<p>Add the new remote to your local repository on your local machine:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ git remote add mine git@github.com:&lt;your user name&gt;/rails.git
+</pre>
+</div>
+<p>Push to your remote:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ git push mine my_new_branch
+</pre>
+</div>
+<h4 id="issue-a-pull-request">5.8 Issue a Pull Request</h4>
+<p>Navigate to the Rails repository you just pushed to (e.g. https://github.com/your-user-name/rails) and press &#8220;Pull Request&#8221; in the upper right hand corner.</p>
+<p>Write your branch name in branch field (is filled with master by default) and press &#8220;Update Commit Range&#8221;</p>
+<p>Ensure the changesets you introduced are included in the &#8220;Commits&#8221; tab and that the &#8220;Files Changed&#8221; incorporate all of your changes.</p>
+<p>Fill in some details about your potential patch including a meaningful title. When finished, press &#8220;Send pull request.&#8221; Rails Core will be notified about your submission.</p>
+<h4 id="get-some-feedback">5.9 Get Some Feedback</h4>
+<p>Now you need to get other people to look at your patch, just as you&#8217;ve looked at other people&#8217;s patches. You can use the <a href="http://groups.google.com/group/rubyonrails-core/">rubyonrails-core mailing list</a> or the #rails-contrib channel on <span class="caps">IRC</span> freenode for this. You might also try just talking to Rails developers that you know.</p>
+<h4 id="iterate-as-necessary">5.10 Iterate as Necessary</h4>
+<p>It’s entirely possible that the feedback you get will suggest changes. Don’t get discouraged: the whole point of contributing to an active open source project is to tap into community knowledge. If people are encouraging you to tweak your code, then it’s worth making the tweaks and resubmitting. If the feedback is that your code doesn’t belong in the core, you might still think about releasing it as a plugin.</p>
+<p>And then&#8230;think about your next contribution!</p>
+<h3 id="rails-contributors">6 Rails Contributors</h3>
+<p>All contributions, either via master or docrails, get credit in <a href="http://contributors.rubyonrails.org">Rails Contributors</a>.</p>
+
+        <h3>Feedback</h3>
+        <p>
+          You're encouraged to help improve the quality of this guide.
+        </p>
+        <p>
+          If you see any typos or factual errors you are confident to
+          patch, please clone <a href="https://github.com/lifo/docrails">docrails</a>
+          and push the change yourself. That branch of Rails has public write access.
+          Commits are still reviewed, but that happens after you've submitted your
+          contribution. <a href="https://github.com/lifo/docrails">docrails</a> is
+          cross-merged with master periodically.
+        </p>
+        <p>
+          You may also find incomplete content, or stuff that is not up to date.
+          Please do add any missing documentation for master. Check the
+          <a href="ruby_on_rails_guides_guidelines.html">Ruby on Rails Guides Guidelines</a>
+          for style and conventions.
+        </p>
+        <p>
+          If for whatever reason you spot something to fix but cannot patch it yourself, please
+          <a href="https://github.com/rails/rails/issues">open an issue</a>.
+        </p>
+        <p>And last but not least, any kind of discussion regarding Ruby on Rails
+          documentation is very welcome in the <a href="http://groups.google.com/group/rubyonrails-docs">rubyonrails-docs mailing list</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <hr class="hide" />
+  <div id="footer">
+    <div class="wrapper">
+      <p>This work is licensed under a <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-Share Alike 3.0</a> License</p>
+      <p>"Rails", "Ruby on Rails", and the Rails logo are trademarks of David Heinemeier Hansson. All rights reserved.</p>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="javascripts/guides.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shCore.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushRuby.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushXml.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushSql.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushPlain.js"></script>
+  <script type="text/javascript">
+    SyntaxHighlighter.all()
+  </script>
+</body>
+</html>

@@ -5,11 +5,11 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
 <head>
 	<meta charset="utf-8">
-	<title></title>
-	<meta name="description" content="">
-	<meta name="author" content="">
+	<title><%= yield(:title) || "#{controller.controller_name.titleize} #{controller.action_name.titleize}" %></title>
+	<meta name="robots" content="noindex, nofollow" />
+	<meta name="description" content="<%= yield(:title) || "#{controller.controller_name.titleize} #{controller.action_name.titleize}" %>">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
-	<%= stylesheet_link_tag "application" %>
+	<%= stylesheet_link_tag "sign_in" %>
 	<%= csrf_meta_tags %>
 	<%= javascript_include_tag "modernizr-2.0.6.min.js" %>
 </head>
@@ -17,16 +17,14 @@
 
 <body>
 <div id="container">
-	<header></header>
-	<div id="main" role="main">
+  	<div id="main" role="main">
 		<%= yield %>
 	</div>
-	<footer></footer>
 </div> <!--! end of #container -->
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="<%= asset_path("jquery.js") %>"><\/script>')</script>
-<%= javascript_include_tag "application" %>
+<%= javascript_include_tag "sign_in" %>
 <script>
 	var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']]; // Change UA-XXXXX-X to be your site's ID
 	(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;

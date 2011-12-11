@@ -1,0 +1,300 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<title>Ruby on Rails Guides
+</title>
+
+<link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
+<link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+<link rel="stylesheet" type="text/css" href="stylesheets/syntaxhighlighter/shCore.css" />
+<link rel="stylesheet" type="text/css" href="stylesheets/syntaxhighlighter/shThemeRailsGuides.css" />
+
+<link rel="stylesheet" type="text/css" href="stylesheets/fixes.css" />
+</head>
+<body class="guide">
+  <div id="topNav">
+    <div class="wrapper">
+      <strong>More at <a href="http://rubyonrails.org/">rubyonrails.org:</a> </strong>
+      <a href="http://rubyonrails.org/">Overview</a> |
+      <a href="http://rubyonrails.org/download">Download</a> |
+      <a href="http://rubyonrails.org/deploy">Deploy</a> |
+      <a href="https://github.com/rails/rails">Code</a> |
+      <a href="http://rubyonrails.org/screencasts">Screencasts</a> |
+      <a href="http://rubyonrails.org/documentation">Documentation</a> |
+      <a href="http://rubyonrails.org/ecosystem">Ecosystem</a> |
+      <a href="http://rubyonrails.org/community">Community</a> |
+      <a href="http://weblog.rubyonrails.org/">Blog</a>
+    </div>
+  </div>
+  <div id="header">
+    <div class="wrapper clearfix">
+      <h1><a href="index.html" title="Return to home page">Guides.rubyonrails.org</a></h1>
+      <p class="hide"><a href="#mainCol">Skip navigation</a>.</p>
+      <ul class="nav">
+        <li><a href="index.html">Home</a></li>
+        <li class="index"><a href="index.html" onclick="guideMenu(); return false;" id="guidesMenu">Guides Index</a>
+          <div id="guides" class="clearfix" style="display: none;">
+            <hr />
+            <dl class="L">
+              <dt>Start Here</dt>
+              <dd><a href="getting_started.html">Getting Started with Rails</a></dd>
+              <dt>Models</dt>
+              <dd><a href="migrations.html">Rails Database Migrations</a></dd>
+              <dd><a href="active_record_validations_callbacks.html">Active Record Validations and Callbacks</a></dd>
+              <dd><a href="association_basics.html">Active Record Associations</a></dd>
+              <dd><a href="active_record_querying.html">Active Record Query Interface</a></dd>
+              <dt>Views</dt>
+              <dd><a href="layouts_and_rendering.html">Layouts and Rendering in Rails</a></dd>
+              <dd><a href="form_helpers.html">Action View Form Helpers</a></dd>
+              <dt>Controllers</dt>
+              <dd><a href="action_controller_overview.html">Action Controller Overview</a></dd>
+              <dd><a href="routing.html">Rails Routing from the Outside In</a></dd>
+            </dl>
+            <dl class="R">
+              <dt>Digging Deeper</dt>
+              <dd><a href="active_support_core_extensions.html">Active Support Core Extensions</a></dd>
+              <dd><a href="i18n.html">Rails Internationalization API</a></dd>
+              <dd><a href="action_mailer_basics.html">Action Mailer Basics</a></dd>
+              <dd><a href="testing.html">Testing Rails Applications</a></dd>
+              <dd><a href="security.html">Securing Rails Applications</a></dd>
+              <dd><a href="debugging_rails_applications.html">Debugging Rails Applications</a></dd>
+              <dd><a href="performance_testing.html">Performance Testing Rails Applications</a></dd>
+              <dd><a href="configuring.html">Configuring Rails Applications</a></dd>
+              <dd><a href="command_line.html">Rails Command Line Tools and Rake Tasks</a></dd>
+              <dd><a href="caching_with_rails.html">Caching with Rails</a></dd>
+              <dd><a href="asset_pipeline.html">Asset Pipeline</a></dd>
+
+              <dt>Extending Rails</dt>
+              <dd><a href="plugins.html">The Basics of Creating Rails Plugins</a></dd>
+              <dd><a href="rails_on_rack.html">Rails on Rack</a></dd>
+              <dd><a href="generators.html">Creating and Customizing Rails Generators</a></dd>
+
+              <dt>Contributing to Ruby on Rails</dt>
+              <dd><a href="contributing_to_ruby_on_rails.html">Contributing to Ruby on Rails</a></dd>
+              <dd><a href="api_documentation_guidelines.html">API Documentation Guidelines</a></dd>
+              <dd><a href="ruby_on_rails_guides_guidelines.html">Ruby on Rails Guides Guidelines</a></dd>
+
+              <dt>Release Notes</dt>
+              <dd><a href="3_1_release_notes.html">Ruby on Rails 3.1 Release Notes</a></dd>
+              <dd><a href="3_0_release_notes.html">Ruby on Rails 3.0 Release Notes</a></dd>
+              <dd><a href="2_3_release_notes.html">Ruby on Rails 2.3 Release Notes</a></dd>
+              <dd><a href="2_2_release_notes.html">Ruby on Rails 2.2 Release Notes</a></dd>
+            </dl>
+          </div>
+        </li>
+        <li><a href="contributing_to_ruby_on_rails.html">Contribute</a></li>
+        <li><a href="credits.html">Credits</a></li>
+      </ul>
+    </div>
+  </div>
+  <hr class="hide" />
+
+  <div id="feature">
+    <div class="wrapper">
+      <h2>Ruby on Rails Guides (edge)</h2>
+
+<p>
+  These are the new guides for Rails 3. The guides for Rails 2.3 are still available
+  at <a href="http://guides.rubyonrails.org/v2.3.11/">http://guides.rubyonrails.org/v2.3.11/</a>.
+</p>
+<p>
+  These guides are designed to make you immediately productive with Rails,
+  and to help you understand how all of the pieces fit together.
+</p>
+
+
+
+      <div id="subCol">
+  <dl>
+    <dd class="work-in-progress">Guides marked with this icon are currently being worked on. While they might still be useful to you, they may contain incomplete information and even errors. You can help by reviewing them and posting your comments and corrections to the author.</dd>
+  </dl>
+</div>
+
+    </div>
+  </div>
+
+  <div id="container">
+    <div class="wrapper">
+      <div id="mainCol">
+        
+
+
+<h3>Start Here</h3>
+
+<dl>
+<dt><a href="getting_started.html">Getting Started with Rails</a></dt><dd>
+  <p>Everything you need to know to install Rails and create your first application.</p>
+</dd></dl>
+
+<h3>Models</h3>
+
+<dl>
+<dt><a href="migrations.html">Rails Database Migrations</a></dt><dd>
+  <p>This guide covers how you can use Active Record migrations to alter your database in a structured and organized manner.</p>
+</dd>
+<dt><a href="active_record_validations_callbacks.html">Active Record Validations and Callbacks</a></dt><dd>
+  <p>This guide covers how you can use Active Record validations and callbacks.</p>
+</dd>
+<dt><a href="association_basics.html">Active Record Associations</a></dt><dd>
+  <p>This guide covers all the associations provided by Active Record.</p>
+</dd>
+<dt><a href="active_record_querying.html">Active Record Query Interface</a></dt><dd>
+  <p>This guide covers the database query interface provided by Active Record.</p>
+</dd></dl>
+
+<h3>Views</h3>
+
+<dl>
+<dt><a href="layouts_and_rendering.html">Layouts and Rendering in Rails</a></dt><dd>
+  <p>This guide covers the basic layout features of Action Controller and Action View, including rendering and redirecting, using content_for blocks, and working with partials.</p>
+</dd>
+<dt><a href="form_helpers.html">Action View Form Helpers</a></dt><dd class="work-in-progress">Work in progress</dd><dd>
+  <p>Guide to using built-in Form helpers.</p>
+</dd></dl>
+
+<h3>Controllers</h3>
+
+<dl>
+<dt><a href="action_controller_overview.html">Action Controller Overview</a></dt><dd>
+  <p>This guide covers how controllers work and how they fit into the request cycle in your application. It includes sessions, filters, and cookies, data streaming, and dealing with exceptions raised by a request, among other topics.</p>
+</dd>
+<dt><a href="routing.html">Rails Routing from the Outside In</a></dt><dd>
+  <p>This guide covers the user-facing features of Rails routing. If you want to understand how to use routing in your own Rails applications, start here.</p>
+</dd></dl>
+
+<h3>Digging Deeper</h3>
+
+<dl>
+
+<dt><a href="active_support_core_extensions.html">Active Support Core Extensions</a></dt><dd>
+  <p>This guide documents the Ruby core extensions defined in Active Support.</p>
+</dd>
+<dt><a href="i18n.html">Rails Internationalization API</a></dt><dd>
+  <p>This guide covers how to add internationalization to your applications. Your application will be able to translate content to different languages, change pluralization rules, use correct date formats for each country and so on.</p>
+</dd>
+<dt><a href="action_mailer_basics.html">Action Mailer Basics</a></dt><dd class="work-in-progress">Work in progress</dd><dd>
+  <p>This guide describes how to use Action Mailer to send and receive emails.</p>
+</dd>
+<dt><a href="testing.html">Testing Rails Applications</a></dt><dd class="work-in-progress">Work in progress</dd><dd>
+  <p>This is a rather comprehensive guide to doing both unit and functional tests in Rails. It covers everything from &quot;What is a test?&quot; to the testing APIs. Enjoy.</p>
+</dd>
+<dt><a href="security.html">Securing Rails Applications</a></dt><dd>
+  <p>This guide describes common security problems in web applications and how to avoid them with Rails.</p>
+</dd>
+<dt><a href="debugging_rails_applications.html">Debugging Rails Applications</a></dt><dd>
+  <p>This guide describes how to debug Rails applications. It covers the different ways of achieving this and how to understand what is happening "behind the scenes" of your code.</p>
+</dd>
+<dt><a href="performance_testing.html">Performance Testing Rails Applications</a></dt><dd>
+  <p>This guide covers the various ways of performance testing a Ruby on Rails application.</p>
+</dd>
+<dt><a href="configuring.html">Configuring Rails Applications</a></dt><dd>
+  <p>This guide covers the basic configuration settings for a Rails application.</p>
+</dd>
+<dt><a href="command_line.html">Rails Command Line Tools and Rake tasks</a></dt><dd>
+  <p>This guide covers the command line tools and rake tasks provided by Rails.</p>
+</dd>
+<dt><a href="caching_with_rails.html">Caching with Rails</a></dt><dd class="work-in-progress">Work in progress</dd><dd>
+  <p>Various caching techniques provided by Rails.</p>
+</dd>
+<dt><a href="asset_pipeline.html">Asset Pipeline</a></dt><dd>
+  <p>This guide documents the asset pipeline.</p>
+</dd></dl>
+
+<h3>Extending Rails</h3>
+
+<dl>
+  <dt><a href="plugins.html">The Basics of Creating Rails Plugins</a></dt><dd class="work-in-progress">Work in progress</dd><dd>
+    <p>This guide covers how to build a plugin to extend the functionality of Rails.</p>
+</dd>
+  <dt><a href="rails_on_rack.html">Rails on Rack</a></dt><dd>
+    <p>This guide covers Rails integration with Rack and interfacing with other Rack components.</p>
+</dd>
+  <dt><a href="generators.html">Creating and Customizing Rails Generators</a></dt><dd>
+    <p>This guide covers the process of adding a brand new generator to your extension
+      or providing an alternative to an element of a built-in Rails generator (such as
+      providing alternative test stubs for the scaffold generator).</p>
+</dd></dl>
+
+<h3>Contributing to Ruby on Rails</h3>
+
+<dl>
+  <dt><a href="contributing_to_ruby_on_rails.html">Contributing to Ruby on Rails</a></dt><dd>
+    <p>Rails is not &quot;somebody else's framework.&quot; This guide covers a variety of ways that you can get involved in the ongoing development of Rails.</p>
+</dd>
+  <dt><a href="api_documentation_guidelines.html">API Documentation Guidelines</a></dt><dd>
+    <p>This guide documents the Ruby on Rails API documentation guidelines.</p>
+</dd>
+  <dt><a href="ruby_on_rails_guides_guidelines.html">Ruby on Rails Guides Guidelines</a></dt><dd>
+    <p>This guide documents the Ruby on Rails guides guidelines.</p>
+</dd></dl>
+
+<h3>Release Notes</h3>
+
+<dl>
+<dt><a href="3_1_release_notes.html">Ruby on Rails 3.1 Release Notes</a></dt><dd>
+  <p>Release notes for Rails 3.1.</p>
+</dd>
+<dt><a href="3_0_release_notes.html">Ruby on Rails 3.0 Release Notes</a></dt><dd>
+  <p>Release notes for Rails 3.0.</p>
+</dd>
+<dt><a href="2_3_release_notes.html">Ruby on Rails 2.3 Release Notes</a></dt><dd>
+  <p>Release notes for Rails 2.3.</p>
+</dd>
+<dt><a href="2_2_release_notes.html">Ruby on Rails 2.2 Release Notes</a></dt><dd>
+  <p>Release notes for Rails 2.2.</p>
+</dd></dl>
+
+
+        <h3>Feedback</h3>
+        <p>
+          You're encouraged to help improve the quality of this guide.
+        </p>
+        <p>
+          If you see any typos or factual errors you are confident to
+          patch, please clone <a href="https://github.com/lifo/docrails">docrails</a>
+          and push the change yourself. That branch of Rails has public write access.
+          Commits are still reviewed, but that happens after you've submitted your
+          contribution. <a href="https://github.com/lifo/docrails">docrails</a> is
+          cross-merged with master periodically.
+        </p>
+        <p>
+          You may also find incomplete content, or stuff that is not up to date.
+          Please do add any missing documentation for master. Check the
+          <a href="ruby_on_rails_guides_guidelines.html">Ruby on Rails Guides Guidelines</a>
+          for style and conventions.
+        </p>
+        <p>
+          If for whatever reason you spot something to fix but cannot patch it yourself, please
+          <a href="https://github.com/rails/rails/issues">open an issue</a>.
+        </p>
+        <p>And last but not least, any kind of discussion regarding Ruby on Rails
+          documentation is very welcome in the <a href="http://groups.google.com/group/rubyonrails-docs">rubyonrails-docs mailing list</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <hr class="hide" />
+  <div id="footer">
+    <div class="wrapper">
+      <p>This work is licensed under a <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-Share Alike 3.0</a> License</p>
+      <p>"Rails", "Ruby on Rails", and the Rails logo are trademarks of David Heinemeier Hansson. All rights reserved.</p>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="javascripts/guides.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shCore.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushRuby.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushXml.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushSql.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushPlain.js"></script>
+  <script type="text/javascript">
+    SyntaxHighlighter.all()
+  </script>
+</body>
+</html>

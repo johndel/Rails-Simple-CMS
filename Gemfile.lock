@@ -86,6 +86,8 @@ GEM
     json (1.6.3)
     launchy (2.0.5)
       addressable (~> 2.2.6)
+    letter_opener (0.0.2)
+      launchy
     libv8 (3.3.10.4)
     mail (2.3.0)
       i18n (>= 0.4.0)
@@ -212,6 +214,7 @@ DEPENDENCIES
   guard-spork
   jquery-rails
   launchy
+  letter_opener
   mysql2
   pry-rails
   pry-remote

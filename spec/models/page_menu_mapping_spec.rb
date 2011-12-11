@@ -28,5 +28,12 @@ describe PageMenuMapping do
     create(:mapping_one)
     build(:mapping_one, :page_id => 2).should have(1).error_on(:menu_id)
   end
+  
+  it "should add page position automatically if it hasn't specified" do
+    page = create(:page)
+    menu = create(:menu)
+    menu.pages << page
+    menu.page_menu_mappings.first.page_position.should be 1
+  end
    
 end

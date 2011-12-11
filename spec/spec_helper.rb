@@ -24,7 +24,7 @@ Spork.prefork do
     # config.mock_with :rr
     config.mock_with :rspec
     config.use_transactional_fixtures = true
-  
+    
     # If true, the base class of anonymous controllers will be inferred
     # automatically. This will be the default behavior in future versions of
     # rspec-rails.
@@ -34,6 +34,9 @@ Spork.prefork do
     config.treat_symbols_as_metadata_keys_with_true_values = true
     config.filter_run :focus => true
     config.run_all_when_everything_filtered = true
+    
+    config.include(MailerMacros)
+    config.before(:each) { reset_email }
   end
 
 

@@ -1,0 +1,658 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<title>Ruby on Rails Guides: Action Mailer Basics</title>
+
+<link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
+<link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+<link rel="stylesheet" type="text/css" href="stylesheets/syntaxhighlighter/shCore.css" />
+<link rel="stylesheet" type="text/css" href="stylesheets/syntaxhighlighter/shThemeRailsGuides.css" />
+
+<link rel="stylesheet" type="text/css" href="stylesheets/fixes.css" />
+</head>
+<body class="guide">
+  <div id="topNav">
+    <div class="wrapper">
+      <strong>More at <a href="http://rubyonrails.org/">rubyonrails.org:</a> </strong>
+      <a href="http://rubyonrails.org/">Overview</a> |
+      <a href="http://rubyonrails.org/download">Download</a> |
+      <a href="http://rubyonrails.org/deploy">Deploy</a> |
+      <a href="https://github.com/rails/rails">Code</a> |
+      <a href="http://rubyonrails.org/screencasts">Screencasts</a> |
+      <a href="http://rubyonrails.org/documentation">Documentation</a> |
+      <a href="http://rubyonrails.org/ecosystem">Ecosystem</a> |
+      <a href="http://rubyonrails.org/community">Community</a> |
+      <a href="http://weblog.rubyonrails.org/">Blog</a>
+    </div>
+  </div>
+  <div id="header">
+    <div class="wrapper clearfix">
+      <h1><a href="index.html" title="Return to home page">Guides.rubyonrails.org</a></h1>
+      <p class="hide"><a href="#mainCol">Skip navigation</a>.</p>
+      <ul class="nav">
+        <li><a href="index.html">Home</a></li>
+        <li class="index"><a href="index.html" onclick="guideMenu(); return false;" id="guidesMenu">Guides Index</a>
+          <div id="guides" class="clearfix" style="display: none;">
+            <hr />
+            <dl class="L">
+              <dt>Start Here</dt>
+              <dd><a href="getting_started.html">Getting Started with Rails</a></dd>
+              <dt>Models</dt>
+              <dd><a href="migrations.html">Rails Database Migrations</a></dd>
+              <dd><a href="active_record_validations_callbacks.html">Active Record Validations and Callbacks</a></dd>
+              <dd><a href="association_basics.html">Active Record Associations</a></dd>
+              <dd><a href="active_record_querying.html">Active Record Query Interface</a></dd>
+              <dt>Views</dt>
+              <dd><a href="layouts_and_rendering.html">Layouts and Rendering in Rails</a></dd>
+              <dd><a href="form_helpers.html">Action View Form Helpers</a></dd>
+              <dt>Controllers</dt>
+              <dd><a href="action_controller_overview.html">Action Controller Overview</a></dd>
+              <dd><a href="routing.html">Rails Routing from the Outside In</a></dd>
+            </dl>
+            <dl class="R">
+              <dt>Digging Deeper</dt>
+              <dd><a href="active_support_core_extensions.html">Active Support Core Extensions</a></dd>
+              <dd><a href="i18n.html">Rails Internationalization API</a></dd>
+              <dd><a href="action_mailer_basics.html">Action Mailer Basics</a></dd>
+              <dd><a href="testing.html">Testing Rails Applications</a></dd>
+              <dd><a href="security.html">Securing Rails Applications</a></dd>
+              <dd><a href="debugging_rails_applications.html">Debugging Rails Applications</a></dd>
+              <dd><a href="performance_testing.html">Performance Testing Rails Applications</a></dd>
+              <dd><a href="configuring.html">Configuring Rails Applications</a></dd>
+              <dd><a href="command_line.html">Rails Command Line Tools and Rake Tasks</a></dd>
+              <dd><a href="caching_with_rails.html">Caching with Rails</a></dd>
+              <dd><a href="asset_pipeline.html">Asset Pipeline</a></dd>
+
+              <dt>Extending Rails</dt>
+              <dd><a href="plugins.html">The Basics of Creating Rails Plugins</a></dd>
+              <dd><a href="rails_on_rack.html">Rails on Rack</a></dd>
+              <dd><a href="generators.html">Creating and Customizing Rails Generators</a></dd>
+
+              <dt>Contributing to Ruby on Rails</dt>
+              <dd><a href="contributing_to_ruby_on_rails.html">Contributing to Ruby on Rails</a></dd>
+              <dd><a href="api_documentation_guidelines.html">API Documentation Guidelines</a></dd>
+              <dd><a href="ruby_on_rails_guides_guidelines.html">Ruby on Rails Guides Guidelines</a></dd>
+
+              <dt>Release Notes</dt>
+              <dd><a href="3_1_release_notes.html">Ruby on Rails 3.1 Release Notes</a></dd>
+              <dd><a href="3_0_release_notes.html">Ruby on Rails 3.0 Release Notes</a></dd>
+              <dd><a href="2_3_release_notes.html">Ruby on Rails 2.3 Release Notes</a></dd>
+              <dd><a href="2_2_release_notes.html">Ruby on Rails 2.2 Release Notes</a></dd>
+            </dl>
+          </div>
+        </li>
+        <li><a href="contributing_to_ruby_on_rails.html">Contribute</a></li>
+        <li><a href="credits.html">Credits</a></li>
+      </ul>
+    </div>
+  </div>
+  <hr class="hide" />
+
+  <div id="feature">
+    <div class="wrapper">
+      <h2>Action Mailer Basics</h2>
+<p>This guide should provide you with all you need to get started in sending and receiving emails from and to your application, and many internals of Action Mailer. It also covers how to test your mailers.</p>
+
+            <div id="subCol">
+        <h3 class="chapter"><img src="images/chapters_icon.gif" alt="" />Chapters</h3>
+        <ol class="chapters">
+<li><a href="#introduction">Introduction</a></li><li><a href="#sending-emails">Sending Emails</a><ul><li><a href="#walkthrough-to-generating-a-mailer">Walkthrough to Generating a Mailer</a></li> <li><a href="#auto-encoding-header-values">Auto encoding header values</a></li> <li><a href="#complete-list-of-action-mailer-methods">Complete List of Action Mailer Methods</a></li> <li><a href="#mailer-views">Mailer Views</a></li> <li><a href="#action-mailer-layouts">Action Mailer Layouts</a></li> <li><a href="#generating-urls-in-action-mailer-views">Generating URLs in Action Mailer Views</a></li> <li><a href="#sending-multipart-emails">Sending Multipart Emails</a></li> <li><a href="#sending-emails-with-attachments">Sending Emails with Attachments</a></li></ul></li><li><a href="#receiving-emails">Receiving Emails</a></li><li><a href="#using-action-mailer-helpers">Using Action Mailer Helpers</a></li><li><a href="#action-mailer-configuration">Action Mailer Configuration</a><ul><li><a href="#example-action-mailer-configuration">Example Action Mailer Configuration</a></li> <li><a href="#action-mailer-configuration-for-gmail">Action Mailer Configuration for GMail</a></li></ul></li><li><a href="#mailer-testing">Mailer Testing</a></li></ol></div>
+    </div>
+  </div>
+
+  <div id="container">
+    <div class="wrapper">
+      <div id="mainCol">
+        <div class="warning"><p>This Guide is based on Rails 3.0. Some of the code shown here will not work in earlier versions of Rails.</p></div>
+<h3 id="introduction">1 Introduction</h3>
+<p>Action Mailer allows you to send emails from your application using a mailer model and views. So, in Rails, emails are used by creating mailers that inherit from <tt>ActionMailer::Base</tt> and live in <tt>app/mailers</tt>. Those mailers have associated views that appear alongside controller views in <tt>app/views</tt>.</p>
+<h3 id="sending-emails">2 Sending Emails</h3>
+<p>This section will provide a step-by-step guide to creating a mailer and its views.</p>
+<h4 id="walkthrough-to-generating-a-mailer">2.1 Walkthrough to Generating a Mailer</h4>
+<h5 id="create-the-mailer">2.1.1 Create the Mailer</h5>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ rails generate mailer UserMailer
+create  app/mailers/user_mailer.rb
+invoke  erb
+create    app/views/user_mailer
+invoke  test_unit
+create    test/functional/user_mailer_test.rb
+</pre>
+</div>
+<p>So we got the mailer, the views, and the tests.</p>
+<h5 id="edit-the-mailer">2.1.2 Edit the Mailer</h5>
+<p><tt>app/mailers/user_mailer.rb</tt> contains an empty mailer:</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class UserMailer &lt; ActionMailer::Base
+  default :from =&gt; &quot;from@example.com&quot;
+end
+</pre>
+</div>
+<p>Let&#8217;s add a method called <tt>welcome_email</tt>, that will send an email to the user&#8217;s registered email address:</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class UserMailer &lt; ActionMailer::Base
+  default :from =&gt; &quot;notifications@example.com&quot;
+
+  def welcome_email(user)
+    @user = user
+    @url  = &quot;http://example.com/login&quot;
+    mail(:to =&gt; user.email, :subject =&gt; &quot;Welcome to My Awesome Site&quot;)
+  end
+end
+</pre>
+</div>
+<p>Here is a quick explanation of the items presented in the preceding method. For a full list of all available options, please have a look further down at the Complete List of Action Mailer user-settable attributes section.</p>
+<ul>
+	<li><tt>default Hash</tt> &#8211; This is a hash of default values for any email you send, in this case we are setting the <tt>:from</tt> header to a value for all messages in this class, this can be overridden on a per email basis</li>
+	<li><tt>mail</tt> &#8211; The actual email message, we are passing the <tt>:to</tt> and <tt>:subject</tt> headers in.</li>
+</ul>
+<p>Just like controllers, any instance variables we define in the method become available for use in the views.</p>
+<h5 id="create-a-mailer-view">2.1.3 Create a Mailer View</h5>
+<p>Create a file called <tt>welcome_email.html.erb</tt> in <tt>app/views/user_mailer/</tt>. This will be the template used for the email, formatted in <span class="caps">HTML</span>:</p>
+<div class="code_container">
+<pre class="brush: ruby; html-script: true; gutter: false; toolbar: false">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;meta content=&quot;text/html; charset=UTF-8&quot; http-equiv=&quot;Content-Type&quot; /&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Welcome to example.com, &lt;%= @user.name %&gt;&lt;/h1&gt;
+    &lt;p&gt;
+      You have successfully signed up to example.com,
+      your username is: &lt;%= @user.login %&gt;.&lt;br/&gt;
+    &lt;/p&gt;
+    &lt;p&gt;
+      To login to the site, just follow this link: &lt;%= @url %&gt;.
+    &lt;/p&gt;
+    &lt;p&gt;Thanks for joining and have a great day!&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+</div>
+<p>It is also a good idea to make a text part for this email, to do this, create a file called <tt>welcome_email.text.erb</tt> in <tt>app/views/user_mailer/</tt>:</p>
+<div class="code_container">
+<pre class="brush: ruby; html-script: true; gutter: false; toolbar: false">
+Welcome to example.com, &lt;%= @user.name %&gt;
+===============================================
+
+You have successfully signed up to example.com,
+your username is: &lt;%= @user.login %&gt;.
+
+To login to the site, just follow this link: &lt;%= @url %&gt;.
+
+Thanks for joining and have a great day!
+</pre>
+</div>
+<p>When you call the <tt>mail</tt> method now, Action Mailer will detect the two templates (text and <span class="caps">HTML</span>) and automatically generate a <tt>multipart/alternative</tt> email.</p>
+<h5 id="wire-it-up-so-that-the-system-sends-the-email-when-a-user-signs-up">2.1.4 Wire It Up So That the System Sends the Email When a User Signs Up</h5>
+<p>There are several ways to do this, some people create Rails Observers to fire off emails, others do it inside of the User Model. However, in Rails 3, mailers are really just another way to render a view. Instead of rendering a view and sending out the <span class="caps">HTTP</span> protocol, they are just sending it out through the Email protocols instead. Due to this, it makes sense to just have your controller tell the mailer to send an email when a user is successfully created.</p>
+<p>Setting this up is painfully simple.</p>
+<p>First off, we need to create a simple <tt>User</tt> scaffold:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ rails generate scaffold user name:string email:string login:string
+$ rake db:migrate
+</pre>
+</div>
+<p>Now that we have a user model to play with, we will just edit the <tt>app/controllers/users_controller.rb</tt> make it instruct the UserMailer to deliver an email to the newly created user by editing the create action and inserting a call to <tt>UserMailer.welcome_email</tt> right after the user is successfully saved:</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class UsersController &lt; ApplicationController
+  # POST /users
+  # POST /users.json
+  def create
+    @user = User.new(params[:user])
+
+    respond_to do |format|
+      if @user.save
+        # Tell the UserMailer to send a welcome Email after save
+        UserMailer.welcome_email(@user).deliver
+
+        format.html { redirect_to(@user, :notice =&gt; 'User was successfully created.') }
+        format.json { render :json =&gt; @user, :status =&gt; :created, :location =&gt; @user }
+      else
+        format.html { render :action =&gt; &quot;new&quot; }
+        format.json { render :json =&gt; @user.errors, :status =&gt; :unprocessable_entity }
+      end
+    end
+  end
+end
+</pre>
+</div>
+<p>This provides a much simpler implementation that does not require the registering of observers and the like.</p>
+<p>The method <tt>welcome_email</tt> returns a <tt>Mail::Message</tt> object which can then just be told <tt>deliver</tt> to send itself out.</p>
+<div class="note"><p>In previous versions of Rails, you would call <tt>deliver_welcome_email</tt> or <tt>create_welcome_email</tt>. This has been deprecated in Rails 3.0 in favour of just calling the method name itself.</p></div>
+<div class="warning"><p>Sending out an email should only take a fraction of a second, but if you are planning on sending out many emails, or you have a slow domain resolution service, you might want to investigate using a background process like Delayed Job.</p></div>
+<h4 id="auto-encoding-header-values">2.2 Auto encoding header values</h4>
+<p>Action Mailer now handles the auto encoding of multibyte characters inside of headers and bodies.</p>
+<p>If you are using <span class="caps">UTF</span>-8 as your character set, you do not have to do anything special, just go ahead and send in <span class="caps">UTF</span>-8 data to the address fields, subject, keywords, filenames or body of the email and Action Mailer will auto encode it into quoted printable for you in the case of a header field or Base64 encode any body parts that are non US-<span class="caps">ASCII</span>.</p>
+<p>For more complex examples such as defining alternate character sets or self encoding text first, please refer to the Mail library.</p>
+<h4 id="complete-list-of-action-mailer-methods">2.3 Complete List of Action Mailer Methods</h4>
+<p>There are just three methods that you need to send pretty much any email message:</p>
+<ul>
+	<li><tt>headers</tt> &#8211; Specifies any header on the email you want, you can pass a hash of header field names and value pairs, or you can call <tt>headers[:field_name] = &#8216;value&#8217;</tt></li>
+	<li><tt>attachments</tt> &#8211; Allows you to add attachments to your email, for example <tt>attachments[&#8216;file-name.jpg&#8217;] = File.read(&#8216;file-name.jpg&#8217;)</tt></li>
+	<li><tt>mail</tt> &#8211; Sends the actual email itself. You can pass in headers as a hash to the mail method as a parameter, mail will then create an email, either plain text, or multipart, depending on what email templates you have defined.</li>
+</ul>
+<h5 id="custom-headers">2.3.1 Custom Headers</h5>
+<p>Defining custom headers are simple, you can do it one of three ways:</p>
+<ul>
+	<li>Defining a header field as a parameter to the <tt>mail</tt> method:</li>
+</ul>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+mail(&quot;X-Spam&quot; =&gt; value)
+</pre>
+</div>
+<ul>
+	<li>Passing in a key value assignment to the <tt>headers</tt> method:</li>
+</ul>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+headers[&quot;X-Spam&quot;] = value
+</pre>
+</div>
+<ul>
+	<li>Passing a hash of key value pairs to the <tt>headers</tt> method:</li>
+</ul>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+headers {&quot;X-Spam&quot; =&gt; value, &quot;X-Special&quot; =&gt; another_value}
+</pre>
+</div>
+<div class="info"><p>All <tt>X-Value</tt> headers per the RFC2822 can appear more than one time. If you want to delete an <tt>X-Value</tt> header, you need to assign it a value of <tt>nil</tt>.</p></div>
+<h5 id="adding-attachments">2.3.2 Adding Attachments</h5>
+<p>Adding attachments has been simplified in Action Mailer 3.0.</p>
+<ul>
+	<li>Pass the file name and content and Action Mailer and the Mail gem will automatically guess the mime_type, set the encoding and create the attachment.</li>
+</ul>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+attachments['filename.jpg'] = File.read('/path/to/filename.jpg')
+</pre>
+</div>
+<div class="note"><p>Mail will automatically Base64 encode an attachment, if you want something different, pre-encode your content and pass in the encoded content and encoding in a <tt>Hash</tt> to the <tt>attachments</tt> method.</p></div>
+<ul>
+	<li>Pass the file name and specify headers and content and Action Mailer and Mail will use the settings you pass in.</li>
+</ul>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+encoded_content = SpecialEncode(File.read('/path/to/filename.jpg'))
+attachments['filename.jpg'] = {:mime_type =&gt; 'application/x-gzip',
+                               :encoding =&gt; 'SpecialEncoding',
+                               :content =&gt; encoded_content }
+</pre>
+</div>
+<div class="note"><p>If you specify an encoding, Mail will assume that your content is already encoded and not try to Base64 encode it.</p></div>
+<h5 id="making-inline-attachments">2.3.3 Making Inline Attachments</h5>
+<p>Action Mailer 3.0 makes inline attachments, which involved a lot of hacking in pre 3.0 versions, much simpler and trivial as they should be.</p>
+<ul>
+	<li>Firstly, to tell Mail to turn an attachment into an inline attachment, you just call <tt>#inline</tt> on the attachments method within your Mailer:</li>
+</ul>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+def welcome
+  attachments.inline['image.jpg'] = File.read('/path/to/image.jpg')
+end
+</pre>
+</div>
+<ul>
+	<li>Then in your view, you can just reference <tt>attachments[]</tt> as a hash and specify which attachment you want to show, calling <tt>url</tt> on it and then passing the result into the <tt>image_tag</tt> method:</li>
+</ul>
+<div class="code_container">
+<pre class="brush: ruby; html-script: true; gutter: false; toolbar: false">
+&lt;p&gt;Hello there, this is our image&lt;/p&gt;
+
+&lt;%= image_tag attachments['image.jpg'].url %&gt;
+</pre>
+</div>
+<ul>
+	<li>As this is a standard call to <tt>image_tag</tt> you can pass in an options hash after the attachment url as you could for any other image:</li>
+</ul>
+<div class="code_container">
+<pre class="brush: ruby; html-script: true; gutter: false; toolbar: false">
+&lt;p&gt;Hello there, this is our image&lt;/p&gt;
+
+&lt;%= image_tag attachments['image.jpg'].url, :alt =&gt; 'My Photo',
+                                            :class =&gt; 'photos' %&gt;
+</pre>
+</div>
+<h5 id="sending-email-to-multiple-recipients">2.3.4 Sending Email To Multiple Recipients</h5>
+<p>It is possible to send email to one or more recipients in one email (for e.g. informing all admins of a new signup) by setting the list of emails to the <tt>:to</tt> key. The list of emails can be an array of email addresses or a single string with the addresses separated by commas.</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class AdminMailer &lt; ActionMailer::Base
+  default :to =&gt; Admin.all.map(&amp;:email),
+          :from =&gt; &quot;notification@example.com&quot;
+
+  def new_registration(user)
+    @user = user
+    mail(:subject =&gt; &quot;New User Signup: #{@user.email}&quot;)
+  end
+end
+</pre>
+</div>
+<p>The same format can be used to set carbon copy (Cc:) and blind carbon copy (Bcc:) recipients, by using the <tt>:cc</tt> and <tt>:bcc</tt> keys respectively.</p>
+<h5 id="sending-email-with-name">2.3.5 Sending Email With Name</h5>
+<p>Sometimes you wish to show the name of the person instead of just their email address when they receive the email. The trick to doing that is
+to format the email address in the format <tt>&#8220;Name &lt;email&gt;&#8221;</tt>.</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+def welcome_email(user)
+  @user = user
+  email_with_name = &quot;#{@user.name} &lt;#{@user.email}&gt;&quot;
+  mail(:to =&gt; email_with_name, :subject =&gt; &quot;Welcome to My Awesome Site&quot;)
+end
+</pre>
+</div>
+<h4 id="mailer-views">2.4 Mailer Views</h4>
+<p>Mailer views are located in the <tt>app/views/name_of_mailer_class</tt> directory. The specific mailer view is known to the class because its name is the same as the mailer method. In our example from above, our mailer view for the <tt>welcome_email</tt> method will be in <tt>app/views/user_mailer/welcome_email.html.erb</tt> for the <span class="caps">HTML</span> version and <tt>welcome_email.text.erb</tt> for the plain text version.</p>
+<p>To change the default mailer view for your action you do something like:</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class UserMailer &lt; ActionMailer::Base
+  default :from =&gt; &quot;notifications@example.com&quot;
+
+  def welcome_email(user)
+    @user = user
+    @url  = &quot;http://example.com/login&quot;
+    mail(:to =&gt; user.email,
+         :subject =&gt; &quot;Welcome to My Awesome Site&quot;,
+         :template_path =&gt; 'notifications',
+         :template_name =&gt; 'another')
+  end
+end
+</pre>
+</div>
+<p>In this case it will look for templates at <tt>app/views/notifications</tt> with name <tt>another</tt>.</p>
+<p>If you want more flexibility you can also pass a block and render specific templates or even render inline or text without using a template file:</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class UserMailer &lt; ActionMailer::Base
+  default :from =&gt; &quot;notifications@example.com&quot;
+
+  def welcome_email(user)
+    @user = user
+    @url  = &quot;http://example.com/login&quot;
+    mail(:to =&gt; user.email,
+         :subject =&gt; &quot;Welcome to My Awesome Site&quot;) do |format|
+      format.html { render 'another_template' }
+      format.text { render :text =&gt; 'Render text' }
+    end
+  end
+
+end
+</pre>
+</div>
+<p>This will render the template &#8216;another_template.html.erb&#8217; for the <span class="caps">HTML</span> part and use the rendered text for the text part. The render command is the same one used inside of Action Controller, so you can use all the same options, such as <tt>:text</tt>, <tt>:inline</tt> etc.</p>
+<h4 id="action-mailer-layouts">2.5 Action Mailer Layouts</h4>
+<p>Just like controller views, you can also have mailer layouts. The layout name needs to be the same as your mailer, such as <tt>user_mailer.html.erb</tt> and <tt>user_mailer.text.erb</tt> to be automatically recognized by your mailer as a layout.</p>
+<p>In order to use a different file just use:</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class UserMailer &lt; ActionMailer::Base
+  layout 'awesome' # use awesome.(html|text).erb as the layout
+end
+</pre>
+</div>
+<p>Just like with controller views, use <tt>yield</tt> to render the view inside the layout.</p>
+<p>You can also pass in a <tt>:layout =&gt; &#8216;layout_name&#8217;</tt> option to the render call inside the format block to specify different layouts for different actions:</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class UserMailer &lt; ActionMailer::Base
+  def welcome_email(user)
+    mail(:to =&gt; user.email) do |format|
+      format.html { render :layout =&gt; 'my_layout' }
+      format.text
+    end
+  end
+end
+</pre>
+</div>
+<p>Will render the <span class="caps">HTML</span> part using the <tt>my_layout.html.erb</tt> file and the text part with the usual <tt>user_mailer.text.erb</tt> file if it exists.</p>
+<h4 id="generating-urls-in-action-mailer-views">2.6 Generating URLs in Action Mailer Views</h4>
+<p>URLs can be generated in mailer views using <tt>url_for</tt> or named routes.</p>
+<p>Unlike controllers, the mailer instance doesn&#8217;t have any context about the incoming request so you&#8217;ll need to provide the <tt>:host</tt>, <tt>:controller</tt>, and <tt>:action</tt>:</p>
+<div class="code_container">
+<pre class="brush: ruby; html-script: true; gutter: false; toolbar: false">
+&lt;%= url_for(:host =&gt; &quot;example.com&quot;,
+            :controller =&gt; &quot;welcome&quot;,
+            :action =&gt; &quot;greeting&quot;) %&gt;
+</pre>
+</div>
+<p>When using named routes you only need to supply the <tt>:host</tt>:</p>
+<div class="code_container">
+<pre class="brush: ruby; html-script: true; gutter: false; toolbar: false">
+&lt;%= user_url(@user, :host =&gt; &quot;example.com&quot;) %&gt;
+</pre>
+</div>
+<p>Email clients have no web context and so paths have no base <span class="caps">URL</span> to form complete web addresses. Thus, when using named routes only the &#8220;_url&#8221; variant makes sense.</p>
+<p>It is also possible to set a default host that will be used in all mailers by setting the <tt>:host</tt> option in the <tt>ActionMailer::Base.default_url_options</tt> hash as follows:</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class UserMailer &lt; ActionMailer::Base
+  default_url_options[:host] = &quot;example.com&quot;
+
+  def welcome_email(user)
+    @user = user
+    @url  = user_url(@user)
+    mail(:to =&gt; user.email,
+         :subject =&gt; &quot;Welcome to My Awesome Site&quot;)
+  end
+end
+</pre>
+</div>
+<h4 id="sending-multipart-emails">2.7 Sending Multipart Emails</h4>
+<p>Action Mailer will automatically send multipart emails if you have different templates for the same action. So, for our UserMailer example, if you have <tt>welcome_email.text.erb</tt> and <tt>welcome_email.html.erb</tt> in <tt>app/views/user_mailer</tt>, Action Mailer will automatically send a multipart email with the <span class="caps">HTML</span> and text versions setup as different parts.</p>
+<p>The order of the parts getting inserted is determined by the <tt>:parts_order</tt> inside of the <tt>ActionMailer::Base.default</tt> method. If you want to explicitly alter the order, you can either change the <tt>:parts_order</tt> or explicitly render the parts in a different order:</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class UserMailer &lt; ActionMailer::Base
+  def welcome_email(user)
+    @user = user
+    @url  = user_url(@user)
+    mail(:to =&gt; user.email,
+         :subject =&gt; &quot;Welcome to My Awesome Site&quot;) do |format|
+      format.html
+      format.text
+    end
+  end
+end
+</pre>
+</div>
+<p>Will put the <span class="caps">HTML</span> part first, and the plain text part second.</p>
+<h4 id="sending-emails-with-attachments">2.8 Sending Emails with Attachments</h4>
+<p>Attachments can be added by using the <tt>attachments</tt> method:</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class UserMailer &lt; ActionMailer::Base
+  def welcome_email(user)
+    @user = user
+    @url  = user_url(@user)
+    attachments['terms.pdf'] = File.read('/path/terms.pdf')
+    mail(:to =&gt; user.email,
+         :subject =&gt; &quot;Please see the Terms and Conditions attached&quot;)
+  end
+end
+</pre>
+</div>
+<p>The above will send a multipart email with an attachment, properly nested with the top level being <tt>multipart/mixed</tt> and the first part being a <tt>multipart/alternative</tt> containing the plain text and <span class="caps">HTML</span> email messages.</p>
+<h3 id="receiving-emails">3 Receiving Emails</h3>
+<p>Receiving and parsing emails with Action Mailer can be a rather complex endeavor. Before your email reaches your Rails app, you would have had to configure your system to somehow forward emails to your app, which needs to be listening for that. So, to receive emails in your Rails app you&#8217;ll need to:</p>
+<ul>
+	<li>Implement a <tt>receive</tt> method in your mailer.</li>
+</ul>
+<ul>
+	<li>Configure your email server to forward emails from the address(es) you would like your app to receive to <tt>/path/to/app/script/rails runner 'UserMailer.receive(STDIN.read)'</tt>.</li>
+</ul>
+<p>Once a method called <tt>receive</tt> is defined in any mailer, Action Mailer will parse the raw incoming email into an email object, decode it, instantiate a new mailer, and pass the email object to the mailer <tt>receive</tt> instance method. Here&#8217;s an example:</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class UserMailer &lt; ActionMailer::Base
+  def receive(email)
+    page = Page.find_by_address(email.to.first)
+    page.emails.create(
+      :subject =&gt; email.subject,
+      :body =&gt; email.body
+    )
+
+    if email.has_attachments?
+      email.attachments.each do |attachment|
+        page.attachments.create({
+          :file =&gt; attachment,
+          :description =&gt; email.subject
+        })
+      end
+    end
+  end
+end
+</pre>
+</div>
+<h3 id="using-action-mailer-helpers">4 Using Action Mailer Helpers</h3>
+<p>Action Mailer now just inherits from Abstract Controller, so you have access to the same generic helpers as you do in Action Controller.</p>
+<h3 id="action-mailer-configuration">5 Action Mailer Configuration</h3>
+<p>The following configuration options are best made in one of the environment files (environment.rb, production.rb, etc&#8230;)</p>
+<table>
+	<tr>
+		<td><tt>template_root</tt></td>
+		<td>Determines the base from which template references will be made.</td>
+	</tr>
+	<tr>
+		<td><tt>logger</tt></td>
+		<td>Generates information on the mailing run if available. Can be set to <tt>nil</tt> for no logging. Compatible with both Ruby&#8217;s own <tt>Logger</tt> and <tt>Log4r</tt> loggers.</td>
+	</tr>
+	<tr>
+		<td><tt>smtp_settings</tt></td>
+		<td>Allows detailed configuration for <tt>:smtp</tt> delivery method:<ul><li><tt>:address</tt> &#8211; Allows you to use a remote mail server. Just change it from its default &#8220;localhost&#8221; setting.</li><li><tt>:port</tt>  &#8211; On the off chance that your mail server doesn&#8217;t run on port 25, you can change it.</li><li><tt>:domain</tt> &#8211; If you need to specify a <span class="caps">HELO</span> domain, you can do it here.</li><li><tt>:user_name</tt> &#8211; If your mail server requires authentication, set the username in this setting.</li><li><tt>:password</tt> &#8211; If your mail server requires authentication, set the password in this setting.</li><li><tt>:authentication</tt> &#8211; If your mail server requires authentication, you need to specify the authentication type here. This is a symbol and one of <tt>:plain</tt>, <tt>:login</tt>, <tt>:cram_md5</tt>.</li></ul></td>
+	</tr>
+	<tr>
+		<td><tt>sendmail_settings</tt></td>
+		<td>Allows you to override options for the <tt>:sendmail</tt> delivery method.<ul><li><tt>:location</tt> &#8211; The location of the sendmail executable. Defaults to <tt>/usr/sbin/sendmail</tt>.</li><li><tt>:arguments</tt> &#8211; The command line arguments to be passed to sendmail. Defaults to <tt>-i -t</tt>.</li></ul></td>
+	</tr>
+	<tr>
+		<td><tt>raise_delivery_errors</tt></td>
+		<td>Whether or not errors should be raised if the email fails to be delivered.</td>
+	</tr>
+	<tr>
+		<td><tt>delivery_method</tt></td>
+		<td>Defines a delivery method. Possible values are <tt>:smtp</tt> (default), <tt>:sendmail</tt>, <tt>:file</tt> and <tt>:test</tt>.</td>
+	</tr>
+	<tr>
+		<td><tt>perform_deliveries</tt></td>
+		<td>Determines whether deliveries are actually carried out when the <tt>deliver</tt> method is invoked on the Mail message. By default they are, but this can be turned off to help functional testing.</td>
+	</tr>
+	<tr>
+		<td><tt>deliveries</tt></td>
+		<td>Keeps an array of all the emails sent out through the Action Mailer with delivery_method :test. Most useful for unit and functional testing.</td>
+	</tr>
+</table>
+<h4 id="example-action-mailer-configuration">5.1 Example Action Mailer Configuration</h4>
+<p>An example would be adding the following to your appropriate <tt>config/environments/$RAILS_ENV.rb</tt> file:</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+config.action_mailer.delivery_method = :sendmail
+# Defaults to:
+# config.action_mailer.sendmail_settings = {
+#   :location =&gt; '/usr/sbin/sendmail',
+#   :arguments =&gt; '-i -t'
+# }
+config.action_mailer.perform_deliveries = true
+config.action_mailer.raise_delivery_errors = true
+</pre>
+</div>
+<h4 id="action-mailer-configuration-for-gmail">5.2 Action Mailer Configuration for GMail</h4>
+<p>As Action Mailer now uses the Mail gem, this becomes as simple as adding to your <tt>config/environments/$RAILS_ENV.rb</tt> file:</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+config.action_mailer.delivery_method = :smtp
+config.action_mailer.smtp_settings = {
+  :address              =&gt; &quot;smtp.gmail.com&quot;,
+  :port                 =&gt; 587,
+  :domain               =&gt; 'baci.lindsaar.net',
+  :user_name            =&gt; '&lt;username&gt;',
+  :password             =&gt; '&lt;password&gt;',
+  :authentication       =&gt; 'plain',
+  :enable_starttls_auto =&gt; true  }
+</pre>
+</div>
+<h3 id="mailer-testing">6 Mailer Testing</h3>
+<p>By default Action Mailer does not send emails in the test environment. They are just added to the <tt>ActionMailer::Base.deliveries</tt> array.</p>
+<p>Testing mailers normally involves two things: One is that the mail was queued, and the other one that the email is correct. With that in mind, we could test our example mailer from above like so:</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class UserMailerTest &lt; ActionMailer::TestCase
+  def test_welcome_email
+    user = users(:some_user_in_your_fixtures)
+
+    # Send the email, then test that it got queued
+    email = UserMailer.welcome_email(user).deliver
+    assert !ActionMailer::Base.deliveries.empty?
+
+    # Test the body of the sent email contains what we expect it to
+    assert_equal [user.email], email.to
+    assert_equal &quot;Welcome to My Awesome Site&quot;, email.subject
+    assert_match(/&lt;h1&gt;Welcome to example.com, #{user.name}&lt;\/h1&gt;/, email.encoded)
+    assert_match(/Welcome to example.com, #{user.name}/, email.encoded)
+  end
+end
+</pre>
+</div>
+<p>In the test we send the email and store the returned object in the <tt>email</tt> variable. We then ensure that it was sent (the first assert), then, in the second batch of assertions, we ensure that the email does indeed contain what we expect.</p>
+
+        <h3>Feedback</h3>
+        <p>
+          You're encouraged to help improve the quality of this guide.
+        </p>
+        <p>
+          If you see any typos or factual errors you are confident to
+          patch, please clone <a href="https://github.com/lifo/docrails">docrails</a>
+          and push the change yourself. That branch of Rails has public write access.
+          Commits are still reviewed, but that happens after you've submitted your
+          contribution. <a href="https://github.com/lifo/docrails">docrails</a> is
+          cross-merged with master periodically.
+        </p>
+        <p>
+          You may also find incomplete content, or stuff that is not up to date.
+          Please do add any missing documentation for master. Check the
+          <a href="ruby_on_rails_guides_guidelines.html">Ruby on Rails Guides Guidelines</a>
+          for style and conventions.
+        </p>
+        <p>
+          If for whatever reason you spot something to fix but cannot patch it yourself, please
+          <a href="https://github.com/rails/rails/issues">open an issue</a>.
+        </p>
+        <p>And last but not least, any kind of discussion regarding Ruby on Rails
+          documentation is very welcome in the <a href="http://groups.google.com/group/rubyonrails-docs">rubyonrails-docs mailing list</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <hr class="hide" />
+  <div id="footer">
+    <div class="wrapper">
+      <p>This work is licensed under a <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-Share Alike 3.0</a> License</p>
+      <p>"Rails", "Ruby on Rails", and the Rails logo are trademarks of David Heinemeier Hansson. All rights reserved.</p>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="javascripts/guides.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shCore.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushRuby.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushXml.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushSql.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushPlain.js"></script>
+  <script type="text/javascript">
+    SyntaxHighlighter.all()
+  </script>
+</body>
+</html>

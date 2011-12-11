@@ -1,0 +1,590 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<title>Ruby on Rails Guides: The Basics of Creating Rails Plugins</title>
+
+<link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
+<link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+<link rel="stylesheet" type="text/css" href="stylesheets/syntaxhighlighter/shCore.css" />
+<link rel="stylesheet" type="text/css" href="stylesheets/syntaxhighlighter/shThemeRailsGuides.css" />
+
+<link rel="stylesheet" type="text/css" href="stylesheets/fixes.css" />
+</head>
+<body class="guide">
+  <div id="topNav">
+    <div class="wrapper">
+      <strong>More at <a href="http://rubyonrails.org/">rubyonrails.org:</a> </strong>
+      <a href="http://rubyonrails.org/">Overview</a> |
+      <a href="http://rubyonrails.org/download">Download</a> |
+      <a href="http://rubyonrails.org/deploy">Deploy</a> |
+      <a href="https://github.com/rails/rails">Code</a> |
+      <a href="http://rubyonrails.org/screencasts">Screencasts</a> |
+      <a href="http://rubyonrails.org/documentation">Documentation</a> |
+      <a href="http://rubyonrails.org/ecosystem">Ecosystem</a> |
+      <a href="http://rubyonrails.org/community">Community</a> |
+      <a href="http://weblog.rubyonrails.org/">Blog</a>
+    </div>
+  </div>
+  <div id="header">
+    <div class="wrapper clearfix">
+      <h1><a href="index.html" title="Return to home page">Guides.rubyonrails.org</a></h1>
+      <p class="hide"><a href="#mainCol">Skip navigation</a>.</p>
+      <ul class="nav">
+        <li><a href="index.html">Home</a></li>
+        <li class="index"><a href="index.html" onclick="guideMenu(); return false;" id="guidesMenu">Guides Index</a>
+          <div id="guides" class="clearfix" style="display: none;">
+            <hr />
+            <dl class="L">
+              <dt>Start Here</dt>
+              <dd><a href="getting_started.html">Getting Started with Rails</a></dd>
+              <dt>Models</dt>
+              <dd><a href="migrations.html">Rails Database Migrations</a></dd>
+              <dd><a href="active_record_validations_callbacks.html">Active Record Validations and Callbacks</a></dd>
+              <dd><a href="association_basics.html">Active Record Associations</a></dd>
+              <dd><a href="active_record_querying.html">Active Record Query Interface</a></dd>
+              <dt>Views</dt>
+              <dd><a href="layouts_and_rendering.html">Layouts and Rendering in Rails</a></dd>
+              <dd><a href="form_helpers.html">Action View Form Helpers</a></dd>
+              <dt>Controllers</dt>
+              <dd><a href="action_controller_overview.html">Action Controller Overview</a></dd>
+              <dd><a href="routing.html">Rails Routing from the Outside In</a></dd>
+            </dl>
+            <dl class="R">
+              <dt>Digging Deeper</dt>
+              <dd><a href="active_support_core_extensions.html">Active Support Core Extensions</a></dd>
+              <dd><a href="i18n.html">Rails Internationalization API</a></dd>
+              <dd><a href="action_mailer_basics.html">Action Mailer Basics</a></dd>
+              <dd><a href="testing.html">Testing Rails Applications</a></dd>
+              <dd><a href="security.html">Securing Rails Applications</a></dd>
+              <dd><a href="debugging_rails_applications.html">Debugging Rails Applications</a></dd>
+              <dd><a href="performance_testing.html">Performance Testing Rails Applications</a></dd>
+              <dd><a href="configuring.html">Configuring Rails Applications</a></dd>
+              <dd><a href="command_line.html">Rails Command Line Tools and Rake Tasks</a></dd>
+              <dd><a href="caching_with_rails.html">Caching with Rails</a></dd>
+              <dd><a href="asset_pipeline.html">Asset Pipeline</a></dd>
+
+              <dt>Extending Rails</dt>
+              <dd><a href="plugins.html">The Basics of Creating Rails Plugins</a></dd>
+              <dd><a href="rails_on_rack.html">Rails on Rack</a></dd>
+              <dd><a href="generators.html">Creating and Customizing Rails Generators</a></dd>
+
+              <dt>Contributing to Ruby on Rails</dt>
+              <dd><a href="contributing_to_ruby_on_rails.html">Contributing to Ruby on Rails</a></dd>
+              <dd><a href="api_documentation_guidelines.html">API Documentation Guidelines</a></dd>
+              <dd><a href="ruby_on_rails_guides_guidelines.html">Ruby on Rails Guides Guidelines</a></dd>
+
+              <dt>Release Notes</dt>
+              <dd><a href="3_1_release_notes.html">Ruby on Rails 3.1 Release Notes</a></dd>
+              <dd><a href="3_0_release_notes.html">Ruby on Rails 3.0 Release Notes</a></dd>
+              <dd><a href="2_3_release_notes.html">Ruby on Rails 2.3 Release Notes</a></dd>
+              <dd><a href="2_2_release_notes.html">Ruby on Rails 2.2 Release Notes</a></dd>
+            </dl>
+          </div>
+        </li>
+        <li><a href="contributing_to_ruby_on_rails.html">Contribute</a></li>
+        <li><a href="credits.html">Credits</a></li>
+      </ul>
+    </div>
+  </div>
+  <hr class="hide" />
+
+  <div id="feature">
+    <div class="wrapper">
+      <h2>The Basics of Creating Rails Plugins</h2>
+<p>A Rails plugin is either an extension or a modification of the core framework. Plugins provide:</p>
+<ul>
+	<li>a way for developers to share bleeding-edge ideas without hurting the stable code base</li>
+	<li>a segmented architecture so that units of code can be fixed or updated on their own release schedule</li>
+	<li>an outlet for the core developers so that they don’t have to include every cool new feature under the sun</li>
+</ul>
+<p>After reading this guide you should be familiar with:</p>
+<ul>
+	<li>Creating a plugin from scratch</li>
+	<li>Writing and running tests for the plugin</li>
+</ul>
+<p>This guide describes how to build a test-driven plugin that will:</p>
+<ul>
+	<li>Extend core ruby classes like Hash and String</li>
+	<li>Add methods to ActiveRecord::Base in the tradition of the &#8216;acts_as&#8217; plugins</li>
+	<li>Give you information about where to put generators in your plugin.</li>
+</ul>
+<p>For the purpose of this guide pretend for a moment that you are an avid bird watcher.
+Your favorite bird is the Yaffle, and you want to create a plugin that allows other developers to share in the Yaffle
+goodness.</p>
+
+            <div id="subCol">
+        <h3 class="chapter"><img src="images/chapters_icon.gif" alt="" />Chapters</h3>
+        <ol class="chapters">
+<li><a href="#setup">Setup</a><ul><li><a href="#either-generate-a-vendored-plugin">Either generate a vendored plugin&#8230;</a></li> <li><a href="#or-generate-a-gemified-plugin">Or generate a gemified plugin.</a></li></ul></li><li><a href="#testing-your-newly-generated-plugin">Testing your newly generated plugin</a></li><li><a href="#extending-core-classes">Extending Core Classes</a></li><li><a href="#add-an-acts_as-method-to-active-record">Add an &#8220;acts_as&#8221; Method to Active Record</a><ul><li><a href="#add-a-class-method">Add a Class Method</a></li> <li><a href="#add-an-instance-method">Add an Instance Method</a></li></ul></li><li><a href="#generators">Generators</a></li><li><a href="#publishing-your-gem">Publishing your Gem</a></li><li><a href="#non-gem-plugins">Non-Gem Plugins</a></li><li><a href="#rdoc-documentation">RDoc Documentation</a><ul><li><a href="#references">References</a></li></ul></li></ol></div>
+    </div>
+  </div>
+
+  <div id="container">
+    <div class="wrapper">
+      <div id="mainCol">
+        <h3 id="setup">1 Setup</h3>
+<p>Before you continue, take a moment to decide if your new plugin will be potentially shared across different Rails applications.</p>
+<ul>
+	<li>If your plugin is specific to your application, your new plugin will be a <em>vendored plugin</em>.</li>
+	<li>If you think your plugin may be used across applications, build it as a <em>gemified plugin</em>.</li>
+</ul>
+<h4 id="either-generate-a-vendored-plugin">1.1 Either generate a vendored plugin&#8230;</h4>
+<p>Use the <tt>rails generate plugin</tt> command in your Rails root directory
+ to create a new plugin that will live in the <tt>vendor/plugins</tt>
+ directory. See usage and options by asking for help:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ rails generate plugin --help
+</pre>
+</div>
+<h4 id="or-generate-a-gemified-plugin">1.2 Or generate a gemified plugin.</h4>
+<p>Writing your Rails plugin as a gem, rather than as a vendored plugin,
+ lets you share your plugin across different rails applications using
+ RubyGems and Bundler.</p>
+<p>Rails 3.1 ships with a <tt>rails plugin new</tt> command which creates a
+ skeleton for developing any kind of Rails extension with the ability
+ to run integration tests using a dummy Rails application. See usage
+ and options by asking for help:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ rails plugin --help
+</pre>
+</div>
+<h3 id="testing-your-newly-generated-plugin">2 Testing your newly generated plugin</h3>
+<p>You can navigate to the directory that contains the plugin, run the <tt>bundle install</tt> command
+ and run the one generated test using the <tt>rake</tt> command.</p>
+<p>You should see:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+2 tests, 2 assertions, 0 failures, 0 errors, 0 skips
+</pre>
+</div>
+<p>This will tell you that everything got generated properly and you are ready to start adding functionality.</p>
+<h3 id="extending-core-classes">3 Extending Core Classes</h3>
+<p>This section will explain how to add a method to String that will be available anywhere in your rails application.</p>
+<p>In this example you will add a method to String named <tt>to_squawk</tt>. To begin, create a new test file with a few assertions:</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+# yaffle/test/core_ext_test.rb
+
+require 'test_helper'
+
+class CoreExtTest &lt; Test::Unit::TestCase
+  def test_to_squawk_prepends_the_word_squawk
+    assert_equal &quot;squawk! Hello World&quot;, &quot;Hello World&quot;.to_squawk
+  end
+end
+</pre>
+</div>
+<p>Run <tt>rake</tt> to run the test. This test should fail because we haven&#8217;t implemented the <tt>to_squawk</tt> method:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+1) Error:
+	test_to_squawk_prepends_the_word_squawk(CoreExtTest):
+	NoMethodError: undefined method `to_squawk' for &quot;Hello World&quot;:String
+	    test/core_ext_test.rb:5:in `test_to_squawk_prepends_the_word_squawk'
+</pre>
+</div>
+<p>Great &#8211; now you are ready to start development.</p>
+<p>Then in <tt>lib/yaffle.rb</tt> require <tt>lib/core_ext</tt>:</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+# yaffle/lib/yaffle.rb
+
+require &quot;yaffle/core_ext&quot;
+
+module Yaffle
+end
+</pre>
+</div>
+<p>Finally, create the <tt>core_ext.rb</tt> file and add the <tt>to_squawk</tt> method:</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+# yaffle/lib/yaffle/core_ext.rb
+
+String.class_eval do
+  def to_squawk
+    &quot;squawk! #{self}&quot;.strip
+  end
+end
+</pre>
+</div>
+<p>To test that your method does what it says it does, run the unit tests with <tt>rake</tt> from your plugin directory.</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+3 tests, 3 assertions, 0 failures, 0 errors, 0 skips
+</pre>
+</div>
+<p>To see this in action, change to the test/dummy directory, fire up a console and start squawking:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ rails console
+&gt;&gt; &quot;Hello World&quot;.to_squawk
+=&gt; &quot;squawk! Hello World&quot;
+</pre>
+</div>
+<h3 id="add-an-acts_as-method-to-active-record">4 Add an &#8220;acts_as&#8221; Method to Active Record</h3>
+<p>A common pattern in plugins is to add a method called &#8216;acts_as_something&#8217; to models. In this case, you
+want to write a method called &#8216;acts_as_yaffle&#8217; that adds a &#8216;squawk&#8217; method to your Active Record models.</p>
+<p>To begin, set up your files so that you have:</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+# yaffle/test/acts_as_yaffle_test.rb
+
+require 'test_helper'
+
+class ActsAsYaffleTest &lt; Test::Unit::TestCase
+end
+</pre>
+</div>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+# yaffle/lib/yaffle.rb
+
+require &quot;yaffle/core_ext&quot;
+require 'yaffle/acts_as_yaffle'
+
+module Yaffle
+end
+</pre>
+</div>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+# yaffle/lib/yaffle/acts_as_yaffle.rb
+
+module Yaffle
+  module ActsAsYaffle
+    # your code will go here
+  end
+end
+</pre>
+</div>
+<h4 id="add-a-class-method">4.1 Add a Class Method</h4>
+<p>This plugin will expect that you&#8217;ve added a method to your model named &#8216;last_squawk&#8217;. However, the
+plugin users might have already defined a method on their model named &#8216;last_squawk&#8217; that they use
+for something else. This plugin will allow the name to be changed by adding a class method called &#8216;yaffle_text_field&#8217;.</p>
+<p>To start out, write a failing test that shows the behavior you&#8217;d like:</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+# yaffle/test/acts_as_yaffle_test.rb
+
+require 'test_helper'
+
+class ActsAsYaffleTest &lt; Test::Unit::TestCase
+
+  def test_a_hickwalls_yaffle_text_field_should_be_last_squawk
+    assert_equal &quot;last_squawk&quot;, Hickwall.yaffle_text_field
+  end
+
+  def test_a_wickwalls_yaffle_text_field_should_be_last_tweet
+    assert_equal &quot;last_tweet&quot;, Wickwall.yaffle_text_field
+  end
+
+end
+</pre>
+</div>
+<p>When you run <tt>rake</tt>, you should see the following:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+1) Error:
+	test_a_hickwalls_yaffle_text_field_should_be_last_squawk(ActsAsYaffleTest):
+	NameError: uninitialized constant ActsAsYaffleTest::Hickwall
+	    test/acts_as_yaffle_test.rb:6:in `test_a_hickwalls_yaffle_text_field_should_be_last_squawk'
+
+	  2) Error:
+	test_a_wickwalls_yaffle_text_field_should_be_last_tweet(ActsAsYaffleTest):
+	NameError: uninitialized constant ActsAsYaffleTest::Wickwall
+	    test/acts_as_yaffle_test.rb:10:in `test_a_wickwalls_yaffle_text_field_should_be_last_tweet'
+
+	5 tests, 3 assertions, 0 failures, 2 errors, 0 skips
+</pre>
+</div>
+<p>This tells us that we don&#8217;t have the necessary models (Hickwall and Wickwall) that we are trying to test.
+We can easily generate these models in our &#8220;dummy&#8221; Rails application by running the following commands from the
+test/dummy directory:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ cd test/dummy
+$ rails generate model Hickwall last_squawk:string
+$ rails generate model Wickwall last_squawk:string last_tweet:string
+</pre>
+</div>
+<p>Now you can create the necessary database tables in your testing database by navigating to your dummy app
+and migrating the database. First</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ cd test/dummy
+$ rake db:migrate
+$ rake db:test:prepare
+</pre>
+</div>
+<p>While you are here, change the Hickwall and Wickwall models so that they know that they are supposed to act
+like yaffles.</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+# test/dummy/app/models/hickwall.rb
+
+class Hickwall &lt; ActiveRecord::Base
+  acts_as_yaffle
+end
+
+# test/dummy/app/models/wickwall.rb
+
+class Wickwall &lt; ActiveRecord::Base
+  acts_as_yaffle :yaffle_text_field =&gt; :last_tweet
+end
+</pre>
+</div>
+<p>We will also add code to define the acts_as_yaffle method.</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+# yaffle/lib/yaffle/acts_as_yaffle.rb
+module Yaffle
+  module ActsAsYaffle
+    extend ActiveSupport::Concern
+
+    included do
+    end
+
+    module ClassMethods
+      def acts_as_yaffle(options = {})
+        # your code will go here
+      end
+    end
+  end
+end
+
+ActiveRecord::Base.send :include, Yaffle::ActsAsYaffle
+</pre>
+</div>
+<p>You can then return to the root directory (<tt>cd ../..</tt>) of your plugin and rerun the tests using <tt>rake</tt>.</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+1) Error:
+	test_a_hickwalls_yaffle_text_field_should_be_last_squawk(ActsAsYaffleTest):
+	NoMethodError: undefined method `yaffle_text_field' for #&lt;Class:0x000001016661b8&gt;
+	    /Users/xxx/.rvm/gems/ruby-1.9.2-p136@xxx/gems/activerecord-3.0.3/lib/active_record/base.rb:1008:in `method_missing'
+	    test/acts_as_yaffle_test.rb:5:in `test_a_hickwalls_yaffle_text_field_should_be_last_squawk'
+
+	  2) Error:
+	test_a_wickwalls_yaffle_text_field_should_be_last_tweet(ActsAsYaffleTest):
+	NoMethodError: undefined method `yaffle_text_field' for #&lt;Class:0x00000101653748&gt;
+	    Users/xxx/.rvm/gems/ruby-1.9.2-p136@xxx/gems/activerecord-3.0.3/lib/active_record/base.rb:1008:in `method_missing'
+	    test/acts_as_yaffle_test.rb:9:in `test_a_wickwalls_yaffle_text_field_should_be_last_tweet'
+
+	5 tests, 3 assertions, 0 failures, 2 errors, 0 skips
+</pre>
+</div>
+<p>Getting closer&#8230; Now we will implement the code of the acts_as_yaffle method to make the tests pass.</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+# yaffle/lib/yaffle/acts_as_yaffle.rb
+
+module Yaffle
+  module ActsAsYaffle
+   extend ActiveSupport::Concern
+
+    included do
+    end
+
+    module ClassMethods
+      def acts_as_yaffle(options = {})
+        cattr_accessor :yaffle_text_field
+        self.yaffle_text_field = (options[:yaffle_text_field] || :last_squawk).to_s
+      end
+    end
+  end
+end
+
+ActiveRecord::Base.send :include, Yaffle::ActsAsYaffle
+</pre>
+</div>
+<p>When you run <tt>rake</tt> you should see the tests all pass:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+5 tests, 5 assertions, 0 failures, 0 errors, 0 skips
+</pre>
+</div>
+<h4 id="add-an-instance-method">4.2 Add an Instance Method</h4>
+<p>This plugin will add a method named &#8216;squawk&#8217; to any Active Record object that calls &#8216;acts_as_yaffle&#8217;. The &#8216;squawk&#8217;
+method will simply set the value of one of the fields in the database.</p>
+<p>To start out, write a failing test that shows the behavior you&#8217;d like:</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+# yaffle/test/acts_as_yaffle_test.rb
+require 'test_helper'
+
+class ActsAsYaffleTest &lt; Test::Unit::TestCase
+
+  def test_a_hickwalls_yaffle_text_field_should_be_last_squawk
+    assert_equal &quot;last_squawk&quot;, Hickwall.yaffle_text_field
+  end
+
+  def test_a_wickwalls_yaffle_text_field_should_be_last_tweet
+    assert_equal &quot;last_tweet&quot;, Wickwall.yaffle_text_field
+  end
+
+  def test_hickwalls_squawk_should_populate_last_squawk
+    hickwall = Hickwall.new
+    hickwall.squawk(&quot;Hello World&quot;)
+    assert_equal &quot;squawk! Hello World&quot;, hickwall.last_squawk
+  end
+
+  def test_wickwalls_squawk_should_populate_last_tweet
+    wickwall = Wickwall.new
+    wickwall.squawk(&quot;Hello World&quot;)
+    assert_equal &quot;squawk! Hello World&quot;, wickwall.last_tweet
+  end
+end
+</pre>
+</div>
+<p>Run the test to make sure the last two tests fail with an error that contains &#8220;NoMethodError: undefined method `squawk&#8217;&#8221;,
+then update &#8216;acts_as_yaffle.rb&#8217; to look like this:</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+# yaffle/lib/yaffle/acts_as_yaffle.rb	
+
+module Yaffle
+  module ActsAsYaffle
+    extend ActiveSupport::Concern
+
+    included do
+    end
+
+    module ClassMethods
+      def acts_as_yaffle(options = {})
+        cattr_accessor :yaffle_text_field
+        self.yaffle_text_field = (options[:yaffle_text_field] || :last_squawk).to_s
+      end
+    end
+
+    def squawk(string)
+      write_attribute(self.class.yaffle_text_field, string.to_squawk)
+    end
+
+  end
+end
+
+ActiveRecord::Base.send :include, Yaffle::ActsAsYaffle
+</pre>
+</div>
+<p>Run <tt>rake</tt> one final time and you should see:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+7 tests, 7 assertions, 0 failures, 0 errors, 0 skips
+</pre>
+</div>
+<div class="note"><p>The use of <tt>write_attribute</tt> to write to the field in model is just one example of how a plugin can interact with the model, and will not always be the right method to use. For example, you could also use <tt>send(&#8220;#{self.class.yaffle_text_field}=&#8221;, string.to_squawk)</tt>.</p></div>
+<h3 id="generators">5 Generators</h3>
+<p>Generators can be included in your gem simply by creating them in a lib/generators directory of your plugin. More information about
+the creation of generators can be found in the <a href="generators.html">Generators Guide</a></p>
+<h3 id="publishing-your-gem">6 Publishing your Gem</h3>
+<p>Gem plugins currently in development can easily be shared from any Git repository. To share the Yaffle gem with others, simply
+commit the code to a Git repository (like Github) and add a line to the Gemfile of the application in question:</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+gem 'yaffle', :git =&gt; 'git://github.com/yaffle_watcher/yaffle.git'
+</pre>
+</div>
+<p>After running <tt>bundle install</tt>, your gem functionality will be available to the application.</p>
+<p>When the gem is ready to be shared as a formal release, it can be published to <a href="http://www.rubygems.org">RubyGems</a>.
+For more information about publishing gems to RubyGems, see: <a href="http://blog.thepete.net/2010/11/creating-and-publishing-your-first-ruby.html">http://blog.thepete.net/2010/11/creating-and-publishing-your-first-ruby.html</a></p>
+<h3 id="non-gem-plugins">7 Non-Gem Plugins</h3>
+<p>Non-gem plugins are useful for functionality that won&#8217;t be shared with another project. Keeping your custom functionality in the
+vendor/plugins directory un-clutters the rest of the application.</p>
+<p>Move the directory that you created for the gem based plugin into the vendor/plugins directory of a generated Rails application, create a vendor/plugins/yaffle/init.rb file that contains &#8220;require &#8216;yaffle&#8217;&#8221; and everything will still work.</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+# yaffle/init.rb
+
+require 'yaffle'
+</pre>
+</div>
+<p>You can test this by changing to the Rails application that you added the plugin to and starting a rails console. Once in the
+console we can check to see if the String has an instance method to_squawk:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ cd my_app
+$ rails console
+$ &quot;Rails plugins are easy!&quot;.to_squawk
+</pre>
+</div>
+<p>You can also remove the .gemspec, Gemfile and Gemfile.lock files as they will no longer be needed.</p>
+<h3 id="rdoc-documentation">8 RDoc Documentation</h3>
+<p>Once your plugin is stable and you are ready to deploy do everyone else a favor and document it! Luckily, writing documentation for your plugin is easy.</p>
+<p>The first step is to update the <span class="caps">README</span> file with detailed information about how to use your plugin. A few key things to include are:</p>
+<ul>
+	<li>Your name</li>
+	<li>How to install</li>
+	<li>How to add the functionality to the app (several examples of common use cases)</li>
+	<li>Warnings, gotchas or tips that might help users and save them time</li>
+</ul>
+<p>Once your <span class="caps">README</span> is solid, go through and add rdoc comments to all of the methods that developers will use. It&#8217;s also customary to add &#8216;#:nodoc:&#8217; comments to those parts of the code that are not included in the public api.</p>
+<p>Once your comments are good to go, navigate to your plugin directory and run:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ rake rdoc
+</pre>
+</div>
+<h4 id="references">8.1 References</h4>
+<ul>
+	<li><a href="https://github.com/radar/guides/blob/master/gem-development.md">Developing a RubyGem using Bundler</a></li>
+	<li><a href="http://yehudakatz.com/2010/04/02/using-gemspecs-as-intended/">Using Gemspecs As Intended</a></li>
+	<li><a href="http://docs.rubygems.org/read/chapter/20">Gemspec Reference</a></li>
+	<li><a href="http://www.mbleigh.com/2008/06/11/gemplugins-a-brief-introduction-to-the-future-of-rails-plugins">GemPlugins</a></li>
+	<li><a href="http://daddy.platte.name/2007/05/rails-plugins-keep-initrb-thin.html">Keeping init.rb thin</a></li>
+</ul>
+
+        <h3>Feedback</h3>
+        <p>
+          You're encouraged to help improve the quality of this guide.
+        </p>
+        <p>
+          If you see any typos or factual errors you are confident to
+          patch, please clone <a href="https://github.com/lifo/docrails">docrails</a>
+          and push the change yourself. That branch of Rails has public write access.
+          Commits are still reviewed, but that happens after you've submitted your
+          contribution. <a href="https://github.com/lifo/docrails">docrails</a> is
+          cross-merged with master periodically.
+        </p>
+        <p>
+          You may also find incomplete content, or stuff that is not up to date.
+          Please do add any missing documentation for master. Check the
+          <a href="ruby_on_rails_guides_guidelines.html">Ruby on Rails Guides Guidelines</a>
+          for style and conventions.
+        </p>
+        <p>
+          If for whatever reason you spot something to fix but cannot patch it yourself, please
+          <a href="https://github.com/rails/rails/issues">open an issue</a>.
+        </p>
+        <p>And last but not least, any kind of discussion regarding Ruby on Rails
+          documentation is very welcome in the <a href="http://groups.google.com/group/rubyonrails-docs">rubyonrails-docs mailing list</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <hr class="hide" />
+  <div id="footer">
+    <div class="wrapper">
+      <p>This work is licensed under a <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-Share Alike 3.0</a> License</p>
+      <p>"Rails", "Ruby on Rails", and the Rails logo are trademarks of David Heinemeier Hansson. All rights reserved.</p>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="javascripts/guides.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shCore.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushRuby.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushXml.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushSql.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushPlain.js"></script>
+  <script type="text/javascript">
+    SyntaxHighlighter.all()
+  </script>
+</body>
+</html>

@@ -1,10 +1,11 @@
-<h2>Forgot your password?</h2>
+<h2><%=t "forgot_password" %></h2>
+<section class="gateway_form">
+	<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
+	  <%= devise_error_messages! %>
+	  <div><div id="pass_forgot_label"><%= f.label :email, "Email:", :id => "forgot_email_label", :class => "sign_in_label" %></div> <div id="reg_input"><%= f.text_field :email, :class => "sign_in_input" %></div></div>
+	  <div class="reg_button"><%= f.submit "", :id => "forgot_button" %></div>
 
-<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
-  <%= devise_error_messages! %>
+	<% end %>
+</section>
 
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email %></div>
-
-  <div><%= f.submit "Send me reset password instructions" %></div>
-<% end %>
+<% content_for :title do %><%=t "forgot_password" %><% end %>

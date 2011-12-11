@@ -6,8 +6,8 @@
 <head>
 	<meta charset="utf-8">
 	<title></title>
+	<meta name="robots" content="noindex, nofollow" />
 	<meta name="description" content="">
-	<meta name="author" content="">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<%= stylesheet_link_tag "application" %>
 	<%= csrf_meta_tags %>
@@ -19,7 +19,8 @@
 <div id="container">
 	<header></header>
 	<div id="main" role="main">
-		<%= yield %>
+  		<%= current_user.email %> <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>        
+  		<%= yield %>
 	</div>
 	<footer></footer>
 </div> <!--! end of #container -->

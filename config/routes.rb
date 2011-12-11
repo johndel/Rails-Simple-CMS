@@ -1,16 +1,25 @@
 Gscms::Application.routes.draw do
-  devise_for :users do
-      get "/admin" => "devise/sessions#new"
+
+  devise_for :users, :skip => [:sessions, :passwords] do
+    # sessions routes
+    get         "/admin/login"    => "devise/sessions#new",             :as => :new_user_session
+    post        "/admin/login"    => "devise/sessions#create",          :as => :user_session
+    delete      "/admin/logout"   => "devise/sessions#destroy",         :as => :destroy_user_session
+
+    # passwords routes
+    get         "password/forgot" => "devise/passwords#new",     :as => :new_user_password
+    post        "password/forgot" => "devise/passwords#create",  :as => :user_password
+    get         "password/reset"  => "devise/passwords#edit",    :as => :edit_user_password
+    put         "password/forgot" => "devise/passwords#update"
   end
 
-  scope "/admin" do
-    resources :menus, :pages #, :except => [:show]
+  namespace :admin do
+    resources :users, :menus, :except => [:show]
+    resources :pages
   end
-  
-  #resources :menus, :pages, :only => [:show]
-  
-  root :to => "pages#index" #This will change
-  
-  # Note: This route will make all actions in every controller accessible via GET requests.
-  # match ':controller(/:action(/:id(.:format)))'
+
+  root :to => "pages#index"
+
+   # Note: This route will make all actions in every controller accessible via GET requests.
+   # match ':controller(/:action(/:id(.:format)))'
 end

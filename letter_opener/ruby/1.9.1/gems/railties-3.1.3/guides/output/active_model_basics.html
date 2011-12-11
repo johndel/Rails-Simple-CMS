@@ -1,0 +1,349 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<title>Ruby on Rails Guides: Active Model Basics</title>
+
+<link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
+<link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+<link rel="stylesheet" type="text/css" href="stylesheets/syntaxhighlighter/shCore.css" />
+<link rel="stylesheet" type="text/css" href="stylesheets/syntaxhighlighter/shThemeRailsGuides.css" />
+
+<link rel="stylesheet" type="text/css" href="stylesheets/fixes.css" />
+</head>
+<body class="guide">
+  <div id="topNav">
+    <div class="wrapper">
+      <strong>More at <a href="http://rubyonrails.org/">rubyonrails.org:</a> </strong>
+      <a href="http://rubyonrails.org/">Overview</a> |
+      <a href="http://rubyonrails.org/download">Download</a> |
+      <a href="http://rubyonrails.org/deploy">Deploy</a> |
+      <a href="https://github.com/rails/rails">Code</a> |
+      <a href="http://rubyonrails.org/screencasts">Screencasts</a> |
+      <a href="http://rubyonrails.org/documentation">Documentation</a> |
+      <a href="http://rubyonrails.org/ecosystem">Ecosystem</a> |
+      <a href="http://rubyonrails.org/community">Community</a> |
+      <a href="http://weblog.rubyonrails.org/">Blog</a>
+    </div>
+  </div>
+  <div id="header">
+    <div class="wrapper clearfix">
+      <h1><a href="index.html" title="Return to home page">Guides.rubyonrails.org</a></h1>
+      <p class="hide"><a href="#mainCol">Skip navigation</a>.</p>
+      <ul class="nav">
+        <li><a href="index.html">Home</a></li>
+        <li class="index"><a href="index.html" onclick="guideMenu(); return false;" id="guidesMenu">Guides Index</a>
+          <div id="guides" class="clearfix" style="display: none;">
+            <hr />
+            <dl class="L">
+              <dt>Start Here</dt>
+              <dd><a href="getting_started.html">Getting Started with Rails</a></dd>
+              <dt>Models</dt>
+              <dd><a href="migrations.html">Rails Database Migrations</a></dd>
+              <dd><a href="active_record_validations_callbacks.html">Active Record Validations and Callbacks</a></dd>
+              <dd><a href="association_basics.html">Active Record Associations</a></dd>
+              <dd><a href="active_record_querying.html">Active Record Query Interface</a></dd>
+              <dt>Views</dt>
+              <dd><a href="layouts_and_rendering.html">Layouts and Rendering in Rails</a></dd>
+              <dd><a href="form_helpers.html">Action View Form Helpers</a></dd>
+              <dt>Controllers</dt>
+              <dd><a href="action_controller_overview.html">Action Controller Overview</a></dd>
+              <dd><a href="routing.html">Rails Routing from the Outside In</a></dd>
+            </dl>
+            <dl class="R">
+              <dt>Digging Deeper</dt>
+              <dd><a href="active_support_core_extensions.html">Active Support Core Extensions</a></dd>
+              <dd><a href="i18n.html">Rails Internationalization API</a></dd>
+              <dd><a href="action_mailer_basics.html">Action Mailer Basics</a></dd>
+              <dd><a href="testing.html">Testing Rails Applications</a></dd>
+              <dd><a href="security.html">Securing Rails Applications</a></dd>
+              <dd><a href="debugging_rails_applications.html">Debugging Rails Applications</a></dd>
+              <dd><a href="performance_testing.html">Performance Testing Rails Applications</a></dd>
+              <dd><a href="configuring.html">Configuring Rails Applications</a></dd>
+              <dd><a href="command_line.html">Rails Command Line Tools and Rake Tasks</a></dd>
+              <dd><a href="caching_with_rails.html">Caching with Rails</a></dd>
+              <dd><a href="asset_pipeline.html">Asset Pipeline</a></dd>
+
+              <dt>Extending Rails</dt>
+              <dd><a href="plugins.html">The Basics of Creating Rails Plugins</a></dd>
+              <dd><a href="rails_on_rack.html">Rails on Rack</a></dd>
+              <dd><a href="generators.html">Creating and Customizing Rails Generators</a></dd>
+
+              <dt>Contributing to Ruby on Rails</dt>
+              <dd><a href="contributing_to_ruby_on_rails.html">Contributing to Ruby on Rails</a></dd>
+              <dd><a href="api_documentation_guidelines.html">API Documentation Guidelines</a></dd>
+              <dd><a href="ruby_on_rails_guides_guidelines.html">Ruby on Rails Guides Guidelines</a></dd>
+
+              <dt>Release Notes</dt>
+              <dd><a href="3_1_release_notes.html">Ruby on Rails 3.1 Release Notes</a></dd>
+              <dd><a href="3_0_release_notes.html">Ruby on Rails 3.0 Release Notes</a></dd>
+              <dd><a href="2_3_release_notes.html">Ruby on Rails 2.3 Release Notes</a></dd>
+              <dd><a href="2_2_release_notes.html">Ruby on Rails 2.2 Release Notes</a></dd>
+            </dl>
+          </div>
+        </li>
+        <li><a href="contributing_to_ruby_on_rails.html">Contribute</a></li>
+        <li><a href="credits.html">Credits</a></li>
+      </ul>
+    </div>
+  </div>
+  <hr class="hide" />
+
+  <div id="feature">
+    <div class="wrapper">
+      <h2>Active Model Basics</h2>
+<p>This guide should provide you with all you need to get started using model classes. Active Model allow for Action Pack helpers to interact with non-ActiveRecord models. Active Model also helps building custom ORMs for use outside of the Rails framework.</p>
+
+            <div id="subCol">
+        <h3 class="chapter"><img src="images/chapters_icon.gif" alt="" />Chapters</h3>
+        <ol class="chapters">
+<li><a href="#introduction">Introduction</a><ul><li><a href="#attributemethods">AttributeMethods</a></li> <li><a href="#callbacks">Callbacks</a></li> <li><a href="#conversion">Conversion</a></li> <li><a href="#dirty">Dirty</a></li> <li><a href="#validations">Validations</a></li></ul></li></ol></div>
+    </div>
+  </div>
+
+  <div id="container">
+    <div class="wrapper">
+      <div id="mainCol">
+        <div class="warning"><p>This Guide is based on Rails 3.0. Some of the code shown here will not work in earlier versions of Rails.</p></div>
+<h3 id="introduction">1 Introduction</h3>
+<p>Active Model is a library containing various modules used in developing frameworks that need to interact with the Rails Action Pack library. Active Model provides a known set of interfaces for usage in classes. Some of modules are explained below -</p>
+<h4 id="attributemethods">1.1 AttributeMethods</h4>
+<p>AttributeMethods module can add custom prefixes and suffixes on methods of a class. It is used by defining the prefixes and suffixes, which methods on the object will use them.</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class Person
+  include ActiveModel::AttributeMethods
+
+  attribute_method_prefix 'reset_'
+  attribute_method_suffix '_highest?'
+  define_attribute_methods ['age']
+
+  attr_accessor :age
+
+private
+  def reset_attribute(attribute)
+    send(&quot;#{attribute}=&quot;, 0)
+  end
+
+  def attribute_highest?(attribute)
+    send(attribute) &gt; 100 ? true : false
+  end
+  
+end
+
+person = Person.new
+person.age = 110
+person.age_highest?  # true
+person.reset_age     # 0
+person.age_highest?  # false
+</pre>
+</div>
+<h4 id="callbacks">1.2 Callbacks</h4>
+<p>Callbacks gives Active Record style callbacks. This provides the ability to define the callbacks and those will run at appropriate time. After defining a callbacks you can wrap with before, after and around custom methods.</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class Person
+  extend ActiveModel::Callbacks
+
+  define_model_callbacks :update
+
+  before_update :reset_me
+
+  def update
+    _run_update_callbacks do
+      # This will call when we are trying to call update on object.
+    end
+  end
+
+  def reset_me
+    # This method will call when you are calling update on object as a before_update callback as defined.
+  end
+end
+</pre>
+</div>
+<h4 id="conversion">1.3 Conversion</h4>
+<p>If a class defines persisted? and id methods then you can include Conversion module in that class and you can able to call Rails conversion methods to objects of that class.</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class Person
+  include ActiveModel::Conversion
+
+  def persisted?
+    false
+  end
+
+  def id
+    nil
+  end
+end
+
+person = Person.new
+person.to_model == person  #=&gt; true
+person.to_key              #=&gt; nil
+person.to_param            #=&gt; nil
+</pre>
+</div>
+<h4 id="dirty">1.4 Dirty</h4>
+<p>An object becomes dirty when an object is gone through one or more changes to its attributes and not yet saved. This gives the ability to check whether an object has been changed or not. It also has attribute based accessor methods. Lets consider a Person class with attributes first_name and last_name</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+require 'rubygems'
+require 'active_model'
+
+class Person
+  include ActiveModel::Dirty
+  define_attribute_methods [:first_name, :last_name]
+
+  def first_name
+    @first_name
+  end
+
+  def first_name=(value)
+    first_name_will_change!
+    @first_name = value
+  end
+
+  def last_name
+    @last_name
+  end
+
+  def last_name=(value)
+    last_name_will_change!
+    @last_name = value
+  end
+
+  def save
+    @previously_changed = changes
+  end
+
+end
+</pre>
+</div>
+<h5 id="querying-object-directly-for-its-list-of-all-changed-attributes">1.4.1 Querying object directly for its list of all changed attributes.</h5>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+person = Person.new
+person.first_name = &quot;First Name&quot;
+
+person.first_name #=&gt; &quot;First Name&quot;
+person.first_name = &quot;First Name Changed&quot;
+
+person.changed? #=&gt; true
+
+#returns an list of fields arry which all has been changed before saved.
+person.changed #=&gt; [&quot;first_name&quot;]
+
+#returns a hash of the fields that have changed with their original values.
+person.changed_attributes #=&gt; {&quot;first_name&quot; =&gt; &quot;First Name Changed&quot;}
+
+#returns a hash of changes, with the attribute names as the keys, and the values will be an array of the old and new value for that field.
+person.changes #=&gt; {&quot;first_name&quot; =&gt; [&quot;First Name&quot;,&quot;First Name Changed&quot;]}
+</pre>
+</div>
+<h5 id="attribute-based-accessor-methods">1.4.2 Attribute based accessor methods</h5>
+<p>Track whether the particular attribute has been changed or not.</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+#attr_name_changed?
+person.first_name #=&gt; &quot;First Name&quot;
+
+#assign some other value to first_name attribute
+person.first_name = &quot;First Name 1&quot;
+
+person.first_name_changed? #=&gt; true
+</pre>
+</div>
+<p>Track what was the previous value of the attribute.</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+#attr_name_was accessor
+person.first_name_was  #=&gt; &quot;First Name&quot;
+</pre>
+</div>
+<p>Track  both previous and current value of the changed attribute. Returns an array if changed else returns nil</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+#attr_name_change
+person.first_name_change #=&gt; [&quot;First Name&quot;, &quot;First Name 1&quot;]
+person.last_name_change #=&gt; nil
+</pre>
+</div>
+<h4 id="validations">1.5 Validations</h4>
+<p>Validations module adds the ability to class objects to validate them in Active Record style.</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class Person
+  include ActiveModel::Validations
+
+  attr_accessor :name, :email, :token
+  
+  validates :name, :presence =&gt; true
+  validates_format_of :email, :with =&gt; /^([^\s]+)((?:[-a-z0-9]\.)[a-z]{2,})$/i  
+  validates! :token, :presence =&gt; true
+  
+end
+
+person = Person.new(:token =&gt; &quot;2b1f325&quot;)
+person.valid?                        #=&gt; false
+person.name  = 'vishnu'
+person.email  = 'me'
+person.valid?                        #=&gt; false
+person.email = 'me@vishnuatrai.com'
+person.valid?                        #=&gt; true
+person.token = nil
+person.valid?                        #=&gt; raises ActiveModel::StrictValidationFailed
+</pre>
+</div>
+
+        <h3>Feedback</h3>
+        <p>
+          You're encouraged to help improve the quality of this guide.
+        </p>
+        <p>
+          If you see any typos or factual errors you are confident to
+          patch, please clone <a href="https://github.com/lifo/docrails">docrails</a>
+          and push the change yourself. That branch of Rails has public write access.
+          Commits are still reviewed, but that happens after you've submitted your
+          contribution. <a href="https://github.com/lifo/docrails">docrails</a> is
+          cross-merged with master periodically.
+        </p>
+        <p>
+          You may also find incomplete content, or stuff that is not up to date.
+          Please do add any missing documentation for master. Check the
+          <a href="ruby_on_rails_guides_guidelines.html">Ruby on Rails Guides Guidelines</a>
+          for style and conventions.
+        </p>
+        <p>
+          If for whatever reason you spot something to fix but cannot patch it yourself, please
+          <a href="https://github.com/rails/rails/issues">open an issue</a>.
+        </p>
+        <p>And last but not least, any kind of discussion regarding Ruby on Rails
+          documentation is very welcome in the <a href="http://groups.google.com/group/rubyonrails-docs">rubyonrails-docs mailing list</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <hr class="hide" />
+  <div id="footer">
+    <div class="wrapper">
+      <p>This work is licensed under a <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-Share Alike 3.0</a> License</p>
+      <p>"Rails", "Ruby on Rails", and the Rails logo are trademarks of David Heinemeier Hansson. All rights reserved.</p>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="javascripts/guides.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shCore.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushRuby.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushXml.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushSql.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushPlain.js"></script>
+  <script type="text/javascript">
+    SyntaxHighlighter.all()
+  </script>
+</body>
+</html>

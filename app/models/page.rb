@@ -1,9 +1,9 @@
 class Page < ActiveRecord::Base
-  include ActionView::Helpers::TextHelper # for using truncate method on prettify_permalink
+  include ActionView::Helpers::TextHelper # for using 'truncate' method on prettify_permalink
   
   before_save :prettify_permalink
   
-  has_many :page_menu_mappings
+  has_many :page_menu_mappings, :dependent => :delete_all
   has_many :menus, :through => :page_menu_mappings, :uniq => true 
   
   validates :name, :presence => true 
