@@ -1,25 +1,29 @@
-<%= form_for([:admin, @user]) do |f| %>
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
-
-      <ul>
-      <% @user.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-  <%= f.label :email %> <br />
-  <%= f.text_field :email %><br /><br />
-  
-  <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-  <%= f.password_field :password %><br /><br />
-  
-  <%= f.label :password_confirmation %><br />
-  <%= f.password_field :password_confirmation %><br /><br />
-  
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+	<div class="module_content">
+	<%= form_for([:admin, @user]) do |f| %>
+	  <% if @user.errors.any? %>
+	    <div id="error_explanation">
+	      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+	      <ul>
+	      <% @user.errors.full_messages.each do |msg| %>
+	        <li><%= msg %></li>
+	      <% end %>
+	      </ul>
+	    </div>
+	  <% end %>
+	  <%= f.label :email %> <br />
+	  <%= f.text_field :email %><br /><br />
+	  
+	  <%= f.label :password, :style => "width: 75px" %> <i>(leave blank if you don't want to change it)</i><br />
+	  <%= f.password_field :password %><br /><br />
+	  
+	  <%= f.label :password_confirmation %><br />
+	  <%= f.password_field :password_confirmation %><br /><br />
+	</div>
+	<div style="clear: both"></div>
+  	<br />
+	  <footer>
+		  <div class="submit_link">
+		    <%= f.submit "#{create_or_update_string} User", :class => "alt_btn" %>
+		  </div>
+	  </footer>
+	<% end %>

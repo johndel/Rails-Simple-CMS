@@ -1,0 +1,31 @@
+	<aside id="sidebar" class="column">
+		<section id="gradientTop">
+			<h3 class="<%= "current_menu" if controller.controller_name == "pages" %>"><a href="/admin/pages">Pages</a></h3>
+			<ul class="toggle">
+				<li class="<%= "current_action" if controller.controller_name == "pages" && controller.action_name == "index"  %>"><%= link_to "All Pages", admin_pages_path %></li>
+				<li class="<%= "current_action" if controller.controller_name == "pages" && controller.action_name == "new"  %>"><%= link_to "New Page", new_admin_page_path %></li>
+				<li class="<%= "current_action" if controller.controller_name == "pages" && controller.action_name == "sitemap"  %>"><%= link_to "Create Sitemap", sitemap_admin_pages_path  %></li>
+			</ul>
+			<br />
+			<h3 class="<%= "current_menu" if controller.controller_name == "menus" %>"><a href="/admin/menus">Menus</a></h3>
+			<ul class="toggle">
+				<li class="<%= "current_action" if controller.controller_name == "menus" && controller.action_name == "index" %>"><%= link_to "All Menus", admin_menus_path %></li>
+				<li class="<%= "current_action" if controller.controller_name == "menus" && controller.action_name == "new" %>"><%= link_to "New Menu", new_admin_menu_path %></li>
+			</ul>
+			
+			<br />
+			<h3 class="<%= "current_menu" if controller.controller_name == "users" %>"><a href="/admin/users">Users</a></h3>
+			<ul class="toggle">
+				<li class="<%= "current_action" if controller.controller_name == "users" && controller.action_name == "index"  %>"><%= link_to "All Users", admin_users_path %></li>
+				<li class="<%= "current_action" if controller.controller_name == "users" && controller.action_name == "new"  %>"><%= link_to "New User", new_admin_user_path %></li>
+			</ul>
+			
+			<br />
+			<h3 class="<%= "current_menu" if controller.controller_name == "settings" %>"><%= link_to "Settings", admin_users_path %></h3>
+		</section>
+		<br />		
+		<footer>
+			<hr />
+			<p><strong>Copyright &copy; 2011 GreekSolution</strong></p>
+		</footer>
+	</aside><!-- end of sidebar -->

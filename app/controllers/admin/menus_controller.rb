@@ -37,4 +37,8 @@ class Admin::MenusController < ApplicationController
     @menu.destroy
     redirect_to admin_menus_url
   end
+  
+  def sort
+    
+  end
 end

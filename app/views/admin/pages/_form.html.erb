@@ -1,17 +1,38 @@
-<%= form_for([:admin, @page]) do |f| %>
-  <% if @page.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@page.errors.count, "error") %> prohibited this page from being saved:</h2>
+	<div class="module_content">
+	<%= form_for([:admin, @page]) do |f| %>
+	  <% if @page.errors.any? %>
+	    <div id="error_explanation">
+	      <h2><%= pluralize(@page.errors.count, "error") %> prohibited this page from being saved:</h2>
+	      <ul>
+	      <% @page.errors.full_messages.each do |msg| %>
+	        <li><%= msg %></li>
+	      <% end %>
+	      </ul>
+	    </div>
+	  <% end %>
 
-      <ul>
-      <% @page.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+	  	<%= f.label :name %>
+	  	<%= f.text_field :name %>
+	  	<%= f.label :title %>
+	  	<%= f.text_field :title %>
+	  	<%= f.label :meta_description %>
+	  	<%= f.text_area :meta_description, :style => "height: 100px" %>
+	  	<%= f.label :content %>
+	  	<%= f.text_area :content %>
+	  	<%= f.label :permalink %>
+	  	<%= f.text_field :permalink %>	  	
+	  	
+	  	<div class="checkbox_pair">
+	  		<div class="checkbox_label"><%= f.label :active %></div>
+	  		<div class="checkbox"><%= f.check_box :active %></div>
+		</div>
+		
+	</div>	  
+	<div style="clear: both"></div>
+  	<br />
+	  <footer>
+	  	<div class="submit_link">
+	    	<%= f.submit "#{create_or_update_string} Page", :class => "alt_btn" %>
+	  	</div>
+	   </footer>
+	<% end %>

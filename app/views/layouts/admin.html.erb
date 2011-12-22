@@ -5,11 +5,11 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
 <head>
 	<meta charset="utf-8">
-	<title></title>
+	<title>Admin Panel | <%= title %></title>
 	<meta name="robots" content="noindex, nofollow" />
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
-	<%= stylesheet_link_tag "application" %>
+	<%= stylesheet_link_tag "admin/all" %>
 	<%= csrf_meta_tags %>
 	<%= javascript_include_tag "modernizr-2.0.6.min.js" %>
 </head>
@@ -17,17 +17,40 @@
 
 <body>
 <div id="container">
-	<header></header>
-	<div id="main" role="main">
-  		<%= current_user.email %> <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>        
-  		<%= yield %>
-	</div>
-	<footer></footer>
+	
+	<header id="header">
+		<hgroup>
+			<h1 class="site_title"><%= link_to "", admin_pages_path, :class => "admin_panel" %></h1>
+			<h2 class="section_title"><%= title %></h2>
+			<div class="btn_view_site"><%= link_to "View Site", root_path %></div>
+		</hgroup>
+	</header> <!-- end of header bar -->
+	
+	<section id="secondary_bar">
+		<div class="user">
+			<p><%= current_user.email %></p><%= link_to('Logout', destroy_user_session_path, :method => :delete, :class => "logout_user", :title => "logout") %>
+		</div>
+		<%= render "admin/partials/breadcrumb" %>
+	</section>
+
+	<%= render "admin/partials/sidebar" %>
+
+	<section id="main" class="column">
+		
+		<% if notice %><h4 class="alert_success"><%= notice %></h4><% end %>
+		<% if alert %><h4 class="alert_error"><%= alert %></h4><% end %>
+		
+  			<%= yield %>
+
+	</section>
+	
+	
+
 </div> <!--! end of #container -->
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="<%= asset_path("jquery.js") %>"><\/script>')</script>
-<%= javascript_include_tag "application" %>
+<%= javascript_include_tag "admin/all" %>
 <script>
 	var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']]; // Change UA-XXXXX-X to be your site's ID
 	(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;
