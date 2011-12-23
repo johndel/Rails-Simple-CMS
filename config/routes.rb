@@ -14,13 +14,13 @@ Gscms::Application.routes.draw do
   end
 
   namespace :admin do
-    resources :users, :except => [:show]
+    resources :users,      :except => [:show]
     
-    resources :menus, :except => [:show] do
+    resources :menus,      :except => [:show] do
        get "sort",         :on => :collection, :as => :sort
     end
     
-    resources :pages, :except => [:show] do
+    resources :pages,      :except => [:show] do
        get "sitemap",      :on => :collection, :as => :sitemap
        get "edit-content" => "pages#edit_content", :on => :member, :as => :edit_content
     end
