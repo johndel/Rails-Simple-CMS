@@ -23,7 +23,7 @@
 					<td><%= page.active %></td>
 					<td><%= page.created_at %></td>
 					<td><%= page.updated_at %></td>
-					<td><%= link_to 'Show', [:admin, page] %></td>
+					<td><%= link_to 'Edit Content', edit_content_admin_page_path(page), :class => "edit_content_link" %></td>
 					<td><%= link_to 'Edit', edit_admin_page_path(page), :class => "edit_link" %></td>
 					<td><%= link_to 'Destroy', [:admin, page], confirm: 'Are you sure?', method: :delete, :class => "delete_link" %></td>
 				</tr>
