@@ -1,1 +1,4 @@
-<%= link_to 'Edit', edit_admin_page_path(@page) %> |
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<div id="page_content" class="mercury-region" data-type="editable">
+	<%= raw @page.content %>
+</div>

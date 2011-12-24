@@ -4,6 +4,7 @@ class PagesController < ApplicationController
   end
 
   def show
+    @page = Page.find(:first, :conditions => ["permalink = ?", params[:permalink]])
   end
   
 end

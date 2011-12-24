@@ -14,7 +14,7 @@ class Admin::PagesController < ApplicationController
     @page = Page.find(params[:id])
   end
 
-  def edit_content
+  def show
     @page = Page.find(params[:id])
   end
 
@@ -36,11 +36,19 @@ class Admin::PagesController < ApplicationController
     end
   end
   
+  def mercury_update
+    page = Page.find(params[:id])
+    page.content = params[:content][:page_content][:value]
+    page.save!
+    render text: ""
+  end
+  
   def destroy
     @page = Page.find(params[:id])
     @page.destroy
     redirect_to admin_pages_url
   end
+  
   
   def sitemap
     
@@ -48,7 +56,7 @@ class Admin::PagesController < ApplicationController
     
   private
     def admin_page_layout
-      action_name == "edit_content" ? "pages" : "admin"
+      action_name == "show" ? "pages" : "admin"
     end
   
 end
