@@ -1,7 +1,7 @@
 Gscms::Application.routes.draw do
-
+  
+  match '/editor(/*requested_uri)' => "auth_mercury#edit", :as => :mercury_editor
   Mercury::Engine.routes
-
   devise_for :users, :skip => [:sessions, :passwords] do
     # sessions routes
     get         "/admin/login"    => "devise/sessions#new",             :as => :new_user_session
@@ -19,8 +19,7 @@ Gscms::Application.routes.draw do
     resources :users,         :except => [:show]
     resources :menus,         :except => [:show] do
        get "sort",            :on => :collection, :as => :sort
-    end
-    
+    end  
     resources :pages do
        get "sitemap",         :on => :collection, :as => :sitemap
        member { post :mercury_update }

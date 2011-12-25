@@ -1,6 +1,9 @@
+//= require jquery-ui
 //= require jquery_ujs
 //= require jquery.equalHeight
 //= require jquery.dataTables.min
+//= require jquery.fancybox-1.3.4.pack
+
 
 $(document).ready(function() { 
 	$("#datatable_pages").dataTable({
@@ -17,7 +20,6 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
-
   //When page loads...
   $(".tab_content").hide(); //Hide all content
   $("ul.tabs li:first").addClass("active").show(); //Activate first tab

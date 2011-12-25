@@ -5,6 +5,9 @@ class PagesController < ApplicationController
 
   def show
     @page = Page.find(:first, :conditions => ["permalink = ?", params[:permalink]])
+    if @page.nil?
+      render_404
+    end
   end
   
 end

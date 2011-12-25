@@ -56,7 +56,15 @@ class Admin::PagesController < ApplicationController
     
   private
     def admin_page_layout
-      action_name == "show" ? "pages" : "admin"
+      case action_name
+      when "show"
+        "pages"
+      when "edit"
+        "popup"
+      else 
+        "admin"
+      end
+      #action_name == "show" ? "pages" : "admin"
     end
   
 end
