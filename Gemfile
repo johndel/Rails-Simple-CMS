@@ -18,6 +18,7 @@ end
 
 gem 'jquery-rails'
 gem 'therubyracer'
+gem 'mercury-rails', :path => "vendor/mercury-gem" #, git: 'https://github.com/jejacks0n/mercury.git', ref: 'a2b16bcdc9'
 
 group :test, :development do
   gem 'capistrano'

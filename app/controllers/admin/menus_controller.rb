@@ -1,5 +1,5 @@
 class Admin::MenusController < ApplicationController
-  layout "admin"
+  layout :admin_menu_layout
   before_filter :authenticate_user!
 
   def index
@@ -41,4 +41,14 @@ class Admin::MenusController < ApplicationController
   def sort
     
   end
+  
+  private
+    def admin_menu_layout
+      case action_name
+      when "edit"
+        "popup"
+      else 
+        "admin"
+      end
+    end
 end

@@ -1,0 +1,11 @@
+<%= stylesheet_link_tag "admin/popup" %>
+	<div id="container" class="popup">
+		<section id="main" class="column" style="width: 450px">
+		<% if notice %><h4 class="alert_success"><%= notice %></h4><% end %>
+		<% if alert %><h4 class="alert_error"><%= alert %></h4><% end %>
+			<%= yield %>
+		</section>
+	</div>
+
+
+

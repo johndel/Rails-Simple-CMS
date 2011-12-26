@@ -1,6 +1,8 @@
+//= require jquery-ui
 //= require jquery_ujs
 //= require jquery.equalHeight
 //= require jquery.dataTables.min
+//= require admin/editForm
 
 $(document).ready(function() { 
 	$("#datatable_pages").dataTable({
@@ -17,7 +19,6 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
-
   //When page loads...
   $(".tab_content").hide(); //Hide all content
   $("ul.tabs li:first").addClass("active").show(); //Activate first tab
@@ -39,12 +40,11 @@ $(document).ready(function() {
 
 $(function() { // Autosize
 	$("#sidebar").css("min-height", $(window).height()- 91); 
-	$("#main").css("width", $(window).width() - 280);
+	// if( $(window).width() < 1030 ) {
+		// $("#main").css("width", $(window).width() - 280);
+	// }
+	
 	$('.column').equalHeight();
-	$(window).resize(function() {
-		$("#sidebar").css("height", $(window).height()- 91); 
-		$("#main").css("width", $(window).width() - 305);
-		$('.column').equalHeight();
-	});
+
 });
 

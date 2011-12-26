@@ -1,5 +1,7 @@
 Gscms::Application.routes.draw do
-
+  
+  match '/editor(/*requested_uri)' => "auth_mercury#edit", :as => :mercury_editor
+  Mercury::Engine.routes
   devise_for :users, :skip => [:sessions, :passwords] do
     # sessions routes
     get         "/admin/login"    => "devise/sessions#new",             :as => :new_user_session
@@ -12,20 +14,20 @@ Gscms::Application.routes.draw do
     get         "password/reset"  => "devise/passwords#edit",    :as => :edit_user_password
     put         "password/forgot" => "devise/passwords#update"
   end
-
+  
   namespace :admin do
-    resources :users, :except => [:show]
-    
-    resources :menus, :except => [:show] do
-       get "sort",         :on => :collection, :as => :sort
-    end
-    
-    resources :pages, :except => [:show] do
-       get "sitemap",      :on => :collection, :as => :sitemap
-       get "edit-content" => "pages#edit_content", :on => :member, :as => :edit_content
+    resources :users,         :except => [:show]
+    resources :menus,         :except => [:show] do
+       get "sort",            :on => :collection, :as => :sort
+    end  
+    resources :pages do
+       get "sitemap",         :on => :collection, :as => :sitemap
+       member { post :mercury_update }
+       #post "show", :on => :member
     end
   end
 
+  get ":permalink" => "pages#show"
   root :to => "pages#index"
   
    # Note: This route will make all actions in every controller accessible via GET requests.
