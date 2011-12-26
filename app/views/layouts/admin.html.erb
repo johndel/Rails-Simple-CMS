@@ -9,11 +9,10 @@
 	<meta name="robots" content="noindex, nofollow" />
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
-	<%= stylesheet_link_tag "admin/all" %>
+	<%= stylesheet_link_tag "admin/all", "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/cupertino/jquery-ui.css" %>
 	<%= csrf_meta_tags %>
 	<%= javascript_include_tag "modernizr-2.0.6.min.js" %>
 </head>
-
 
 <body>
 <div id="container">
@@ -36,12 +35,9 @@
 	<%= render "admin/partials/sidebar" %>
 
 	<section id="main" class="column">
-		
 		<% if notice %><h4 class="alert_success"><%= notice %></h4><% end %>
 		<% if alert %><h4 class="alert_error"><%= alert %></h4><% end %>
-		
-  			<%= yield %>
-
+  		<%= yield %>
 	</section>
 	
 	
@@ -51,6 +47,7 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="<%= asset_path("jquery.js") %>"><\/script>')</script>
 <%= javascript_include_tag "admin/all" %>
+<%= yield :custom_styling %>
 <script>
 	var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']]; // Change UA-XXXXX-X to be your site's ID
 	(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;

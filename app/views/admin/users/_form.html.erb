@@ -1,5 +1,6 @@
+<%= render "admin/partials/form_validations" %>
 	<div class="module_content">
-	<%= form_for([:admin, @user]) do |f| %>
+	<%= form_for([:admin, @user], :html => { :class => "form_validations" }) do |f| %>
 	  <% if @user.errors.any? %>
 	    <div id="error_explanation">
 	      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
@@ -11,13 +12,20 @@
 	    </div>
 	  <% end %>
 	  <%= f.label :email %> <br />
-	  <%= f.text_field :email %><br /><br />
-	  
-	  <%= f.label :password, :style => "width: 75px" %> <i>(leave blank if you don't want to change it)</i><br />
-	  <%= f.password_field :password %><br /><br />
-	  
-	  <%= f.label :password_confirmation %><br />
-	  <%= f.password_field :password_confirmation %><br /><br />
+	  <%= f.email_field :email, :class => "validate[required, custom[email]]" %><br /><br />
+  	  
+  	  <% if controller.action_name == "new" %>
+		  <%= f.label :password, :style => "width: 75px" %><br />
+		  <%= f.password_field :password, :class => "validate[required]" %><br /><br />
+		  <%= f.label :password_confirmation %><br />
+		  <%= f.password_field :password_confirmation, :class => "validate[required]" %><br /><br />
+	  <% else %>
+	  	  <%= f.label :password, :style => "width: 75px" %> <i>(leave blank if you don't want to change it)</i><br />
+		  <%= f.password_field :password %><br /><br />
+		  <%= f.label :password_confirmation %><br />
+		  <%= f.password_field :password_confirmation %><br /><br />
+	  <% end %>
+
 	</div>
 	<div style="clear: both"></div>
   	<br />
