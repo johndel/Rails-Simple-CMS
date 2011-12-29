@@ -230,7 +230,7 @@ DEPENDENCIES
   jquery-rails
   launchy
   letter_opener
-  mercury-rails!
+  mercury-rails (= 0.2.3)!
   mysql2
   pry-rails
   pry-remote

@@ -19,7 +19,7 @@ class Admin::PagesController < ApplicationController
   end
 
   def create
-    @page = Page.new(params[:page])  
+    @page = Page.new(params[:page])
     if @page.save
       redirect_to new_admin_page_url, notice: 'Page was successfully created.'
     else
@@ -59,8 +59,8 @@ class Admin::PagesController < ApplicationController
       case action_name
       when "show"
         "pages"
-      when "edit"
-        "popup"
+      #when "edit"
+      #  "popup"
       else 
         "admin"
       end

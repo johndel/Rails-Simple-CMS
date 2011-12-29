@@ -40,9 +40,9 @@ $(document).ready(function() {
 
 $(function() { // Autosize
 	$("#sidebar").css("min-height", $(window).height()- 91); 
-	// if( $(window).width() < 1030 ) {
-		// $("#main").css("width", $(window).width() - 280);
-	// }
+	//if( $(window).width() < 1030 ) {
+		$("#main").css("width", $(window).width() - 280);
+	//}
 	
 	$('.column').equalHeight();
 

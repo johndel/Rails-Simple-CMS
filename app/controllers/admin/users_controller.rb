@@ -1,5 +1,5 @@
 class Admin::UsersController < ApplicationController
-  layout :admin_user_layout
+  layout "admin" # :admin_user_layout
   before_filter :authenticate_user!
 
   def index
@@ -42,13 +42,13 @@ class Admin::UsersController < ApplicationController
     redirect_to admin_users_url
   end
   
-  private
-    def admin_user_layout
-      case action_name
-      when "edit"
-        "popup"
-      else 
-        "admin"
-      end
-    end
+  # private
+    # def admin_user_layout
+      # case action_name
+      # #when "edit"
+      # #  "popup"
+      # else 
+        # "admin"
+      # end
+    # end
 end

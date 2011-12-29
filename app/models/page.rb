@@ -1,7 +1,9 @@
 class Page < ActiveRecord::Base
-  include ActionView::Helpers::TextHelper # for using 'truncate' method on prettify_permalink
+  default_scope :order => "name ASC"
+  scope :position_order, lambda { |num| joins(:page_menu_mappings).where("page_menu_mappings.menu_id =?", num).reorder("page_position") }
   
-  before_save :prettify_permalink
+  include ActionView::Helpers::TextHelper # for using 'truncate' method on prettify_permalink  
+  before_validation :prettify_permalink
   
   has_many :page_menu_mappings, :dependent => :delete_all
   has_many :menus, :through => :page_menu_mappings, :uniq => true 

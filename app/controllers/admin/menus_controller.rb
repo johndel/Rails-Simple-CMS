@@ -1,5 +1,5 @@
 class Admin::MenusController < ApplicationController
-  layout :admin_menu_layout
+  layout "admin"
   before_filter :authenticate_user!
 
   def index
@@ -8,10 +8,14 @@ class Admin::MenusController < ApplicationController
 
   def new
     @menu = Menu.new
+    @pages = Page.all
+    @other_pages = Page.all
   end
 
   def edit
     @menu = Menu.find(params[:id])
+    @pages = Page.position_order(@menu.id)
+    @other_pages = Page.all - @pages 
   end
 
   def create
@@ -38,17 +42,35 @@ class Admin::MenusController < ApplicationController
     redirect_to admin_menus_url
   end
   
-  def sort
-    
-  end
-  
-  private
-    def admin_menu_layout
-      case action_name
-      when "edit"
-        "popup"
-      else 
-        "admin"
+  def page_sort # FIX: This method needs HEAVY refactoring
+    @pm_mapping = PageMenuMapping.where("menu_id = ?", params[:menu])
+    if @pm_mapping
+      
+      @pm_mapping.each do |pm_mapping| # For removing from the list...
+         # Rails.logger.info("#{params[:page]} doesn\'t have the page_menu_mapping: #{pm_mapping.page_id} - #{params[:page].include?(pm_mapping.page_id.to_s)}")
+         PageMenuMapping.delete(pm_mapping) unless params[:page].include?(pm_mapping.page_id.to_s)
+      end
+
+      params[:page].each do |page| # For adding new elements to the list...
+        # Rails.logger.info("#{page} #{page.class} doesn\'t have the page_menu_mapping: #{@ids} - #{@ids.include?(page.to_i)} --- #{@ids.first.class}")
+        PageMenuMapping.create(page_id: page, menu_id: params[:menu]) unless @pm_mapping.map(&:page_id).include?(page.to_i) 
+      end
+      
+      params[:page].each_with_index do |id, index|
+        @pm_mapping.update_all({page_position: index + 1}, {page_id: id}) # Finally sorting
       end
     end
+
+    render :text => "" #params.inspect #params['page'].index(page.id.to_s) + 1
+  end
+
+  # private
+    # def admin_menu_layout
+      # case action_name
+      # #when "edit"
+      # #  "popup"
+      # else 
+        # "admin"
+      # end
+    # end
 end

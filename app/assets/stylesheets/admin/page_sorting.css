@@ -1,0 +1,66 @@
+#page_sorting {
+clear: both;
+position: relative;
+top: 10px;
+overflow: auto;
+margin 5px 0;
+}
+
+#main #page_sorting h3 {
+text-align: center;
+float: left;
+margin: 0;
+padding: 0;
+width: 165px;
+}
+
+#main #page_sorting h3.left_h3 , #sortable1 {
+margin: 0;
+margin-right: 24px;
+}
+
+#sortable2 {
+margin: 0;
+}
+
+#sortable1, #sortable2 {
+border: 1px solid #ccc;
+float: left;
+display: block;
+width: 166px;
+overflow: auto;
+padding: 0;
+}
+
+#sortable1 li, #sortable2 li {
+cursor:move;
+list-style-type: none;
+margin: 4px;
+padding: 3px 7px;
+}
+
+#sortable1 li {
+color: #1C94C4;
+background-color: #f7f7f7;
+font-weight: normal;
+border: 1px solid #ccc;
+}
+
+#sortable2 li {
+background-color: #F7F7F7;
+color: #333;
+font-weight: normal;
+border: 1px solid #ccc;
+} 
+
+.connectedSortable {
+	min-height: 36px;
+}
+
+.ui-state-highlight {
+height: 20px;
+}
+
+.ui-icon-arrow-4 {
+float: left;
+}

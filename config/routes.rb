@@ -18,7 +18,9 @@ Gscms::Application.routes.draw do
   namespace :admin do
     resources :users,         :except => [:show]
     resources :menus,         :except => [:show] do
-       get "sort",            :on => :collection, :as => :sort
+       collection do 
+          post :page_sort
+       end
     end  
     resources :pages do
        get "sitemap",         :on => :collection, :as => :sitemap

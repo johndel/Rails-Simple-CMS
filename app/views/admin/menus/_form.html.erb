@@ -1,4 +1,9 @@
 <%= render "admin/partials/form_validations" %>
+<%= stylesheet_link_tag "admin/page_sorting" %>
+<%= content_for :custom_styling do %>
+	<%= javascript_include_tag "admin/sortMenu" %>
+<% end %>
+
 	<div class="module_content">
 	<%= form_for([:admin, @menu], :html => { :class => "form_validations" }) do |f| %>
 	  <% if @menu.errors.any? %>
@@ -14,6 +19,24 @@
 	
 	  	<%= f.label :name %>
 	  	<%= f.text_field :name, :class =>"validate[required]" %>
+	  	
+	  	<div id="page_sorting" data-menu-id="<%= @menu.id %>">
+	  		<div>
+	  			<h3 class="left_h3">Pages in the menu</h3>
+	  			<h3>Other pages</h3>
+	  		</div> 		
+			<ul id="sortable1" class="connectedSortable">
+				<% @pages.each do |page| %>
+				<li class="ui-state-default" id="page_<%= page.id %>"><span class="ui-icon ui-icon-arrow-4"></span><span class="sorted-name"><%= page.name %></span></a>
+				<% end %>
+			</ul>
+			
+			<ul id="sortable2" class="connectedSortable">
+				<% @other_pages.each do |page| %>
+				<li id="page_<%= page.id %>"><span class="ui-icon ui-icon-arrow-4"></span><span class="sorted-name"><%= page.name %></span></a>
+				<% end %>
+			</ul>
+	  	</div>
 	</div>	  
 	<div style="clear: both"></div>
   	<br />
