@@ -16,4 +16,8 @@ module ApplicationHelper
     end
   end
   
+  def first_menu
+    Menu.first
+  end
+  
 end

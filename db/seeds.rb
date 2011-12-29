@@ -5,3 +5,6 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+User.create(email: "example@example.com", password: "easy_password")
+Setting.create(meta_key: "homepage")
+#Page.create(name: 404, title: "Error Page 404", permalink: "404", )

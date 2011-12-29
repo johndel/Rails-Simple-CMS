@@ -21,7 +21,11 @@ Gscms::Application.routes.draw do
        collection do 
           post :page_sort
        end
-    end  
+    end
+    
+    get "settings/homepage"       => "settings#homepage",      :as => :settings
+    post "settings/homepage-save" => "settings#homepage_save", :as => :homepage_save
+     
     resources :pages do
        get "sitemap",         :on => :collection, :as => :sitemap
        member { post :mercury_update }

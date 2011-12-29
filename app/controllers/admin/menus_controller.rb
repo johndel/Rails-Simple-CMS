@@ -30,7 +30,7 @@ class Admin::MenusController < ApplicationController
   def update
     @menu = Menu.find(params[:id])
     if @menu.update_attributes(params[:menu])
-      redirect_to admin_menus_url, notice: 'Menu was successfully updated.'
+      redirect_to admin_pages_url, notice: 'Menu was successfully updated.'
     else
       render action: "edit"
     end

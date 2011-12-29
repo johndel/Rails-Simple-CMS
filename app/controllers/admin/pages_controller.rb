@@ -15,6 +15,7 @@ class Admin::PagesController < ApplicationController
   end
 
   def show
+    @pages = Page.position_order
     @page = Page.find(params[:id])
   end
 

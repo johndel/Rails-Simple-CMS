@@ -5,9 +5,8 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
 <head>
 	<meta charset="utf-8">
-	<title></title>
-	<meta name="description" content="">
-	<meta name="author" content="John Deliyiannis, istoselidas@gmail.com">
+	<title><%= @page.title %></title>
+	<meta name="description" content="<%= @page.meta_description %>">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<%= stylesheet_link_tag "pages/all" %>
 	<%= csrf_meta_tags %>
@@ -17,8 +16,8 @@
 
 <body>
 <div id="container">
-	<header></header>
 	<div id="main" role="main">
+		<%= render "pages/partials/menu" %>
   		<%= yield %>
 	</div>
 	<footer></footer>

@@ -1,6 +1,6 @@
 class Page < ActiveRecord::Base
   default_scope :order => "name ASC"
-  scope :position_order, lambda { |num| joins(:page_menu_mappings).where("page_menu_mappings.menu_id =?", num).reorder("page_position") }
+  scope :position_order, lambda { |num = 8| joins(:page_menu_mappings).where("page_menu_mappings.menu_id =?", num).reorder("page_position").where(:active => true) }
   
   include ActionView::Helpers::TextHelper # for using 'truncate' method on prettify_permalink  
   before_validation :prettify_permalink
@@ -18,6 +18,9 @@ class Page < ActiveRecord::Base
   validates :meta_description, :length => { :maximum => 250 }
   validates :permalink, :length => { :maximum => 250 }
 
+  def self.first_page
+    find(Setting.where(:meta_key => "homepage").first.meta_value)
+  end
   
   def prettify_permalink
     # parameterize function is nice but not as good as below

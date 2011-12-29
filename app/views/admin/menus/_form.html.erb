@@ -17,8 +17,8 @@
 	    </div>
 	  <% end %>
 	
-	  	<%= f.label :name %>
-	  	<%= f.text_field :name, :class =>"validate[required]" %>
+	  	<%#= f.label :name %>
+	  	<%#= f.text_field :name, :class =>"validate[required]" %>
 	  	
 	  	<div id="page_sorting" data-menu-id="<%= @menu.id %>">
 	  		<div>
@@ -41,7 +41,7 @@
 	<div style="clear: both"></div>
   	<br />
 	  <footer>
-	  	<div class="submit_link"><%= f.submit "#{create_or_update_string} Menu", :class => "alt_btn" %></div>
+	  	<div class="submit_link"><%= f.submit "#{create_or_update_string}", :class => "alt_btn" %></div>
 	  </footer>
 	<% end %>
 
