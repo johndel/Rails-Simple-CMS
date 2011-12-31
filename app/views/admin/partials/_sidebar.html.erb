@@ -5,7 +5,6 @@
 				<li class="<%= "current_action" if controller.controller_name == "pages" && controller.action_name == "index"  %>"><%= link_to "All Pages", admin_pages_path %></li>
 				<li class="<%= "current_action" if controller.controller_name == "pages" && controller.action_name == "new"  %>"><%= link_to "New Page", new_admin_page_path %></li>
 				<li class="<%= "current_action" if controller.controller_name == "menus" && controller.action_name == "edit" %>"><%= link_to "Sort Pages", edit_admin_menu_path(first_menu) %></li>
-				<li class="<%= "current_action" if controller.controller_name == "settings" && controller.action_name == "homepage" %>"><%= link_to "Change Homepage", admin_settings_path %></li>
 			</ul>
 	
 			<br />

@@ -3,7 +3,7 @@ class Admin::PagesController < ApplicationController
   before_filter :authenticate_user!
 
   def index
-    @pages = Page.all
+    @pages = Page.all #.joins(:page_menu_mappings).where("page_menu_mappings.menu_id =?", 8).reorder("page_position")
   end
 
   def new
@@ -15,6 +15,8 @@ class Admin::PagesController < ApplicationController
   end
 
   def show
+    @opages = Page.find(11,12,13)
+    @setting = Setting.where(:meta_key => "sidebar").first
     @pages = Page.position_order
     @page = Page.find(params[:id])
   end
@@ -40,6 +42,9 @@ class Admin::PagesController < ApplicationController
   def mercury_update
     page = Page.find(params[:id])
     page.content = params[:content][:page_content][:value]
+    setting = Setting.where(:meta_key => "sidebar").first
+    setting.meta_value = params[:content][:page_sidebar][:value]
+    setting.save!
     page.save!
     render text: ""
   end

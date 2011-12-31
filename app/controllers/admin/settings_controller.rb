@@ -3,7 +3,7 @@ class Admin::SettingsController < ApplicationController
   before_filter :authenticate_user!
   
   def homepage
-    @pages = Page.where(:active => true)
+    @pages = Page.position_order.where(:active => true)
     @homepage = Setting.where(:meta_key => :homepage).first
   end
   

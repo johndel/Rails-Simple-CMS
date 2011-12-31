@@ -61,7 +61,7 @@ ActiveRecord::Schema.define(:version => 20111229080546) do
 
   create_table "settings", :force => true do |t|
     t.string   "meta_key"
-    t.string   "meta_value"
+    t.text   "meta_value"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

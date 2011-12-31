@@ -5,6 +5,7 @@
 		<table id="datatable_pages" class="tablesorter" cellspacing="0">
 			<thead>
 				<tr>
+					<th>Page Position</th>
 					<th>Name</th>
 					<th>Permalink</th>
 					<th>Active</th>
@@ -18,6 +19,7 @@
 			<tbody>
 				<% @pages.each do |page| %>
 				<tr class="<%= cycle("odd", "even") %>">
+					<td><%= page.page_menu_mappings.first.page_position rescue "No value" %></td>
 					<td><%= page.name %></td>
 					<td><%= page.permalink %></td>
 					<td><%= page.active %></td>

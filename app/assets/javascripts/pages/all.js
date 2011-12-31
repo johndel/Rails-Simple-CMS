@@ -1,2 +1,2 @@
 //= require jquery_ujs
-//= custom
+//= require pages/custom

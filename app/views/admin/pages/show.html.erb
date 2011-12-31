@@ -1,3 +1,9 @@
 <div id="page_content" class="mercury-region" data-type="editable">
 	<%= raw @page.content %>
 </div>
+
+<% content_for(:sidebar) do %>
+<div id="page_sidebar" class="mercury-region" data-type="editable">
+	 <%=raw @setting.meta_value %>
+</div>
+<% end %>
