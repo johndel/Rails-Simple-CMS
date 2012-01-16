@@ -1,3 +1,7 @@
+/*
+ *= require_self
+*/
+
 .inputContainer {
 	position: relative;
 	float: left;

@@ -8,7 +8,7 @@ class Admin::MenusController < ApplicationController
 
   def new
     @menu = Menu.new
-    @pages = Page.all
+    @pages = []
     @other_pages = Page.all
   end
 

@@ -1,29 +1,11 @@
 <ul>
 	<% @pages.each do |page| %>
-		<% if page.id == 2 %>
-		<li class="nav-item" id="academy">
-			<%= link_to page.name, "#", :title => page.name, :id => page.name %>
-			<ul id="submenu" style="display: none">
-				<% @opages.each do |opage| %>
-						<li class="submenu-item"><%= link_to opage.name, "/#{opage.permalink}/", :title => opage.name, :id => opage.name %></li>
-				<% end %>
-			</ul>
-		<% else %>
 		<li class="nav-item">
-			<%= link_to page.name, "/#{page.permalink}/", :title => page.name, :id => page.name %>
+			<% if page == @homepage %>
+				<%= link_to page.name, "/", :title => page.name, :id => page.name %>
+			<% else %>
+				<%= link_to page.name, "/#{page.permalink}/", :title => page.name, :id => page.name %>
+			<% end %>
 		<% end %>
 	</li>
-	<% end %>
-	<li id="facebook" class="nav-item" title="Facebook">
-		<a href="http://www.facebook.com/groups/247001865402/" target="_blank"></a>
-	</li>
 </ul>
-<!--
-Σχολή
-<ul id="submenu" style="display: none;">
-<li class="submenu-item" id="chap-koon-do"><div class="submenu-sep"></div><a href="http://www.asermis.gr/chapkoon-do">Chap Koon Do</a>
-<li class="submenu-item" id="wushu"><div class="submenu-sep"></div><a href="#">Wushu</a>
-<li class="submenu-item" id="kick-boxing"><div class="submenu-sep"></div><a href="#">Kick Boxing</a>
-<li class="submenu-item" id="tai-chi-chuan"><a href="#">Tai Chi Chuan</a>
-</ul>
--->

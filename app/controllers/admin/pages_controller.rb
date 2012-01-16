@@ -15,8 +15,6 @@ class Admin::PagesController < ApplicationController
   end
 
   def show
-    @opages = Page.find(11,12,13)
-    @setting = Setting.where(:meta_key => "sidebar").first
     @pages = Page.position_order
     @page = Page.find(params[:id])
   end

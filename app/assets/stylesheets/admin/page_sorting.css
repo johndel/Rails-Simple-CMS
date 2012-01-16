@@ -3,7 +3,7 @@ clear: both;
 position: relative;
 top: 10px;
 overflow: auto;
-margin 5px 0;
+margin: 5px 0;
 }
 
 #main #page_sorting h3 {

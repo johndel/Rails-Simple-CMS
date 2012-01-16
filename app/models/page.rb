@@ -1,6 +1,6 @@
 class Page < ActiveRecord::Base
   default_scope :order => "name ASC"
-  scope :position_order, lambda { |num = 8| joins(:page_menu_mappings).where("page_menu_mappings.menu_id =?", num).reorder("page_position").where(:active => true) }
+  scope :position_order, lambda { |num = 1| joins(:page_menu_mappings).where("page_menu_mappings.menu_id =?", num).reorder("page_position").where(:active => true) }
   
   include ActionView::Helpers::TextHelper # for using 'truncate' method on prettify_permalink  
   before_validation :prettify_permalink
