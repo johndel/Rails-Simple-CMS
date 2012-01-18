@@ -13,15 +13,15 @@
 
 	  	<%= f.label :name, "Name - <em>required</em>".html_safe %>
 	  	<%= f.text_field :name, :class =>"validate[required]" %>
-	  	<%= f.label :title %>
+	  	<%= f.label :title, "Title <span id='title-count' class='char_count'></span>".html_safe %>
 	  	<%= f.text_field :title %>
-	  	<%= f.label :meta_description %>
+	  	<%= f.label :meta_description, "Meta Description <span id='meta-desc-count' class='char_count'></span>".html_safe %>
 	  	<%= f.text_area :meta_description, :style => "height: 100px" %>
-	  	<%= f.label :content %>
+	  	<%= f.label :content, "Content <span id='content-count' class='char_count'></span>".html_safe %>
 	  	<%= f.text_area :content %>
 	  	<%= f.label :permalink, "Clean Url - <em>required</em>".html_safe %>
 	  	<%= f.text_field :permalink, :class =>"validate[required]" %>	  	
-	  	
+  	
 	  	<div class="checkbox_pair">
 	  		<div class="checkbox_label"><%= f.label :active %></div>
 	  		<div class="checkbox"><%= f.check_box :active, :checked => true %></div>
@@ -29,3 +29,23 @@
 		
 	<div style="clear: both"></div>
 	<% end %>
+	
+<script>
+	$(function() {
+		checkTitleLength();
+		checkMetadescLength();
+		checkContentLength();
+		
+		$('#page_title').live('keyup click blur focus change paste', function() {
+			checkTitleLength();
+		});
+		
+		$('#page_meta_description').live('keyup click blur focus change paste', function() {
+			checkMetadescLength();
+		});
+
+		$('#page_content').live('keyup click blur focus change paste', function() {
+			checkContentLength();
+		});
+	});
+</script>
