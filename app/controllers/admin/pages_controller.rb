@@ -9,16 +9,7 @@ class Admin::PagesController < ApplicationController
   def new
     @page = Page.new
   end
-
-  def edit
-    @page = Page.find(params[:id])
-  end
-
-  def show
-    @pages = Page.position_order
-    @page = Page.find(params[:id])
-  end
-
+  
   def create
     @page = Page.new(params[:page])
     if @page.save
@@ -27,22 +18,36 @@ class Admin::PagesController < ApplicationController
       render action: "new" 
     end
   end
+
+  def edit
+    @page = Page.find(params[:id])
+  end
+    
+  def ajax_edit
+    @page = Page.find(params[:id])
+  end
   
   def update
     @page = Page.find(params[:id])
-    if @page.update_attributes(params[:page])
-      redirect_to admin_pages_url, notice: 'Page was successfully updated.'
-    else
-      render action: "edit"
+    respond_to do |format|  
+      if @page.update_attributes(params[:page])
+        format.html { redirect_to admin_pages_url, notice: 'Page was successfully updated.' }
+        format.js   { render "success_update" }
+      else
+        format.html { render action: "edit" }
+        format.js   { render "failed_update" }
+      end
     end
   end
-  
+
+  def show
+    @pages = Page.position_order
+    @page = Page.find(params[:id])
+  end
+ 
   def mercury_update
     page = Page.find(params[:id])
     page.content = params[:content][:page_content][:value]
-    setting = Setting.where(:meta_key => "sidebar").first
-    setting.meta_value = params[:content][:page_sidebar][:value]
-    setting.save!
     page.save!
     render text: ""
   end
@@ -63,12 +68,11 @@ class Admin::PagesController < ApplicationController
       case action_name
       when "show"
         "pages"
-      #when "edit"
-      #  "popup"
+      when "ajax_edit"
+        "popup"
       else 
         "admin"
       end
-      #action_name == "show" ? "pages" : "admin"
     end
   
 end

@@ -310,8 +310,6 @@ p#copyleft {
 }
 
 /* Main Content */
-
-
 section#main {
 background: #F0F0F0 url("<%= asset_path('admin/main_bg.jpg') %>") repeat-y left top;
 float: left;
@@ -973,6 +971,55 @@ padding: 10px 0;
 text-indent: 40px;
 font-size: 14px;}
 
+.alert_success .page_name {
+	color: #000;
+}
+
+.popup #main h4.alert_success, .popup #main h4.alert_error {
+	font-size: 12px;
+	margin: 20px 0px 0px -10px;
+}
+
+.popup #main h4.alert_error {
+	padding-bottom: 0;
+}
+
+
+.flash-close-icon-success, .flash-close-icon-fail {
+	cursor: pointer;
+	display: block;
+	height: 16px;
+	width: 16px;
+	float: right;
+	position: relative;
+	top: -5px;
+	right: 5px;
+}
+
+.popup #main .alert_error li {
+	text-indent: 0;
+}
+
+.popup #main .flash-close-icon-success, .popup #main .flash-close-icon-fail {
+	cursor: pointer;
+	display: block;
+	height: 16px;
+	width: 16px;
+	float: right;
+	position: relative;
+	top: -1px;
+	right: 3px;
+}
+
+
+.flash-close-icon-success {
+	background: url("<%= asset_path('admin/flash-close-icon-success.png') %>") no-repeat;
+
+}
+
+.flash-close-icon-fail {
+	background: url("<%= asset_path('admin/flash-close-icon-fail.png') %>") no-repeat;
+}
 
 /* FIXES */
 #sidebar h3 {
@@ -990,15 +1037,25 @@ text-align: center;
 }
 
 /* Settings */
+
+#main .settings input {
+	position: relative;
+	top: 3px;
+	left: 14px;
+}
+
 #main .settings input, #main .settings label {
-float: left;
-margin: 0;
-line-height: 14px;
+	float: left;
+	margin: 0;
+	line-height: 10px;
 }
 
 #main .settings label {
-text-transform: none;
-font-size: 14px;
-padding-bottom: 3px;
-border-bottom: 1px solid #ccc;
+	text-indent: 10px;
+	text-transform: none;
+	font-size: 14px;
+	height: 18px;
+	line-height: 20px;
+	padding-bottom: 3px;
+	border-bottom: 1px solid #ccc;
 }

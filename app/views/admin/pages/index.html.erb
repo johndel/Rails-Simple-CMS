@@ -1,13 +1,14 @@
 <article class="module width_full">
 	<header><h3>All Pages</h3></header>
-	
+
+
 	<div class="tab_container">
 		<table id="datatable_pages" class="tablesorter" cellspacing="0">
 			<thead>
 				<tr>
 					<th>Page Position</th>
 					<th>Name</th>
-					<th>Permalink</th>
+					<th>Clean Url</th>
 					<th>Active</th>
 					<th>Created</th>
 					<th>Updated</th>
@@ -18,15 +19,15 @@
 			</thead>
 			<tbody>
 				<% @pages.each do |page| %>
-				<tr class="<%= cycle("odd", "even") %>">
-					<td><%= page.page_menu_mappings.first.page_position rescue "No value" %></td>
-					<td><%= page.name %></td>
-					<td><%= page.permalink %></td>
-					<td><%= page.active %></td>
-					<td><%= page.created_at %></td>
-					<td><%= page.updated_at %></td>
+				<tr class="<%= cycle("odd", "even") %>" id="<%= dom_id(page) %>">
+					<td id="<%= dom_id(page, "sort") %>"><%= page.page_menu_mappings.first.page_position rescue "No value" %></td>
+					<td id="<%= dom_id(page, "name") %>"><%= page.name %></td>
+					<td id="<%= dom_id(page, "permalink") %>"><%= page.permalink %></td>
+					<td id="<%= dom_id(page, "active") %>"><%= page.active %></td>
+					<td id="<%= dom_id(page, "created_at") %>"><%= page.created_at %></td>
+					<td id="<%= dom_id(page, "updated_at") %>"><%= page.updated_at %></td>
 					<td><%= link_to 'Edit Content', "/editor" + admin_page_path(page), :class => "edit_content_link" %></td>
-					<td><%= link_to 'Edit', edit_admin_page_path(page), :class => "edit_link edit_ajax_link" %></td>
+					<td><%= link_to 'Edit', edit_admin_page_path(page), :class => "edit_link edit_ajax_link", :data => { :url => ajax_edit_admin_page_path(page) } %></td>
 					<td><%= link_to 'Destroy', [:admin, page], confirm: 'Are you sure?', method: :delete, :class => "delete_link" %></td>
 				</tr>
 				<% end %>

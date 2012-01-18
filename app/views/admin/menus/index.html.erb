@@ -18,7 +18,7 @@
 					<td><%= menu.name %></td>
 					<td><%= menu.created_at %></td>
 					<td><%= menu.updated_at %></td>
-					<td><%= link_to 'Edit', edit_admin_menu_path(menu), :class => "edit_link edit_ajax_link" %></td>
+					<td><%= link_to 'Edit', edit_admin_menu_path(menu), :class => "edit_link" %></td>
 					<td><%= link_to 'Destroy', [:admin, menu], confirm: 'Are you sure?', method: :delete, :class => "delete_link" %></td>
 				</tr>
 				<% end %>

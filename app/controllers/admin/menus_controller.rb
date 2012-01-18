@@ -1,5 +1,5 @@
 class Admin::MenusController < ApplicationController
-  layout "admin"
+  layout "admin" #:admin_menu_layout
   before_filter :authenticate_user!
 
   def index
@@ -64,11 +64,11 @@ class Admin::MenusController < ApplicationController
     render :text => "" #params.inspect #params['page'].index(page.id.to_s) + 1
   end
 
-  # private
+  private
     # def admin_menu_layout
       # case action_name
-      # #when "edit"
-      # #  "popup"
+      # when "edit"
+        # "popup"
       # else 
         # "admin"
       # end

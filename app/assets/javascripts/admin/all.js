@@ -1,5 +1,6 @@
 //= require jquery-ui
 //= require jquery_ujs
+//= require admin/popup
 //= require jquery.equalHeight
 //= require jquery.dataTables.min
 //= require admin/editForm

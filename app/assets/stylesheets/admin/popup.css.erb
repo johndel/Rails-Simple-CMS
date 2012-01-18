@@ -1,15 +1,136 @@
-/*
- *= require reset
- *= require admin/core
-*/
-body {
-	background: none;
+.ui-widget-content #main{
+background: none;
+margin: 0;
+padding: 0;
 }
 
-#container #main {
-	background: none;
+.ui-widget-content textarea {
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+border-radius: 5px;
+border: 1px solid #BBBBBB;
+color: #666666;
+-webkit-box-shadow: inset 0 2px 2px #ccc, 0 1px 0 #fff;
+-moz-box-shadow: inset 0 2px 2px #ccc, 0 1px 0 #fff;
+box-shadow: inset 0 2px 2px #ccc, 0 1px 0 #fff;
+padding: 5px 10px 0 10px;
+background-position: 10px 6px;
+margin: 0;
+display: block;
+float: left;
+width: 320px;
+margin: 0 10px;
 }
 
-.popup article {
-	margin: 15px 0 0 20px;
+.ui-widget-content textarea:focus {
+outline: none;
+border: 1px solid #005DA2;
+-webkit-box-shadow: inset 0 2px 2px #ccc, 0 0 10px #ADDCE6;
+-moz-box-shadow: inset 0 2px 2px #ccc, 0 0 10px #ADDCE6;
+box-shadow: inset 0 2px 2px #ccc, 0 0 10px #ADDCE6;
 }
+
+.ui-widget-content .checkbox_pair {
+overflow: auto;
+clear: both;
+}
+
+.ui-widget-content .checkbox_label {
+float: left;
+height: 40px;
+width: 60px;
+margin-right: 10px;
+}
+
+.ui-widget-content .checkbox_label label {
+width: 48px;
+}
+
+.ui-widget-content .checkbox {
+float: left;
+height: 40px;
+width: 14px;
+}
+
+.ui-widget-content #page_active {
+margin: 18px 0 0 0;
+}
+
+.ui-widget-content label {
+margin: 10px 0 5px 10px;
+padding: 0;
+line-height: 35px;
+}
+
+.ui-widget-content input {
+width: 330px;
+}
+
+.ui-widget-content #main .checkbox_pair {
+
+position: relative;
+top: 2px;
+height: 30px !important;
+line-height: 0px !important;
+overflow: hidden !important;
+}
+
+.ui-widget-content #main .checkbox_pair label{
+position: relative;
+top: -10px;
+height: 28px;
+line-height: 25px;
+}
+
+.ui-widget-content #main .checkbox_pair .checkbox{
+position: relative;
+top: -10px;
+height: 38px;
+line-height: 25px;
+}
+
+.ui-widget-content label em {
+color: red;
+font-size: 6px;
+text-transform: capitalize;
+}
+
+fieldset select {
+width: 96%;
+margin: 0 10px;
+border: 1px solid #bbb;
+height: 20px;
+color: #666666;
+}
+
+
+
+fieldset textarea {
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+border-radius: 5px;
+border: 1px solid #BBBBBB;
+color: #666666;
+-webkit-box-shadow: inset 0 2px 2px #ccc, 0 1px 0 #fff;
+-moz-box-shadow: inset 0 2px 2px #ccc, 0 1px 0 #fff;
+box-shadow: inset 0 2px 2px #ccc, 0 1px 0 #fff;
+padding-left: 10px;
+background-position: 10px 6px;
+margin: 0 0.5%;
+display: block;
+float: left;
+width: 96%;
+margin: 0 10px;
+}
+
+fieldset textarea:focus {
+outline: none;
+border: 1px solid #005DA2;
+-webkit-box-shadow: inset 0 2px 2px #ccc, 0 0 10px #ADDCE6;
+-moz-box-shadow: inset 0 2px 2px #ccc, 0 0 10px #ADDCE6;
+box-shadow: inset 0 2px 2px #ccc, 0 0 10px #ADDCE6;
+}
+
+.ui-dialog .ui-state-error { background: url("http://jqueryui.com/themeroller/images/?new=b81900&w=40&h=40&f=png&q=100&fltr[]=over|textures/08_diagonals_thick.png|0|0|18") repeat }
+.validateTips { border: 1px solid transparent; padding: 0.3em; }
+

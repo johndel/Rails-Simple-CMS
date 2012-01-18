@@ -1,0 +1,52 @@
+// require_self 
+
+$(function() {
+	
+	$(".close-me").live("click", function() {
+		$(this).parent().fadeOut();
+	});
+	
+	$(".edit_ajax_link").click(function(e) {
+		var url = $(this).data("url"); //this.href;
+	    if ($("#dialog").length == 0) {
+	   		var dialog = $('<div id="dialog" style="display:none" title="Edit Page"></div>').appendTo('body');
+	    }         
+        
+        dialog.load(
+                url, 
+                function (responseText, textStatus, XMLHttpRequest) {
+                    dialog.dialog({
+						width: 390,
+						modal: true,
+                       	buttons: {
+                       		"Update Page": function() {
+                       			var bValid = true;
+								bValid = bValid && checkLength( $("#page_name"), "Page Name" );
+								bValid = bValid && checkLength( $("#page_permalink"), "Clean Url" );
+								
+								if ( bValid ) {
+									$(".update_ajax_page").submit();
+								}
+                       		}
+                       	},
+                     	close: function(event, ui) {
+							dialog.remove();
+                     	} 	 
+                    });
+                }
+            );
+		e.preventDefault();
+	});	
+});	
+
+function checkLength( o, n ) {
+	if ( o.val().length == 0 ) {
+		o.addClass( "ui-state-error" );
+		return false;
+	} else {
+		o.removeClass( "ui-state-error" );
+		return true;
+	}
+}
+	
+

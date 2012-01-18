@@ -16,19 +16,20 @@ Gscms::Application.routes.draw do
   end
   
   namespace :admin do
-    resources :users,         :except => [:show]
-    resources :menus,         :except => [:show] do
-       collection do 
-          post :page_sort
-       end
+    resources :users,   :except => [:show]
+    resources :menus,   :except => [:show] do
+       post :page_sort, :on => :collection
     end
     
     get "settings/homepage"       => "settings#homepage",      :as => :settings
     post "settings/homepage-save" => "settings#homepage_save", :as => :homepage_save
      
-    resources :pages do
-       get "sitemap",         :on => :collection, :as => :sitemap
-       member { post :mercury_update }
+    resources :pages do 
+       get "sitemap",   :on => :collection, :as => :sitemap
+       member do 
+         get :ajax_edit
+         post :mercury_update
+       end
        #post "show", :on => :member
     end
   end
