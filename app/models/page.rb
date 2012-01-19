@@ -1,6 +1,8 @@
 class Page < ActiveRecord::Base
   default_scope :order => "name ASC"
   scope :position_order, lambda { |num = 1| joins(:page_menu_mappings).where("page_menu_mappings.menu_id =?", num).reorder("page_position").where(:active => true) }
+  after_save { Page.cache_expiration }
+  after_destroy { Page.cache_expiration }
   
   include ActionView::Helpers::TextHelper # for using 'truncate' method on prettify_permalink  
   before_validation :prettify_permalink
@@ -30,4 +32,11 @@ class Page < ActiveRecord::Base
   def self.sitemap
     pending "Must create some controllers etc and then"
   end
+  
+   def self.cache_expiration
+    immune_deletion_cache = ["404.html", "422.html", "500.html"]
+    Dir["#{Rails.root}/public/*.html"].entries.each do |f| 
+      File.delete(f)  unless immune_deletion_cache.include?(f.gsub("/ror/gscms/public/", "")) 
+    end
+ end
 end

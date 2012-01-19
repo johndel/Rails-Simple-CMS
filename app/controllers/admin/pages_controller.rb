@@ -60,9 +60,27 @@ class Admin::PagesController < ApplicationController
   
   
   def sitemap
+    @pages = Page.where("active")
+    File.delete("#{Rails.root}/public/sitemap.xml") if File.exists?("#{Rails.root}/public/sitemap.xml")
     
+    sitemap = File.new("#{Rails.root}/public/sitemap.xml", "w")
+    sitemap.puts('<?xml version="1.0" encoding="utf-8"?>')
+    sitemap.puts('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">')
+    @pages.each do |page|
+      sitemap.puts('<url>')
+      sitemap.puts("<loc>http://#{request.host_with_port}/#{page.permalink}/</loc>")
+      sitemap.puts("<lastmod>#{page.updated_at.strftime("%Y-%m-%d")}</lastmod>")
+      sitemap.puts('</url>')
+    end
+    sitemap.puts('</urlset>')    
+    redirect_to admin_pages_url, notice: 'Sitemap was successfully created.'
   end
     
+  def clear_cache
+    Page.cache_expiration
+    redirect_to admin_pages_url, notice: 'Cache was successfully sweeped.'
+  end
+  
   private
     def admin_page_layout
       case action_name

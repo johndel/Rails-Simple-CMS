@@ -59,6 +59,8 @@ class Admin::MenusController < ApplicationController
       params[:page].each_with_index do |id, index|
         @pm_mapping.update_all({page_position: index + 1}, {page_id: id}) # Finally sorting
       end
+          
+      Page.cache_expiration
     end
 
     render :text => "" #params.inspect #params['page'].index(page.id.to_s) + 1

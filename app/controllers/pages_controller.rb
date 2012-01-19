@@ -1,4 +1,5 @@
 class PagesController < ApplicationController
+  caches_page :index, :show
   layout "pages"
 
   def index

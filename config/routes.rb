@@ -25,7 +25,8 @@ Gscms::Application.routes.draw do
     post "settings/homepage-save" => "settings#homepage_save", :as => :homepage_save
      
     resources :pages do 
-       get "sitemap",   :on => :collection, :as => :sitemap
+       get "sitemap",     :on => :collection, :as => :sitemap
+       get "clear_cache", :on => :collection, :as => :clear_cache
        member do 
          get :ajax_edit
          post :mercury_update
@@ -34,7 +35,7 @@ Gscms::Application.routes.draw do
     end
   end
 
-  get ":permalink" => "pages#show"
+  get ":permalink" => "pages#show", :as => :permalink
   root :to => "pages#index"
   
    # Note: This route will make all actions in every controller accessible via GET requests.
