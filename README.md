@@ -3,7 +3,7 @@
 GreekSolution Simple CMS in Rails.
 
 ### Demo
-You can login and check the [CMs](http://gscms.greeksolution.com)<br />
+You can login and check the [CMS](http://gscms.greeksolution.com)<br />
 Email: example@example.com <br />
 Password: testme
 
