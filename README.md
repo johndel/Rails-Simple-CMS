@@ -63,7 +63,7 @@ As you probably have guested, you can have different views between index page an
 For adding / editing images, javascripts and css, go to **app/assets/** and add them under the folder pages.
 
 ### Edit to fit your needs / Developer's guide
-The database has a general purpose table ( [EAV](http://en.wikipedia.org/wiki/Entity%E2%80%93attribute%E2%80%93value_model) ) with the name **settings**. I've created some projects which has a sidebar included and I've added it here. You can store anything you feel good in here and fit in your project.
+The database has a general purpose table ( [EAV](http://en.wikipedia.org/wiki/Entity%E2%80%93attribute%E2%80%93value_model) ) with the name **settings**. I've created some projects which have a sidebar included and I've added it here. You can store anything you feel good in here and fits in your project.
 
 **Menus** and **pages** is a typical many-to-many database relationship with the association table named **page_menu_mappings**. It also has a typical CRUD users table and a mercury_image for storing images for mercury editor. That's it! For now...
 
@@ -82,12 +82,12 @@ Pages should have at least a name and a clean url to be saved. Menus should have
 
 ### Future ideas (sorted with what I think best / most important to add)
 1. Photo Gallery / Video Gallery
-2. MarkitUp editor for some more experienced user
+2. MarkitUp editor for some more experienced users
 3. Create custom layout / modules with a nice drag and drop interface and transfer content in every area of the project you like
 4. ... Your ideas here!!! Send me an [email](mailto:istoselidas@gmail.com) :)
 
 ### Tests
-I've used the awesome setup of Ryan Bates ([How I test](http://railscasts.com/episodes/275-how-i-test)). Just type `guard` and hit enter to run the tests. Some test maybe failing but I'll fix them in the future.
+I've used the awesome setup of Ryan Bates ([How I test](http://railscasts.com/episodes/275-how-i-test)). Just type `guard` and hit enter to run the tests. Some tests maybe failing but I'll fix them in the future.
 If you are on a OSX you may need to customize it a bit to run the tests, just watch Ryan. 
 
 _Feel free to use it as you like. I'd love to hear your comments about. Thank you!_
