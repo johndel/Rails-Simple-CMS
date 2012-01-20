@@ -55,7 +55,7 @@ class Admin::PagesController < ApplicationController
   def destroy
     @page = Page.find(params[:id])
     @page.destroy
-    redirect_to admin_pages_url
+    redirect_to admin_pages_url, notice: "Page was successfully deleted."
   end
   
   

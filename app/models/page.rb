@@ -36,7 +36,7 @@ class Page < ActiveRecord::Base
    def self.cache_expiration
     immune_deletion_cache = ["404.html", "422.html", "500.html"]
     Dir["#{Rails.root}/public/*.html"].entries.each do |f| 
-      File.delete(f)  unless immune_deletion_cache.include?(f.gsub("/ror/gscms/public/", "")) 
+      File.delete(f) unless immune_deletion_cache.include?(f.gsub("#{Rails.root}/public/", "")) 
     end
  end
 end

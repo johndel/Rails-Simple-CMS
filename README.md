@@ -2,6 +2,11 @@
 
 GreekSolution Simple CMS in Rails.
 
+### Demo
+You can login and check the [CMs](http://gscms.greeksolution.com)<br />
+Email: example@example.com <br />
+Password: testme
+
 ### System Requirements
 Rails version: 3.1.3 <br/>
 Ruby version: 1.9.3
@@ -35,6 +40,9 @@ use any other shiny GUI MySQL interface - database interface to import it. Crede
 Email:    example@example.com<br />
 Password: testme
 
+### Production
+For production, be sure to write `rake assets:precompile` first or if you are deploying with capistrano, let `load "deploy/assets"` in the config/deploy.rb . 
+
 # Some basic info about using it 
 *(Pretty boring, just mess around with the project! Only for geeks who read the manual first...)* 
 ### Pages
@@ -61,6 +69,9 @@ For creating your layout, just hack around the **app/views/layouts/pages.html.er
 As you probably have guested, you can have different views between index page and all the other pages.
 
 For adding / editing images, javascripts and css, go to **app/assets/** and add them under the folder pages.
+
+### Cache 
+You can clear cache any time by visiting page **http://yourdomain.com/admin/pages/clear_cache** (you need to be logged in as administrator).
 
 ### Edit to fit your needs / Developer's guide
 The database has a general purpose table ( [EAV](http://en.wikipedia.org/wiki/Entity%E2%80%93attribute%E2%80%93value_model) ) with the name **settings**. I've created some projects which have a sidebar included and I've added it here. You can store anything you feel good in here and fits in your project.
