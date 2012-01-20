@@ -11,6 +11,7 @@ class Admin::SettingsController < ApplicationController
     @homepage = Setting.where(:meta_key => :homepage).first
     @homepage.meta_value = params[:setting_homepage]
     @homepage.save 
+    Page.cache_expiration
     #render :text => params.inspect
     redirect_to admin_pages_path, :notice => "Homepage has successfully saved."
   end
