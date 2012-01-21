@@ -4,8 +4,8 @@
 	<%= javascript_include_tag "admin/sortMenu" %>
 <% end %>
 
-	<div class="module_content">
 	<%= form_for([:admin, @menu], :html => { :class => "form_validations" }) do |f| %>
+	<div class="module_content">
 	  <% if @menu.errors.any? %>
 	    <div id="error_explanation">
 	      <h2><%= pluralize(@menu.errors.count, "error") %> prohibited this menu from being saved:</h2>

@@ -3,9 +3,8 @@
 	  		<header>
 	  			<h3 class="left_h3">Choose your homepage</h3>
 	  		</header> 		
-		<div class="module_content settings">
 			<%= form_tag(admin_homepage_save_path) do %>
-				<br />
+			<div class="module_content settings">
 				<% @pages.each do |page| %>
 					<% if @homepage.meta_value == page.id.to_s %> 
 						<%= radio_button_tag "setting_homepage", "#{page.id}", true %> <%= label_tag "setting_homepage_#{page.id}", "#{page.name}" %><br /><br />

@@ -1,6 +1,6 @@
 <%= render "admin/partials/form_validations" %>
-	<div class="module_content">
 	<%= form_for([:admin, @page], :html => { :class => "form_validations" }) do |f| %>
+	<div class="module_content">
 	  <% if @page.errors.any? %>
 	    <div id="error_explanation">
 	      <h2><%= pluralize(@page.errors.count, "error") %> prohibited this page from being saved:</h2>
@@ -29,8 +29,6 @@
 		</div>
 		
 	</div>	  
-	<div style="clear: both"></div>
-  	<br />
 	  <footer>
 	  	<div class="submit_link">
 	    	<%= f.submit "#{create_or_update_string} Page", :class => "alt_btn" %>
