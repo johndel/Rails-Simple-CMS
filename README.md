@@ -22,7 +22,7 @@ I also tried to keep it as simple as possible and I'll add more functionality in
 Follow the steps below to install and use it:
 
 1. `git clone git@github.com:johndel/Rails-Simple-CMS.git`
-2. Run `rake exec bundle install` to install the necessary gems
+2. Run `bundle install` to install the necessary gems
 3. Create a database.yml or change the config/database.yml.example to config/database.yml file and fill in the credentials (beware of the socket! It depends on OS, I am using ubuntu so this is what it fits for me)
 4. Open the db/seeds.rb file and change the User.create to fit your needs (set an email and password for login to the administration panel)
 5. Type `rake db:create:all` to create your databases
