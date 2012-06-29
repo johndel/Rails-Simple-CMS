@@ -1,1 +1,0 @@
-Mercury::Engine.routes if defined?(Mercury)

@@ -1,8 +1,8 @@
 Gscms::Application.routes.draw do
   
-  match '/editor(/*requested_uri)' => "auth_mercury#edit", :as => :mercury_editor
-  Mercury::Engine.routes
-  devise_for :users, :skip => [:sessions, :passwords] do
+  devise_for :users, :skip => [:sessions, :passwords]
+  
+  as :user do
     # sessions routes
     get         "/admin/login"    => "devise/sessions#new",             :as => :new_user_session
     post        "/admin/login"    => "devise/sessions#create",          :as => :user_session
@@ -27,9 +27,8 @@ Gscms::Application.routes.draw do
     resources :pages do 
        get "sitemap",     :on => :collection, :as => :sitemap
        get "clear_cache", :on => :collection, :as => :clear_cache
-       member do 
+       member do
          get :ajax_edit
-         post :mercury_update
        end
        #post "show", :on => :member
     end

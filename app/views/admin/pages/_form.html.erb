@@ -12,16 +12,16 @@
 	    </div>
 	  <% end %>
 
-	  	<%= f.label :name %>
-	  	<%= f.text_field :name, :class =>"validate[required]" %>
-	  	<%= f.label :title %>
-	  	<%= f.text_field :title %>
-	  	<%= f.label :meta_description %>
-	  	<%= f.text_area :meta_description, :style => "height: 100px" %>
-	  	<%= f.label :content %>
-	  	<%= f.text_area :content %>
-	  	<%= f.label :permalink %>
-	  	<%= f.text_field :permalink, :class =>"validate[required]" %>	  	
+	  	<div class="input_field"><%= f.label :name, "Name - <em>required</em>".html_safe %>
+	  	<%= f.text_field :name, :class =>"validate[required]" %></div>
+	  	<div class="input_field"><%= f.label :title, "Title <span id='title-count' class='char_count'></span>".html_safe %>
+	  	<%= f.text_field :title %></div>
+	  	<div class="input_field"><%= f.label :meta_description, "Meta Description <span id='meta-desc-count' class='char_count'></span>".html_safe %>
+	  	<%= f.text_area :meta_description, :style => "height: 100px" %></div>
+	  	<div class="input_field"><%= f.label :content, "Content <span id='content-count' class='char_count'></span>".html_safe %>
+	  	<%= f.text_area :content %></div>
+	  	<div class="input_field"><%= f.label :permalink, "Clean Url - <em>required</em>".html_safe %>
+	  	<%= f.text_field :permalink, :class =>"validate[required]" %>	</div>  	
 	  	
 	  	<div class="checkbox_pair">
 	  		<div class="checkbox_label"><%= f.label :active %></div>
@@ -35,3 +35,25 @@
 	  	</div>
 	   </footer>
 	<% end %>
+	
+<% content_for :custom_styling do %>	
+	<script>
+		$(function() {
+			checkTitleLength();
+			checkMetadescLength();
+			checkContentLength();
+			
+			$('#page_title').live('keyup click blur focus change paste', function() {
+				checkTitleLength();
+			});
+			
+			$('#page_meta_description').live('keyup click blur focus change paste', function() {
+				checkMetadescLength();
+			});
+	
+			$('#page_content').live('keyup click blur focus change paste', function() {
+				checkContentLength();
+			});
+		});
+	</script>
+<% end %>

@@ -8,7 +8,7 @@ Email: example@example.com <br />
 Password: testme
 
 ### System Requirements
-Rails version: 3.2 <br/>
+Rails version: 3.2.6<br/>
 Ruby version: 1.9.3
 
 ### Description
@@ -46,9 +46,7 @@ For production, be sure to write `rake assets:precompile` first or if you are de
 # Some basic info about using it 
 *(Pretty boring, just mess around with the project! Only for geeks who read the manual first...)* 
 ### Pages
-I've used mercury editor (**AWESOME** editor for people who just want something shiny and fast and don't know HTML) for editing content. For adding images just drag and drop them. 
-
-You can also edit html with two ways, either from the edit preferences, using content or from mercury. 
+I've decided to remove mercury and add markitdown for editing content.  
 
 Also I've added a simple count for SEO awareness in the edit-preferences (for the content it doesn't count the white spaces / line breaks and html tags as words / characters).
 
