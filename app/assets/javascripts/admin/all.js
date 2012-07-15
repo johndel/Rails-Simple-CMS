@@ -7,7 +7,7 @@
 
 $(document).ready(function() { 
 	$("#datatable_pages").dataTable({
-		"aoColumns": [null,null,null,null,null,null,{ "bSortable": false },{ "bSortable": false },{ "bSortable": false }
+		"aoColumns": [null,null,null,null,null,null,{ "bSortable": false },{ "bSortable": false },{ "bSortable": false },{ "bSortable": false }
 	]}); 
 	
 	$("#datatable_menus").dataTable({

@@ -45,6 +45,13 @@ class Admin::PagesController < ApplicationController
     @page = Page.find(params[:id])
   end
   
+  def page_update
+    page = Page.find(params[:id])
+    page.content = params[:content][:page_content][:value]
+    page.save!
+    render text: ""
+  end
+  
   def destroy
     @page = Page.find(params[:id])
     @page.destroy
@@ -77,6 +84,8 @@ class Admin::PagesController < ApplicationController
   private
     def admin_page_layout
       case action_name
+      when "show"
+        "pages"
       when "ajax_edit"
         "popup"
       else 

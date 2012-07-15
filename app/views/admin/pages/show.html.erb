@@ -1,4 +1,9 @@
-<div id="page_content" data-type="editable">
+<%= stylesheet_link_tag "markitup/skins/markitup/style.css", "markitup/sets/markitdown/style.css" %>
+<%= raw @page.content %>
+<textarea class="markItUp">
 	<%= raw @page.content %>
-</div>
+</textarea>
 
+<% content_for :custom_styling do %>	
+	<%= javascript_include_tag "markitup/jquery.markitup", "markitup/sets/markitdown/set", "admin/markitup_custom.js" %>
+<% end %>

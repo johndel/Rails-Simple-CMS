@@ -1,2 +1,5 @@
 <%= raw @page.content %>
 
+<% content_for :custom_styling do %>	
+	<%= javascript_include_tag "markitup/jquery.markitup", "markitup/sets/default/set", "admin/markitup_custom.js" %>
+<% end %>

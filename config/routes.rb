@@ -28,7 +28,8 @@ Gscms::Application.routes.draw do
        get "sitemap",     :on => :collection, :as => :sitemap
        get "clear_cache", :on => :collection, :as => :clear_cache
        member do
-         get :ajax_edit
+         get  :ajax_edit
+         post :page_update
        end
        #post "show", :on => :member
     end
