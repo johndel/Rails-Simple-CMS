@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Upload:</b>
+  <%= @upload.file_file_name %>
+</p>
+
+
+<p>
+  <b>Upvote:</b>
+  <%= @upload.file_file_name %>
+</p>
+
+<p>
+  <b>Attachement:</b>
+<%= image_tag @upload.file.url %>
+</p>
+
+<%= link_to 'Edit', edit_admin_upload_path(@upload) %> |
+<%= link_to 'Back', admin_uploads_path %>

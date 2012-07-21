@@ -1,0 +1,69 @@
+<%= render "admin/partials/form_validations" %>
+	<%= form_for([:admin, @upload], :html => { :class => "form_validations" }) do |f| %>
+	<div class="module_content">
+	  <% if @upload.errors.any? %>
+	    <div id="error_explanation">
+	      <h2><%= pluralize(@upload.errors.count, "error") %> prohibited this page from being saved:</h2>
+	      <ul>
+	      <% @upload.errors.full_messages.each do |msg| %>
+	        <li><%= msg %></li>
+	      <% end %>
+	      </ul>
+	    </div>
+	  <% end %>
+
+
+		<div class="field"><%= f.label :url %><br />
+   		 <%= f.text_field :url %></div>
+  
+  		<div class="field"><%= f.label :file %><br />
+    	<%= f.file_field :file %></div>
+  
+ 		<div class="actions"><%= f.submit %></div>
+ 		
+ 		
+	<!--   	<div class="input_field"><%= f.label :name, "Name - <em>required</em>".html_safe %>
+	  	<%= f.text_field :name, :class =>"validate[required]" %></div>
+	  	<div class="input_field"><%= f.label :title, "Title <span id='title-count' class='char_count'></span>".html_safe %>
+	  	<%= f.text_field :title %></div>
+	  	<div class="input_field"><%= f.label :meta_description, "Meta Description - <span id='meta-desc-count' class='char_count'></span>".html_safe %>
+	  	<%= f.text_area :meta_description, :style => "height: 100px" %></div>
+	  	<div class="input_field"><%= f.label :content, "Content - <span id='content-count' class='char_count'></span>".html_safe %>
+	  	<%= f.text_area :content %></div>
+	  	<div class="input_field"><%= f.label :permalink, "Clean Url - <em>required</em>".html_safe %>
+	  	<%= f.text_field :permalink, :class =>"validate[required]" %>	</div>  	
+	  	
+	  	<div class="checkbox_pair checkbox_active">
+	  		<div class="checkbox_label"><%= f.label :active %></div>
+	  		<div class="checkbox"><%= f.check_box :active, :checked => true %></div>
+		</div>
+		
+	</div>	  
+	  <footer>
+	  	<div class="submit_link">
+	    	<%= f.submit "#{create_or_update_string} Page", :class => "alt_btn" %>
+	  	</div>
+	  </footer>	 -->						
+	<% end %>
+	
+<% content_for :custom_styling do %>	
+	<script>
+		$(function() {
+			checkTitleLength();
+			checkMetadescLength();
+			checkContentLength();
+			
+			$('#page_title').live('keyup click blur focus change paste', function() {
+				checkTitleLength();
+			});
+			
+			$('#page_meta_description').live('keyup click blur focus change paste', function() {
+				checkMetadescLength();
+			});
+	
+			$('#page_content').live('keyup click blur focus change paste', function() {
+				checkContentLength();
+			});
+		});
+	</script>
+<% end %>

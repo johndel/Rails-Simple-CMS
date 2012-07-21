@@ -17,6 +17,7 @@ Gscms::Application.routes.draw do
   
   namespace :admin do
     resources :users,   :except => [:show]
+    resources :uploads, :except => [:show]
     resources :menus,   :except => [:show] do
        post :page_sort, :on => :collection
     end
