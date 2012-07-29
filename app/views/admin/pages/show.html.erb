@@ -1,9 +1,20 @@
-<%= stylesheet_link_tag "markitup/skins/markitup/style.css", "markitup/sets/markitdown/style.css" %>
+<%= stylesheet_link_tag "markitup/skins/markitup/style.css", "markitup/sets/default/style.css", "markitup/sets/markitdown/style.css" %>
+
+<div class="content-preview">
 <%= raw @page.content %>
-<textarea class="markItUp">
-	<%= raw @page.content %>
+</div>
+
+<a href="#" id="buttonaki">Dokimi</a>
+
+<ul id="switcher">
+    <li class="html"><a href="#">Html</a></li>
+    <li class="markdown currentSet"><a href="#">MarkDown</a></li>
+</ul>
+
+<textarea id="multiSet">
+<%= raw @page.content %>
 </textarea>
 
 <% content_for :custom_styling do %>	
-	<%= javascript_include_tag "markitup/jquery.markitup", "markitup/sets/markitdown/set", "admin/markitup_custom.js" %>
+	<%= javascript_include_tag "markitup/jquery.markitup.js", "markitup/sets/default/set.js", "markitup/sets/markitdown/set.js", "admin/markitup_custom.js" %>
 <% end %>

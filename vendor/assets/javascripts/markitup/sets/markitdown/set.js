@@ -10,8 +10,7 @@
 // -------------------------------------------------------------------
 // Feel free to add more tags
 // -------------------------------------------------------------------
-mySettings = {
-	previewParserPath:	'',
+myMarkDownSettings = {
 	onShiftEnter:		{keepDefault:false, openWith:'\n\n'},
 	markupSet: [
 		{name:'First Level Heading', key:'1', placeHolder:'Your title here...', closeWith:function(markItUp) { return miu.markdownTitle(markItUp, '=') } },
@@ -26,6 +25,7 @@ mySettings = {
 		{separator:'---------------' },
 		{name:'Bulleted List', openWith:'- ' },
 		{name:'Numeric List', openWith:function(markItUp) {
+			console.log(markItUp.line);
 			return markItUp.line+'. ';
 		}},
 		{separator:'---------------' },
@@ -33,9 +33,9 @@ mySettings = {
 		{name:'Link', key:'L', openWith:'[', closeWith:']([![Url:!:http://]!] "[![Title]!]")', placeHolder:'Your text to link here...' },
 		{separator:'---------------'},	
 		{name:'Quotes', openWith:'> '},
-		{name:'Code Block / Code', openWith:'(!(\t|!|`)!)', closeWith:'(!(`)!)'}//,
-		//{separator:'---------------'},
-		//{name:'Preview', call:'preview', className:"preview"}
+		{name:'Code Block / Code', openWith:'(!(\t|!|`)!)', closeWith:'(!(`)!)'},
+		{separator:'---------------'},
+		{name:'Preview', call:'preview', className:"preview"}
 	]
 }
 
