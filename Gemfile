@@ -18,6 +18,7 @@ end
 
 gem 'jquery-rails'
 gem 'therubyracer'
+# gem 'redcarpet'
 
 group :test, :development do
   gem 'capistrano'

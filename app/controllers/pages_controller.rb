@@ -16,7 +16,6 @@ class PagesController < ApplicationController
     check_404(@page)
   end
   
-  
   private
   def default_menu_pages
     @pages = Page.position_order(Menu.find(:first, :conditions => {:name => "default"}).id)

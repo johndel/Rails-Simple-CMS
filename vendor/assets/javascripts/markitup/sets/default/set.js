@@ -1,19 +1,11 @@
-// ----------------------------------------------------------------------------
-// markItUp!
-// ----------------------------------------------------------------------------
-// Copyright (C) 2011 Jay Salvat
-// http://markitup.jaysalvat.com/
-// ----------------------------------------------------------------------------
-// Html tags
-// http://en.wikipedia.org/wiki/html
-// ----------------------------------------------------------------------------
-// Basic set. Feel free to add more tags
-// ----------------------------------------------------------------------------
-var myHtmlSettings = {
+myHtmlSettings = {
     nameSpace:       "html", // Useful to prevent multi-instances CSS conflict
     onShiftEnter:    {keepDefault:false, replaceWith:'<br />\n'},
     onCtrlEnter:     {keepDefault:false, openWith:'\n<p>', closeWith:'</p>\n'},
     onTab:           {keepDefault:false, openWith:'     '},
+    afterInsert:function() {
+		changePreview();
+	},
     markupSet:  [
         {name:'Heading 1', key:'1', openWith:'<h1(!( class="[![Class]!]")!)>', closeWith:'</h1>', placeHolder:'Your title here...' },
         {name:'Heading 2', key:'2', openWith:'<h2(!( class="[![Class]!]")!)>', closeWith:'</h2>', placeHolder:'Your title here...' },
@@ -34,9 +26,7 @@ var myHtmlSettings = {
         {name:'Picture', key:'P', replaceWith:'<img src="[![Source:!:http://]!]" alt="[![Alternative text]!]" />' },
         {name:'Link', key:'L', openWith:'<a href="[![Link:!:http://]!]"(!( title="[![Title]!]")!)>', closeWith:'</a>', placeHolder:'Your text to link...' },
         {separator:'---------------' },
-        {name:'Clean', replaceWith:function(h) { return h.selection.replace(/<(.*?)>/g, "") } },
-        {name:'Preview', call:'preview', className:'preview' }
+        {name:'Clean', replaceWith:function(h) { return h.selection.replace(/<(.*?)>/g, "") } }//,
+        // {name:'Preview', call:'preview', className:'preview' }
     ]
 }
-
-

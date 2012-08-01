@@ -24,11 +24,12 @@ Gscms::Application.routes.draw do
     get "settings/homepage"       => "settings#homepage",      :as => :settings
     post "settings/homepage-save" => "settings#homepage_save", :as => :homepage_save
      
-    resources :pages do 
-       get "sitemap",     :on => :collection, :as => :sitemap
-       get "clear_cache", :on => :collection, :as => :clear_cache
+    resources :pages do
+       get   "sitemap",       :on => :collection, :as => :sitemap
+       get   "clear_cache",   :on => :collection, :as => :clear_cache
        member do
-         get  :ajax_edit
+         put  :quick_update
+         get  :quick_edit
          post :page_update
        end
        #post "show", :on => :member

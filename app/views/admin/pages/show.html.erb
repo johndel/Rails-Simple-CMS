@@ -1,20 +1,31 @@
 <%= stylesheet_link_tag "markitup/skins/markitup/style.css", "markitup/sets/default/style.css", "markitup/sets/markitdown/style.css" %>
 
-<div class="content-preview">
-<%= raw @page.content %>
-</div>
+<div id="flash_message"></div>
+	
+	<%= form_for([:admin, @page], :remote => true, :html => { :class => "update_ajax_page form_validations" }) do |f| %>
+	  <% if @page.errors.any? %>
+	    <div id="error_explanation">
+	      <h2><%= pluralize(@page.errors.count, "error") %> prohibited this page from being saved:</h2>
+	      <ul>
+	      <% @page.errors.full_messages.each do |msg| %>
+	        <li><%= msg %></li>
+	      <% end %>
+	      </ul>
+	    </div>
+	  <% end %>
+	  
+	  	<div class="content-preview">
+	  		<%= raw @page.content %>
+	  	</div>
 
-<a href="#" id="buttonaki">Dokimi</a>
-
-<ul id="switcher">
-    <li class="html"><a href="#">Html</a></li>
-    <li class="markdown currentSet"><a href="#">MarkDown</a></li>
-</ul>
-
-<textarea id="multiSet">
-<%= raw @page.content %>
-</textarea>
+	  	<%= f.text_area :content, :id => 'multiSet' %>
+	  	
+	    <%= f.submit "Update Content", :class => "alt_btn update" %>
+	    
+    	<div style="clear: both"></div>
+	    	
+	<% end %> 
 
 <% content_for :custom_styling do %>	
-	<%= javascript_include_tag "markitup/jquery.markitup.js", "markitup/sets/default/set.js", "markitup/sets/markitdown/set.js", "admin/markitup_custom.js" %>
+	<%= javascript_include_tag "markitup/jquery.markitup.js", "markitup/sets/default/set.js", "admin/markitup_custom.js" %>
 <% end %>

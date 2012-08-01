@@ -1,7 +1,7 @@
 $(document).ready(function() {
       // $("textarea").markItUp(mySettings);
       
-    $('#multiSet').markItUp(myMarkDownSettings);
+    $('#multiSet').markItUp(myHtmlSettings);
     
     $('#switcher li').click(function() {
 			$('#switcher li').removeClass('currentSet');
@@ -21,6 +21,17 @@ $(document).ready(function() {
     );
 });
 
-$("#buttonaki").click(function() {
-	alert($("#multiSet").val());
+$("#multiSet").keyup(function() {
+	changePreview();
 });
+
+
+/*$("li.markItUpButton a").live("click", function() {
+	alert('Handler called.');
+	//changePreview();
+});*/
+
+
+function changePreview() {
+	$(".content-preview").html($("#multiSet").val());
+}

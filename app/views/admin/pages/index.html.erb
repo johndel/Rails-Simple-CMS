@@ -29,7 +29,7 @@
 					<td id="<%= dom_id(page, "updated_at") %>"><%= page.updated_at %></td>
 					<td><%= link_to "Edit Content", admin_page_path(page), :class => "edit_content" %></td>
 					<td><%= link_to 'Edit', edit_admin_page_path(page), :class => "full_edit_content" %></td>
-					<td><%= link_to 'Quick Edit', edit_admin_page_path(page), :class => "edit_link edit_ajax_link", :data => { :url => ajax_edit_admin_page_path(page) } %></td>
+					<td><%= link_to 'Quick Edit', edit_admin_page_path(page), :class => "edit_link edit_ajax_link", :data => { :url => quick_edit_admin_page_path(page) } %></td>
 					<td><%= link_to 'Destroy', [:admin, page], confirm: 'Are you sure?', method: :delete, :class => "delete_link" %></td>
 				</tr>
 				<% end %>
