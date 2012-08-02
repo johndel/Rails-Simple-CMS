@@ -1,4 +1,4 @@
-<%= stylesheet_link_tag "markitup/skins/markitup/style.css", "markitup/sets/default/style.css", "markitup/sets/markitdown/style.css" %>
+<%= stylesheet_link_tag "admin/flash_messages.css", "markitup/skins/markitup/style.css", "markitup/sets/default/style.css", "markitup/sets/markitdown/style.css" %>
 
 <div id="flash_message"></div>
 	
@@ -27,5 +27,5 @@
 	<% end %> 
 
 <% content_for :custom_styling do %>	
-	<%= javascript_include_tag "markitup/jquery.markitup.js", "markitup/sets/default/set.js", "admin/markitup_custom.js" %>
+	<%= javascript_include_tag "admin/popup.js", "markitup/jquery.markitup.js", "markitup/sets/default/set.js", "admin/markitup_custom.js" %>
 <% end %>
