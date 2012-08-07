@@ -31,7 +31,5 @@ Gscms::Application.configure do
   # Devise ActionMailer Config
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
   config.action_mailer.delivery_method = :letter_opener
-  
-  Paperclip.options[:command_path] = "/usr/local/bin/"
 
 end

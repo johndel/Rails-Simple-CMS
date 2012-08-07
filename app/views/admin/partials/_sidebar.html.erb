@@ -22,7 +22,7 @@
 			<br />
 			<h3 class="<%= "current_menu" if controller.controller_name == "uploads" %>"><a href="/admin/uploads">Uploads</a></h3>
 			<ul class="toggle">
-				<li class="<%= "current_action" if controller.controller_name == "uploads" && controller.action_name == "index" %>"><%= link_to "All Uploadds", admin_uploads_path %></li>
+				<li class="<%= "current_action" if controller.controller_name == "uploads" && controller.action_name == "index" %>"><%= link_to "All Uploads", admin_uploads_path %></li>
 				<li class="<%= "current_action" if controller.controller_name == "uploads" && controller.action_name == "new" %>"><%= link_to "New Upload", new_admin_upload_path %></li>
 			</ul>
 	

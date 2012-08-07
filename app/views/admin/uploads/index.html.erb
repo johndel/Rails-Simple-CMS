@@ -17,11 +17,11 @@
 			<tbody>
 				<% @uploads.each do |upload| %>
 				<tr class="<%= cycle("odd", "even") %>">
-					<td><%= upload.file_file_name %></td>
-					<td><%= upload.url %></td>
-					<td><%= upload.file_content_type %></td>					
+					<td><%= upload.upload_file_name %></td>
+					<td><%= upload.permalink %></td>
+					<td><%= upload.upload_content_type %></td>					
 					<td><%= upload.created_at %></td>
-					<td><%= upload.file_updated_at %></td>
+					<td><%= upload.updated_at %></td>
 					<td><%= link_to 'Edit', edit_admin_upload_path(upload), :class => "edit_link" %></td>
 					<td><%= link_to 'Destroy', [:admin, upload], confirm: 'Are you sure?', method: :delete, :class => "delete_link" %></td>
 				</tr>

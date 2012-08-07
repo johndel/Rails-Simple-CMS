@@ -1,5 +1,5 @@
 <%= render "admin/partials/form_validations" %>
-	<%= form_for([:admin, @upload], :html => { :class => "form_validations" }) do |f| %>
+	<%= form_for([:admin, @upload], :html => { :class => "form_validations", :multipart => true }) do |f| %>
 	<div class="module_content">
 	  <% if @upload.errors.any? %>
 	    <div id="error_explanation">
@@ -11,39 +11,15 @@
 	      </ul>
 	    </div>
 	  <% end %>
-
-
-		<div class="field"><%= f.label :url %><br />
-   		 <%= f.text_field :url %></div>
-  
-  		<div class="field"><%= f.label :file %><br />
-    	<%= f.file_field :file %></div>
-  
- 		<div class="actions"><%= f.submit %></div>
- 		
- 		
-	<!--   	<div class="input_field"><%= f.label :name, "Name - <em>required</em>".html_safe %>
-	  	<%= f.text_field :name, :class =>"validate[required]" %></div>
-	  	<div class="input_field"><%= f.label :title, "Title <span id='title-count' class='char_count'></span>".html_safe %>
-	  	<%= f.text_field :title %></div>
-	  	<div class="input_field"><%= f.label :meta_description, "Meta Description - <span id='meta-desc-count' class='char_count'></span>".html_safe %>
-	  	<%= f.text_area :meta_description, :style => "height: 100px" %></div>
-	  	<div class="input_field"><%= f.label :content, "Content - <span id='content-count' class='char_count'></span>".html_safe %>
-	  	<%= f.text_area :content %></div>
-	  	<div class="input_field"><%= f.label :permalink, "Clean Url - <em>required</em>".html_safe %>
-	  	<%= f.text_field :permalink, :class =>"validate[required]" %>	</div>  	
-	  	
-	  	<div class="checkbox_pair checkbox_active">
-	  		<div class="checkbox_label"><%= f.label :active %></div>
-	  		<div class="checkbox"><%= f.check_box :active, :checked => true %></div>
-		</div>
-		
-	</div>	  
-	  <footer>
-	  	<div class="submit_link">
-	    	<%= f.submit "#{create_or_update_string} Page", :class => "alt_btn" %>
-	  	</div>
-	  </footer>	 -->						
+   		 
+   		 <div class="field"><%= f.label :permalink %><br />
+   		 <%= f.text_field :permalink %></div>
+   		  
+   		 <div class="field"><%= f.label :upload %><br />
+   		 <%= f.file_field :upload %></div>
+   		   
+ 		<div class="actions"><%= f.submit %></div>	
+						
 	<% end %>
 	
 <% content_for :custom_styling do %>	
