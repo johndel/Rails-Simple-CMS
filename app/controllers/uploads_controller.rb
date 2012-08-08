@@ -26,7 +26,8 @@ class UploadsController < ApplicationController
 
 
   def show
-    @upload = Upload.find(:first, :conditions => ["permalink = ?", params[:permalink]])
+    # redirect_to permalink_url
+    # @upload = Upload.find(:first, :conditions => ["permalink = ?", params[:permalink]])
     render_404 if @upload.nil? # render_404 on application controller
   end
   

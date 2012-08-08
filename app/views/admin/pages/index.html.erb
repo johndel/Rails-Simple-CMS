@@ -22,7 +22,7 @@
 				<% @pages.each do |page| %>
 				<tr class="<%= cycle("odd", "even") %>" id="<%= dom_id(page) %>">
 					<td id="<%= dom_id(page, "sort") %>"><%= page.page_menu_mappings.first.page_position rescue "No value" %></td>
-					<td id="<%= dom_id(page, "name") %>"><%= page.name %></td>
+					<td id="<%= dom_id(page, "name") %>"><%= link_to page.permalink, permalink_path(page.permalink) %></td>
 					<td id="<%= dom_id(page, "permalink") %>"><%= page.permalink %></td>
 					<td id="<%= dom_id(page, "active") %>"><%= page.active %></td>
 					<td id="<%= dom_id(page, "created_at") %>"><%= page.created_at %></td>

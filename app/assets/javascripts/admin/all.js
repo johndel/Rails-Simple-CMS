@@ -17,6 +17,10 @@ $(document).ready(function() {
 	$("#datatable_users").dataTable({
 		"aoColumns": [null,null,null,{ "bSortable": false },{ "bSortable": false }
 	]});  
+	
+	$("#datatable_uploads").dataTable({
+		"aoColumns": [null,null,null,null,null,{ "bSortable": false },{ "bSortable": false }
+	]}); 
 });
 
 $(document).ready(function() {

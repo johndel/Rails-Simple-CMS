@@ -1,45 +1,35 @@
 <%= render "admin/partials/form_validations" %>
-	<%= form_for([:admin, @upload], :html => { :class => "form_validations", :multipart => true }) do |f| %>
-	<div class="module_content">
-	  <% if @upload.errors.any? %>
-	    <div id="error_explanation">
-	      <h2><%= pluralize(@upload.errors.count, "error") %> prohibited this page from being saved:</h2>
-	      <ul>
-	      <% @upload.errors.full_messages.each do |msg| %>
-	        <li><%= msg %></li>
-	      <% end %>
-	      </ul>
-	    </div>
-	  <% end %>
-   		 
-   		 <div class="field"><%= f.label :permalink %><br />
-   		 <%= f.text_field :permalink %></div>
-   		  
-   		 <div class="field"><%= f.label :upload %><br />
-   		 <%= f.file_field :upload %></div>
-   		   
- 		<div class="actions"><%= f.submit %></div>	
-						
+
+<%= form_for([:admin, @upload], :html => { :class => "form_validations", :multipart => true }) do |f| %>
+<div class="module_content">
+	<% if @upload.errors.any? %>
+	<div class="error_explanation">
+		<h2><%= pluralize(@upload.errors.count, "error") %> prohibited this page from being saved:</h2>
+		<ul>
+			<% @upload.errors.full_messages.each do |msg| %>
+			<li>
+				<%= msg %>
+			</li>
+			<% end %>
+		</ul>
+	</div>
 	<% end %>
-	
-<% content_for :custom_styling do %>	
-	<script>
-		$(function() {
-			checkTitleLength();
-			checkMetadescLength();
-			checkContentLength();
-			
-			$('#page_title').live('keyup click blur focus change paste', function() {
-				checkTitleLength();
-			});
-			
-			$('#page_meta_description').live('keyup click blur focus change paste', function() {
-				checkMetadescLength();
-			});
-	
-			$('#page_content').live('keyup click blur focus change paste', function() {
-				checkContentLength();
-			});
-		});
-	</script>
+
+	<%= f.label :permalink %>
+	<br />
+	<%= f.text_field :permalink %>
+	<br />
+	<br />
+
+	<%= f.label :upload %>
+	<br />
+	<%= f.file_field :upload, :id => "upload_field" %>
+</div>
+
+<div style="clear: both"></div>
+<footer>
+	<div class="submit_link">
+		<%= f.submit "#{create_or_update_string} Upload", :class => "alt_btn" %>
+	</div>
+</footer>
 <% end %>
