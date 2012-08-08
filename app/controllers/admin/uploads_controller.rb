@@ -16,7 +16,6 @@ class Admin::UploadsController < ApplicationController
     else
       render action: "new"
     end
-     # render :text => @upload.permalink
   end
 
   def edit
