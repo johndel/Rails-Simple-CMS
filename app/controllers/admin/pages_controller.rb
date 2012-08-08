@@ -23,11 +23,11 @@ class Admin::PagesController < ApplicationController
     @page = Page.find(params[:id])
   end
     
-  def ajax_edit
+  def quick_edit
     @page = Page.find(params[:id])
   end
   
-  def update
+  def quick_update
     @page = Page.find(params[:id])
     respond_to do |format|  
       if @page.update_attributes(params[:page])
@@ -45,11 +45,17 @@ class Admin::PagesController < ApplicationController
     @page = Page.find(params[:id])
   end
   
-  def page_update
-    page = Page.find(params[:id])
-    page.content = params[:content][:page_content][:value]
-    page.save!
-    render text: ""
+  def update
+    @page = Page.find(params[:id])
+    respond_to do |format|  
+      if @page.update_attributes(params[:page])
+        #format.html { redirect_to admin_page_url(@page), notice: 'Page was successfully updated.' }
+        format.js   { render "success_content_update" }
+      else
+        #format.html { render action: "show" }
+        format.js   { render "failed_content_update" }
+      end
+    end
   end
   
   def destroy
@@ -86,7 +92,7 @@ class Admin::PagesController < ApplicationController
       case action_name
       when "show"
         "pages"
-      when "ajax_edit"
+      when "quick_edit"
         "popup"
       else 
         "admin"

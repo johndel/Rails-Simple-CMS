@@ -22,11 +22,9 @@
 }
 .markItUpEditor {
 	font:12px 'Courier New', Courier, monospace;
-	padding:5px 5px 5px 35px;
 	border:1px solid #ccc;
-	width: 95%;
+	width: 954px;
 	height:320px;
-	background:#FFF url("<%= asset_path('markitup/skins/markitup/images/bg-editor.png') %>") no-repeat;
 	clear:both;
 	line-height:18px;
 	overflow:auto;
@@ -128,7 +126,7 @@
 	background-color:#3C769D;
 }
 /***************************************************************************************/
-.html .markItUpEditor {
+/*.html .markItUpEditor {
 	background-image:url("<%= asset_path('markitup/skins/markitup/images/bg-editor-html.png') %>");
 }
 .markdown .markItUpEditor {
@@ -138,9 +136,73 @@
 	background-image:url("<%= asset_path('markitup/skins/markitup/images/bg-editor-textile.png') %>");
 }
 .bbcode .markItUpEditor {
-	background-image:url("(<%= asset_path('markitup/skins/markitup/images/bg-editor-bbcode.png') %>");
+	background-image:url("<%= asset_path('markitup/skins/markitup/images/bg-editor-bbcode.png') %>");
 }
 .wiki .markItUpEditor,
 .dotclear .markItUpEditor {
-	background-image:url("(<%= asset_path('markitup/skins/markitup/images/bg-editor-wiki.png') %>");
+	background-image:url("<%= asset_path('markitup/skins/markitup/images/bg-editor-wiki.png') %>");
+}*/
+
+
+
+ul#switcher { 
+	border-top: 1px solid #ccc;
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+	background: #f9f9f9;
+	overflow: auto;
+	margin: 0;
+	padding: 0;
+}
+
+#switcher li {
+	list-style: none;
+	margin-right: 10px;
+	text-indent: 20px;
+	display: inline-block;
+}
+
+#switcher li a {
+	text-decoration: none;
+	color: #3C769D;
+
+}
+
+#switcher .currentSet {
+	background: url("<%= asset_path('markitup/skins/markitup/images/accept.png') %>") no-repeat;
+	font-weight: bold;
+}
+
+.content-preview {
+	border: 1px dashed blue;
+	min-height: 17px;
+}
+
+input[type=submit].alt_btn {
+background: #D0D1D4 url("<%= asset_path('admin/btn_submit_2.png') %>") repeat-x;
+border: 1px solid#30B0C8;
+-webkit-box-shadow: 0 1px 0 #fff;
+-moz-box-shadow: 0 1px 0 #fff;
+box-shadow: 0 1px 0 #fff;
+font-weight: bold;
+height: 22px;
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+border-radius: 5px;
+padding: 0 10px;
+color: #003E49;
+text-shadow: 0 1px 0 #6CDCF9;
+cursor: pointer;
+font-family: sans-serif;
+font-size: 90%;
+margin: 5px 25px 0 0;
+float: right;
+}
+
+#edit_page_2 {
+margin: -5px;
+}
+
+#main {
+border-radius: 5px;
 }
