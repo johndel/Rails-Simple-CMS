@@ -18,7 +18,7 @@ end
 
 gem 'jquery-rails'
 gem 'therubyracer'
-gem "paperclip", "~> 3.0"
+gem "paperclip"
 
 group :test, :development do
   gem 'capistrano'

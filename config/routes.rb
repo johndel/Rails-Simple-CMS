@@ -37,7 +37,7 @@ Gscms::Application.routes.draw do
     end
   end
 
-  get ":permalink" => "uploads#show", :as => :permalink
+  # get ":permalink" => "uploads#show", :as => :permalink
   get ":permalink" => "pages#show", :as => :permalink
   root :to => "pages#index"
   

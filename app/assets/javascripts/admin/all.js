@@ -19,7 +19,7 @@ $(document).ready(function() {
 	]});  
 	
 	$("#datatable_uploads").dataTable({
-		"aoColumns": [null,null,null,null,null,{ "bSortable": false },{ "bSortable": false }
+		"aoColumns": [null,null,null,null,{ "bSortable": false },{ "bSortable": false }
 	]}); 
 });
 

@@ -22,20 +22,16 @@ class Admin::UploadsController < ApplicationController
     @upload = Upload.find(params[:id])
   end
 
-  def ajax_edit
-    @upload = Upload.find(params[:id])
-  end
+  # def ajax_edit
+    # @upload = Upload.find(params[:id])
+  # end
 
   def update
     @upload = Upload.find(params[:id])
-    respond_to do |format|
-      if @upload.update_attributes(params[:upload])
-        format.html { redirect_to admin_uploads_url, notice: 'Upload was successfully updated.' }
-        format.js { render "success_update" }
-      else
-        format.html { render action: "edit" }
-        format.js   { render "failed_update" }
-      end
+    if @upload.update_attributes(params[:upload])
+      redirect_to admin_uploads_url, notice: 'Upload was successfully updated.'
+    else
+      ender action: "edit"
     end
   end
 
@@ -44,5 +40,5 @@ class Admin::UploadsController < ApplicationController
     @upload.destroy
     redirect_to admin_uploads_url, notice: "Upload successfully deleted."
   end
-
+  
 end
