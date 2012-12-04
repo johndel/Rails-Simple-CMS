@@ -1,0 +1,46 @@
+#page_sorting {
+	clear: both;
+	position: relative;
+	top: 10px;
+	overflow: auto;
+	margin: 5px 0;
+}
+
+#sortable1 {
+	margin: 0;
+}
+
+
+
+#sortable1, #sortable2 {
+	border: 1px solid #ccc;
+	display: block;
+	overflow: auto;
+	padding: 0;
+}
+
+#sortable1 li, #sortable2 li {
+	cursor: move;
+	list-style-type: none;
+	margin: 4px;
+	font-weight: normal;
+	padding: 3px 7px;
+	background-color: #f7f7f7;
+	border: 1px solid #ccc;
+}
+
+#sortable1 li {
+	color: #1C94C4;
+}
+
+.connectedSortable {
+	min-height: 36px;
+}
+
+.ui-state-highlight {
+	height: 20px;
+}
+
+.ui-icon-arrow-4 {
+	float: left;
+}

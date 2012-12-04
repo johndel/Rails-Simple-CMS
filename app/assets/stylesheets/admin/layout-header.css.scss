@@ -1,0 +1,138 @@
+/* Header */
+
+
+/** Top Header **/
+#header {
+	height: 55px;
+	width: 100%;
+	background: #222222 asset-url("admin/header_bg.png", image) repeat-x;
+	h1.site_title, h2.section_title {
+		float: left;
+		margin: 0;
+		font-size: 22px;
+		display: block;
+		height: 55px;
+		font-weight: normal;
+		text-align: left;
+		text-indent: 40px;
+		line-height: 55px;
+		color: #fff;
+		text-shadow: 0 -1px 0 #000;
+	} 
+	h1.site_title {
+		width: 280px;
+		a {
+			color: #fff;
+			text-decoration: none;
+		}
+	}
+	h2.section_title {
+		background: asset-url("admin/header_shadow.png", image) no-repeat left top;
+	}
+}
+
+h1 a.admin_panel {
+	margin: 10px 0 0 50px;
+	width: 172px;
+	height: 31px;
+	background: asset-url("admin/admin_panel.png", image)  no-repeat;
+	display: block;  
+}
+
+.btn_view_site {
+	float: right;
+	width: 95px;
+	margin-right: 20px;
+	a {
+		display: block;
+		margin-top: 12px;
+		width: 91px;
+		height: 27px;
+		background: asset-url("admin/btn_view_site.png", image) no-repeat;
+		text-align: center;
+		line-height: 29px;
+		color: #fff;
+		text-decoration: none;
+		text-shadow: 0 -1px 0 #000;
+		&:hover {
+			background-position: 0 -27px;
+		}
+	}
+}
+
+
+/** Secondary Header (Secondary Bar) **/
+section#secondary_bar {
+	height: 38px;
+	width: 100%;
+	background: #F1F1F4 asset-url("admin/secondary_bar.png", image) repeat-x;
+	.user {
+		float: left;
+		width: 280px;
+		height: 38px;
+		a {
+			text-decoration: none;
+			color: #666666;
+			&.logout_user {
+				float: right;
+				display: inline-block;
+				width: 15px;
+				line-height: 30px;
+			}
+		}
+	}
+	ul {
+	margin: 0;
+	list-style-type: none;
+		li {
+		  display: inline-block;
+		  line-height: 33px;
+		}
+	}
+}
+
+/* Breadcrumbs */
+
+.breadcrumb_container {
+	float: left;
+	padding-left: 25px;
+	background: asset-url("admin/secondary_bar_shadow.png", image) no-repeat left top;
+	height: 38px;
+}
+
+.breadcrumb {
+	padding: 0 10px;
+	border: 1px solid #ccc;
+	@include border-radius(5px);
+	@include box-shadow(0 1px 0 #fff);
+	height: 23px;
+	margin: 4px;
+	a {
+		display: block;
+		float: left;
+		height: 24px;
+		line-height: 23px;
+		&.current, &.current:hover {
+			color: #9E9E9E;
+			text-shadow: 0 1px 0 #fff;
+			text-decoration: none;
+		}
+		&:link, &:visited {
+			color: #44474F;
+			text-decoration: none;
+			text-shadow: 0 1px 0 #fff;
+		}
+		.breadcrumbs a:hover {
+			color: #222222;
+		}
+	}
+}
+
+.breadcrumb_divider {
+	display: inline-block;
+	width: 12px;
+	height: 24px;
+	background: asset-url("admin/breadcrumb_divider.png", image) no-repeat;
+	float: left;
+	margin: 0 5px;
+}

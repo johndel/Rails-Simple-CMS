@@ -1,0 +1,25 @@
+<article class="module">
+	<header><h3>All Users</h3></header>
+		<table id="datatable_users" class="table table-hover">
+			<thead>
+				<tr>
+					<th>Email</th>
+					<th>Created</th>
+					<th>Updated</th>
+					<th class="index_action">Edit</th>
+					<th class="index_action">Delete</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @users.each do |user| %>
+				<tr>
+					<td><%= user.email %></td>
+					<td><%= user.created_at %></td>
+					<td><%= user.updated_at %></td>
+					<td><%= link_to 'Edit', edit_admin_user_path(user), :class => "btn btn-primary" %></td>
+					<td><%= link_to 'Destroy', [:admin, user], confirm: 'Are you sure?', method: :delete, :class => "btn btn-danger" %></td>
+				</tr>
+				<% end %>
+				</tbody>
+		</table>
+</article><!-- end of stats article -->

@@ -1,0 +1,31 @@
+<article class="module">
+	<header><h3>All Pages</h3></header>
+		<table id="datatable_pages" class="table table-hover">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Clean Url</th>
+					<th>Active</th>
+					<th>Created</th>
+					<th>Updated</th>
+					<th class="index_action">Edit Content</th>
+					<th class="index_action">Edit Page</th>
+					<th class="index_action">Delete</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @pages.each do |page| %>
+				<tr class="<%= cycle("odd", "even") %>" id="<%= dom_id(page) %>">
+					<td id="<%= dom_id(page, "name") %>"><%= link_to page.name, check_permalink(page) %></td>
+					<td id="<%= dom_id(page, "permalink") %>"><%= page.permalink %></td>
+					<td id="<%= dom_id(page, "active") %>"><%= page.active %></td>
+					<td id="<%= dom_id(page, "created_at") %>"><%= page.created_at %></td>
+					<td id="<%= dom_id(page, "updated_at") %>"><%= page.updated_at %></td>
+					<td><%= link_to "Edit Content", admin_page_path(page), :class => "btn btn-primary" %></td>
+					<td><%= link_to 'Edit', edit_admin_page_path(page), :class => "btn btn-primary" %></td>
+					<td><%= link_to 'Destroy', [:admin, page], confirm: 'Are you sure?', method: :delete, :class => "btn btn-danger" %></td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+</article><!-- end of stats article -->

@@ -1,0 +1,13 @@
+<div class="breadcrumb_container">
+  <article class="breadcrumb">
+  	<% if controller.action_name == "index" %>
+  		<a class="current"><%= controller.controller_name.titleize %></a>
+  		<div class="breadcrumb_divider"></div>
+  	  	<a class="current">All</a>
+  	<% else %>
+  	  	<%= link_to "#{controller.controller_name.titleize}", eval("admin_#{controller.controller_name}_path"), :class => "current" %> 
+  	  	<div class="breadcrumb_divider"></div>
+  	  	<a class="current"><%= controller.action_name.titleize %> <%= controller.controller_name.titleize.singularize %></a>
+  	<% end %>
+  </article>
+</div>

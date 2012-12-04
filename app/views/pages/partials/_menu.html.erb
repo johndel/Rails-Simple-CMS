@@ -1,0 +1,13 @@
+<%# cache "default_menu" do %>
+	<ul>
+		<% @pages.each do |page| %>
+			<li class="nav-item">
+				<% if page == @homepage %>
+					<%= link_to page.name, "/", :title => page.name, :id => page.name %>
+				<% else %>
+					<%= link_to page.name, "/#{page.permalink}/", :title => page.name, :id => page.name %>
+				<% end %>
+			<% end %>
+		</li>
+	</ul>
+<%# end %>

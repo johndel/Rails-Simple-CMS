@@ -1,0 +1,35 @@
+<%= stylesheet_link_tag "admin/flash_messages.css", "admin/markitup_custom.css" %>
+
+<div id="flash_message"></div>
+	
+	<%= form_for([:admin, @page], :remote => true, :html => { :class => "update_ajax_page form_validations" }) do |f| %>
+	  <% if @page.errors.any? %>
+	    <div id="error_explanation">
+	      <h2><%= pluralize(@page.errors.count, "error") %> prohibited this page from being saved:</h2>
+	      <ul>
+	      <% @page.errors.full_messages.each do |msg| %>
+	        <li><%= msg %></li>
+	      <% end %>
+	      </ul>
+	    </div>
+	  <% end %>
+	  
+	  	<div class="content-preview">
+	  		<%= raw @page.content %>
+	  	</div>
+	
+	<div id="draggable_editor">
+    <div id="handle"></div>
+    <%= link_to "Back to Admin Panel", admin_pages_path %>
+    <%= f.text_area :content, :id => 'multiSet' %>
+		<%= f.submit "Update Content", :class => "alt_btn update" %>
+		<div style="clear: both"></div>
+	</div>
+
+	<% end %> 
+
+<% content_for :custom_styling do %>
+	<%= stylesheet_link_tag "admin/custom_show.css" %>
+	<%= javascript_include_tag "jquery-ui" %>
+	<%= javascript_include_tag "admin/markitup_custom.js", "admin/draggable_editor.js" %>
+<% end %>

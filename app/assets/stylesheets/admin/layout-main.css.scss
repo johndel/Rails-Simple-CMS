@@ -1,0 +1,20 @@
+/* Main Content */
+#contentwrapper {
+	float: left;
+	width: 100%;
+}
+
+section#main {
+	margin-left: 280px; 
+	background-color: #F0F0F0;
+	padding: 0 40px;
+	h3 {
+		color: #1F1F20;
+		text-transform: uppercase;
+		text-shadow: 0 1px 0 #fff;
+		font-size: 18px;
+		font-weight: normal;
+		line-height: 32px;
+		margin: 0px 0 30px 20px;
+	}
+}

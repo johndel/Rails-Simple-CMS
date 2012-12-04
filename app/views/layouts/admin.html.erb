@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<title>Admin Panel | <%= title %></title>
+	<meta name="robots" content="noindex, nofollow" />
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<%= stylesheet_link_tag "admin/all", "http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/themes/cupertino/jquery-ui.css" %>
+	<%= csrf_meta_tags %>
+	<%= javascript_include_tag "modernizr-2.6.2.min.js" %>
+</head>
+
+<body>
+	<div class="row-fluid">
+			<header id="header">
+				<hgroup>
+					<h1 class="site_title"><%= link_to "", admin_pages_path, :class => "admin_panel" %></h1>
+					<div class="btn_view_site"><%= link_to "View Site", root_path %></div>
+				</hgroup>
+			</header> <!-- end of header bar -->
+
+			<section id="secondary_bar">
+				<div class="user">
+					<ul>
+						<li style="float: left;"><i class="icon-user"></i>&nbsp;<%= current_user.email %></li> 
+						<li style="float: right"><%= link_to(raw('&times;'), destroy_user_session_path, :method => :delete, :class => "close logout_user", :title => "logout") %></li>
+					</ul>
+				</div>
+				<%= render "admin/partials/breadcrumb" %>
+			</section>
+		</div>
+
+		<div class="row-fluid">
+			<div id="contentwrapper">
+				<section id="main">
+					<% if notice %><div class="alert alert-success"><button class="close" data-dismiss="alert" type="button">&times;</button><%= notice %></div><% end %>
+					<% if alert %><div class="alert alert-error"><button class="close" data-dismiss="alert" type="button">&times;</button><%= alert %></div><% end %>
+					<%= yield %>
+				</section>
+			</div>
+			<%= render "admin/partials/sidebar" %>
+	</div> <!-- end of #row-fluid -->
+
+<%= javascript_include_tag "http://code.jquery.com/jquery-latest.min.js" %>
+<script>window.jQuery || document.write('<script src="<%= asset_path("jquery.js") %>"><\/script>')</script>
+<%= javascript_include_tag "admin/all" %>
+<%= render "admin/partials/form_validations" %>
+<%= yield :custom_styling %>
+<script>
+	var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']]; // Change UA-XXXXX-X to be your site's ID
+	(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;
+	g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+	s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+<!--[if lt IE 7 ]>
+	<%= javascript_include_tag "//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js" %>
+	<script>window.attachEvent("onload",function(){CFInstall.check({mode:"overlay"})})</script>
+<![endif]-->
+</body>
+
+
+</html>
+

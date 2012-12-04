@@ -1,0 +1,107 @@
+@import "markitup";
+@import "markitup-html";
+
+
+/* -------------------------------------------------------------------
+// markItUp! Universal MarkUp Engine, JQuery plugin
+// By Jay Salvat - http://markitup.jaysalvat.com/
+// ------------------------------------------------------------------*/
+.markItUp {
+  width: 99%;
+}
+
+.markItUp a:link,
+.markItUp a:visited {
+color:#000;
+text-decoration:none;
+}
+.markItUp {
+
+}
+
+.markItUp .markItUpButton16 a {
+    background-image: asset-url("markitup/clean.png", image);
+}
+        
+
+.markItUpContainer {
+border:1px solid #ccc;
+background:#FFF asset-url("markitup/bg-container.png", image) repeat-x top left;
+font:11px Verdana, Arial, Helvetica, sans-serif;
+}
+#draggable_editor .markItUpEditor {
+  background: none;
+  padding: 0;
+  font:12px 'Courier New', Courier, monospace;
+  border:1px solid #ccc;
+  width: 918px;
+  height:320px;
+  clear:both;
+  line-height:18px;
+  overflow:auto;
+}
+.markItUpPreviewFrame {
+overflow:auto;
+background-color:#FFFFFF;
+border:1px solid #3C769D;
+width:99.9%;
+height:300px;
+margin:5px 0;
+}
+.markItUpFooter {
+width:100%;
+cursor:n-resize;
+}
+.markItUpResizeHandle {
+overflow:hidden;
+width:22px; height:5px;
+margin-left:auto;
+margin-right:auto;
+background-image: asset-url("markitup/handle.png", image);
+cursor:n-resize;
+padding: 2px 0;
+}
+
+.content-preview {
+border: 1px dashed blue;
+min-height: 17px;
+}
+
+input[type=submit].alt_btn {
+background: #D0D1D4 asset-url("admin/btn_submit_2.png", image) repeat-x;
+border: 1px solid#30B0C8;
+-webkit-box-shadow: 0 1px 0 #fff;
+-moz-box-shadow: 0 1px 0 #fff;
+box-shadow: 0 1px 0 #fff;
+font-weight: bold;
+height: 22px;
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+border-radius: 5px;
+padding: 0 10px;
+color: #003E49;
+text-shadow: 0 1px 0 #6CDCF9;
+cursor: pointer;
+font-family: sans-serif;
+font-size: 90%;
+margin: 5px 25px 0 0;
+float: right;
+}
+
+#edit_page_2 {
+margin: -5px;
+}
+
+#main {
+border-radius: 5px;
+}
+
+#handle {
+  position: absolute;
+  margin: -15px 0 0 0;
+  height: 30px;
+  width: 30px;
+  left: 50%;
+  background: asset-url("admin/handle.png", image) center no-repeat;
+  cursor: move;
+}

@@ -1,0 +1,21 @@
+<article class="module">
+
+	  		<header><h3>Choose your homepage</h3></header> 		
+			<%= form_tag(admin_homepage_save_path) do %>
+			<div class="module_content">
+				<select name="setting_homepage">
+					<% @pages.each do |page| %>
+						<% if @homepage.meta_value == page.id.to_s %>
+							<option name="setting_homepage" value="<%= page.id %>" selected="selected"><%= page.name %></option>
+						<% else %>
+							<option value="<%= page.id %>"><%= page.name %></option>
+						<% end %>
+					<% end %>
+				</select>
+			</div>
+
+	  <footer>
+	  	<%= submit_tag "Save homepage", :class => "btn pull-right" %>
+	  </footer>
+	  	   <% end %>
+</article>

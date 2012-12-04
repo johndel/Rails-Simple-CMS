@@ -1,0 +1,26 @@
+<article class="module">
+	<header><h3>All Menus</h3></header>
+	
+		<table id="datatable_menus" class="table table-hover">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Created</th>
+					<th>Updated</th>
+					<th class="index_action">Edit</th>
+					<th class="index_action">Delete</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @menus.each do |menu| %>
+				<tr class="<%= cycle("odd", "even") %>">
+					<td><%= menu.name %></td>
+					<td><%= menu.created_at %></td>
+					<td><%= menu.updated_at %></td>
+					<td><%= link_to 'Edit', edit_admin_menu_path(menu), :class => "btn btn-primary" %></td>
+					<td><%= link_to 'Destroy', [:admin, menu], confirm: 'Are you sure?', method: :delete, :class => "btn btn-danger" %></td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+</article><!-- end of stats article -->

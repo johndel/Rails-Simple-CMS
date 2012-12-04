@@ -1,0 +1,65 @@
+.module {
+	border: 1px solid #9BA0AF;
+	margin: 26px 0;
+	@include border-radius(5px);
+	background: #ffffff;
+	@include box-shadow(0 0 7px #ccc);
+	header {
+		@include box-shadow(0 0 7px #ccc);
+		height: 34px;
+		width: 100%;
+		background: #F1F1F4 asset-url("admin/header_bar.png", image) repeat-x;
+		@include border-top-radius(5px);
+	}
+	table {
+		margin: 0;
+	}
+	form {
+		margin: 20px 0 0 0;
+	}
+	footer {
+		height: 32px;
+		padding: 6px 10px 4px 10px;
+		border-top: 1px solid #9CA1B0;
+		background: #F1F1F4 asset-url("admin/module_footer_bg.png", image) repeat-x;
+		@include border-bottom-radius(5px);
+	}
+}
+
+.module_content {
+	margin: 10px 20px;
+	color: #666;
+	h2{
+		font-size: 16px;
+	}
+}
+
+.dataTables_length, .dataTables_filter {
+	display: inline-block;
+	margin: 8px;
+}
+
+
+.dataTables_length {
+	width: 20%;
+	select{
+		width: 60px;
+	}
+}
+
+.dataTables_filter {
+	float: right;
+	text-align: right;
+	display: inline-block;
+	width: 70%;
+}
+
+.dataTables_info {
+	padding: 10px;
+	text-align: center;
+	border-top: 1px solid #ccc;
+}
+
+form label em {
+	color: red;
+}
