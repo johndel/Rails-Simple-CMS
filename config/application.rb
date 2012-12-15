@@ -55,7 +55,7 @@ module Gscms
     
     # Also for Heroku Deployment => http://guides.rubyonrails.org/asset_pipeline.html#precompiling-assets
     config.assets.initialize_on_precompile = false
-    config.assets.precompile += ['*.js', '*.css'] #+= %w( sign_in.css.erb pages_css/all admin_css/all )
+    config.assets.precompile += ['*.js', '*.css', '*.css.*', ] #+= %w( sign_in.css.erb pages_css/all admin_css/all )
     
     # Define Devise Layouts
     config.to_prepare do

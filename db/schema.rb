@@ -15,18 +15,20 @@ ActiveRecord::Schema.define(:version => 20121204112103) do
 
   create_table "menus", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "page_menu_mappings", :force => true do |t|
     t.integer  "page_id"
     t.integer  "menu_id"
     t.integer  "page_position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
+  add_index "page_menu_mappings", ["menu_id", "page_id"], :name => "index_page_menu_mappings_on_menu_id_and_page_id", :unique => true
+  add_index "page_menu_mappings", ["menu_id", "page_position"], :name => "index_page_menu_mappings_on_menu_id_and_page_position", :unique => true
   add_index "page_menu_mappings", ["menu_id"], :name => "index_page_menu_mappings_on_menu_id"
   add_index "page_menu_mappings", ["page_id"], :name => "index_page_menu_mappings_on_page_id"
 
@@ -37,38 +39,37 @@ ActiveRecord::Schema.define(:version => 20121204112103) do
     t.text     "content"
     t.string   "permalink"
     t.boolean  "active"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
   create_table "settings", :force => true do |t|
     t.string   "meta_key"
-    t.text     "meta_value", :limit => 2147483647
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.text     "meta_value"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "uploads", :force => true do |t|
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
-    t.string   "permalink"
     t.string   "upload_file_name"
     t.string   "upload_content_type"
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email",                                 :default => "", :null => false
-    t.string   "encrypted_password",     :limit => 128, :default => "", :null => false
+    t.string   "email",                  :default => "", :null => false
+    t.string   "encrypted_password",     :default => "", :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                         :default => 0
+    t.integer  "sign_in_count",          :default => 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
