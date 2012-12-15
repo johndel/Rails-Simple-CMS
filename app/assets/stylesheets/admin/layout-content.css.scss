@@ -1,7 +1,11 @@
 .module {
 	border: 1px solid #9BA0AF;
 	margin: 26px 0;
-	@include border-radius(5px);
+	@include border-top-radius(5px);
+	@include border-bottom-radius(5px);
+	@include border-left-radius(5px);
+	@include border-right-radius(5px);
+
 	background: #ffffff;
 	@include box-shadow(0 0 7px #ccc);
 	header {

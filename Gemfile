@@ -15,11 +15,9 @@ end
 
 gem 'jquery-rails', '>= 2.1.4'
 gem 'markitup-rails', '>= 0.2.2'
-gem 'therubyracer', '>= 0.10.2'
 gem 'paperclip', '>= 3.3.1'
 gem 'capistrano', '>= 2.13.5'
 gem 'thin', '>= 1.5.0'
-gem 'newrelic_rpm', '>= 3.5.2.17'
 
 # Javascript Libraries for better / easier update
 gem 'bootstrap-sass', '>= 2.2.1.1'

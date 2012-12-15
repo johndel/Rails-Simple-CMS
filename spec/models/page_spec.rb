@@ -36,14 +36,5 @@ describe Page do
     #lambda { menu.pages << page }.should raise_error
     expect { menu.pages << page }.to raise_error
   end
-
-  it "should create sitemap of all of the active pages" do
-    pending   
-  end
-  
-  # INTEGRATION TEST
-   # it "should be the first page if it has permalink as '/first-page/'" do
-    # page.create(:page, title: "I am the first page", permalink: "/first-page/")
-  # end
   
 end

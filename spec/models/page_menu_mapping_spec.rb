@@ -1,4 +1,4 @@
-require 'spec_helper'  
+require 'spec_helper'
 describe PageMenuMapping do
   before(:each) do
     @page_menu_mapping = PageMenuMapping.first
@@ -6,11 +6,11 @@ describe PageMenuMapping do
     @page = Page.first
   end
   
-  it "can belongs to a page" do
+  it "can belong to a page" do
     @page_menu_mapping.page.should be_valid
   end
   
-  it "can belongs to a menu" do
+  it "can belong to a menu" do
     @page_menu_mapping.menu.should be_valid
   end
   
@@ -23,8 +23,7 @@ describe PageMenuMapping do
   end
   
   it "can't have same page position number with the same menu" do
-    create(:mapping_one)
-    build(:mapping_one, :page_id => 2).should have(1).error_on(:menu_id)
+    build(:page_menu_mapping, :page_id => 2, :menu_id => 1, :page_position => 1).should have(1).error_on(:menu_id) 
   end
   
   it "should add page position automatically if it hasn't specified" do

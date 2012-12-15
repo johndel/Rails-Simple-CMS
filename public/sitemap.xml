@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
-<loc>http://192.168.1.101:3000/homepage/</loc>
-<lastmod>2012-10-25</lastmod>
-</url>
-<url>
-<loc>http://192.168.1.101:3000/demo22/</loc>
-<lastmod>2012-10-25</lastmod>
-</url>
-<url>
-<loc>http://192.168.1.101:3000/test234/</loc>
-<lastmod>2012-10-23</lastmod>
+<loc>http://test.host/homepage/</loc>
+<lastmod>2012-12-09</lastmod>
 </url>
 </urlset>
