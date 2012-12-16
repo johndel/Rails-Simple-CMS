@@ -1,36 +1,21 @@
 require 'spec_helper'
 
-shared_context "user stuff" do
-  before do
-    @users = User.all
-  end
-end
-
-
 describe User do
-  include_context "user stuff"
-
-  it "database should have at least one user" do
-  	@users.should have_at_least(1).user
+  before do
+    @user = FactoryGirl.create(:user)
   end
 
   it "all existing users should have email" do
-  	@users.each do |user|
-  	  user.email.should_not be_empty
-  	end
+    @user.email.should_not be_empty
   end
 
   it "every existing user email should have specific format" do
-  	@users.each do |user|
-  	  user.email.should =~ /^.+@.+$/
-  	end	
-  end	
+    @user.email.should =~ /^.+@.+$/
+  end
 
   it "all existing users should have password" do
-  	@users.each do |user|
-  	  user.encrypted_password.should_not be_empty
-  	end
-  end	
+  	@user.encrypted_password.should_not be_empty
+  end
 
   it "should have normal email addresses" do
     User.new(email: "notniceemail@no", password: "passwordpass").should_not be_valid

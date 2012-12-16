@@ -7,7 +7,7 @@ describe Admin::MenusController do
     it "should be successful" do
       get 'index'
       response.should render_template :index
-      response.should be_success 
+      response.should be_success
     end
 
 	  it "should find a list with all menus" do
@@ -22,7 +22,7 @@ describe Admin::MenusController do
       Menu.should_receive(:new)
       Page.should_receive(:all)
       get 'new'
-      assigns(:pages).should be_kind_of(Array)	
+      assigns(:pages).should be_kind_of(Array)
       response.should render_template :new
       response.should be_success
     end
@@ -49,7 +49,7 @@ describe Admin::MenusController do
 	        post :create, menu: FactoryGirl.attributes_for(:menu, name: nil)
 	      }.to_not change(Menu, :count)
 	    end
-	    
+
 	    it "re-renders the new method" do
 	      post :create, name: FactoryGirl.attributes_for(:menu, name: nil)
 	      response.should render_template :new
@@ -68,7 +68,7 @@ describe Admin::MenusController do
       assigns(:pages).length.should eq(3)
       assigns(:other_pages).should be_kind_of(Array)
     end
-    
+
     it "renders the #show view" do
       get :edit, id: menu
       response.should render_template :edit
@@ -81,13 +81,13 @@ describe 'PUT update' do
     @menu = create(:menu, name: "A nice menu name")
     @menu2 = create(:menu, name: "Second menu name")
   end
-  
+
   context "valid attributes" do
     it "located the menu @menu" do
       put :update, id: @menu, menu: FactoryGirl.attributes_for(:menu)
-      assigns(:menu).should eq(@menu)      
+      assigns(:menu).should eq(@menu)
     end
-  
+
     it "changes @menu's attributes" do
       put :update, id: @menu, menu: FactoryGirl.attributes_for(:menu, name: "A better menu name")
       @menu.reload
@@ -98,19 +98,19 @@ describe 'PUT update' do
       response.should redirect_to admin_pages_url
     end
   end
-  
+
   context "invalid attributes" do
     it "locates the requested @menu" do
       put :update, id: @menu, menu: FactoryGirl.attributes_for(:menu, name: "Second menu name")
-      assigns(:menu).should eq(@menu)      
+      assigns(:menu).should eq(@menu)
     end
-    
+
     it "does not change @menu's attributes" do
       put :update, id: @menu, menu: FactoryGirl.attributes_for(:menu, name: "Second menu name")
       @menu.reload
       @menu.name.should eq("A nice menu name")
     end
-    
+
     it "re-renders the edit method" do
       put :update, id: @menu, menu: FactoryGirl.attributes_for(:menu, name: "Second menu name")
       response.should render_template :edit
@@ -122,13 +122,13 @@ end
 	  before :each do
 	    @menu = create(:menu)
 	  end
-	  
+
 	  it "deletes the menu" do
 	    expect{
-	      delete :destroy, id: @menu        
+	      delete :destroy, id: @menu
 	    }.to change(Menu, :count).by(-1)
 	  end
-	    
+
 	  it "redirects to menu#index" do
 	    delete :destroy, id: @menu
 	    response.should redirect_to admin_menus_url
@@ -136,28 +136,26 @@ end
   end
 
   describe "sort functionality" do
-    let(:menu) { FactoryGirl.create(:menu_with_pages) }
+    let!(:menu) { FactoryGirl.create(:menu_with_pages) }
 
     it "should sort successful" do
-      menu.pages.length.should eq(3)
       page_ids = [menu.pages[2].id, menu.pages[0].id, menu.pages[1].id]
+      PageMenuMapping.all.length.should eq(3)
       post :page_sort, :menu => menu.id, :page => page_ids
       PageMenuMapping.where(menu_id: menu.id).order(:page_position).map(&:page_id).should eq(page_ids)
     end
 
     it "should remove a page successfully" do
-      menu.pages.length.should eq(3)
       page_ids = [menu.pages[2].id, menu.pages[0].id]
       post :page_sort, :menu => menu.id, :page => page_ids
-      PageMenuMapping.where(menu_id: menu.id).order(:page_position).length.should eq(2)
+      PageMenuMapping.where(menu_id: menu.id).order(:page_position).map(&:page_id).should eq(page_ids)
     end
 
     it "should add a page successfully" do
-      menu.pages.length.should eq(3)
       page = create(:page)
       page_ids = [menu.pages[2].id, menu.pages[0].id, menu.pages[1].id, page.id]
       post :page_sort, :menu => menu.id, :page => page_ids
-      PageMenuMapping.where(menu_id: menu.id).order(:page_position).length.should eq(4)    
+      PageMenuMapping.where(menu_id: menu.id).order(:page_position).length.should eq(4)
     end
   end
 end

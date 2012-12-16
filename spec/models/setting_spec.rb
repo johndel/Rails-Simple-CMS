@@ -3,7 +3,7 @@ require 'spec_helper'
 
 shared_context "setting stuff" do
   before do
-    @homepage = Setting.where(id: 1).first
+    @homepage = create(:homepage_setting)
   end
 end
 

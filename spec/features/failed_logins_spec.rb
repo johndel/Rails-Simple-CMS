@@ -17,7 +17,7 @@ feature "Failed Login" do
     current_path.should eq(user_session_path)
     page.should have_content("Invalid email or password.")
   end
-  
+
   scenario "should redirects to sign in page if user isn't logged in" do
     visit admin_pages_path
     current_path.should eq(user_session_path)

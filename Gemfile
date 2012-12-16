@@ -35,6 +35,8 @@ group :test, :development do
   gem 'launchy', '>= 2.1.2'
   gem 'pry-remote', '>= 0.1.6'
   gem 'pry-rails', '>= 0.2.2'
+  gem 'pry-stack_explorer', '>= 0.4.7'
+  gem 'pry-debugger', '>= 0.2.0'
   gem 'rb-inotify', '>= 0.8.8'
 end
 

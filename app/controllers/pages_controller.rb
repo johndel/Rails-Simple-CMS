@@ -14,7 +14,7 @@ class PagesController < ApplicationController
     @page = Page.where("permalink = ?", params[:permalink]).first
     check_404
   end
-  
+
   private
   def default_menu_pages
   	menu_id = Menu.select("id").where(:name => "default").first
@@ -24,9 +24,9 @@ class PagesController < ApplicationController
   def check_404
     render_404 if @page.nil? || @homepage.permalink == params[:permalink] ||  @page.active == false # render_404 on application controller
   end
-  
+
   def homepage
-    @homepage = Page.first_page 
+    @homepage = Page.first_page
   end
-  
+
 end
