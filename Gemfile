@@ -38,9 +38,12 @@ group :test, :development do
   gem 'pry-stack_explorer', '>= 0.4.7'
   gem 'pry-debugger', '>= 0.2.0'
   gem 'rb-inotify', '>= 0.8.8'
+  gem 'simplecov', '>= 0.7.1', :require => false
 end
 
 group :development do
+  gem 'rails_best_practices', '>= 1.13.1'
+  gem 'brakeman', '>= 1.8.2'
   gem 'letter_opener', '>= 1.0.0'
   gem 'bullet', '>= 4.2.0'
   gem 'rack-mini-profiler', '>= 0.1.23'

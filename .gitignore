@@ -3,6 +3,8 @@
 .sass-cache
 capybara-*.html
 .rspec
+brakeman.html
+rails_best_practices_output.html
 /.bundle
 /vendor/bundle
 /log/*
@@ -11,12 +13,13 @@ capybara-*.html
 /public/assets/
 /public/system/*
 /public/uploads/*
-/coverage/
+/coverage
 /spec/tmp/*
 **.orig
 config/database.yml
 config/newrelic.yml
 config/deploy.rb
+coverage
 *.tmproj
 *.sw?
 *.cache
