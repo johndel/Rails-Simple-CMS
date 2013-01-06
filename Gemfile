@@ -38,7 +38,6 @@ group :test, :development do
   gem 'pry-rails', '>= 0.2.2'
   gem 'pry-stack_explorer', '>= 0.4.7'
   gem 'pry-debugger', '>= 0.2.0'
-  gem 'rb-inotify', '>= 0.8.8'
   gem 'simplecov', '>= 0.7.1', :require => false
 end
 
