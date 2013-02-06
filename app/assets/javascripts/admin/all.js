@@ -4,26 +4,26 @@
 //= require jquery.dataTables.min
 //= require jasny_fileupload
 
-$(document).ready(function() { 
+$(document).ready(function() {
 	$("#datatable_pages").dataTable({
     "sDom": '<"H"lfr>t<"F"i>',
 		"aoColumns": [null,null,null,null,null,{ "bSortable": false },{ "bSortable": false },{ "bSortable": false }
-	]}); 
-	
+	]});
+
 	$("#datatable_menus").dataTable({
     "sDom": '<"H"lfr>t<"F"i>',
 		"aoColumns": [null,null,null,{ "bSortable": false },{ "bSortable": false }
 	]});
-	
+
 	$("#datatable_users").dataTable({
     "sDom": '<"H"lfr>t<"F"i>',
 		"aoColumns": [null,null,null,{ "bSortable": false },{ "bSortable": false }
-	]});  
-	
+	]});
+
 	$("#datatable_uploads").dataTable({
     "sDom": '<"H"lfr>t<"F"i>',
 		"aoColumns": [null,null,null,{ "bSortable": false },{ "bSortable": false }
-	]}); 
+	]});
 });
 
 // Thanks http://stackoverflow.com/questions/652917/in-jquery-want-to-remove-all-html-inside-of-a-div the second answer for this!
