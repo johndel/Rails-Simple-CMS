@@ -1,6 +1,6 @@
-@import "markitup";
+/*@import "markitup";
 @import "markitup-html";
-
+*/
 
 /* -------------------------------------------------------------------
 // markItUp! Universal MarkUp Engine, JQuery plugin
@@ -20,13 +20,13 @@ text-decoration:none;
 }
 
 .markItUp .markItUpButton16 a {
-    background-image: asset-url("markitup/clean.png", image);
+    background-image: image-url("/assets/markitup/clean.png");
 }
-        
+
 
 .markItUpContainer {
 border:1px solid #ccc;
-background:#FFF asset-url("markitup/bg-container.png", image) repeat-x top left;
+background:#FFF image-url("/assets/markitup/bg-container.png") repeat-x top left;
 font:11px Verdana, Arial, Helvetica, sans-serif;
 }
 #draggable_editor .markItUpEditor {
@@ -57,7 +57,7 @@ overflow:hidden;
 width:22px; height:5px;
 margin-left:auto;
 margin-right:auto;
-background-image: asset-url("markitup/handle.png", image);
+background-image: image-url("/assets/markitup/handle.png");
 cursor:n-resize;
 padding: 2px 0;
 }
@@ -65,10 +65,11 @@ padding: 2px 0;
 .content-preview {
 border: 1px dashed blue;
 min-height: 17px;
+overflow: auto;
 }
 
 input[type=submit].alt_btn {
-background: #D0D1D4 asset-url("admin/btn_submit_2.png", image) repeat-x;
+background: #D0D1D4 image-url("/assets/admin/btn_submit_2.png") repeat-x;
 border: 1px solid#30B0C8;
 -webkit-box-shadow: 0 1px 0 #fff;
 -moz-box-shadow: 0 1px 0 #fff;
@@ -102,6 +103,11 @@ border-radius: 5px;
   height: 30px;
   width: 30px;
   left: 50%;
-  background: asset-url("admin/handle.png", image) center no-repeat;
+  background: image-url("/assets/admin/handle.png") center no-repeat;
   cursor: move;
 }
+
+#multiSet {
+  width: 1000px;
+}
+

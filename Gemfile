@@ -15,7 +15,6 @@ gem 'devise', '>= 2.1.2'
 #end
 
 gem 'jquery-rails', '>= 2.1.4'
-gem 'markitup-rails', '>= 0.2.2'
 gem 'paperclip', '>= 3.3.1'
 gem 'capistrano', '>= 2.13.5'
 gem 'thin', '>= 1.5.0'

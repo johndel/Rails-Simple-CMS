@@ -1,6 +1,3 @@
-//= require markitup
-//= require markitup-html
-
 myHtmlSettings = {
     nameSpace:       "html", // Useful to prevent multi-instances CSS conflict
     onShiftEnter:    {keepDefault:false, replaceWith:'<br />\n'},
@@ -36,6 +33,7 @@ myHtmlSettings = {
 }
 ;
 
+
 $(document).ready(function() {
   $('#multiSet').markItUp(myHtmlSettings);
 });
@@ -48,7 +46,7 @@ function changePreview() {
 	$(".content-preview").html($("#multiSet").val());
 }
 
-$(".close-me").live("click", function() {
+$(document).on("click", ".close-me", function() {
 	$(this).parent().fadeOut();
 });
 
