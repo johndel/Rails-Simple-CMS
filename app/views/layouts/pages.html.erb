@@ -6,8 +6,8 @@
 
 <head>
 	<meta charset="utf-8" http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<title><%= @page.title %></title>
-	<meta name="description" content="<%= @page.meta_description %>">
+	<title><%= @page.title rescue "#{controller.action_name.titleize} #{controller.controller_name.titleize.singularize}" %></title>
+	<meta name="description" content="<%= @page.meta_description rescue "#{controller.action_name.titleize} #{controller.controller_name.titleize.singularize}" %>">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<%= stylesheet_link_tag "pages/all" %>
 	<%= csrf_meta_tags %>

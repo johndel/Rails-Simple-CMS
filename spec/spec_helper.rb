@@ -27,8 +27,6 @@ Spork.prefork do
     # config.mock_with :mocha
     # config.mock_with :flexmock
     # config.mock_with :rr
-    OmniAuth.config.test_mode = true
-
     config.use_transactional_fixtures = false
 
     config.before(:suite) do

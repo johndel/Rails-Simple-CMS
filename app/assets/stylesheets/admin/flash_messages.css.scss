@@ -19,7 +19,7 @@
 	display: block;
 	margin: 20px 38px 10px 40px;
 	margin-top: 20px;
-  @include  border-radius(5px);
+  border-radius: 5px;
 	background: #B5E5EF image-url("admin/icn_alert_info.png") no-repeat;
 	background-position: 10px 10px;
 	border: 1px solid #005DA2;
@@ -32,7 +32,7 @@
 	display: block;
 	margin: 20px 38px 10px 40px;
 	margin-top: 20px;
-  @include  border-radius(5px);
+  border-radius: 5px;
 	background: #F5F3BA image-url("admin/icn_alert_warning.png") no-repeat;
 	background-position: 10px 10px;
 	border: 1px solid #C7A20D;
@@ -45,7 +45,7 @@
 	display: block;
 	margin: 20px 38px 10px 40px;
 	margin-top: 20px;
-  @include  border-radius(5px);
+  border-radius: 5px;
 	background: #F3D9D9 image-url("admin/icn_alert_error.png") no-repeat;
 	background-position: 10px 10px;
 	border: 1px solid #D20009;
@@ -58,7 +58,7 @@
 	display: block;
 	margin: 20px 38px 10px 40px;
 	margin-top: 20px;
-  @include	border-radius(5px);
+  border-radius: 5px;
 	background: #E2F6C5 image-url("admin/icn_alert_success.png") no-repeat;
 	background-position: 10px 10px;
 	border: 1px solid #79C20D;

@@ -7,12 +7,11 @@ gem 'devise', '>= 2.1.2'
 
 # Gems used only for assets and not required
 # in production environments by default.
-#group :assets do
-  gem "sass"
+group :assets do
   gem 'sass-rails', '>= 3.2.5'
   gem 'coffee-rails', '>= 3.2.2'
   gem 'uglifier', '>= 1.3.0'
-#end
+end
 
 gem 'jquery-rails', '>= 2.1.4'
 gem 'paperclip', '>= 3.3.1'
@@ -22,8 +21,6 @@ gem 'thin', '>= 1.5.0'
 # Javascript Libraries for better / easier update
 gem 'bootstrap-sass', '>= 2.2.1.1'
 gem 'compass-rails'
-gem "deadweight"
-
 
 group :test, :development do
   gem 'factory_girl_rails', '>= 4.1.0'
@@ -40,6 +37,7 @@ group :test, :development do
   gem 'pry-debugger', '>= 0.2.0'
   gem 'simplecov', '>= 0.7.1', :require => false
   gem 'database_cleaner'
+  gem 'rb-inotify'
 end
 
 group :development do
