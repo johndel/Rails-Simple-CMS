@@ -1,5 +1,3 @@
-<%= render "admin/partials/form_validations" %>
-
 <%= form_for([:admin, @upload], :html => { :class => "form_validations", :multipart => true }) do |f| %>
 <div class="module_content">
 	<% if @upload.errors.any? %>
@@ -18,14 +16,14 @@
 
 	<%= f.label :permalink %>
 	<%= f.text_field :permalink, :class => "validate[required] span12" %>
-	
+
 	<%= f.label :upload %>
 	<div class="fileupload fileupload-new" data-provides="fileupload">
     <span class="btn btn-file"><span class="fileupload-new">Select file</span><span class="fileupload-exists">Change</span><%= f.file_field :upload %></span>
     <span class="fileupload-preview"></span>
     <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none">x</a>
     </div>
-		
+
 	<%#= f.file_field :upload %>
 </div>
 

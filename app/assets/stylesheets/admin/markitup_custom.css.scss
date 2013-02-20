@@ -25,9 +25,10 @@ text-decoration:none;
 
 
 .markItUpContainer {
-border:1px solid #ccc;
-background:#FFF image-url("/assets/markitup/bg-container.png") repeat-x top left;
-font:11px Verdana, Arial, Helvetica, sans-serif;
+  border:1px solid #ccc;
+  background:#FFF image-url("/assets/markitup/bg-container.png") repeat-x top left;
+  font:11px Verdana, Arial, Helvetica, sans-serif;
+  padding: 0px 14px 10px 5px;
 }
 #draggable_editor .markItUpEditor {
   padding: 0;
@@ -46,7 +47,7 @@ margin:5px 0;
 }
 .markItUpFooter {
 width:100%;
-cursor:n-resize;
+cursor: n-resize;
 }
 .markItUpResizeHandle {
 overflow:hidden;
@@ -67,13 +68,9 @@ overflow: auto;
 input[type=submit].alt_btn {
 background: #D0D1D4 image-url("/assets/admin/btn_submit_2.png") repeat-x;
 border: 1px solid#30B0C8;
--webkit-box-shadow: 0 1px 0 #fff;
--moz-box-shadow: 0 1px 0 #fff;
 box-shadow: 0 1px 0 #fff;
 font-weight: bold;
 height: 22px;
--webkit-border-radius: 5px;
--moz-border-radius: 5px;
 border-radius: 5px;
 padding: 0 10px;
 color: #003E49;
@@ -85,10 +82,6 @@ margin: 5px 25px 0 0;
 float: right;
 }
 
-#edit_page_2 {
-margin: -5px;
-}
-
 #main {
 border-radius: 5px;
 }
@@ -98,11 +91,7 @@ border-radius: 5px;
   margin: -15px 0 0 0;
   height: 30px;
   width: 30px;
-  left: 50%;
+  left: 47%;
   background: image-url("/assets/admin/handle.png") center no-repeat;
   cursor: move;
-}
-
-#multiSet {
-  width: 696px !important;
 }

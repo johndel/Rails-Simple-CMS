@@ -32,12 +32,12 @@ GEM
     arel (3.0.2)
     awesome_print (1.1.0)
     bcrypt-ruby (3.0.1)
+    better_errors (0.5.0)
+      coderay (>= 1.0.0)
+      erubis (>= 2.6.6)
     binding_of_caller (0.6.8)
     bootstrap-sass (2.2.2.0)
       sass (~> 3.2)
-    bourbon (3.0.1)
-      sass (>= 3.2.0)
-      thor
     bourne (1.1.2)
       mocha (= 0.10.5)
     brakeman (1.9.1)
@@ -68,6 +68,7 @@ GEM
       xpath (~> 1.0.0)
     childprocess (0.3.7)
       ffi (~> 1.0, >= 1.0.6)
+    chunky_png (1.2.7)
     cocaine (0.4.2)
     code_analyzer (0.3.1)
       sexp_processor
@@ -81,7 +82,20 @@ GEM
     coffee-script-source (1.4.0)
     colored (1.2)
     columnize (0.3.6)
+    compass (0.12.2)
+      chunky_png (~> 1.2)
+      fssm (>= 0.2.7)
+      sass (~> 3.1)
+    compass-rails (1.0.3)
+      compass (>= 0.12.2, < 0.14)
+    css_parser (1.2.6)
+      addressable
+      rdoc
     daemons (1.1.9)
+    database_cleaner (0.9.1)
+    deadweight (0.2.2)
+      css_parser (~> 1.2.6)
+      nokogiri
     debugger (1.2.4)
       columnize (>= 0.3.1)
       debugger-linecache (~> 1.1.1)
@@ -106,6 +120,7 @@ GEM
       railties (>= 3.0.0)
     fastercsv (1.5.5)
     ffi (1.3.1)
+    fssm (0.2.10)
     guard (1.6.2)
       listen (>= 0.6.0)
       lumberjack (>= 1.0.2)
@@ -282,13 +297,16 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  better_errors
   bootstrap-sass (>= 2.2.1.1)
-  bourbon (>= 2.1.2)
   brakeman (>= 1.8.2)
   bullet (>= 4.2.0)
   capistrano (>= 2.13.5)
   capybara (>= 2.0.1)
   coffee-rails (>= 3.2.2)
+  compass-rails
+  database_cleaner
+  deadweight
   devise (>= 2.1.2)
   factory_girl_rails (>= 4.1.0)
   guard-rspec (>= 2.3.0)

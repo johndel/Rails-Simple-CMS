@@ -21,7 +21,8 @@ gem 'thin', '>= 1.5.0'
 
 # Javascript Libraries for better / easier update
 gem 'bootstrap-sass', '>= 2.2.1.1'
-gem 'bourbon', '>= 2.1.2'
+gem 'compass-rails'
+gem "deadweight"
 
 
 group :test, :development do
@@ -38,6 +39,7 @@ group :test, :development do
   gem 'pry-stack_explorer', '>= 0.4.7'
   gem 'pry-debugger', '>= 0.2.0'
   gem 'simplecov', '>= 0.7.1', :require => false
+  gem 'database_cleaner'
 end
 
 group :development do
@@ -46,5 +48,6 @@ group :development do
   gem 'letter_opener', '>= 1.0.0'
   gem 'bullet', '>= 4.2.0'
   gem 'rack-mini-profiler', '>= 0.1.23'
+  gem 'better_errors'
 end
 

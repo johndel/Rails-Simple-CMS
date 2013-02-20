@@ -1,12 +1,8 @@
-
-
-
-
 /* Z-INDEX */
  .formError { z-index: 990; }
     .formError .formErrorContent { z-index: 991; }
     .formError .formErrorArrow { z-index: 996; }
-    
+
     .ui-dialog .formError { z-index: 5000; }
     .ui-dialog .formError .formErrorContent { z-index: 5001; }
     .ui-dialog .formError .formErrorArrow { z-index: 5006; }

@@ -1,5 +1,4 @@
 FactoryGirl.define do
-
   factory :page do
     sequence(:name) { |n| "#{n} Page" }
     title "A CMS Page"

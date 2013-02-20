@@ -9,7 +9,7 @@
 		@include box-shadow(0 0 7px #ccc);
 		height: 34px;
 		width: 100%;
-		background: #F1F1F4 asset-url("admin/header_bar.png", image) repeat-x;
+		background: #F1F1F4 image-url("admin/header_bar.png") repeat-x;
 		@include border-top-radius(5px);
 	}
 	table {
@@ -22,7 +22,7 @@
 		height: 32px;
 		padding: 6px 10px 4px 10px;
 		border-top: 1px solid #9CA1B0;
-		background: #F1F1F4 asset-url("admin/module_footer_bg.png", image) repeat-x;
+		background: #F1F1F4 image-url("admin/module_footer_bg.png") repeat-x;
 		@include border-bottom-radius(5px);
 	}
 }

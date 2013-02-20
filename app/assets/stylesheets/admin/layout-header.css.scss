@@ -5,7 +5,7 @@
 #header {
 	height: 55px;
 	width: 100%;
-	background: #222222 asset-url("admin/header_bg.png", image) repeat-x;
+	background: #222222 image-url("admin/header_bg.png") repeat-x;
 	h1.site_title, h2.section_title {
 		float: left;
 		margin: 0;
@@ -18,7 +18,7 @@
 		line-height: 55px;
 		color: #fff;
 		text-shadow: 0 -1px 0 #000;
-	} 
+	}
 	h1.site_title {
 		width: 280px;
 		a {
@@ -27,7 +27,7 @@
 		}
 	}
 	h2.section_title {
-		background: asset-url("admin/header_shadow.png", image) no-repeat left top;
+		background: image-url("admin/header_shadow.png") no-repeat left top;
 	}
 }
 
@@ -35,8 +35,8 @@ h1 a.admin_panel {
 	margin: 10px 0 0 50px;
 	width: 172px;
 	height: 31px;
-	background: asset-url("admin/admin_panel.png", image)  no-repeat;
-	display: block;  
+	background: image-url("admin/admin_panel.png")  no-repeat;
+	display: block;
 }
 
 .btn_view_site {
@@ -48,7 +48,7 @@ h1 a.admin_panel {
 		margin-top: 12px;
 		width: 91px;
 		height: 27px;
-		background: asset-url("admin/btn_view_site.png", image) no-repeat;
+		background: image-url("admin/btn_view_site.png") no-repeat;
 		text-align: center;
 		line-height: 29px;
 		color: #fff;
@@ -65,15 +65,15 @@ h1 a.admin_panel {
 section#secondary_bar {
 	height: 38px;
 	width: 100%;
-	background: #F1F1F4 asset-url("admin/secondary_bar.png", image) repeat-x;
-	.user {
+	background: #F1F1F4 image-url("admin/secondary_bar.png") repeat-x;
+	.admin {
 		float: left;
 		width: 280px;
 		height: 38px;
 		a {
 			text-decoration: none;
 			color: #666666;
-			&.logout_user {
+			&.logout_admin {
 				float: right;
 				display: inline-block;
 				width: 15px;
@@ -96,7 +96,7 @@ section#secondary_bar {
 .breadcrumb_container {
 	float: left;
 	padding-left: 25px;
-	background: asset-url("admin/secondary_bar_shadow.png", image) no-repeat left top;
+	background: image-url("admin/secondary_bar_shadow.png") no-repeat left top;
 	height: 38px;
 }
 
@@ -132,7 +132,7 @@ section#secondary_bar {
 	display: inline-block;
 	width: 12px;
 	height: 24px;
-	background: asset-url("admin/breadcrumb_divider.png", image) no-repeat;
+	background: image-url("admin/breadcrumb_divider.png") no-repeat;
 	float: left;
 	margin: 0 5px;
 }

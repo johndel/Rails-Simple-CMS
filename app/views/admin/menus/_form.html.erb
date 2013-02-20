@@ -1,51 +1,45 @@
-<%= render "admin/partials/form_validations" %>
-<%= stylesheet_link_tag "admin/page_sorting" %>
-<%= content_for :custom_styling do %>
-	<%= javascript_include_tag "admin/sortMenu" %>
-<% end %>
+<%= form_for([:admin, @menu], :html => { :class => "form_validations" }) do |f| %>
+<div class="module_content">
+  <% if @menu.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@menu.errors.count, "error") %> prohibited this menu from being saved:</h2>
+      <ul>
+      <% @menu.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-	<%= form_for([:admin, @menu], :html => { :class => "form_validations" }) do |f| %>
-	<div class="module_content">
-	  <% if @menu.errors.any? %>
-	    <div id="error_explanation">
-	      <h2><%= pluralize(@menu.errors.count, "error") %> prohibited this menu from being saved:</h2>
-	      <ul>
-	      <% @menu.errors.full_messages.each do |msg| %>
-	        <li><%= msg %></li>
-	      <% end %>
-	      </ul>     
-	    </div>
-	  <% end %>
-	
-	  	<%= f.label :name %>
-	  	<%= f.text_field :name, :class =>"validate[required] span12" %>
-	  	
-	<% if controller.action_name != "new" %>
-	  	<div id="page_sorting" data-menu-id="<%= @menu.id %>">
-  			<div class="row-fluid">
-				<div class="span6 menu_pages">Pages in the menu</div>
-				<div class="span6 other_pages">Other pages</div>
-			</div>
-		
+  	<%= f.label :name %>
+  	<%= f.text_field :name, :class =>"validate[required] span12" %>
+
+<% if controller.action_name != "new" %>
+  	<div id="page_sorting" data-menu-id="<%= @menu.id %>">
 			<div class="row-fluid">
-				<ul id="sortable1" class="connectedSortable span6">
-					<% @pages.each do |page| %>
-					<li class="ui-state-default" id="page_<%= page.id %>"><span class="ui-icon ui-icon-arrow-4"></span><span class="sorted-name"><%= page.name %></span></a>
-					<% end %>
-				</ul>
-				
-				<ul id="sortable2" class="connectedSortable span6">
-					<% @other_pages.each do |page| %>
-					<li id="page_<%= page.id %>"><span class="ui-icon ui-icon-arrow-4"></span><span class="sorted-name"><%= page.name %></span></a>
-					<% end %>
-				</ul>
-			</div>
-	  	</div>
-	<% end %>
-	</div>
-	<br />
-	  <footer>
-	  	<%= f.submit "#{create_or_update_string}", :class => "btn pull-right" %>
-	  </footer>
-	<% end %>
+			<div class="span6 menu_pages">Pages in the menu</div>
+			<div class="span6 other_pages">Other pages</div>
+		</div>
+
+		<div class="row-fluid">
+			<ul id="sortable1" class="connectedSortable span6">
+				<% @pages.each do |page| %>
+				<li class="ui-state-default" id="page_<%= page.id %>"><span class="ui-icon ui-icon-arrow-4"></span><span class="sorted-name"><%= page.name %></span></a>
+				<% end %>
+			</ul>
+
+			<ul id="sortable2" class="connectedSortable span6">
+				<% @other_pages.each do |page| %>
+				<li id="page_<%= page.id %>"><span class="ui-icon ui-icon-arrow-4"></span><span class="sorted-name"><%= page.name %></span></a>
+				<% end %>
+			</ul>
+		</div>
+  	</div>
+<% end %>
+</div>
+<br />
+  <footer>
+  	<%= f.submit "#{create_or_update_string}", :class => "btn pull-right" %>
+  </footer>
+<% end %>
 

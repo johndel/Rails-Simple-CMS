@@ -1,18 +1,17 @@
-<%= render "admin/partials/form_validations" %>
-	<%= form_for([:admin, @user], :html => { :class => "form_validations" }) do |f| %>
+	<%= form_for([:admin, @admin], :html => { :class => "form_validations" }) do |f| %>
 	<div class="module_content">
-	  <% if @user.errors.any? %>
+	  <% if @admin.errors.any? %>
 	    <div id="error_explanation">
-	      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+	      <h2><%= pluralize(@admin.errors.count, "error") %> prohibited this admin from being saved:</h2>
 	      <ul>
-	      <% @user.errors.full_messages.each do |msg| %>
+	      <% @admin.errors.full_messages.each do |msg| %>
 	        <li><%= msg %></li>
 	      <% end %>
 	      </ul>
 	    </div>
 	  <% end %>
 	  <%= f.label :email %>
-	  <%= f.email_field :email, :class => "validate[required, custom[email]] span12" %>  	  
+	  <%= f.email_field :email, :class => "validate[required, custom[email]] span12" %>
   	  <% if controller.action_name == "new" %>
 		  <%= f.label :password %>
 		  <%= f.password_field :password, :class => "validate[required] span12" %>
@@ -27,6 +26,6 @@
 
 	</div>
 	  <footer>
-	    <%= f.submit "#{create_or_update_string} User", :class => "btn pull-right" %>
+	    <%= f.submit "#{create_or_update_string} Admin", :class => "btn pull-right" %>
 	  </footer>
 	<% end %>

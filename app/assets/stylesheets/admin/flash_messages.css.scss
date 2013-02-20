@@ -19,10 +19,8 @@
 	display: block;
 	margin: 20px 38px 10px 40px;
 	margin-top: 20px;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
-	background: #B5E5EF asset-url("admin/icn_alert_info.png", image) no-repeat;
+  @include  border-radius(5px);
+	background: #B5E5EF image-url("admin/icn_alert_info.png") no-repeat;
 	background-position: 10px 10px;
 	border: 1px solid #005DA2;
 	color: #082B33;
@@ -34,10 +32,8 @@
 	display: block;
 	margin: 20px 38px 10px 40px;
 	margin-top: 20px;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
-	background: #F5F3BA asset-url("admin/icn_alert_warning.png", image) no-repeat;
+  @include  border-radius(5px);
+	background: #F5F3BA image-url("admin/icn_alert_warning.png") no-repeat;
 	background-position: 10px 10px;
 	border: 1px solid #C7A20D;
 	color: #796616;
@@ -49,10 +45,8 @@
 	display: block;
 	margin: 20px 38px 10px 40px;
 	margin-top: 20px;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
-	background: #F3D9D9 asset-url("admin/icn_alert_error.png", image) no-repeat;
+  @include  border-radius(5px);
+	background: #F3D9D9 image-url("admin/icn_alert_error.png") no-repeat;
 	background-position: 10px 10px;
 	border: 1px solid #D20009;
 	color: #7B040F;
@@ -64,10 +58,8 @@
 	display: block;
 	margin: 20px 38px 10px 40px;
 	margin-top: 20px;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
-	background: #E2F6C5 asset-url("admin/icn_alert_success.png", image) no-repeat;
+  @include	border-radius(5px);
+	background: #E2F6C5 image-url("admin/icn_alert_success.png") no-repeat;
 	background-position: 10px 10px;
 	border: 1px solid #79C20D;
 	color: #32510F;
@@ -92,9 +84,9 @@
 }
 
 .flash-close-icon-success {
-	background: asset-url("admin/flash-close-icon-success.png", image) no-repeat;
+	background: image-url("admin/flash-close-icon-success.png") no-repeat;
 }
 
 .flash-close-icon-fail {
-	background: asset-url("admin/flash-close-icon-fail.png", image) no-repeat;
+	background: image-url("admin/flash-close-icon-fail.png") no-repeat;
 }

@@ -2,29 +2,14 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require jquery.dataTables.min
+//= require jquery.validationEngine
+//= require jquery.validationEngine-en
+//= require admin/form_validations
+//= require admin/dataTables.init
+//= require admin/check_seo
+//= require admin/sortMenu
 //= require jasny_fileupload
 
-$(document).ready(function() {
-	$("#datatable_pages").dataTable({
-    "sDom": '<"H"lfr>t<"F"i>',
-		"aoColumns": [null,null,null,null,null,{ "bSortable": false },{ "bSortable": false },{ "bSortable": false }
-	]});
-
-	$("#datatable_menus").dataTable({
-    "sDom": '<"H"lfr>t<"F"i>',
-		"aoColumns": [null,null,null,{ "bSortable": false },{ "bSortable": false }
-	]});
-
-	$("#datatable_admins").dataTable({
-    "sDom": '<"H"lfr>t<"F"i>',
-		"aoColumns": [null,null,null,{ "bSortable": false },{ "bSortable": false }
-	]});
-
-	$("#datatable_uploads").dataTable({
-    "sDom": '<"H"lfr>t<"F"i>',
-		"aoColumns": [null,null,null,{ "bSortable": false },{ "bSortable": false }
-	]});
-});
 
 // Thanks http://stackoverflow.com/questions/652917/in-jquery-want-to-remove-all-html-inside-of-a-div the second answer for this!
 jQuery.fn.stripTags = function() { return this.replaceWith( this.html().replace(/<\/?[^>]+>/gi, '') ); };
