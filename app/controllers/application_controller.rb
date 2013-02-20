@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   layout :layout_by_resource
-  
+
   def layout_by_resource
     if devise_controller?
       "sign_in"
@@ -9,10 +9,10 @@ class ApplicationController < ActionController::Base
       super
     end
   end
-  
+
   # Devise redirects
   def after_sign_in_path_for(resource)
-    if resource.is_a?(User)
+    if resource.is_a?(Admin)
       admin_pages_path
     else
       super
@@ -26,5 +26,5 @@ class ApplicationController < ActionController::Base
       format.any  { head :not_found }
     end
   end
- 
+
 end

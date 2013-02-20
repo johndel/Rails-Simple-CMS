@@ -1,4 +1,4 @@
-class PagesController < ApplicationController
+class PagesController < FrontendController
   caches_page :index, :show
   layout "pages"
 

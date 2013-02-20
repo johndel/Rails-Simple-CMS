@@ -26,8 +26,8 @@
 			<section id="secondary_bar">
 				<div class="user">
 					<ul>
-						<li style="float: left;"><i class="icon-user"></i>&nbsp;<%= current_user.email %></li> 
-						<li style="float: right"><%= link_to(raw('&times;'), destroy_user_session_path, :method => :delete, :class => "close logout_user", :title => "logout") %></li>
+						<li style="float: left;"><i class="icon-user"></i>&nbsp;<%= current_admin.email %></li>
+						<li style="float: right"><%= link_to(raw('&times;'), destroy_admin_session_path, :method => :delete, :class => "close logout_admin", :title => "logout") %></li>
 					</ul>
 				</div>
 				<%= render "admin/partials/breadcrumb" %>

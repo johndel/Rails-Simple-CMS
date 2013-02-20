@@ -1,7 +1,6 @@
-class Admin::UploadsController < ApplicationController
+class Admin::UploadsController < Admin::BackendController
   layout "admin"
-  before_filter :authenticate_user!
-  
+
   def index
     @uploads = Upload.all
   end
@@ -22,7 +21,7 @@ class Admin::UploadsController < ApplicationController
   def destroy
     @upload = Upload.find(params[:id])
     @upload.destroy
-    redirect_to admin_uploads_url, notice: "Upload successfully deleted."
+    redirect_to admin_uploads_url, notice: "Upload was successfully deleted."
   end
-  
+
 end

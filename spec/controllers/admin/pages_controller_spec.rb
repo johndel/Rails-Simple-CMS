@@ -1,13 +1,13 @@
 require 'spec_helper'
 
 describe Admin::PagesController do
-  before { controller.stub(:authenticate_user!).and_return true }
+  before { controller.stub(:authenticate_admin!).and_return true }
 
   describe "GET 'index'" do
     it "should be successful" do
       get 'index'
       response.should render_template :index
-      response.should be_success 
+      response.should be_success
     end
 
 	  it "should find a list with all menusexi" do
@@ -23,7 +23,7 @@ describe Admin::PagesController do
       get :edit, id: page
       assigns(:page).should eq(page)
     end
-    
+
     it "renders the #show view" do
       get :edit, id: page
       response.should render_template :edit
@@ -33,7 +33,7 @@ describe Admin::PagesController do
   describe "GET 'new'" do
     it "returns http success" do
       Page.should_receive(:new)
-      get 'new'      
+      get 'new'
       response.should render_template :new
       response.should be_success
     end
@@ -61,7 +61,7 @@ describe Admin::PagesController do
 	        post :create, page: FactoryGirl.attributes_for(:page, name: nil)
 	      }.to_not change(Page, :count)
 	    end
-	    
+
 	    it "re-renders the new method" do
 	      post :create, name: FactoryGirl.attributes_for(:page, name: nil)
 	      response.should render_template :new
@@ -75,15 +75,15 @@ describe 'PUT update' do
     @page = create(:page, name: "A nice page name")
     @page2 = create(:page, name: "Second page name")
   end
-  
+
   context "valid attributes" do
     it "located the page @page" do
       put :update, id: @page, page: FactoryGirl.attributes_for(:page)
-      assigns(:page).should eq(@page)      
+      assigns(:page).should eq(@page)
     end
-  
+
     it "changes @page's attributes" do
-      put :update, id: @page, 
+      put :update, id: @page,
       page: FactoryGirl.attributes_for(:page, name: "A better page name")
       @page.reload
       @page.name.should eq("A better page name")
@@ -94,20 +94,20 @@ describe 'PUT update' do
       response.should redirect_to admin_page_path(@page)
     end
   end
-  
+
   context "invalid attributes" do
     it "locates the requested @page" do
       put :update, id: @page, page: FactoryGirl.attributes_for(:page, name: "Second page name")
-      assigns(:page).should eq(@page)      
+      assigns(:page).should eq(@page)
     end
-    
+
     it "does not change @page's attributes" do
-      put :update, id: @page, 
+      put :update, id: @page,
       page: FactoryGirl.attributes_for(:page, name: "Second page name")
       @page.reload
       @page.name.should eq("A nice page name")
     end
-    
+
     it "re-renders the show method" do
       put :update, id: @page, page: FactoryGirl.attributes_for(:page, name: "Second page name")
       response.should render_template :show
@@ -119,13 +119,13 @@ end
 	  before :each do
 	    @page = create(:page)
 	  end
-	  
+
 	  it "deletes the page" do
 	    expect{
-	      delete :destroy, id: @page       
+	      delete :destroy, id: @page
 	    }.to change(Page, :count).by(-1)
 	  end
-	    
+
 	  it "redirects to page#index" do
 	    delete :destroy, id: @page
 	    response.should redirect_to admin_pages_url
@@ -145,5 +145,5 @@ end
 	  File.read(sitemap_path).should match "schemas"
 	  (File.exists?(sitemap_path)).should be_true
 	end
-  end 
+  end
 end

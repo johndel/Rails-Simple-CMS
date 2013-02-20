@@ -1,13 +1,13 @@
 require 'spec_helper'
 
 describe Admin::UploadsController do
-  before { controller.stub(:authenticate_user!).and_return true }
+  before { controller.stub(:authenticate_admin!).and_return true }
 
   describe "GET 'index'" do
     it "should be successful" do
       get 'index'
       response.should render_template :index
-      response.should be_success 
+      response.should be_success
     end
 
 	  it "should find a list with all menus" do
@@ -50,7 +50,7 @@ describe Admin::UploadsController do
 	        post :create, upload: FactoryGirl.attributes_for(:upload, upload_file_name: nil)
 	      }.to_not change(Menu, :count)
 	    end
-	    
+
 	    it "re-renders the new method" do
 	      post :create, name: FactoryGirl.attributes_for(:upload, upload_file_name: nil)
 	      response.should render_template :new
@@ -65,13 +65,13 @@ describe "GET 'delete'" do
 	  before :each do
 	    @upload = create(:upload)
 	  end
-	  
+
 	  it "deletes the upload" do
 	    expect{
-	      delete :destroy, id: @upload        
+	      delete :destroy, id: @upload
 	    }.to change(Upload, :count).by(-1)
 	  end
-	    
+
 	  it "redirects to upload#index" do
 	    delete :destroy, id: @upload
 	    response.should redirect_to admin_uploads_url

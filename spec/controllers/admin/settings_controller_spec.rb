@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Admin::SettingsController do
-  before { controller.stub(:authenticate_user!).and_return true }
+  before { controller.stub(:authenticate_admin!).and_return true }
 
   describe 'homepage' do
     let!(:homepage) { FactoryGirl.create(:homepage_setting) }

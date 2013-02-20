@@ -1,6 +1,5 @@
-class Admin::MenusController < ApplicationController
+class Admin::MenusController < Admin::BackendController
   layout "admin" #:admin_menu_layout
-  before_filter :authenticate_user!
   after_filter 	Page.cache_expiration, :only => [:create, :update, :page_sort]
 
   def index

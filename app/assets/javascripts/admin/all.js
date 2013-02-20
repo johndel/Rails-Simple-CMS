@@ -15,7 +15,7 @@ $(document).ready(function() {
 		"aoColumns": [null,null,null,{ "bSortable": false },{ "bSortable": false }
 	]});
 
-	$("#datatable_users").dataTable({
+	$("#datatable_admins").dataTable({
     "sDom": '<"H"lfr>t<"F"i>',
 		"aoColumns": [null,null,null,{ "bSortable": false },{ "bSortable": false }
 	]});

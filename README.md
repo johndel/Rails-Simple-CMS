@@ -26,11 +26,10 @@ Follow the steps below to install and use it:
 3. Create a database.yml or change the config/database.yml.example to config/database.yml file and fill in the credentials (beware of the socket! It depends on OS, I am using ubuntu so this is what it fits for me)
 4. Open the db/seeds.rb file and change the User.create to fit your needs (set an email and password for login to the administration panel)
 5. Type `rake db:create:all` to create your databases
-6. Type `rake db:schema:load` to create database schema
-7. Type `rake db:seed` to load some basic data (if you loaded gscms.sql it already has a user example)
-8. Run `rails s` or `passenger start` (install the passenger gem) to begin server
-9. Go to localhost:3000 and check if everything is working great! Your site is served :)
-10. For admin login, go to localhost:3000/admin/login and type your credentials
+6. Type `rake db:setup` to create database schema and load seed (if you loaded gscms.sql it already has a user example)
+7. Run `rails s` or `passenger start` (install the passenger gem) to begin server
+8. Go to localhost:3000 and check if everything is working great! Your site is served :)
+9. For admin login, go to localhost:3000/admin/login and type your credentials
 
 You can also load the schema from mysql (like the old days if you missed them). I've included gscms.sql file in the root path of the app, just type:
 **mysql -u username -ppassword -h localhost database_name < gscms.sql**

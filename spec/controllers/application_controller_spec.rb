@@ -9,12 +9,12 @@ describe ApplicationController do
   end
 
   before (:each) do
-    @user = FactoryGirl.create(:user)
+    @admin = FactoryGirl.create(:admin)
   end
 
   describe "After login" do
     it "redirects to the /admin/pages" do
-        controller.after_sign_in_path_for(@user).should == admin_pages_path
+        controller.after_sign_in_path_for(@admin).should == admin_pages_path
     end
   end
 
