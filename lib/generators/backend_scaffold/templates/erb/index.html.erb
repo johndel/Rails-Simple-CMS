@@ -1,0 +1,25 @@
+<article class="module">
+  <header><h3>All <%= backend_scaffold_name.pluralize %></h3></header>
+    <table id="datatable_<%= attributes.count %>_2" class="table table-hover">
+      <thead>
+        <tr>
+          <% attributes.each do |attribute| -%>
+            <th><%= attribute.human_name %></th>
+          <% end -%>
+          <th class="index_action">Edit</th>
+          <th class="index_action">Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%% @<%= plural_table_name %>.each do |<%= singular_table_name %>| %>
+        <tr>
+          <% attributes.each do |attribute| -%>
+          <td><%%= <%= singular_table_name %>.<%= attribute.name %> %></td>
+          <% end -%>
+          <td><%%= link_to 'Edit', edit_admin_<%= singular_table_name %>_path(<%= singular_table_name %>), :class => "btn btn-primary" %></td>
+          <td><%%= link_to 'Destroy', [:admin, <%= singular_table_name %>], confirm: 'Are you sure?', method: :delete, :class => "btn btn-danger" %></td>
+        </tr>
+        <%% end %>
+        </tbody>
+    </table>
+</article><!-- end of stats article -->

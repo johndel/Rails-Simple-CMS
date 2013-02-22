@@ -1,0 +1,7 @@
+Description:
+	Backend scaffold are made as the typical scaffold, except it goes in the right places in the gscms on the backend.
+	
+Examples:
+    `rails generate backend_scaffold post`
+    `rails generate backend_scaffold post title body:text published:boolean`
+    `rails generate backend_scaffold purchase amount:decimal tracking_id:integer:uniq`

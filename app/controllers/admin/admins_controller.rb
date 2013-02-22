@@ -16,7 +16,7 @@ class Admin::AdminsController < Admin::BackendController
   def create
    @admin = Admin.new(params[:admin])
     if@admin.save
-      redirect_to new_admin_admin_url, notice: 'Admin was successfully created.'
+      redirect_to new_admin_admin_path, notice: 'Admin was successfully created.'
     else
       render action: "new"
     end
@@ -28,8 +28,8 @@ class Admin::AdminsController < Admin::BackendController
       params[:admin].delete(:password_confirmation)
     end
    @admin = Admin.find(params[:id])
-    if@admin.update_attributes(params[:admin])
-      redirect_to admin_admins_url, notice: 'Admin was successfully updated.'
+    if @admin.update_attributes(params[:admin])
+      redirect_to admin_admins_path, notice: 'Admin was successfully updated.'
     else
       render action: "edit"
     end
@@ -38,6 +38,6 @@ class Admin::AdminsController < Admin::BackendController
   def destroy
    @admin = Admin.find(params[:id])
    @admin.destroy
-    redirect_to admin_admins_url, notice: "Admin was successfully deleted."
+    redirect_to admin_admins_path, notice: "Admin was successfully deleted."
   end
 end

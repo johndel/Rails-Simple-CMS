@@ -12,7 +12,7 @@ class Admin::UploadsController < Admin::BackendController
   def create
     @upload = Upload.new(params[:upload])
     if @upload.save
-      redirect_to new_admin_upload_url, notice: 'Upload was successfully created.'
+      redirect_to new_admin_upload_path, notice: 'Upload was successfully created.'
     else
       render action: "new"
     end
@@ -21,7 +21,7 @@ class Admin::UploadsController < Admin::BackendController
   def destroy
     @upload = Upload.find(params[:id])
     @upload.destroy
-    redirect_to admin_uploads_url, notice: "Upload was successfully deleted."
+    redirect_to admin_uploads_path, notice: "Upload was successfully deleted."
   end
 
 end

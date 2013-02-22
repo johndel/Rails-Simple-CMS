@@ -12,7 +12,7 @@ class Admin::PagesController < Admin::BackendController
   def create
     @page = Page.new(params[:page])
     if @page.save
-      redirect_to new_admin_page_url, notice: 'Page was successfully created.'
+      redirect_to new_admin_page_path, notice: 'Page was successfully created.'
     else
       render action: "new"
     end
@@ -31,7 +31,7 @@ class Admin::PagesController < Admin::BackendController
     @page = Page.find(params[:id])
     respond_to do |format|
       if @page.update_attributes(params[:page])
-        format.html { redirect_to admin_page_url(@page), notice: 'Page was successfully updated.' }
+        format.html { redirect_to admin_page_path(@page), notice: 'Page was successfully updated.' }
         format.js   { render "success_content_update" }
       else
         format.html { render action: "show" }
@@ -43,7 +43,7 @@ class Admin::PagesController < Admin::BackendController
   def destroy
     @page = Page.find(params[:id])
     @page.destroy
-    redirect_to admin_pages_url, notice: "Page was successfully deleted."
+    redirect_to admin_pages_path, notice: "Page was successfully deleted."
   end
 
 
@@ -61,12 +61,12 @@ class Admin::PagesController < Admin::BackendController
     end
     sitemap.puts('</urlset>')
     sitemap.close
-    redirect_to admin_pages_url, notice: 'Sitemap was successfully created.'
+    redirect_to admin_pages_path, notice: 'Sitemap was successfully created.'
   end
 
   def clear_cache
     Page.cache_expiration
-    redirect_to admin_pages_url, notice: 'Cache was successfully sweeped.'
+    redirect_to admin_pages_path, notice: 'Cache was successfully sweeped.'
   end
 
   private

@@ -8,7 +8,7 @@ Email: example@example.com <br />
 Password: testme
 
 ### System Requirements
-Rails version: 3.2.11<br/>
+Rails version: 3.2.12<br/>
 Ruby version: 1.9.3
 
 ### Description

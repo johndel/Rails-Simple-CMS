@@ -19,13 +19,14 @@
 				<li class="<%= "current_action" if controller.controller_name == "admin" && controller.action_name == "index"  %>"><%= link_to "All Admin", admin_admins_path %></li>
 				<li class="<%= "current_action" if controller.controller_name == "admin" && controller.action_name == "new"  %>"><%= link_to "New Admin", new_admin_admin_path %></li>
 			</ul>
-			<br />
-			<h3 class="<%= "current_menu" if controller.controller_name == "uploads" %>"><a href="/admin/uploads">Uploads</a></h3>
-			<ul class="toggle">
-				<li class="<%= "current_action" if controller.controller_name == "uploads" && controller.action_name == "index" %>"><%= link_to "All Uploads", admin_uploads_path %></li>
-				<li class="<%= "current_action" if controller.controller_name == "uploads" && controller.action_name == "new" %>"><%= link_to "New Upload", new_admin_upload_path %></li>
-			</ul>
+      <br />
+      <h3 class="<%= "current_menu" if controller.controller_name == "uploads" %>"><%= link_to "Uploads", admin_uploads_path %></h3>
+      <ul class="toggle">
+      	<li class="<%= "current_action" if controller.controller_name == "uploads" && controller.action_name == "index" %>"><%= link_to "All Uploads", admin_uploads_path %></li>
+      	<li class="<%= "current_action" if controller.controller_name == "uploads" && controller.action_name == "new" %>"><%= link_to "New Upload", new_admin_upload_path %></li>
+      </ul>
 
+<!-- Before this, the generator will add it -->
 			<br />
 			<h3 class="<%= "current_menu" if controller.controller_name == "settings" %>"><%= link_to "Settings", admin_settings_path %></h3>
 		</section>

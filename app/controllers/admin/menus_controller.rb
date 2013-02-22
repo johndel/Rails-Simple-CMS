@@ -21,7 +21,7 @@ class Admin::MenusController < Admin::BackendController
   def create
     @menu = Menu.new(params[:menu])
     if @menu.save
-      redirect_to admin_menus_url, notice: 'Menu was successfully created.'
+      redirect_to admin_menus_path, notice: 'Menu was successfully created.'
     else
       render action: "new"
     end
@@ -30,7 +30,7 @@ class Admin::MenusController < Admin::BackendController
   def update
     @menu = Menu.find(params[:id])
     if @menu.update_attributes(params[:menu])
-      redirect_to admin_pages_url, notice: 'Menu was successfully updated.'
+      redirect_to admin_pages_path, notice: 'Menu was successfully updated.'
     else
       render action: "edit"
     end
@@ -39,7 +39,7 @@ class Admin::MenusController < Admin::BackendController
   def destroy
     @menu = Menu.find(params[:id])
     @menu.destroy
-    redirect_to admin_menus_url
+    redirect_to admin_menus_path
   end
 
   def page_sort
