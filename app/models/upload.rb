@@ -1,17 +1,17 @@
 class Upload < ActiveRecord::Base
-  
-  validates :upload_file_name, :uniqueness => true, :presence => true
+
+  validates :upload_file_name, uniqueness: true, presence: true
   validates_attachment_presence :upload
   validate :check_permalink
-  
-  include ActionView::Helpers::TextHelper # for using 'truncate' method on prettify_permalink  
+
+  include ActionView::Helpers::TextHelper # for using 'truncate' method on prettify_permalink
   before_validation :prettify_permalink
-  
-  has_attached_file :upload, :path => ':rails_root/public/uploads/:filename', :url => '/uploads/:filename'
+
+  has_attached_file :upload, path: ":rails_root/public/uploads/:filename", url: "/uploads/:filename"
 
   attr_accessor :permalink  # Virtual Attribute
   after_upload_post_process :rename_file_name
-  
+
 private
   def rename_file_name
     extension = File.extname(upload_file_name).downcase

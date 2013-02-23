@@ -1,6 +1,6 @@
 class Admin::MenusController < Admin::BackendController
   layout "admin" #:admin_menu_layout
-  after_filter 	Page.cache_expiration, :only => [:create, :update, :page_sort]
+  after_filter 	Page.cache_expiration, only: [:create, :update, :page_sort]
 
   def index
     @menus = Menu.all
@@ -15,7 +15,7 @@ class Admin::MenusController < Admin::BackendController
   def edit
     @menu = Menu.find(params[:id])
     @pages = Page.position_order(@menu.id)
-    @other_pages = Page.where(:active => true) - @pages
+    @other_pages = Page.where(active: true) - @pages
   end
 
   def create
@@ -61,7 +61,7 @@ class Admin::MenusController < Admin::BackendController
       end
 
     end
-    render :text => "" #params.inspect #params['page'].index(page.id.to_s) + 1
+    render text: "" #params.inspect #params['page'].index(page.id.to_s) + 1
   end
 
 end

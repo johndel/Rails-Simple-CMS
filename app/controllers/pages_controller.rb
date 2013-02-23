@@ -17,7 +17,7 @@ class PagesController < FrontendController
 
   private
   def default_menu_pages
-  	menu_id = Menu.select("id").where(:name => "default").first
+  	menu_id = Menu.select("id").where(name: "default").first
     @pages = Page.position_order(menu_id)
   end
 

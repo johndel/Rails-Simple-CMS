@@ -24,15 +24,15 @@ Gscms::Application.configure do
 
   # Do not compress assets
   config.assets.compress = false
-  
+
   # Expands the lines which load the assets
   config.assets.debug = false
   config.assets.logger = nil
   config.quiet_assets = true
 
-  
+
   # Devise ActionMailer Config
-  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  config.action_mailer.default_url_options = { host: 'localhost:3000' }
   config.action_mailer.delivery_method = :letter_opener
 
   config.after_initialize do
@@ -43,5 +43,5 @@ Gscms::Application.configure do
 	Bullet.rails_logger = true
 	Bullet.disable_browser_cache = true
   end
-  
+
 end

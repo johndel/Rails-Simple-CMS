@@ -21,9 +21,9 @@
 					<td id="<%= dom_id(page, "active") %>"><%= page.active %></td>
 					<td id="<%= dom_id(page, "created_at") %>"><%= page.created_at %></td>
 					<td id="<%= dom_id(page, "updated_at") %>"><%= page.updated_at %></td>
-					<td><%= link_to "Edit Content", admin_page_path(page), :class => "btn btn-primary" %></td>
-					<td><%= link_to 'Edit', edit_admin_page_path(page), :class => "btn btn-primary" %></td>
-					<td><%= link_to 'Destroy', [:admin, page], confirm: 'Are you sure?', method: :delete, :class => "btn btn-danger" %></td>
+					<td><%= link_to "Edit Content", admin_page_path(page), class: "btn btn-primary" %></td>
+					<td><%= link_to 'Edit', edit_admin_page_path(page), class: "btn btn-primary" %></td>
+					<td><%= link_to 'Destroy', [:admin, page], confirm: 'Are you sure?', method: :delete, class: "btn btn-danger" %></td>
 				</tr>
 				<% end %>
 			</tbody>

@@ -23,7 +23,7 @@ namespace :images do
     data.each do |f|
         content+=File.open(f, 'r').read
     end
-    content.encode!('UTF-8', 'UTF-8', :invalid => :replace)
+    content.encode!('UTF-8', 'UTF-8', invalid: :replace)
 
     img.each do |m|
       if not ignore_image.include?(m) and not content=~ Regexp.new("\\b"+File.basename(m)+"\\b")

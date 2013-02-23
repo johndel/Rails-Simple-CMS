@@ -1,4 +1,4 @@
-<%%= form_for([:admin, @<%= singular_table_name %>], :html => { class: "form_validations" }) do |f| %>
+<%%= form_for([:admin, @<%= singular_table_name %>], html: { class: "form_validations" }) do |f| %>
   <div class="module_content">
   <%% if @<%= singular_table_name %>.errors.any? %>
     <div id="error_explanation">

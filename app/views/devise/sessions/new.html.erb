@@ -4,17 +4,17 @@
 
 		<% if notice %><p class="notice"><%= notice %></p><% end %>
 		<% if alert %><p class="alert"><%= alert %></p><% end %>
-		<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-		  
-		  <div id="email"><%= f.label :email, "Email:", :class => "sign_in_label" %> <%= f.text_field :email, :class => "sign_in_input", :autocomplete => "off" %></div>
-		  <div id="password"><%= f.label :password, "Password:", :class => "sign_in_label" %> <%= f.password_field :password, :class => "sign_in_input", :autocomplete => "off" %></div>
-		  
+		<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+
+		  <div id="email"><%= f.label :email, "Email:", class: "sign_in_label" %> <%= f.text_field :email, class: "sign_in_input", autocomplete: "off" %></div>
+		  <div id="password"><%= f.label :password, "Password:", class: "sign_in_label" %> <%= f.password_field :password, class: "sign_in_input", autocomplete: "off" %></div>
+
 		  <div id="submit_button"><%= f.submit "" %></div>
-		  
+
 		  <% if devise_mapping.rememberable? -%>
 		    <footer>
 		    	<%= link_to "Forgot your password?", new_password_path(resource_name) %>
-		    	<div id="remember_me"><%= f.label :remember_me %> <%= f.check_box :remember_me %></div> 
+		    	<div id="remember_me"><%= f.label :remember_me %> <%= f.check_box :remember_me %></div>
 		    </footer>
 		  <% end -%>
 		<% end %>

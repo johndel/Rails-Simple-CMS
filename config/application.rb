@@ -10,7 +10,7 @@ require "sprockets/railtie"
 
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
-  Bundler.require(*Rails.groups(:assets => %w(development test)))
+  Bundler.require(*Rails.groups(assets: %w(development test)))
   # If you want your assets lazily compiled in production, use this line
    Bundler.require(:default, :assets, Rails.env)
 end
@@ -53,7 +53,7 @@ module Gscms
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
-    # Also for Heroku Deployment => http://guides.rubyonrails.org/asset_pipeline.html#precompiling-assets
+    # Also for Heroku Deployment -> http://guides.rubyonrails.org/asset_pipeline.html#precompiling-assets
     config.assets.initialize_on_precompile = false
     config.assets.precompile += ['*.js', 'pages/all.css', 'admin/all.css', 'sign_in.css', 'admin/admin_page_show.css' ] #+= %w( sign_in.css.erb pages_css/all admin_css/all ) , 'pages/all.css.scss', 'admin/all.css.scss'
 

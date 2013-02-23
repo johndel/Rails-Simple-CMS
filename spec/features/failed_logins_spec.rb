@@ -11,8 +11,8 @@ feature "Failed Login" do
 
   scenario "Shows error message on invalid username and password" do
     visit new_admin_session_path
-    fill_in "Email", :with => "emaildoesntexists@example.com"
-    fill_in "Password", :with => "wrong password"
+    fill_in "Email", with: "emaildoesntexists@example.com"
+    fill_in "Password", with: "wrong password"
     click_button ""
     current_path.should eq(admin_session_path)
     page.should have_content("Invalid email or password.")

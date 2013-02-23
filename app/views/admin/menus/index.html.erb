@@ -17,8 +17,8 @@
 					<td><%= menu.name %></td>
 					<td><%= menu.created_at %></td>
 					<td><%= menu.updated_at %></td>
-					<td><%= link_to 'Edit', edit_admin_menu_path(menu), :class => "btn btn-primary" %></td>
-					<td><%= link_to 'Destroy', [:admin, menu], confirm: 'Are you sure?', method: :delete, :class => "btn btn-danger" %></td>
+					<td><%= link_to 'Edit', edit_admin_menu_path(menu), class: "btn btn-primary" %></td>
+					<td><%= link_to 'Destroy', [:admin, menu], confirm: 'Are you sure?', method: :delete, class: "btn btn-danger" %></td>
 				</tr>
 				<% end %>
 			</tbody>

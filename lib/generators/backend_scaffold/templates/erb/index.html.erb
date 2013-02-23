@@ -16,8 +16,8 @@
           <% attributes.each do |attribute| -%>
           <td><%%= <%= singular_table_name %>.<%= attribute.name %> %></td>
           <% end -%>
-          <td><%%= link_to 'Edit', edit_admin_<%= singular_table_name %>_path(<%= singular_table_name %>), :class => "btn btn-primary" %></td>
-          <td><%%= link_to 'Destroy', [:admin, <%= singular_table_name %>], confirm: 'Are you sure?', method: :delete, :class => "btn btn-danger" %></td>
+          <td><%%= link_to 'Edit', edit_admin_<%= singular_table_name %>_path(<%= singular_table_name %>), class: "btn btn-primary" %></td>
+          <td><%%= link_to 'Destroy', [:admin, <%= singular_table_name %>], confirm: 'Are you sure?', method: :delete, class: "btn btn-danger" %></td>
         </tr>
         <%% end %>
         </tbody>

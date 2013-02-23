@@ -141,20 +141,20 @@ end
     it "should sort successful" do
       page_ids = [menu.pages[2].id, menu.pages[0].id, menu.pages[1].id]
       PageMenuMapping.all.length.should eq(3)
-      post :page_sort, :menu => menu.id, :page => page_ids
+      post :page_sort, menu: menu.id, page: page_ids
       PageMenuMapping.where(menu_id: menu.id).order(:page_position).map(&:page_id).should eq(page_ids)
     end
 
     it "should remove a page successfully" do
       page_ids = [menu.pages[2].id, menu.pages[0].id]
-      post :page_sort, :menu => menu.id, :page => page_ids
+      post :page_sort, menu: menu.id, page: page_ids
       PageMenuMapping.where(menu_id: menu.id).order(:page_position).map(&:page_id).should eq(page_ids)
     end
 
     it "should add a page successfully" do
       page = create(:page)
       page_ids = [menu.pages[2].id, menu.pages[0].id, menu.pages[1].id, page.id]
-      post :page_sort, :menu => menu.id, :page => page_ids
+      post :page_sort, menu: menu.id, page: page_ids
       PageMenuMapping.where(menu_id: menu.id).order(:page_position).length.should eq(4)
     end
   end

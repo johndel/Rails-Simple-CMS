@@ -1,6 +1,6 @@
 <div id="flash_message"></div>
 
-	<%= form_for([:admin, @page], :remote => true, :html => { :class => "update_ajax_page form_validations" }) do |f| %>
+	<%= form_for([:admin, @page], remote: true, html: { class: "update_ajax_page form_validations" }) do |f| %>
 	  <% if @page.errors.any? %>
 	    <div id="error_explanation">
 	      <h2><%= pluralize(@page.errors.count, "error") %> prohibited this page from being saved:</h2>
@@ -19,8 +19,8 @@
 	<div id="draggable_editor">
     <div id="handle"></div>
     <%= link_to "Back to Admin Panel", admin_pages_path %>
-    <%= f.text_area :content, :id => 'multiSet' %>
-		<%= f.submit "Update Content", :class => "alt_btn update" %>
+    <%= f.text_area :content, id: 'multiSet' %>
+		<%= f.submit "Update Content", class: "alt_btn update" %>
 		<div style="clear: both"></div>
 	</div>
 

@@ -22,7 +22,7 @@ describe Admin::SettingsController do
 
     it 'changes the homepage' do
   	  get 'homepage_save', setting_homepage: new_homepage.id
-  	  Setting.where(:meta_key => :homepage).first.meta_value.should eq(new_homepage.id.to_s)
+  	  Setting.where(meta_key: :homepage).first.meta_value.should eq(new_homepage.id.to_s)
   	  flash[:notice].should_not be_nil
   	  response.should redirect_to admin_pages_path
   	end

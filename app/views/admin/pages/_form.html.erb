@@ -1,4 +1,4 @@
-<%= form_for([:admin, @page], :html => { :class => "form_validations" }) do |f| %>
+<%= form_for([:admin, @page], html: { class: "form_validations" }) do |f| %>
 	<div class="module_content">
 	<% if @page.errors.any? %>
 		<div id="error_explanation">
@@ -12,23 +12,23 @@
 	  <% end %>
 
 		<%= f.label :name, raw("Name - <em>required</em>") %>
-		<%= f.text_field :name, :class => "validate[required] span12" %>
+		<%= f.text_field :name, class: "validate[required] span12" %>
 
 		<%= f.label :title, "Title <span id='title-count' class='char_count'></span>".html_safe %>
-		<%= f.text_field :title, :class => "span12" %>
+		<%= f.text_field :title, class: "span12" %>
 
 		<%= f.label :meta_description, "Meta Description - <span id='meta-desc-count' class='char_count'></span>".html_safe %>
-		<%= f.text_area :meta_description, :class => "span12" %>
+		<%= f.text_area :meta_description, class: "span12" %>
 
 		<%= f.label :content, "Content - <span id='content-count' class='char_count'></span>".html_safe %>
-		<%= f.text_area :content, :class => "span12" %>
+		<%= f.text_area :content, class: "span12" %>
 
 		<%= f.label :permalink, "Clean Url - <em>required</em>".html_safe %>
-		<%= f.text_field :permalink, :class =>"validate[required] span12" %>
+		<%= f.text_field :permalink, class:"validate[required] span12" %>
 
 		<label class="checkbox">
 			<% if action_name == "new" %>
-				<%= f.check_box :active, :checked => true %>
+				<%= f.check_box :active, :cecked: true %>
 			<% else %>
 				<%= f.check_box :active %>
 			<% end %>
@@ -36,6 +36,6 @@
 		</label>
 	</div>
   <footer>
-    	<%= f.submit "#{create_or_update_string} Page", :class => "btn pull-right" %>
+    	<%= f.submit "#{create_or_update_string} Page", class: "btn pull-right" %>
    </footer>
 <% end %>

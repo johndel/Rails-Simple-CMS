@@ -18,7 +18,7 @@
 	<div class="row-fluid">
 			<header id="header">
 				<hgroup>
-					<h1 class="site_title"><%= link_to "", admin_pages_path, :class => "admin_panel" %></h1>
+					<h1 class="site_title"><%= link_to "", admin_pages_path, class: "admin_panel" %></h1>
 					<div class="btn_view_site"><%= link_to "View Site", root_path %></div>
 				</hgroup>
 			</header> <!-- end of header bar -->
@@ -27,7 +27,7 @@
 				<div class="admin">
 					<ul>
 						<li style="float: left;"><i class="icon-user"></i>&nbsp;<%= current_admin.email %></li>
-						<li style="float: right"><%= link_to(raw('&times;'), destroy_admin_session_path, :method => :delete, :class => "close logout_admin", :title => "logout") %></li>
+						<li style="float: right"><%= link_to(raw('&times;'), destroy_admin_session_path, method: :delete, class: "close logout_admin", title: "logout") %></li>
 					</ul>
 				</div>
 				<%= render "admin/partials/breadcrumb" %>

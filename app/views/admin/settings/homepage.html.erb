@@ -1,6 +1,6 @@
 <article class="module">
 
-	  		<header><h3>Choose your homepage</h3></header> 		
+	  		<header><h3>Choose your homepage</h3></header>
 			<%= form_tag(admin_homepage_save_path) do %>
 			<div class="module_content">
 				<select name="setting_homepage">
@@ -15,7 +15,7 @@
 			</div>
 
 	  <footer>
-	  	<%= submit_tag "Save homepage", :class => "btn pull-right" %>
+	  	<%= submit_tag "Save homepage", class: "btn pull-right" %>
 	  </footer>
 	  	   <% end %>
 </article>

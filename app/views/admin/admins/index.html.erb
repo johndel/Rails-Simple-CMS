@@ -16,8 +16,8 @@
 					<td><%= admin.email %></td>
 					<td><%= admin.created_at %></td>
 					<td><%= admin.updated_at %></td>
-					<td><%= link_to 'Edit', edit_admin_admin_path(admin), :class => "btn btn-primary" %></td>
-					<td><%= link_to 'Destroy', [:admin, admin], confirm: 'Are you sure?', method: :delete, :class => "btn btn-danger" %></td>
+					<td><%= link_to 'Edit', edit_admin_admin_path(admin), class: "btn btn-primary" %></td>
+					<td><%= link_to 'Destroy', [:admin, admin], confirm: 'Are you sure?', method: :delete, class: "btn btn-danger" %></td>
 				</tr>
 				<% end %>
 				</tbody>

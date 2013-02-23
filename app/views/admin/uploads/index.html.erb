@@ -13,11 +13,11 @@
 			<tbody>
 				<% @uploads.each do |upload| %>
 				<tr class="<%= cycle("odd", "even") %>" id="<%= dom_id(upload) %>">
-					<td id="<%= dom_id(upload, "name") %>"><%= link_to upload.upload_file_name, '/uploads'+permalink_path(upload.upload_file_name), :target => "_blank" %></td>
+					<td id="<%= dom_id(upload, "name") %>"><%= link_to upload.upload_file_name, '/uploads'+permalink_path(upload.upload_file_name), target: "_blank" %></td>
 					<td id="<%= dom_id(upload, "type") %>"><%= upload.upload_content_type %></td>
 					<td id="<%= dom_id(upload, "created_at") %>"><%= upload.created_at %></td>
 					<td id="<%= dom_id(upload, "updated_at") %>"><%= upload.updated_at %></td>
-					<td><%= link_to 'Destroy', [:admin, upload], confirm: 'Are you sure?', method: :delete, :class => "btn btn-danger" %></td>
+					<td><%= link_to 'Destroy', [:admin, upload], confirm: 'Are you sure?', method: :delete, class: "btn btn-danger" %></td>
 				</tr>
 				<% end %>
 			</tbody>
