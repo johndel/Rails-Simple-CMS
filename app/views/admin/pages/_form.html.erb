@@ -24,11 +24,11 @@
 		<%= f.text_area :content, class: "span12" %>
 
 		<%= f.label :permalink, "Clean Url - <em>required</em>".html_safe %>
-		<%= f.text_field :permalink, class:"validate[required] span12" %>
+		<%= f.text_field :permalink, class: "validate[required] span12" %>
 
 		<label class="checkbox">
 			<% if action_name == "new" %>
-				<%= f.check_box :active, :cecked: true %>
+				<%= f.check_box :active, checked: true %>
 			<% else %>
 				<%= f.check_box :active %>
 			<% end %>
