@@ -1,5 +1,3 @@
-changePreview = ->
-  $(".content-preview").html $("#multiSet").val()
 myHtmlSettings =
   nameSpace: "html"
   onShiftEnter:
@@ -109,11 +107,21 @@ myHtmlSettings =
       h.selection.replace /<(.*?)>/g, ""
   ]
 
-$(document).ready ->
+$ ->
   $("#multiSet").markItUp myHtmlSettings
 
 $("#multiSet").keyup ->
   changePreview()
 
-$(document).on "click", ".close-me", ->
-  $(this).parent().fadeOut()
+changePreview = ->
+  $(".content_preview").html $("#multiSet").val()
+
+$ ->
+  $("#draggable_editor").draggable { handle: "#handle" }
+
+$ ->
+  $(".update_content").click ->
+    setTimeout ( ->
+      $("#flash_message").html("")
+    ), 4000
+

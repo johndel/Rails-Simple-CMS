@@ -1,7 +1,3 @@
-/*@import "markitup";
-@import "markitup-html";
-*/
-
 /* -------------------------------------------------------------------
 // markItUp! Universal MarkUp Engine, JQuery plugin
 // By Jay Salvat - http://markitup.jaysalvat.com/
@@ -56,10 +52,19 @@
   padding: 2px 0;
 }
 
+#markItUpMultiSet .markItUpSeparator {
+height: 25px;
+}
+
+#markItUpMultiSet .markItUpButton {
+  height: 20px;
+  line-height: 20px;
+  padding: 5px 0 0 5px;
+  text-align: center;
+}
+
 .content_preview {
   border: 1px dashed blue;
-  min-height: 17px;
-  overflow: auto;
 }
 
 #main {
@@ -74,7 +79,7 @@
 }
 
 #draggable_editor {
-  z-index: 100000000;
+  z-index: 1050;
   position: absolute;
   border: 1px solid #cccccc;
   box-shadow: 0 0 5px 0px #bbbbbb;
@@ -86,5 +91,9 @@
 .update_content {
   margin-right: 9px;
   float: right;
+}
+
+.clear-button {
+  clear: both;
 }
 
