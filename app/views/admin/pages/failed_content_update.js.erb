@@ -1,1 +1,5 @@
-$(".popup #main").prepend('<h4 class="alert_error">Problem updating page. <span class="flash-close-icon-fail close-me"></span><ul><%= escape_javascript(render "ajax_content_error_show") %></ul></h4>');
+<% tmp_error_list = "" %>
+<% @page.errors.full_messages.each do |msg| %>
+<% tmp_error_list += "<li>#{msg}</li>" %>
+<% end %>
+$("#flash_message").prepend('<div class="alert alert-error"><h4>Error!</h4>Problem updating page.<ul><%= escape_javascript(tmp_error_list.html_safe) %></ul></div>');
