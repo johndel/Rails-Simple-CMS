@@ -12,23 +12,20 @@
 
 .markItUp a:link,
 .markItUp a:visited {
-color:#000;
-text-decoration:none;
-}
-.markItUp {
-
+  color:#000;
+  text-decoration:none;
 }
 
 .markItUp .markItUpButton16 a {
-    background-image: image-url("/assets/markitup/clean.png");
+  background-image: image-url("/assets/markitup/clean.png");
 }
-
 
 .markItUpContainer {
   border:1px solid #ccc;
   background:#FFF image-url("/assets/markitup/bg-container.png") repeat-x top left;
   font:11px Verdana, Arial, Helvetica, sans-serif;
-  padding: 0px 14px 10px 5px;
+  padding: 0px 14px 0px 5px;
+  margin-left: 10px;
 }
 #draggable_editor .markItUpEditor {
   padding: 0;
@@ -38,60 +35,56 @@ text-decoration:none;
   height: 320px;
 }
 .markItUpPreviewFrame {
-overflow:auto;
-background-color:#FFFFFF;
-border:1px solid #3C769D;
-width:99.9%;
-height:300px;
-margin:5px 0;
+  overflow:auto;
+  background-color:#FFFFFF;
+  border:1px solid #3C769D;
+  width:99.9%;
+  height:300px;
+  margin:5px 0;
 }
 .markItUpFooter {
-width:100%;
-cursor: n-resize;
+  width:100%;
+  cursor: n-resize;
 }
 .markItUpResizeHandle {
-overflow:hidden;
-width:22px; height:5px;
-margin-left:auto;
-margin-right:auto;
-background-image: image-url("/assets/markitup/handle.png");
-cursor:n-resize;
-padding: 2px 0;
+  overflow:hidden;
+  width:22px; height:5px;
+  margin-left:auto;
+  margin-right:auto;
+  background-image: image-url("/assets/markitup/handle.png");
+  cursor:n-resize;
+  padding: 2px 0;
 }
 
-.content-preview {
-border: 1px dashed blue;
-min-height: 17px;
-overflow: auto;
-}
-
-input[type=submit].alt_btn {
-background: #D0D1D4 image-url("/assets/admin/btn_submit_2.png") repeat-x;
-border: 1px solid#30B0C8;
-box-shadow: 0 1px 0 #fff;
-font-weight: bold;
-height: 22px;
-border-radius: 5px;
-padding: 0 10px;
-color: #003E49;
-text-shadow: 0 1px 0 #6CDCF9;
-cursor: pointer;
-font-family: sans-serif;
-font-size: 90%;
-margin: 5px 25px 0 0;
-float: right;
+.content_preview {
+  border: 1px dashed blue;
+  min-height: 17px;
+  overflow: auto;
 }
 
 #main {
-border-radius: 5px;
+  border-radius: 5px;
 }
 
 #handle {
-  position: absolute;
-  margin: -15px 0 0 0;
-  height: 30px;
-  width: 30px;
-  left: 47%;
-  background: image-url("/assets/admin/handle.png") center no-repeat;
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #ccc;
   cursor: move;
+  padding: 2px 2px 2px 5px;
 }
+
+#draggable_editor {
+  z-index: 100000000;
+  position: absolute;
+  border: 1px solid #cccccc;
+  box-shadow: 0 0 5px 0px #bbbbbb;
+  background-color: white;
+  text-align: center;
+  padding-bottom: 5px;
+}
+
+.update_content {
+  margin-right: 9px;
+  float: right;
+}
+

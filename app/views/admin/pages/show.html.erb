@@ -1,30 +1,31 @@
 <div id="flash_message"></div>
 
-	<%= form_for([:admin, @page], remote: true, html: { class: "update_ajax_page form_validations" }) do |f| %>
-	  <% if @page.errors.any? %>
-	    <div id="error_explanation">
-	      <h2><%= pluralize(@page.errors.count, "error") %> prohibited this page from being saved:</h2>
-	      <ul>
-	      <% @page.errors.full_messages.each do |msg| %>
-	        <li><%= msg %></li>
-	      <% end %>
-	      </ul>
-	    </div>
-	  <% end %>
+  <%= form_for([:admin, @page], remote: true, html: { class: "update_ajax_page form_validations" }) do |f| %>
+    <% if @page.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@page.errors.count, "error") %> prohibited this page from being saved:</h2>
+        <ul>
+        <% @page.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
 
-	  	<div class="content-preview">
-	  		<%= raw @page.content %>
-	  	</div>
+      <div class="content_preview">
+        <%= raw @page.content %>
+      </div>
 
-	<div id="draggable_editor">
-    <div id="handle"></div>
-    <%= link_to "Back to Admin Panel", admin_pages_path %>
+  <div id="draggable_editor">
+    <div id="handle">
+      <%= link_to "Back to Admin Panel", admin_pages_path, confirm: 'Are you sure?' %>
+    </div>
     <%= f.text_area :content, id: 'multiSet' %>
-		<%= f.submit "Update Content", class: "alt_btn update" %>
-		<div style="clear: both"></div>
-	</div>
+    <%= f.submit "Update Content", class: "btn update_content" %>
+    <div style="clear: both"></div>
+  </div>
 
-	<% end %>
+  <% end %>
 
 <% content_for :custom_styling do %>
   <%= stylesheet_link_tag "admin/admin_page_show" %>
