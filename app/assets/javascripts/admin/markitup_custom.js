@@ -46,7 +46,7 @@ function insert_image(h) {
     if(result != null) {
       $this = $("#multiSet");
       $this.selectRange(h.caretPosition,h.caretPosition + h.selection.length);
-      $this.replaceSelectedText('<img src="' + result + '" alt="' + h.selection + '" title="' + h.selection + '" />');
+      $this.replaceSelectedText('<img src="' + result + '" alt="' + h.selection + '" title="' + h.selection + '" />\n');
       changePreview();
     }
   });
@@ -57,7 +57,7 @@ function insert_link(h) {
     if(result != null) {
       $this = $("#multiSet");
       $this.selectRange(h.caretPosition,h.caretPosition + h.selection.length);
-      $this.replaceSelectedText('<a href="' + result + '" alt="' + h.selection + '" title="' + h.selection + '">' + h.selection + '</a>');
+      $this.replaceSelectedText('<a href="' + result + '" alt="' + h.selection + '" title="' + h.selection + '">' + h.selection + '</a>\n');
       changePreview();
     }
   });
@@ -66,21 +66,21 @@ function insert_link(h) {
 function clear_div(h) {
   $this = $("#multiSet");
   $this.selectRange(h.caretPosition,h.caretPosition + h.selection.length);
-  $this.replaceSelectedText('<div style="clear: both;">' + h.selection + '</div>');
+  $this.replaceSelectedText('<div style="clear: both;">' + h.selection + '</div>\n');
   changePreview();
 }
 
 function left_div(h) {
   $this = $("#multiSet");
   $this.selectRange(h.caretPosition,h.caretPosition + h.selection.length);
-  $this.replaceSelectedText('<div style="float: left; margin: 10px">' + h.selection + '</div>');
+  $this.replaceSelectedText('<div style="float: left; margin: 10px">' + h.selection + '</div>\n');
   changePreview();
 }
 
 function right_div(h) {
   $this = $("#multiSet");
   $this.selectRange(h.caretPosition,h.caretPosition + h.selection.length);
-  $this.replaceSelectedText('<div style="float: right; margin: 10px">' + h.selection + '</div>');
+  $this.replaceSelectedText('<div style="float: right; margin: 10px">' + h.selection + '</div>\n');
   changePreview();
 }
 
