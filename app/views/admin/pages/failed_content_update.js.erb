@@ -2,4 +2,4 @@
 <% @page.errors.full_messages.each do |msg| %>
 <% tmp_error_list += "<li>#{msg}</li>" %>
 <% end %>
-$("#flash_message").prepend('<div class="alert alert-error"><h4>Error!</h4>Problem updating page.<ul><%= escape_javascript(tmp_error_list.html_safe) %></ul></div>');
+$("#flash_message").prepend('<div class="alert alert-error"><h4>Error!</h4>Problem updating page.<ul><%= escape_javascript(tmp_error_list.html_safe) %></ul><button type="button" class="close" data-dismiss="alert">&times;</button></div>');

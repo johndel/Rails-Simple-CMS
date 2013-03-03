@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130221234250) do
+ActiveRecord::Schema.define(:version => 20130302100816) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                                 :default => "", :null => false
@@ -59,15 +59,6 @@ ActiveRecord::Schema.define(:version => 20130221234250) do
     t.datetime "updated_at"
   end
 
-  create_table "projects", :force => true do |t|
-    t.string   "name"
-    t.text     "description"
-    t.boolean  "active"
-    t.string   "first"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
-
   create_table "settings", :force => true do |t|
     t.string   "meta_key"
     t.text     "meta_value", :limit => 2147483647
@@ -78,7 +69,6 @@ ActiveRecord::Schema.define(:version => 20130221234250) do
   create_table "uploads", :force => true do |t|
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
-    t.string   "permalink"
     t.string   "upload_file_name"
     t.string   "upload_content_type"
   end

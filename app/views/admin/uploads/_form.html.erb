@@ -1,4 +1,4 @@
-<%= form_for([:admin, @upload], html: { class: "form_validations", multipart: true }) do |f| %>
+<%= form_for([:admin, @upload], html: { class: "form_validations" }) do |f| %>
 <div class="module_content">
 	<% if @upload.errors.any? %>
 	<div class="error_explanation">
@@ -14,8 +14,8 @@
 	<% end %>
 
 
-	<%= f.label :permalink %>
-	<%= f.text_field :permalink, class: "validate[required] span12" %>
+	<%= f.label :upload_name, "Rename on the upload"  %>
+	<%= f.text_field :upload_name, class: "span12" %>
 
 	<%= f.label :upload %>
 	<div class="fileupload fileupload-new" data-provides="fileupload">
@@ -23,8 +23,6 @@
     <span class="fileupload-preview"></span>
     <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none">&times;</a>
     </div>
-
-	<%#= f.file_field :upload %>
 </div>
 
 	<footer>

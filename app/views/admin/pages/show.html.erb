@@ -21,3 +21,60 @@
   <%= stylesheet_link_tag "admin/admin_page_show" %>
   <%= javascript_include_tag "admin/admin_page_show" %>
 <% end %>
+
+
+
+<!-- File Manager Modal -->
+<div id="file_manager_modal" class="modal hide fade">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+  <h3>File Manager</h3>
+  </div>
+  <div class="modal-body">
+    <div id="file_manager_flash_message"></div>
+    <ul class="nav nav-tabs" id="file-manager-ul">
+      <li class="active"><a href="#file-upload-tab">File Upload</a></li>
+      <li><a href="#file-insert-tab">Insert Uploaded Files</a></li>
+    </ul>
+    <div class="tab-content">
+
+      <div class="tab-pane active" id="file-upload-tab"> <!-- File Upload Tab -->
+        <div id="uploads_table" class="file_table"></div>
+        <%= form_for([:admin, Upload.new], remote: true, html: { style: "margin-bottom: 10px" }) do |f| %>
+          <div class="fileinput-button-box" style="text-align: center; margin-left: 190px;">
+            <span class="btn btn-success fileinput-button">
+            <i class="icon-plus icon-white"></i>
+            <span>Add Upload...</span>
+              <%= f.file_field :upload, multiple: true, name: "upload[upload]" %>
+            </span>
+          </div>
+        <% end %>
+        <div style="text-align: center">OR</div>
+        <div id="dropzone" class="fade well" style="text-align: center;">...drag 'n' drop your file in this area.</div>
+      </div> <!-- End of File Upload Tab -->
+
+      <div class="tab-pane" id="file-insert-tab"> <!-- File Insert Tab -->
+        <table class="upload-table">
+          <% @uploads.each do |upload| %>
+            <%= render partial: "admin/uploads/upload_row", locals: { upload: upload } %>
+          <% end %>
+        </table>
+      </div> <!-- File Insert Tab -->
+    </div>
+        <div>
+        </div>
+
+  </div>
+
+  <div class="modal-footer">
+    <a href="#" class="btn" data-dismiss="modal">Close</a>
+  </div>
+
+<script id="template-upload" type="text/x-tmpl">
+  <div class="upload">
+    {%=o.name%}
+    <div class="progress"><div class="bar" style="width: 0%"></div></div>
+  </div>
+</script>
+
+</div><!-- End File Manager Modal -->

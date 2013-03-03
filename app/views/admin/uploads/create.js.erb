@@ -1,0 +1,6 @@
+<% if @upload.new_record? %>
+  $("#file_manager_flash_message").html('<div class="alert alert-error">There is some problem uploading the file.<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+  <% else %>
+  $(".upload-table").prepend("<%= j render partial: 'admin/uploads/upload_row', locals: { upload: @upload } %>");
+  $("#file_manager_flash_message").html('<div class="alert alert-success">File was successfully uploaded.<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+<% end %>

@@ -21,7 +21,11 @@
   background:#FFF image-url("/assets/markitup/bg-container.png") repeat-x top left;
   font:11px Verdana, Arial, Helvetica, sans-serif;
   padding: 0px 14px 0px 5px;
-  margin-left: 10px;
+  margin: 0 1px 0 10px;
+}
+.markItUpContainer ul{
+  overflow: auto;
+  min-width: 700px;
 }
 #draggable_editor .markItUpEditor {
   padding: 0;
@@ -63,8 +67,36 @@ height: 25px;
   text-align: center;
 }
 
+.markItUp .file_manager a {
+    background-image: url("/assets/markitup/folder-icon.png");
+}
+
 .content_preview {
   border: 1px dashed blue;
+}
+
+.left_div a, .right_div a, .clear_div a {
+  background-image: url("/assets/glyphicons-halflings.png");
+  background-repeat: no-repeat;
+  display: inline-block;
+  height: 14px;
+  line-height: 14px;
+  margin-top: 1px;
+  vertical-align: text-top;
+  width: 14px;
+}
+
+.left_div a {
+  background-position: -240px -96px;
+
+}
+
+.right_div a {
+  background-position: -264px -96px;
+}
+
+.clear_div a {
+   background-position: -456px -144px;
 }
 
 #main {
@@ -97,3 +129,16 @@ height: 25px;
   clear: both;
 }
 
+/* File Manager */
+table.upload-table {
+  margin: 0 auto;
+}
+
+table.upload-table td  {
+  border: 1px solid #ccc;
+  padding: 3px 10px;
+}
+
+td.upload-name {
+  width: 255px;
+}

@@ -1,0 +1,5 @@
+<tr class="<%= cycle("odd", "even") %>" id="<%= dom_id(upload) %>">
+  <td id="<%= dom_id(upload, "name") %>" class="upload-name" data-type="<%= upload.upload_content_type %>"><%= upload.upload_file_name %></td>
+  <td><button class="btn btn-primary insert-uploaded-file">Insert to editor</button></td>
+  <td><%= link_to 'Destroy', [:admin, upload], confirm: 'Are you sure?', method: :delete, remote: true, class: "btn btn-danger delete-upload" %></td>
+</tr>

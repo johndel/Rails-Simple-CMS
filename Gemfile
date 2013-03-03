@@ -14,6 +14,7 @@ group :assets do
 end
 
 gem 'jquery-rails', '>= 2.1.4'
+gem 'jquery-fileupload-rails'
 gem 'paperclip', '>= 3.3.1'
 gem 'capistrano', '>= 2.13.5'
 gem 'thor'
@@ -21,6 +22,7 @@ gem 'thor'
 # Javascript Libraries for better / easier update
 gem 'bootstrap-sass', '>= 2.2.1.1'
 gem 'compass-rails'
+
 
 group :test, :development do
   gem 'factory_girl_rails', '>= 4.1.0'

@@ -25,6 +25,7 @@ class Admin::PagesController < Admin::BackendController
   def show
     @pages = Page.position_order
     @page = Page.find(params[:id])
+    @uploads = Upload.all
   end
 
   def update
