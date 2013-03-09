@@ -2,11 +2,6 @@
 
 GreekSolution Simple CMS in Rails.
 
-### Demo
-You can login and check the [CMS](http://cms.johndel.gr/admin/login/)<br />
-Email: example@example.com <br />
-Password: testme
-
 ### System Requirements
 Rails version: 3.2.12<br/>
 Ruby version: 1.9.3
