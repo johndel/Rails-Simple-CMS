@@ -39,7 +39,7 @@ group :test, :development do
   gem 'pry-debugger', '>= 0.2.0'
   gem 'simplecov', '>= 0.7.1', :require => false
   gem 'database_cleaner'
-  gem 'rb-inotify'
+  gem 'rb-inotify' unless RUBY_PLATFORM.match(/darwin/)
 end
 
 group :development do
